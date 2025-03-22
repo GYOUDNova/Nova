@@ -18,6 +18,9 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
 
+      - name: Restore NuGet Packages
+        run: dotnet restore Nova.sln
+
       - name: Check Code Formatting
         run: |
           dotnet format Nova.sln --verify-no-changes
