@@ -9,7 +9,7 @@ Red='\033[0;31m'          # Red
 Yellow='\033[0;33m'       # Yellow
 Green='\033[0;32m'        # Green
 
-echo -e "${Cyan}Formatting Nova solution...${Color_Off}"
+echo -e "${Cyan}Checking Format on Nova solution...${Color_Off}"
 
 dotnet format Nova.sln --verify-no-changes
 
@@ -18,6 +18,8 @@ rc=$?
 if [[ $rc != 0 ]]; then
         echo -e "${Yellow}Code is not formatted correctly in project $csproj!${Color_Off}"
         echo -e "${Yellow}Please run 'dotnet format -v diag Nova.sln' to format your code.${Color_Off}"
+else 
+    echo -e "${Green}Code is formatted correctly!${Color_Off}"
 fi
 
 exit $rc
