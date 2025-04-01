@@ -1,0 +1,8 @@
+.title-label {
+    font-size: 30px;
+    -unity-text-align: upper-center;
+    -unity-font-style: bold;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(52, 94, 217);
+    padding-top: 20px;
+}
