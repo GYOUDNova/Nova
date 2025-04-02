@@ -3,6 +3,33 @@
     <engine:VisualElement name="EditorWindow">
         <engine:VisualElement name="Header" style="flex-grow: 1;">
             <engine:Label name="TitleLabel" class="title-label" />
+            <engine:VisualElement name="logo" class="logo" />
+        </engine:VisualElement>
+        <engine:VisualElement name="Body" class="body">
+            <engine:Button name="MenuOption" class="button menu-button">
+                <engine:VisualElement name="ButtonTop" class="button-top" style="width: 247px;">
+                    <engine:Label text="Gesture List" name="ButtonText" class="button-text" />
+                </engine:VisualElement>
+                <engine:VisualElement name="ButtonBottom" class="button-bottom" />
+            </engine:Button>
+            <engine:Button name="MenuOption" class="button menu-button">
+                <engine:VisualElement name="ButtonTop" class="button-top">
+                    <engine:Label text="Create a Gesture" name="ButtonText" class="button-text" />
+                </engine:VisualElement>
+                <engine:VisualElement name="ButtonBottom" class="button-bottom" />
+            </engine:Button>
+            <engine:Button name="MenuOption" class="button menu-button">
+                <engine:VisualElement name="ButtonTop" class="button-top">
+                    <engine:Label text="Add a Combination" name="ButtonText" class="button-text" />
+                </engine:VisualElement>
+                <engine:VisualElement name="ButtonBottom" class="button-bottom" />
+            </engine:Button>
+            <engine:Button name="MenuOption" class="button menu-button">
+                <engine:VisualElement name="ButtonTop" class="button-top">
+                    <engine:Label text="Settings/Calibration" name="ButtonText" class="button-text" />
+                </engine:VisualElement>
+                <engine:VisualElement name="ButtonBottom" class="button-bottom" />
+            </engine:Button>
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

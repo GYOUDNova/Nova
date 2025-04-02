@@ -8,8 +8,8 @@ public class EditorWindowController : EditorWindow
     [SerializeField]
     private VisualTreeAsset visualTreeAsset;
 
-    private const float minWindowHeight = 400;
-    private const float minWindowLength = 800;
+    private const float minWindowHeight = 600;
+    private const float minWindowLength = 850;
 
     static EditorWindowController()
     {
@@ -23,15 +23,15 @@ public class EditorWindowController : EditorWindow
     public static void ShowWindow()
     {
         EditorWindowController windowController = GetWindow<EditorWindowController>();
-        windowController.minSize = new Vector2(minWindowLength, minWindowHeight);
-        windowController.titleContent = new GUIContent("NOVA Configuration");     
+        windowController.titleContent = new GUIContent("NOVA Configuration");
+        windowController.maxSize = new Vector2(minWindowLength, minWindowHeight);
+        windowController.minSize = windowController.maxSize;
     }
 
     public void CreateGUI()
     {
         VisualElement root = visualTreeAsset.CloneTree();
         rootVisualElement.Add(root);
-
 
         Label label = root.Q<Label>("TitleLabel");
         label.text = "Hand Gesture Configuration";
