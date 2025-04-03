@@ -16,7 +16,7 @@ namespace NOVA.Scripts
         private const float MinWindowLength = 850;
         private const string WindowTitle = "Create a Gesture";
 
-        [MenuItem("Window/UI Toolkit/CreatingGestureWindowController")]
+        [MenuItem("Window/UI Toolkit/Creating Gesture Screen")]
         public static void SetupAndShowWindow()
         {
             CreatingGestureWindowController createGestureController = GetWindow<CreatingGestureWindowController>();

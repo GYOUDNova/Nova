@@ -28,21 +28,91 @@ public class EditModeControllerTests
     }
 
     /// <summary>
-    /// Test ensures that when a button on the menu is clicked, it is actually triggered.
+    /// Test ensures that when the Add a Combination button is clicked in the editor, that the menu opens
     /// </summary>
     [UnityTest]
-    public IEnumerator EditorWindow_ClickButton_ButtonWorks()
+    public IEnumerator EditorWindow_OpenAddCombinationWindow_SubWindowOpens()
     {
         //Arrange
         Button button = new();
         bool buttonClicked = false;
-        var window = EditorWindow.GetWindow<MainEditorWindowController>();
+        var mainWindow = EditorWindow.GetWindow<MainEditorWindowController>();
+        var subMenu = EditorWindow.GetWindow<AddingCombinationWindowController>();
 
         //Act   
-        button = window.rootVisualElement.Q<Button>("CreateAGestureButton");
-        button.clicked += () => buttonClicked = true;
+        button = mainWindow.rootVisualElement.Q<Button>("AddACombinationButton");
 
         TestUtils.ClickOnButton(button);
+        buttonClicked = EditorWindow.HasOpenInstances<AddingCombinationWindowController>();
+        yield return null;
+
+        //Assert
+        Assert.IsTrue(buttonClicked);
+    }
+
+    /// <summary>
+    /// Test ensures that when the Create Gesture button is clicked in the editor, that the menu opens
+    /// </summary>
+    [UnityTest]
+    public IEnumerator EditorWindow_OpenCreateGestureWindow_SubWindowOpens()
+    {
+        //Arrange
+        Button button = new();
+        bool buttonClicked = false;
+        var mainWindow = EditorWindow.GetWindow<MainEditorWindowController>();
+        var subMenu = EditorWindow.GetWindow<CreatingGestureWindowController>();
+
+        //Act   
+        button = mainWindow.rootVisualElement.Q<Button>("CreateAGestureButton");
+       
+        TestUtils.ClickOnButton(button);
+        buttonClicked = EditorWindow.HasOpenInstances<CreatingGestureWindowController>();
+        yield return null;
+
+        //Assert
+        Assert.IsTrue(buttonClicked);
+    }
+
+    /// <summary>
+    /// Test ensures that when the Add a Gesture List button is clicked in the editor, that the menu opens
+    /// </summary>
+    [UnityTest]
+    public IEnumerator EditorWindow_OpenGestureListWindow_SubWindowOpens()
+    {
+        //Arrange
+        Button button = new();
+        bool buttonClicked = false;
+        var mainWindow = EditorWindow.GetWindow<MainEditorWindowController>();
+        var subMenu = EditorWindow.GetWindow<GestureListWindowController>();
+
+        //Act   
+        button = mainWindow.rootVisualElement.Q<Button>("GestureListButton");
+
+        TestUtils.ClickOnButton(button);
+        buttonClicked = EditorWindow.HasOpenInstances<GestureListWindowController>();
+        yield return null;
+
+        //Assert
+        Assert.IsTrue(buttonClicked);
+    }
+
+    /// <summary>
+    /// Test ensures that when the Settings & Calibration button is clicked in the editor, that the menu opens
+    /// </summary>
+    [UnityTest]
+    public IEnumerator EditorWindow_OpenSettingsWindow_SubWindowOpens()
+    {
+        //Arrange
+        Button button = new();
+        bool buttonClicked = false;
+        var mainWindow = EditorWindow.GetWindow<MainEditorWindowController>();
+        var subMenu = EditorWindow.GetWindow<SettingsCalibrationWindowController>();
+
+        //Act   
+        button = mainWindow.rootVisualElement.Q<Button>("SettingsCalibrationButton");
+
+        TestUtils.ClickOnButton(button);
+        buttonClicked = EditorWindow.HasOpenInstances<SettingsCalibrationWindowController>();
         yield return null;
 
         //Assert
