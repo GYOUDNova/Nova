@@ -16,7 +16,7 @@ namespace NOVA.Scripts
         private const float MinWindowLength = 850;
         private const string Title = "Settings & Calibration";
 
-        [MenuItem("Window/UI Toolkit/Settings & Calibration")]
+        [MenuItem("Window/UI Toolkit/Settings Calibration")]
         public static void SetupAndShowWindow()
         {
             SettingsCalibrationWindowController settingsController = GetWindow<SettingsCalibrationWindowController>();
