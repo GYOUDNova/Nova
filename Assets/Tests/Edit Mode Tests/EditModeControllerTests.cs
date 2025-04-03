@@ -19,9 +19,9 @@ public class EditModeControllerTests
         bool result = false;
 
         //Act
-        EditorWindow.GetWindow<EditorWindowController>();
+        EditorWindow.GetWindow<MainEditorWindowController>();
         yield return null;
-        result = EditorWindow.HasOpenInstances<EditorWindowController>();
+        result = EditorWindow.HasOpenInstances<MainEditorWindowController>();
 
         //Assert
         Assert.IsTrue(result);
@@ -36,10 +36,10 @@ public class EditModeControllerTests
         //Arrange
         Button button = new();
         bool buttonClicked = false;
-        var window = EditorWindow.GetWindow<EditorWindowController>();
+        var window = EditorWindow.GetWindow<MainEditorWindowController>();
 
         //Act   
-        button = window.rootVisualElement.Q<Button>("MenuOption");
+        button = window.rootVisualElement.Q<Button>("CreateAGestureButton");
         button.clicked += () => buttonClicked = true;
 
         TestUtils.ClickOnButton(button);
