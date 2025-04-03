@@ -29,6 +29,7 @@
 
 .button-bottom {
     height: 60%;
+     background-image: url("project://database/Assets/Images/NOVA_Logo.png?fileID=2800000&guid=7ae3119cad772bc4ea379281f9b755cc&type=3#NOVA_Logo");
 }
 
 .button-top {

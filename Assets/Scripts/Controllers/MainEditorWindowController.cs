@@ -23,8 +23,7 @@ namespace NOVA.Scripts
         /*Window Settings*/
         private const float MinWindowHeight = 600;
         private const float MinWindowLength = 850;
-        private const string WindowTitle = "NOVA Configuration";
-        private const string HeaderTitle = "Hand Gesture Configuration";
+        private const string Title = "NOVA Configuration";
 
         static MainEditorWindowController()
         {
@@ -38,7 +37,7 @@ namespace NOVA.Scripts
         public static void SetupAndShowWindow()
         {
             MainEditorWindowController mainWindowController = GetWindow<MainEditorWindowController>();
-            mainWindowController.titleContent = new GUIContent(WindowTitle);
+            mainWindowController.titleContent = new GUIContent(Title);
             mainWindowController.maxSize = new Vector2(MinWindowLength, MinWindowHeight);
             mainWindowController.minSize = mainWindowController.maxSize;
         }
@@ -52,7 +51,7 @@ namespace NOVA.Scripts
             rootVisualElement.Add(root);
 
             Label label = root.Q<Label>("TitleLabel");
-            label.text = HeaderTitle;
+            label.text = Title;
 
             creatingGestureButton = root.Q<Button>("CreateAGestureButton");
             creatingGestureButton.RegisterCallback<ClickEvent>(evt => OpenSubScreen(evt, SubScreen.CreateGesture));

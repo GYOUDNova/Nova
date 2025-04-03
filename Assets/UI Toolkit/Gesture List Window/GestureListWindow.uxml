@@ -1,0 +1,9 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Gesture%20List%20Window/GestureListWindowUSS.uss?fileID=7433441132597879392&amp;guid=6a45c3ba426fde448aefc6eacd0af5bc&amp;type=3#GestureListWindowUSS" />
+    <engine:VisualElement name="EditorWindow">
+        <engine:VisualElement name="Header" style="flex-grow: 1;">
+            <engine:Label name="TitleLabel" class="title-label" />
+            <engine:VisualElement name="logo" class="logo" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

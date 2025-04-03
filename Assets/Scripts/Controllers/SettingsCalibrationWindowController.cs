@@ -14,13 +14,13 @@ namespace NOVA.Scripts
         /*Window Settings*/
         private const float MinWindowHeight = 600;
         private const float MinWindowLength = 850;
-        private const string WindowTitle = "Settings & Calibration";
+        private const string Title = "Settings & Calibration";
 
         [MenuItem("Window/UI Toolkit/Settings & Calibration")]
         public static void SetupAndShowWindow()
         {
             SettingsCalibrationWindowController settingsController = GetWindow<SettingsCalibrationWindowController>();
-            settingsController.titleContent = new GUIContent(WindowTitle);
+            settingsController.titleContent = new GUIContent(Title);
             settingsController.maxSize = new Vector2(MinWindowLength, MinWindowHeight);
             settingsController.minSize = settingsController.maxSize;
         }
@@ -29,6 +29,9 @@ namespace NOVA.Scripts
         {
             root = settingsScreenAsset.CloneTree();
             rootVisualElement.Add(root);
+
+            Label label = root.Q<Label>("TitleLabel");
+            label.text = Title;
         }
     }
 }

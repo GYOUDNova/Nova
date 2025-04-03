@@ -14,13 +14,13 @@ namespace NOVA.Scripts
         /*Window Settings*/
         private const float MinWindowHeight = 600;
         private const float MinWindowLength = 850;
-        private const string WindowTitle = "Gesture List";
+        private const string Title = "Gesture List";
 
         [MenuItem("Window/UI Toolkit/Gesture List Screen")]
         public static void SetupAndShowWindow()
         {
             GestureListWindowController gestureListController = GetWindow<GestureListWindowController>();
-            gestureListController.titleContent = new GUIContent(WindowTitle);
+            gestureListController.titleContent = new GUIContent(Title);
             gestureListController.maxSize = new Vector2(MinWindowLength, MinWindowHeight);
             gestureListController.minSize = gestureListController.maxSize;
         }
@@ -29,6 +29,9 @@ namespace NOVA.Scripts
         {
             root = gestureListScreenAsset.CloneTree();
             rootVisualElement.Add(root);
+
+            Label label = root.Q<Label>("TitleLabel");
+            label.text = Title;
         }
     }
 }
