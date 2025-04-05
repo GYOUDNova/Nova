@@ -1,7 +1,9 @@
 {
     "name": "NOVA",
     "rootNamespace": "NOVA.Scripts",
-    "references": [],
+    "references": [
+        ""
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
