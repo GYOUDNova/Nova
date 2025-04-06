@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 652af036167dcc24391141937920df6e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_ViewDataDictionary: {instanceID: 0}
+  - addingCombinationScreenAsset: {fileID: 9197481963319205126, guid: f9f3061a744a94e47b785dfc3ea972f2, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
