@@ -11,7 +11,6 @@ using NUnit.Framework;
 [TestFixture]
 public class SampleSqliteHandlerTests
 {
-
     /// <summary>
     /// The name of the SQLite database file
     /// </summary>

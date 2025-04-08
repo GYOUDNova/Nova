@@ -11,17 +11,10 @@ namespace NOVA.Scripts
     /// in Unity. It creates a sample SQLite database and applies migrations to it.
     /// </summary>
 
-    [InitializeOnLoad]
     public class SampleSqliteHandler
     {
         private const string DatabaseName = "test.db";
         private SQLiteConnection connection;
-
-        static SampleSqliteHandler()
-        {
-            // This static constructor is called when the class is loaded
-            _ = new SampleSqliteHandler();
-        }
 
         public SampleSqliteHandler()
         {
