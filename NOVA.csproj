@@ -61,8 +61,44 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\WaitForResult.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\StaticImageSource.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\GraphRunner.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\InferenceMode.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSourceProvider.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\RunningMode.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkDetectionConfigWindow.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkDetectionConfig.cs" />
+    <Compile Include="Assets\Scripts\Controllers\AddingCombinationWindowController.cs" />
     <Compile Include="Assets\Scripts\Entity.cs" />
+    <Compile Include="Assets\Scripts\Controllers\CreatingGestureWindowController.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkerRunner.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\Modal.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\WebCamSource.cs" />
+    <Compile Include="Assets\Scripts\Controllers\GestureInputController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\MainEditorWindowController.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\ModalContents.cs" />
+    <Compile Include="Assets\Scripts\Helpers\TestUtils.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\Bootstrap.cs" />
+    <Compile Include="Assets\Scripts\Controllers\GestureListWindowController.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\Screen.cs" />
     <Compile Include="Assets\Scripts\SampleSqliteHandler.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\ImageSource.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageReadMode.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\EnumExtension.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\VideoSource.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\AssetLoader.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\ModalButton.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\ImageSourceType.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\ImageSourceConfig.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\TaskApiRunner.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\LegacySolutionRunner.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\AutoFit.cs" />
+    <Compile Include="Assets\Scripts\Controllers\SettingsCalibrationWindowController.cs" />
+    <Compile Include="Assets\Scripts\Helpers\SubScreens.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\AppSettings.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\SolutionMenu.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\VisionTaskApiRunner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\NOVA.asmdef" />
@@ -568,12 +604,20 @@
       <HintPath>Library\PackageCache\com.unity.collab-proxy@001b54a8988a\Lib\Editor\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>Library\PackageCache\com.github.homuler.mediapipe@7f48457ae94b\Runtime\Plugins\Protobuf\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="SQLitePCLRaw.batteries_v2">
       <HintPath>Assets\Packages\SQLitePCLRaw.bundle_green.2.1.2\lib\netstandard2.0\SQLitePCLRaw.batteries_v2.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@001b54a8988a\Lib\Editor\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Google.Protobuf">
+      <HintPath>Library\PackageCache\com.github.homuler.mediapipe@7f48457ae94b\Runtime\Plugins\Protobuf\Google.Protobuf.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="log4netPlastic">
@@ -1094,6 +1138,14 @@
     </Reference>
     <Reference Include="System.Xml.Serialization">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.EditorCoroutines.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Mediapipe.Runtime">
+      <HintPath>Library\ScriptAssemblies\Mediapipe.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEditor.UI">

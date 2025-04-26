@@ -2,7 +2,8 @@
     "name": "NOVA",
     "rootNamespace": "NOVA.Scripts",
     "references": [
-        ""
+        "Unity.EditorCoroutines.Editor",
+        "Mediapipe.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
