@@ -4,6 +4,7 @@
         <engine:VisualElement name="Header" style="flex-grow: 1;">
             <engine:Label name="TitleLabel" class="title-label" />
             <engine:VisualElement name="logo" class="logo" />
+            <engine:Button text="Button" name="TakeImageButton" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>
