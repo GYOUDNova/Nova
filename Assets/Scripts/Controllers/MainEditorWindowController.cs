@@ -46,7 +46,7 @@ namespace NOVA.Scripts
         /// Creates the GUI for the main editor application
         /// </summary>
         public void CreateGUI()
-        {          
+        {
             root = mainEditorTreeAsset.CloneTree();
             rootVisualElement.Add(root);
 

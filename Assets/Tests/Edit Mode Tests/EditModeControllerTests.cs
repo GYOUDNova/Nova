@@ -64,7 +64,7 @@ public class EditModeControllerTests
 
         //Act   
         button = mainWindow.rootVisualElement.Q<Button>("CreateAGestureButton");
-       
+
         TestUtils.ClickOnButton(button);
         buttonClicked = EditorWindow.HasOpenInstances<CreatingGestureWindowController>();
         yield return null;

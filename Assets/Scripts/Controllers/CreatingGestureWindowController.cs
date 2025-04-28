@@ -1,10 +1,10 @@
+using System.Collections;
 using Mediapipe.Tasks.Vision.Core;
 using Mediapipe.Tasks.Vision.HandLandmarker;
 using Mediapipe.Unity;
 using Mediapipe.Unity.Experimental;
 using Mediapipe.Unity.Sample;
 using Mediapipe.Unity.Sample.HandLandmarkDetection;
-using System.Collections;
 using Unity.EditorCoroutines.Editor;
 using UnityEditor;
 using UnityEngine;
@@ -18,13 +18,22 @@ namespace NOVA.Scripts
         private VisualTreeAsset createGestureScreenAsset;
 
         /* Window Settings */
-        private const float MinWindowHeight = 1920;
-        private const float MinWindowLength = 1080;
+
+        private const float MinWindowHeight = 1280;
+        private const float MinWindowLength = 720;
+
+        private const string WindowName = "Create a Gesture";
+        private const string CameraFeedSelector = "camera-feed";
+        private const string TakeImageButtonName = "TakeImageButton";
 
         private VisualElement root;
+
+        /* Camera Settings */
+
+        private const int CameraWidth = 600;
+        private const int CameraHeight = 600;
         private WebCamTexture webCamTexture;
         private Texture2D texture;
-
         private EditorCoroutine edCoro;
 
         // The actual task API that will be used for hand landmark detection
@@ -36,6 +45,7 @@ namespace NOVA.Scripts
         // Reference to the MP image that will be used for processing
         private Mediapipe.Image _mpImage;
 
+        // Image processing options for the hand landmark detection
         private ImageProcessingOptions imageProcessingOptions;
 
         // This is will contain the basic config information for the hand landmark detection (i.e., num of hands, etc.)
@@ -45,36 +55,38 @@ namespace NOVA.Scripts
         public static void SetupAndShowWindow()
         {
             CreatingGestureWindowController createGestureController = GetWindow<CreatingGestureWindowController>();
-            createGestureController.titleContent = new GUIContent("Create a Gesture");
+            createGestureController.titleContent = new GUIContent(WindowName);
             createGestureController.maxSize = new Vector2(MinWindowHeight, MinWindowLength);
             createGestureController.minSize = createGestureController.maxSize;
         }
 
+
+        /// <summary>
+        /// Creates the GUI for the window
+        /// </summary>
         public void CreateGUI()
         {
             root = createGestureScreenAsset.CloneTree();
             rootVisualElement.Add(root);
 
-            webCamTexture = new WebCamTexture(800, 600);
-            webCamTexture.deviceName = "USB Camera";
+            webCamTexture = new WebCamTexture(CameraWidth, CameraHeight);
             webCamTexture.Play();
 
             texture = new Texture2D(webCamTexture.width, webCamTexture.height);
+
             foreach (var device in WebCamTexture.devices)
             {
                 Debug.Log(device.name);
             }
 
-
+            // Add the camera feed to the UI
             var image = new Image();
             image.image = texture;
-            image.style.width = 800;
-            image.style.height = 600;
-
+            image.AddToClassList(CameraFeedSelector);
             root.Add(image);
 
             // Add functionality to take image and save
-            var takeImage = root.Q<Button>("TakeImageButton");
+            var takeImage = root.Q<Button>(TakeImageButtonName);
             takeImage.clicked += () =>
             {
                 // Use the mediapipe task API to process the image
@@ -85,6 +97,8 @@ namespace NOVA.Scripts
                 var result = HandLandmarkerResult.Alloc(2);
                 if (_taskApi.TryDetect(_mpImage, imageProcessingOptions, ref result))
                 {
+                    // Placeholder: Log the results
+                    // TODO: Replace with actual logic to process landmarks
                     foreach (var hands in result.handWorldLandmarks)
                     {
                         foreach (var handLandmark in hands.landmarks)
@@ -102,6 +116,9 @@ namespace NOVA.Scripts
             edCoro = EditorCoroutineUtility.StartCoroutine(UpdateFeed(), this);
         }
 
+        /// <summary>
+        /// Cleanup resources when the window is closed.
+        /// </summary>
         public void OnDestroy()
         {
             webCamTexture.Stop();
@@ -110,6 +127,9 @@ namespace NOVA.Scripts
             EditorCoroutineUtility.StopCoroutine(edCoro);
         }
 
+        /// <summary>
+        /// This method is called every frame to update the camera feed
+        /// </summary>
         private void OnGUI()
         {
             if (webCamTexture != null && webCamTexture.isPlaying)
@@ -119,17 +139,20 @@ namespace NOVA.Scripts
             }
         }
 
+        /// <summary>
+        /// Coroutine to update the camera feed and process the image
+        /// </summary>
         private IEnumerator UpdateFeed()
         {
             config.RunningMode = Mediapipe.Tasks.Vision.Core.RunningMode.IMAGE;
             AssetLoader.Provide(new StreamingAssetsResourceManager());
             yield return AssetLoader.PrepareAssetAsync(config.ModelPath);
 
-            imageProcessingOptions = new Mediapipe.Tasks.Vision.Core.ImageProcessingOptions(rotationDegrees: 0);
+            imageProcessingOptions = new ImageProcessingOptions(rotationDegrees: 0);
             var options = config.GetHandLandmarkerOptions(null);
             _taskApi = HandLandmarker.CreateFromOptions(options);
 
-            _frame = new(1920, 1080, TextureFormat.RGBA32);
+            _frame = new(CameraWidth, CameraHeight, TextureFormat.RGBA32);
 
             // Continue updating the feed until the window is closed
             while (hasFocus)

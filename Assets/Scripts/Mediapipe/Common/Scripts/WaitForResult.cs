@@ -12,76 +12,76 @@ using Stopwatch = System.Diagnostics.Stopwatch;
 
 namespace Mediapipe.Unity
 {
-  public class WaitForResult : CustomYieldInstruction
-  {
-    public object result { get; private set; }
-
-    protected object tmpResult;
-    protected bool isDone = false;
-
-    private readonly MonoBehaviour _runner;
-    private readonly IEnumerator _inner;
-    private readonly Coroutine _coroutine;
-
-    public bool isError { get; private set; } = false;
-    public Exception error { get; private set; }
-    public override bool keepWaiting => !isDone && !isError;
-
-    public WaitForResult(MonoBehaviour runner, IEnumerator inner, long timeoutMillisec = long.MaxValue)
+    public class WaitForResult : CustomYieldInstruction
     {
-      _runner = runner;
-      _inner = inner;
-      _coroutine = runner.StartCoroutine(Run(timeoutMillisec));
-    }
+        public object result { get; private set; }
 
-    private IEnumerator Run(long timeoutMillisec)
-    {
-      var stopwatch = new Stopwatch();
-      stopwatch.Start();
+        protected object tmpResult;
+        protected bool isDone = false;
 
-      while (true)
-      {
-        try
+        private readonly MonoBehaviour _runner;
+        private readonly IEnumerator _inner;
+        private readonly Coroutine _coroutine;
+
+        public bool isError { get; private set; } = false;
+        public Exception error { get; private set; }
+        public override bool keepWaiting => !isDone && !isError;
+
+        public WaitForResult(MonoBehaviour runner, IEnumerator inner, long timeoutMillisec = long.MaxValue)
         {
-          if (stopwatch.ElapsedMilliseconds > timeoutMillisec)
-          {
-            _runner.StopCoroutine(_coroutine);
-            throw new TimeoutException($"{stopwatch.ElapsedMilliseconds}ms has passed");
-          }
-          if (!_inner.MoveNext())
-          {
-            break;
-          }
-          tmpResult = _inner.Current;
+            _runner = runner;
+            _inner = inner;
+            _coroutine = runner.StartCoroutine(Run(timeoutMillisec));
         }
-        catch (Exception e)
+
+        private IEnumerator Run(long timeoutMillisec)
         {
-          isError = true;
-          error = e;
-          yield break;
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            while (true)
+            {
+                try
+                {
+                    if (stopwatch.ElapsedMilliseconds > timeoutMillisec)
+                    {
+                        _runner.StopCoroutine(_coroutine);
+                        throw new TimeoutException($"{stopwatch.ElapsedMilliseconds}ms has passed");
+                    }
+                    if (!_inner.MoveNext())
+                    {
+                        break;
+                    }
+                    tmpResult = _inner.Current;
+                }
+                catch (Exception e)
+                {
+                    isError = true;
+                    error = e;
+                    yield break;
+                }
+                yield return tmpResult;
+            }
+            Done(tmpResult);
         }
-        yield return tmpResult;
-      }
-      Done(tmpResult);
+
+        protected virtual void Done(object result)
+        {
+            this.result = result;
+            isDone = true;
+        }
     }
 
-    protected virtual void Done(object result)
+    public class WaitForResult<T> : WaitForResult
     {
-      this.result = result;
-      isDone = true;
+        public new T result { get; private set; }
+
+        public WaitForResult(MonoBehaviour runner, IEnumerator inner, long timeoutMillisec = long.MaxValue) : base(runner, inner, timeoutMillisec) { }
+
+        protected override void Done(object result)
+        {
+            this.result = (T)result;
+            isDone = true;
+        }
     }
-  }
-
-  public class WaitForResult<T> : WaitForResult
-  {
-    public new T result { get; private set; }
-
-    public WaitForResult(MonoBehaviour runner, IEnumerator inner, long timeoutMillisec = long.MaxValue) : base(runner, inner, timeoutMillisec) { }
-
-    protected override void Done(object result)
-    {
-      this.result = (T)result;
-      isDone = true;
-    }
-  }
 }

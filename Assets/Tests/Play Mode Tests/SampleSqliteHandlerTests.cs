@@ -1,8 +1,8 @@
 using System.Collections;
-using UnityEngine;
-using UnityEngine.TestTools;
 using NOVA.Scripts;
 using NUnit.Framework;
+using UnityEngine;
+using UnityEngine.TestTools;
 
 /// <summary>
 /// This class contains tests for the SampleSqliteHandler class
