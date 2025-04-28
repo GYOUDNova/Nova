@@ -6,10 +6,10 @@
 
 namespace Mediapipe.Unity
 {
-  [System.Serializable]
-  public enum InferenceMode
-  {
-    GPU,
-    CPU,
-  }
+    [System.Serializable]
+    public enum InferenceMode
+    {
+        GPU,
+        CPU,
+    }
 }

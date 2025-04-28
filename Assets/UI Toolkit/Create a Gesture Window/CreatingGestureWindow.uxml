@@ -1,10 +1,11 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/Create%20a%20Gesture%20Window/CreatingGestureWindowUSS.uss?fileID=7433441132597879392&amp;guid=4b23470200e43a14f9b20e3fd6ff3e40&amp;type=3#CreatingGestureWindowUSS" />
+    <Style src="project://database/Assets/UI%20Toolkit/window.uss?fileID=7433441132597879392&amp;guid=14e1d9d7fd525284290419e722cdb958&amp;type=3#window" />
     <engine:VisualElement name="EditorWindow">
         <engine:VisualElement name="Header" style="flex-grow: 1;">
             <engine:Label name="TitleLabel" class="title-label" />
             <engine:VisualElement name="logo" class="logo" />
-            <engine:Button text="Button" name="TakeImageButton" />
+            <engine:Button text="Take Image" name="TakeImageButton" class="take-image-btn" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

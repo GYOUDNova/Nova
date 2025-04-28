@@ -6,8 +6,8 @@
 
 public enum ImageSourceType
 {
-  WebCamera = 0,
-  Image = 1,
-  Video = 2,
-  Unknown = 3,
+    WebCamera = 0,
+    Image = 1,
+    Video = 2,
+    Unknown = 3,
 }
