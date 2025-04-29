@@ -88,7 +88,7 @@ public class GestureInputControllerTests
         _gestureInputController.AddGestureToChain(gesture2Name);
 
         // Wait for 2 seconds
-        yield return new WaitForSecondsRealtime(3f);
+        yield return new WaitForSeconds(3f);
 
         // Assert
         Assert.AreEqual("TestGestureChain Activated", _outputText, "The gesture input was not activated correctly.");
@@ -107,7 +107,7 @@ public class GestureInputControllerTests
         _gestureInputController.AddGestureToChain(gesture1Name);
 
         // Wait for 2 seconds
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSeconds(2f);
 
         // Assert
         Assert.AreEqual("TestGesture Activated", _outputText, "The gesture input was not activated correctly.");
