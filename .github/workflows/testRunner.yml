@@ -1,12 +1,15 @@
-name: Actions 😎
+name: Test Runner 😎
 
 on: [push, pull_request]
 
 jobs:
   build:
-    name: Build my project ✨
+    permissions:
+      checks: write
+    name: Run Tests in PlayMode and EditMode ✨
     runs-on: ubuntu-latest
     steps:
+
       # Checkout
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,6 +27,7 @@ jobs:
       # Test
       - name: Run tests
         uses: game-ci/unity-test-runner@v4
+        id: tests
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
@@ -31,13 +35,11 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
 
-          
-      # Build
-      - name: Build project
-        uses: game-ci/unity-builder@v4
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        if: always()
         with:
-          targetPlatform: StandaloneWindows
+          name: Test Results
+          path: ${{ steps.tests.outputs.artifactsPath }}
+
+        
