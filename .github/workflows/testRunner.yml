@@ -5,16 +5,13 @@ on: [push, pull_request]
 jobs:
   build:
     name: Build my project ✨
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       # Checkout
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           lfs: true
-
-      - name: Restore NuGet packages
-        run: nuget restore
 
       # Cache
       - uses: actions/cache@v3
