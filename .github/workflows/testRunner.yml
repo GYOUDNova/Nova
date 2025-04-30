@@ -7,9 +7,6 @@ jobs:
     name: Build my project ✨
     runs-on: ubuntu-latest
     steps:
-      - name: Print Current Directory
-        run: pwd
-
       # Checkout
       - name: Checkout repository
         uses: actions/checkout@v4
