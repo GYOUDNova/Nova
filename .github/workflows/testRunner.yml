@@ -3,7 +3,7 @@ name: Test Runner 😎
 on: [pull_request]
 
 jobs:
-  build:
+  test:
     permissions:
       checks: write
     name: Run Tests in PlayMode and EditMode ✨
