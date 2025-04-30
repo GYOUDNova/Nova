@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using NUnit.Framework;
 using SQLite;
-using UnityEditor;
 using UnityEngine;
 
 namespace NOVA.Scripts

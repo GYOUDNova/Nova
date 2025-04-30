@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using System.Collections;
 using Mediapipe.Tasks.Vision.Core;
 using Mediapipe.Tasks.Vision.HandLandmarker;
@@ -163,3 +165,5 @@ namespace NOVA.Scripts
         }
     }
 }
+
+#endif
