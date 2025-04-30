@@ -33,6 +33,7 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: StandaloneWindows
+          customImage: 'unityci/editor:ubuntu-6000.0.39f1-windows-mono-3'
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
