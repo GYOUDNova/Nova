@@ -79,7 +79,7 @@ namespace NOVA.Scripts
             webCamTexture = new WebCamTexture(CameraWidth, CameraHeight);
            
 
-            texture = new Texture2D(webCamTexture.width, webCamTexture.height);
+            texture = new Texture2D(640, 480);
             DropdownField = root.Q<DropdownField>(DropdownMenuName);
             ErrorLabel = root.Q<Label>(ErrorLabelName);
 
@@ -135,7 +135,7 @@ namespace NOVA.Scripts
             {
                 webCamTexture.Stop();
             }
-              webCamTexture = new WebCamTexture(CameraWidth, CameraHeight);
+              webCamTexture = new WebCamTexture(480, 620);
             webCamTexture.deviceName = newValue;
             webCamTexture.Play();
             edCoro = EditorCoroutineUtility.StartCoroutine(UpdateFeed(), this);
@@ -160,6 +160,9 @@ namespace NOVA.Scripts
         {
             if (webCamTexture != null && webCamTexture.isPlaying)
             {
+                Debug.Log(webCamTexture.GetPixels32().Length);
+                Debug.Log(webCamTexture.width + "|" + webCamTexture.height);
+                Debug.Log(texture.width + "|" + texture.height);
                 texture.SetPixels32(webCamTexture.GetPixels32());
                 texture.Apply();
             }
