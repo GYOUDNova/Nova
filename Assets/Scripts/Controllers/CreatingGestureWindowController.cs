@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Linq;
 using Mediapipe.Tasks.Vision.Core;
 using Mediapipe.Tasks.Vision.HandLandmarker;
 using Mediapipe.Unity;
@@ -25,6 +27,11 @@ namespace NOVA.Scripts
         private const string WindowName = "Create a Gesture";
         private const string CameraFeedSelector = "camera-feed";
         private const string TakeImageButtonName = "TakeImageButton";
+        private const string DropdownMenuName = "CameraDropdown";
+        private const string ErrorLabelName = "ErrorLabel";
+
+        private DropdownField DropdownField;
+        private Label ErrorLabel;
 
         private VisualElement root;
 
@@ -70,14 +77,18 @@ namespace NOVA.Scripts
             rootVisualElement.Add(root);
 
             webCamTexture = new WebCamTexture(CameraWidth, CameraHeight);
-            webCamTexture.Play();
+           
 
             texture = new Texture2D(webCamTexture.width, webCamTexture.height);
+            DropdownField = root.Q<DropdownField>(DropdownMenuName);
+            ErrorLabel = root.Q<Label>(ErrorLabelName);
 
             foreach (var device in WebCamTexture.devices)
             {
-                Debug.Log(device.name);
+                DropdownField.choices.Add(device.name);
             }
+            // Register a callback for when the dropdown value changes
+            DropdownField.RegisterValueChangedCallback(evt => OnCameraSelected(evt.newValue));
 
             // Add the camera feed to the UI
             var image = new Image();
@@ -111,9 +122,24 @@ namespace NOVA.Scripts
                 {
                     Debug.LogError("Error processing image texture...");
                 }
-            };
+            };          
+        }
 
+        private void OnCameraSelected(string newValue)
+        {
+            if (WebCamTexture.devices.Any(device => device.name == newValue))
+            {
+
+            }
+            if (webCamTexture != null && webCamTexture.isPlaying)
+            {
+                webCamTexture.Stop();
+            }
+              webCamTexture = new WebCamTexture(CameraWidth, CameraHeight);
+            webCamTexture.deviceName = newValue;
+            webCamTexture.Play();
             edCoro = EditorCoroutineUtility.StartCoroutine(UpdateFeed(), this);
+
         }
 
         /// <summary>

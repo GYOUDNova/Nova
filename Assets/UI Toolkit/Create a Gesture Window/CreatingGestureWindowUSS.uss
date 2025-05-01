@@ -1,16 +1,18 @@
 .take-image-btn {
-    width: 100px;
-    height: 100px;
     align-items: stretch;
-    align-self: flex-end;
+    align-self: flex-start;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
+    margin-left: 320px;
 }
 
-.webcam-feed {
-    width: 600px;
-    height: 600px;
-    align-self: center;
+.horizontal-container {
+    flex-direction: row;
+}
+
+.error-text {
+    color: rgb(255, 0, 0);
+    margin-top: 3px;
 }

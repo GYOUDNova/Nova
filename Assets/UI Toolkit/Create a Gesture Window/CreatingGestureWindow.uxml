@@ -4,8 +4,12 @@
     <engine:VisualElement name="EditorWindow">
         <engine:VisualElement name="Header" style="flex-grow: 1;">
             <engine:Label name="TitleLabel" class="title-label" />
-            <engine:VisualElement name="logo" class="logo" />
-            <engine:Button text="Take Image" name="TakeImageButton" class="take-image-btn" />
+            <engine:VisualElement name="logo" class="logo" style="margin-top: 0;" />
+            <engine:VisualElement name="HorizontalContainer" class="horizontal-container">
+                <engine:Button text="Take Image" name="TakeImageButton" class="take-image-btn" />
+                <engine:Label text="Label" name="ErrorText" class="error-text" />
+            </engine:VisualElement>
+            <engine:DropdownField label="Cameras" name="CameraDropdown" style="width: 50%; margin-left: 320px;" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>
