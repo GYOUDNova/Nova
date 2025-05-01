@@ -1,6 +1,6 @@
 name: Format Check
 
-on: [pull_request]
+on: [push, pull_request]
 
 jobs:
   format-check:
@@ -42,17 +42,15 @@ jobs:
 
       - name: Check Code Formatting
         run: |
-          dotnet restore NOVA.csproj
-          dotnet format NOVA.csproj --verify-no-changes
+          for csproj in $(find . -name '*.csproj'); do
+            # Verify code formatting for each project
+            echo -e "Verifying format for project: $csproj"
+            dotnet format "$csproj" --verify-no-changes --exclude "**/Mediapipe/**"
 
-          rc=$?
+            rc=$?
 
-          if [[ $rc != 0 ]]; then
-            echo -e "Code is not formatted correctly!"
-            exit $rc
-          else 
-            echo -e "Code is formatted correctly!"
-          fi
-    
-
-
+            if [[ $rc != 0 ]]; then
+              echo "Error: Code formatting check failed for project $csproj"
+              exit $rc
+            fi
+          done

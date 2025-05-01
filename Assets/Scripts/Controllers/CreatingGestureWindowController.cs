@@ -39,19 +39,19 @@ namespace NOVA.Scripts
         private EditorCoroutine edCoro;
 
         // The actual task API that will be used for hand landmark detection
-        private HandLandmarker _taskApi;
+        private HandLandmarker taskApi;
 
         // A frame object to hold the texture image
-        private TextureFrame _frame;
+        private TextureFrame textureFrame;
 
         // Reference to the MP image that will be used for processing
-        private Mediapipe.Image _mpImage;
+        private Mediapipe.Image mpImage;
 
         // Image processing options for the hand landmark detection
         private ImageProcessingOptions imageProcessingOptions;
 
-        // This is will contain the basic config information for the hand landmark detection (i.e., num of hands, etc.)
-        public readonly HandLandmarkDetectionConfig config = new HandLandmarkDetectionConfig();
+        // This is will contain the basic config information for the hand landmark detection (i.e., num of hands, etc.)[
+        public readonly HandLandmarkDetectionConfig Config = new HandLandmarkDetectionConfig();
 
         [MenuItem("Window/UI Toolkit/Creating Gesture Screen")]
         public static void SetupAndShowWindow()
@@ -93,11 +93,11 @@ namespace NOVA.Scripts
             {
                 // Use the mediapipe task API to process the image
 
-                _frame.ReadTextureOnCPU(texture);
-                _mpImage = _frame.BuildCPUImage();
+                textureFrame.ReadTextureOnCPU(texture);
+                mpImage = textureFrame.BuildCPUImage();
 
                 var result = HandLandmarkerResult.Alloc(2);
-                if (_taskApi.TryDetect(_mpImage, imageProcessingOptions, ref result))
+                if (taskApi.TryDetect(mpImage, imageProcessingOptions, ref result))
                 {
                     // Placeholder: Log the results
                     // TODO: Replace with actual logic to process landmarks
@@ -146,15 +146,15 @@ namespace NOVA.Scripts
         /// </summary>
         private IEnumerator UpdateFeed()
         {
-            config.RunningMode = Mediapipe.Tasks.Vision.Core.RunningMode.IMAGE;
+            Config.RunningMode = Mediapipe.Tasks.Vision.Core.RunningMode.IMAGE;
             AssetLoader.Provide(new StreamingAssetsResourceManager());
-            yield return AssetLoader.PrepareAssetAsync(config.ModelPath);
+            yield return AssetLoader.PrepareAssetAsync(Config.ModelPath);
 
             imageProcessingOptions = new ImageProcessingOptions(rotationDegrees: 0);
-            var options = config.GetHandLandmarkerOptions(null);
-            _taskApi = HandLandmarker.CreateFromOptions(options);
+            var options = Config.GetHandLandmarkerOptions(null);
+            taskApi = HandLandmarker.CreateFromOptions(options);
 
-            _frame = new(CameraWidth, CameraHeight, TextureFormat.RGBA32);
+            textureFrame = new(CameraWidth, CameraHeight, TextureFormat.RGBA32);
 
             // Continue updating the feed until the window is closed
             while (hasFocus)

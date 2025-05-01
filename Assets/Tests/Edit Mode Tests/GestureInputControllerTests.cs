@@ -8,9 +8,9 @@ using UnityEngine.TestTools;
 
 public class GestureInputControllerTests
 {
-    private GestureInputController _gestureInputController;
+    private GestureInputController gestureInputController;
 
-    private string _outputText;
+    private string outputText;
 
     //set up gesture input controller
     [SetUp]
@@ -18,25 +18,25 @@ public class GestureInputControllerTests
     {
         // Create a new GameObject and add the GestureInputController component
         GameObject gameObject = new GameObject();
-        _gestureInputController = gameObject.AddComponent<GestureInputController>();
+        gestureInputController = gameObject.AddComponent<GestureInputController>();
 
         // Initialize the GestureDictionary with some test data
-        _gestureInputController.gestureDictionary = new GestureDictionary
+        gestureInputController.GestureDictionary = new GestureDictionary
         {
-            gestureInputs = new List<GestureInput>
+            GestureInputs = new List<GestureInput>
             {
-                new GestureInput { gestureName = "TestGesture", gestureEvent = new UnityEvent() }
+                new GestureInput { GestureName = "TestGesture", GestureEvent = new UnityEvent() }
             }
         };
 
         // Initialize the GestureInputMapping dictionary
-        _gestureInputController.gestureInputMapping = _gestureInputController.gestureDictionary.ToDictionary();
+        gestureInputController.GestureInputMapping = gestureInputController.GestureDictionary.ToDictionary();
 
         // Set up a listener for the UnityEvent to capture output
-        _gestureInputController.gestureDictionary.gestureInputs[0].gestureEvent.AddListener(() => _outputText = "TestGesture Activated");
+        gestureInputController.GestureDictionary.GestureInputs[0].GestureEvent.AddListener(() => outputText = "TestGesture Activated");
 
         // default value for output text
-        _outputText = string.Empty;
+        outputText = string.Empty;
     }
 
 
@@ -48,12 +48,12 @@ public class GestureInputControllerTests
         string gestureName = "TestGesture";
 
         // Act
-        _gestureInputController.ActivateGestureInput(gestureName);
+        gestureInputController.ActivateGestureInput(gestureName);
 
         // Wait for the UnityEvent to be invoked
         yield return null;
 
         // Assert
-        Assert.AreEqual("TestGesture Activated", _outputText, "The gesture input was not activated correctly.");
+        Assert.AreEqual("TestGesture Activated", outputText, "The gesture input was not activated correctly.");
     }
 }

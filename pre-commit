@@ -9,19 +9,22 @@ Red='\033[0;31m'          # Red
 Yellow='\033[0;33m'       # Yellow
 Green='\033[0;32m'        # Green
 
-csproject='NOVA.csproj'
 
-echo -e "${Cyan}Checking Format on ${csproject}...${Color_Off}"
+# Find csproj files in the root directory ONLY
+for csproj in $(find . -maxdepth 1 -name "*.csproj"); do
+    echo -e "${Cyan}Checking Format on $csproj${Color_Off}"
 
-dotnet format $csproject --verify-no-changes
+    dotnet format $csproj --verify-no-changes --exclude "**/Mediapipe/**"
 
-rc=$?
+    rc=$?
 
-if [[ $rc != 0 ]]; then
-        echo -e "${Yellow}Code is not formatted correctly in project ${csproject}!${Color_Off}"
-        echo -e "${Yellow}Please run 'dotnet format -v diag ${csproject}' to format your code.${Color_Off}"
-else 
-    echo -e "${Green}Code is formatted correctly!${Color_Off}"
-fi
+    if [[ $rc != 0 ]]; then
+        echo -e "${Yellow}Code is not formatted correctly in project $csproj!${Color_Off}"
+        echo -e "${Yellow}Please run 'dotnet format -v diag $csproj' --exclude \"**/Mediapipe/**\ to format your code.${Color_Off}"
+        exit $rc
+    else 
+        echo -e "${Green}Code for $csproj is formatted correctly!${Color_Off}"
+    fi
+done
 
 exit $rc

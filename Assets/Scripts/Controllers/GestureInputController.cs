@@ -8,21 +8,21 @@ namespace NOVA.Scripts
     public class GestureInputController : MonoBehaviour
     {
         [SerializeField]
-        public GestureDictionary gestureDictionary;
+        public GestureDictionary GestureDictionary;
 
-        public Dictionary<string, UnityEvent> gestureInputMapping;
+        public Dictionary<string, UnityEvent> GestureInputMapping;
 
         public void Start()
         {
-            gestureInputMapping = gestureDictionary.ToDictionary();
+            GestureInputMapping = GestureDictionary.ToDictionary();
         }
 
         // function to take string and activate the input action
         public void ActivateGestureInput(string gestureName)
         {
-            if (gestureInputMapping.ContainsKey(gestureName))
+            if (GestureInputMapping.ContainsKey(gestureName))
             {
-                gestureInputMapping[gestureName].Invoke();
+                GestureInputMapping[gestureName].Invoke();
                 Debug.Log($"Activated gesture input: {gestureName}");
             }
             else
@@ -36,17 +36,17 @@ namespace NOVA.Scripts
     public class GestureDictionary
     {
         [SerializeField]
-        public List<GestureInput> gestureInputs;
+        public List<GestureInput> GestureInputs;
 
         public Dictionary<string, UnityEvent> ToDictionary()
         {
             Dictionary<string, UnityEvent> gestureInputMapping = new Dictionary<string, UnityEvent>();
 
-            foreach (var gestureInput in gestureInputs)
+            foreach (var gestureInput in GestureInputs)
             {
-                if (!gestureInputMapping.ContainsKey(gestureInput.gestureName))
+                if (!gestureInputMapping.ContainsKey(gestureInput.GestureName))
                 {
-                    gestureInputMapping.Add(gestureInput.gestureName, gestureInput.gestureEvent);
+                    gestureInputMapping.Add(gestureInput.GestureName, gestureInput.GestureEvent);
                 }
             }
 
@@ -58,8 +58,8 @@ namespace NOVA.Scripts
     public class GestureInput
     {
         [SerializeField]
-        public string gestureName;
+        public string GestureName;
         [SerializeField]
-        public UnityEvent gestureEvent;
+        public UnityEvent GestureEvent;
     }
 }
