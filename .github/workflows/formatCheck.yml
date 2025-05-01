@@ -42,7 +42,7 @@ jobs:
 
       - name: Check Code Formatting
         run: |
-          for csproj in $(find. -maxdepth 1 -name '*.csproj'); do
+          for csproj in $(find . -maxdepth 1 -name '*.csproj'); do
             # Verify code formatting for each project
             echo -e "Verifying format for project: $csproj"
             dotnet restore "$csproj"
