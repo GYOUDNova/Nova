@@ -20,7 +20,6 @@ namespace NOVA.Scripts
         private VisualTreeAsset createGestureScreenAsset;
 
         /* Window Settings */
-
         private const float MinWindowHeight = 1280;
         private const float MinWindowLength = 720;
 
@@ -28,17 +27,16 @@ namespace NOVA.Scripts
         private const string CameraFeedSelector = "camera-feed";
         private const string TakeImageButtonName = "TakeImageButton";
         private const string DropdownMenuName = "CameraDropdown";
-        private const string ErrorLabelName = "ErrorLabel";
+        private const string MessageLabelName = "MessageLabel";
 
         private DropdownField DropdownField;
-        private Label ErrorLabel;
+        private Label MessageText;
 
         private VisualElement root;
 
         /* Camera Settings */
-
-        private const int CameraWidth = 600;
-        private const int CameraHeight = 600;
+        private const int CameraWidth = 640;
+        private const int CameraHeight = 480;
         private WebCamTexture webCamTexture;
         private Texture2D texture;
         private EditorCoroutine edCoro;
@@ -67,7 +65,6 @@ namespace NOVA.Scripts
             createGestureController.minSize = createGestureController.maxSize;
         }
 
-
         /// <summary>
         /// Creates the GUI for the window
         /// </summary>
@@ -76,21 +73,17 @@ namespace NOVA.Scripts
             root = createGestureScreenAsset.CloneTree();
             rootVisualElement.Add(root);
 
-            webCamTexture = new WebCamTexture(CameraWidth, CameraHeight);
-           
-
-            texture = new Texture2D(640, 480);
             DropdownField = root.Q<DropdownField>(DropdownMenuName);
-            ErrorLabel = root.Q<Label>(ErrorLabelName);
-
+            DropdownField.RegisterValueChangedCallback(evt => OnCameraSelected(evt.newValue));
             foreach (var device in WebCamTexture.devices)
             {
                 DropdownField.choices.Add(device.name);
             }
-            // Register a callback for when the dropdown value changes
-            DropdownField.RegisterValueChangedCallback(evt => OnCameraSelected(evt.newValue));
+            MessageText = root.Q<Label>(MessageLabelName);
 
-            // Add the camera feed to the UI
+            webCamTexture = new WebCamTexture(CameraWidth, CameraHeight);
+            texture = new Texture2D(CameraWidth, CameraHeight);
+
             var image = new Image();
             image.image = texture;
             image.AddToClassList(CameraFeedSelector);
@@ -101,7 +94,6 @@ namespace NOVA.Scripts
             takeImage.clicked += () =>
             {
                 // Use the mediapipe task API to process the image
-
                 _frame.ReadTextureOnCPU(texture);
                 _mpImage = _frame.BuildCPUImage();
 
@@ -120,26 +112,38 @@ namespace NOVA.Scripts
                 }
                 else
                 {
-                    Debug.LogError("Error processing image texture...");
+                    MessageText.text = "Unable to detect gesture. Please try again";
                 }
-            };          
+            };
         }
 
-        private void OnCameraSelected(string newValue)
+        /// <summary>
+        /// Callback for when a camera is picked in the dropdown
+        /// </summary>
+        /// <param name="selectedCamera"></param>
+        private void OnCameraSelected(string selectedCamera)
         {
-            if (WebCamTexture.devices.Any(device => device.name == newValue))
+            if (!WebCamTexture.devices.Any(device => device.name == selectedCamera))
             {
-
+                MessageText.text = $"Unable to find the given camera: {selectedCamera}";
             }
             if (webCamTexture != null && webCamTexture.isPlaying)
             {
                 webCamTexture.Stop();
             }
-              webCamTexture = new WebCamTexture(480, 620);
-            webCamTexture.deviceName = newValue;
-            webCamTexture.Play();
-            edCoro = EditorCoroutineUtility.StartCoroutine(UpdateFeed(), this);
 
+            try
+            {
+                webCamTexture = new WebCamTexture(CameraWidth, CameraHeight);
+                webCamTexture.deviceName = selectedCamera;
+                webCamTexture.Play();
+                edCoro = EditorCoroutineUtility.StartCoroutine(UpdateFeed(), this);
+            }
+            catch(Exception)
+            {
+                MessageText.text = $"There was a problem setting up and playing the camera: {selectedCamera}";
+            }          
+           
         }
 
         /// <summary>
@@ -149,7 +153,6 @@ namespace NOVA.Scripts
         {
             webCamTexture.Stop();
             webCamTexture = null;
-
             EditorCoroutineUtility.StopCoroutine(edCoro);
         }
 
@@ -160,9 +163,6 @@ namespace NOVA.Scripts
         {
             if (webCamTexture != null && webCamTexture.isPlaying)
             {
-                Debug.Log(webCamTexture.GetPixels32().Length);
-                Debug.Log(webCamTexture.width + "|" + webCamTexture.height);
-                Debug.Log(texture.width + "|" + texture.height);
                 texture.SetPixels32(webCamTexture.GetPixels32());
                 texture.Apply();
             }
