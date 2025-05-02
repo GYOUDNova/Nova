@@ -9,17 +9,17 @@ namespace NOVA.Scripts
     public class GestureInputController : MonoBehaviour
     {
         [SerializeField]
-        public GestureDictionary gestureDictionary;
+        public GestureDictionary GestureDictionary;
 
         [SerializeField]
-        public GestureChainDictionary gestureChainDictionary;
+        public GestureChainDictionary GestureChainDictionary;
 
-        public Dictionary<string, UnityEvent> singleGestureInputMapping;
+        public Dictionary<string, UnityEvent> SingleGestureInputMapping;
 
-        public Dictionary<string, UnityEvent> gestureChainMapping;
+        public Dictionary<string, UnityEvent> GestureChainMapping;
 
         [NonSerialized]
-        public List<string> currentGestureChain = new List<string>();
+        public List<string> CurrentGestureChain = new List<string>();
 
         int longestChainLength = 0;
 
@@ -29,24 +29,24 @@ namespace NOVA.Scripts
 
         public void Start()
         {
-            singleGestureInputMapping = gestureDictionary.ToDictionary();
+            SingleGestureInputMapping = GestureDictionary.ToDictionary();
 
-            gestureChainMapping = gestureChainDictionary.ToDictionary();
+            GestureChainMapping = GestureChainDictionary.ToDictionary();
 
-            longestChainLength = gestureChainDictionary.GetLongestChainLength();
+            longestChainLength = GestureChainDictionary.GetLongestChainLength();
         }
 
         public void ResetLongestChainLength()
         {
-            longestChainLength = gestureChainDictionary.GetLongestChainLength();
+            longestChainLength = GestureChainDictionary.GetLongestChainLength();
         }
 
         // function to take string and activate the input action
         public void ActivateGestureInput(string gestureName)
         {
-            if (singleGestureInputMapping.ContainsKey(gestureName))
+            if (SingleGestureInputMapping.ContainsKey(gestureName))
             {
-                singleGestureInputMapping[gestureName].Invoke();
+                SingleGestureInputMapping[gestureName].Invoke();
                 Debug.Log($"Activated gesture input: {gestureName}");
             }
             else
@@ -58,21 +58,21 @@ namespace NOVA.Scripts
         public void ActivateGestureChainInput()
         {
             // print the current gesture chain
-            Debug.Log($"Current gesture chain: {string.Join("", currentGestureChain)}");
+            Debug.Log($"Current gesture chain: {string.Join("", CurrentGestureChain)}");
 
             // combine the current gesture chain into a string
-            string currentGestureChainKey = string.Join("", currentGestureChain);
+            string currentGestureChainKey = string.Join("", CurrentGestureChain);
 
             // check if the current gesture chain is in the dictionary
-            if (gestureChainMapping.ContainsKey(currentGestureChainKey))
+            if (GestureChainMapping.ContainsKey(currentGestureChainKey))
             {
-                gestureChainMapping[currentGestureChainKey].Invoke();
-                Debug.Log($"Activated gesture chain input: {string.Join(", ", currentGestureChain)}");
+                GestureChainMapping[currentGestureChainKey].Invoke();
+                Debug.Log($"Activated gesture chain input: {string.Join(", ", CurrentGestureChain)}");
             }
             // if the gesture chain is not in the dictionary run activateGestureInput with the last gesture in the chain
             else
             {
-                string lastGesture = currentGestureChain[currentGestureChain.Count - 1];
+                string lastGesture = CurrentGestureChain[CurrentGestureChain.Count - 1];
                 ActivateGestureInput(lastGesture);
                 Debug.Log($"Activated single gesture");
             }
@@ -87,26 +87,26 @@ namespace NOVA.Scripts
                 chainKeepWaiting = false;
                 yield return new WaitForSeconds(1f);
                 // check if the chain length is greater than the longest chain length then stop waiting
-                if (currentGestureChain.Count > longestChainLength)
+                if (CurrentGestureChain.Count > longestChainLength)
                 {
                     break;
                 }
 
             }
             ActivateGestureChainInput();
-            currentGestureChain.Clear();
+            CurrentGestureChain.Clear();
             chainCoroutineRunning = false;
 
         }
 
         public void AddGestureToChain(string gestureInput)
         {
-            if (currentGestureChain == null)
+            if (CurrentGestureChain == null)
             {
-                currentGestureChain = new List<string>();
+                CurrentGestureChain = new List<string>();
             }
 
-            currentGestureChain.Add(gestureInput);
+            CurrentGestureChain.Add(gestureInput);
             // check if chain coroutine is running
             if (chainCoroutineRunning)
             {
@@ -124,17 +124,17 @@ namespace NOVA.Scripts
     public class GestureDictionary
     {
         [SerializeField]
-        public List<GestureInput> gestureInputs;
+        public List<GestureInput> GestureInputs;
 
         public Dictionary<string, UnityEvent> ToDictionary()
         {
             Dictionary<string, UnityEvent> gestureInputMapping = new Dictionary<string, UnityEvent>();
 
-            foreach (var gestureInput in gestureInputs)
+            foreach (var gestureInput in GestureInputs)
             {
-                if (!gestureInputMapping.ContainsKey(gestureInput.gestureName))
+                if (!gestureInputMapping.ContainsKey(gestureInput.GestureName))
                 {
-                    gestureInputMapping.Add(gestureInput.gestureName, gestureInput.gestureEvent);
+                    gestureInputMapping.Add(gestureInput.GestureName, gestureInput.GestureEvent);
                 }
             }
 
@@ -146,20 +146,20 @@ namespace NOVA.Scripts
     public class GestureChainDictionary
     {
         [SerializeField]
-        public List<GestureChainInput> gestureChainInputs;
+        public List<GestureChainInput> GestureChainInputs;
 
         public Dictionary<string, UnityEvent> ToDictionary()
         {
             Dictionary<string, UnityEvent> gestureInputMapping = new Dictionary<string, UnityEvent>();
 
-            foreach (var gestureInput in gestureChainInputs)
+            foreach (var gestureInput in GestureChainInputs)
             {
                 // create a string from the list of gesture chain names
-                string gestureChainKey = string.Join("", gestureInput.gestureChainNames);
+                string gestureChainKey = string.Join("", gestureInput.GestureChainNames);
 
                 if (!gestureInputMapping.ContainsKey(gestureChainKey))
                 {
-                    gestureInputMapping.Add(gestureChainKey, gestureInput.gestureEvent);
+                    gestureInputMapping.Add(gestureChainKey, gestureInput.GestureEvent);
                 }
             }
 
@@ -173,11 +173,11 @@ namespace NOVA.Scripts
         {
             int longestChainLength = 0;
 
-            foreach (var gestureInput in gestureChainInputs)
+            foreach (var gestureInput in GestureChainInputs)
             {
-                if (gestureInput.gestureChainNames.Count > longestChainLength)
+                if (gestureInput.GestureChainNames.Count > longestChainLength)
                 {
-                    longestChainLength = gestureInput.gestureChainNames.Count;
+                    longestChainLength = gestureInput.GestureChainNames.Count;
                 }
             }
 
@@ -189,17 +189,17 @@ namespace NOVA.Scripts
     public class GestureInput
     {
         [SerializeField]
-        public string gestureName;
+        public string GestureName;
         [SerializeField]
-        public UnityEvent gestureEvent;
+        public UnityEvent GestureEvent;
     }
 
     [Serializable]
     public class GestureChainInput
     {
         [SerializeField]
-        public List<string> gestureChainNames;
+        public List<string> GestureChainNames;
         [SerializeField]
-        public UnityEvent gestureEvent;
+        public UnityEvent GestureEvent;
     }
 }

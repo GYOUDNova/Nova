@@ -70,7 +70,6 @@
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkDetectionConfigWindow.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkDetectionConfig.cs" />
     <Compile Include="Assets\Scripts\Controllers\AddingCombinationWindowController.cs" />
-    <Compile Include="Assets\Scripts\Entity.cs" />
     <Compile Include="Assets\Scripts\Controllers\CreatingGestureWindowController.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkerRunner.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\Modal.cs" />
@@ -80,19 +79,21 @@
     <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\ModalContents.cs" />
     <Compile Include="Assets\Scripts\Helpers\TestUtils.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\Bootstrap.cs" />
+    <Compile Include="Assets\Scripts\Helpers\InstallPreCommitHook.cs" />
     <Compile Include="Assets\Scripts\Controllers\GestureListWindowController.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\Screen.cs" />
-    <Compile Include="Assets\Scripts\SampleSqliteHandler.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\ImageSource.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageReadMode.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\EnumExtension.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\VideoSource.cs" />
+    <Compile Include="Assets\Scripts\Database\SampleSqliteHandler.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\AssetLoader.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\ModalButton.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\ImageSourceType.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\ImageSourceConfig.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\TaskApiRunner.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\LegacySolutionRunner.cs" />
+    <Compile Include="Assets\Scripts\Database\Entity.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\AutoFit.cs" />
     <Compile Include="Assets\Scripts\Controllers\SettingsCalibrationWindowController.cs" />
     <Compile Include="Assets\Scripts\Helpers\SubScreens.cs" />
@@ -592,10 +593,6 @@
       <HintPath>Library\PackageCache\com.unity.testtools.codecoverage@205a02cbcb39\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="SQLitePCLRaw.core">
-      <HintPath>Assets\Packages\SQLitePCLRaw.core.2.1.2\lib\netstandard2.0\SQLitePCLRaw.core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@001b54a8988a\Lib\Editor\unityplastic.dll</HintPath>
       <Private>False</Private>
@@ -606,10 +603,6 @@
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
       <HintPath>Library\PackageCache\com.github.homuler.mediapipe@7f48457ae94b\Runtime\Plugins\Protobuf\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="SQLitePCLRaw.batteries_v2">
-      <HintPath>Assets\Packages\SQLitePCLRaw.bundle_green.2.1.2\lib\netstandard2.0\SQLitePCLRaw.batteries_v2.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
@@ -628,20 +621,8 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="SQLitePCLRaw.provider.e_sqlite3">
-      <HintPath>Assets\Packages\SQLitePCLRaw.provider.e_sqlite3.2.1.2\lib\netstandard2.0\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1b53f46e931b\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="SQLite-net">
-      <HintPath>Assets\Packages\sqlite-net-pcl.1.9.172\lib\netstandard2.0\SQLite-net.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="NuGetForUnity.PluginAPI">
-      <HintPath>Library\PackageCache\com.github-glitchenzo.nugetforunity@ef15a3e52483\Editor\PluginAPI\NuGetForUnity.PluginAPI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
@@ -1146,6 +1127,10 @@
     </Reference>
     <Reference Include="Mediapipe.Runtime">
       <HintPath>Library\ScriptAssemblies\Mediapipe.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Gilzoide.SqliteNet">
+      <HintPath>Library\ScriptAssemblies\Gilzoide.SqliteNet.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEditor.UI">

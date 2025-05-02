@@ -8,9 +8,9 @@ using UnityEngine.TestTools;
 
 public class GestureInputControllerTests
 {
-    private GestureInputController _gestureInputController;
+    private GestureInputController gestureInputController;
 
-    private string _outputText;
+    private string outputText;
 
     //set up gesture input controller
     [SetUp]
@@ -18,44 +18,44 @@ public class GestureInputControllerTests
     {
         // Create a new GameObject and add the GestureInputController component
         GameObject gameObject = new GameObject();
-        _gestureInputController = gameObject.AddComponent<GestureInputController>();
+        gestureInputController = gameObject.AddComponent<GestureInputController>();
 
         // Initialize the GestureDictionary with some test data
-        _gestureInputController.gestureDictionary = new GestureDictionary
+        gestureInputController.GestureDictionary = new GestureDictionary
         {
-            gestureInputs = new List<GestureInput>
+            GestureInputs = new List<GestureInput>
             {
-                new GestureInput { gestureName = "TestGesture", gestureEvent = new UnityEvent() }
+                new GestureInput { GestureName = "TestGesture", GestureEvent = new UnityEvent() }
             }
         };
 
-        _gestureInputController.gestureChainDictionary = new GestureChainDictionary
+        gestureInputController.GestureChainDictionary = new GestureChainDictionary
         {
-            gestureChainInputs = new List<GestureChainInput>
+            GestureChainInputs = new List<GestureChainInput>
             {
-                new GestureChainInput { gestureChainNames = new List<string> { "TestGesture" , "TestGesture2"}, gestureEvent = new UnityEvent() }
+                new GestureChainInput { GestureChainNames = new List<string> { "TestGesture" , "TestGesture2"}, GestureEvent = new UnityEvent() }
             }
         };
 
         // Initialize the GestureInputMapping dictionary
-        _gestureInputController.singleGestureInputMapping = _gestureInputController.gestureDictionary.ToDictionary();
+        gestureInputController.SingleGestureInputMapping = gestureInputController.GestureDictionary.ToDictionary();
 
-        _gestureInputController.gestureChainMapping = _gestureInputController.gestureChainDictionary.ToDictionary();
+        gestureInputController.GestureChainMapping = gestureInputController.GestureChainDictionary.ToDictionary();
 
-        _gestureInputController.ResetLongestChainLength();
+        gestureInputController.ResetLongestChainLength();
 
         // Set up a listener for the UnityEvent to capture output
-        _gestureInputController.gestureDictionary.gestureInputs[0].gestureEvent.AddListener(() => _outputText = "TestGesture Activated");
+        gestureInputController.GestureDictionary.GestureInputs[0].GestureEvent.AddListener(() => outputText = "TestGesture Activated");
 
         // Set up a listener for the UnityEvent to capture output for chain
-        _gestureInputController.gestureChainDictionary.gestureChainInputs[0].gestureEvent.AddListener(() => _outputText = "TestGestureChain Activated");
+        gestureInputController.GestureChainDictionary.GestureChainInputs[0].GestureEvent.AddListener(() => outputText = "TestGestureChain Activated");
 
-        _gestureInputController.gestureChainMapping["TestGestureTestGesture2"].AddListener(() => _outputText = "TestGestureChain Activated");
+        gestureInputController.GestureChainMapping["TestGestureTestGesture2"].AddListener(() => outputText = "TestGestureChain Activated");
 
-        _gestureInputController.singleGestureInputMapping["TestGesture"].AddListener(() => _outputText = "TestGesture Activated");
+        gestureInputController.SingleGestureInputMapping["TestGesture"].AddListener(() => outputText = "TestGesture Activated");
 
         // default value for output text
-        _outputText = string.Empty;
+        outputText = string.Empty;
     }
 
 
@@ -64,16 +64,16 @@ public class GestureInputControllerTests
     public IEnumerator GestureInputControllerTest_ActivateTestGesture()
     {
         // Arrange
-        string gestureName = "TestGesture";
+        string GestureName = "TestGesture";
 
         // Act
-        _gestureInputController.ActivateGestureInput(gestureName);
+        gestureInputController.ActivateGestureInput(GestureName);
 
         // Wait for the UnityEvent to be invoked
         yield return null;
 
         // Assert
-        Assert.AreEqual("TestGesture Activated", _outputText, "The gesture input was not activated correctly.");
+        Assert.AreEqual("TestGesture Activated", outputText, "The gesture input was not activated correctly.");
     }
 
     [UnityTest]
@@ -84,14 +84,14 @@ public class GestureInputControllerTests
         string gesture2Name = "TestGesture2";
 
         // Act
-        _gestureInputController.AddGestureToChain(gesture1Name);
-        _gestureInputController.AddGestureToChain(gesture2Name);
+        gestureInputController.AddGestureToChain(gesture1Name);
+        gestureInputController.AddGestureToChain(gesture2Name);
 
         // Wait for 2 seconds
         yield return new WaitForSeconds(3f);
 
         // Assert
-        Assert.AreEqual("TestGestureChain Activated", _outputText, "The gesture input was not activated correctly.");
+        Assert.AreEqual("TestGestureChain Activated", outputText, "The gesture input was not activated correctly.");
     }
 
     [UnityTest]
@@ -102,14 +102,14 @@ public class GestureInputControllerTests
         string gesture2Name = "TestGesture2";
 
         // Act
-        _gestureInputController.AddGestureToChain(gesture1Name);
-        _gestureInputController.AddGestureToChain(gesture2Name);
-        _gestureInputController.AddGestureToChain(gesture1Name);
+        gestureInputController.AddGestureToChain(gesture1Name);
+        gestureInputController.AddGestureToChain(gesture2Name);
+        gestureInputController.AddGestureToChain(gesture1Name);
 
         // Wait for 2 seconds
         yield return new WaitForSeconds(2f);
 
         // Assert
-        Assert.AreEqual("TestGesture Activated", _outputText, "The gesture input was not activated correctly.");
+        Assert.AreEqual("TestGesture Activated", outputText, "The gesture input was not activated correctly.");
     }
 }

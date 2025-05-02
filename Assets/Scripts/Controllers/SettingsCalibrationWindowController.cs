@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -35,3 +37,5 @@ namespace NOVA.Scripts
         }
     }
 }
+
+#endif

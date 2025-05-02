@@ -1,11 +1,54 @@
+# Credits to: https://github.com/topfreegames/unity-template/blob/master/.editorconfig
+# Visual Studio Reference: https://docs.microsoft.com/en-us/visualstudio/ide/create-portable-custom-editor-options
+# Rider Reference: https://www.jetbrains.com/help/rider/EditorConfig_Index.html
+
+# top-most EditorConfig file
 root = true
 charset = utf-8
 
 [*]
 indent_style = space
-trim_trailing_whitespace = true
-insert_final_newline = true
+
+[*.{json,asmdef}]
+indent_size = 2
 
 [*.cs]
+# Basic text
 indent_size = 4
-dotnet_sort_system_directives_first = true
+insert_final_newline = true
+max_line_length = 120
+trim_trailing_whitespace = true
+
+# camelCase for Private Fields
+
+dotnet_naming_rule.private_fields_should_be_camel_case.severity = warning
+dotnet_naming_rule.private_fields_should_be_camel_case.symbols = private_fields
+dotnet_naming_rule.private_fields_should_be_camel_case.style = camel_case
+
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+
+dotnet_naming_style.camel_case.required_prefix = 
+dotnet_naming_style.camel_case.required_suffix = 
+dotnet_naming_style.camel_case.word_separator = 
+dotnet_naming_style.camel_case.capitalization = camel_case
+
+# Constant fields should be PascalCase
+dotnet_naming_rule.constant_fields_should_be_pascal_case.severity = warning
+dotnet_naming_rule.constant_fields_should_be_pascal_case.symbols = constant_fields
+dotnet_naming_rule.constant_fields_should_be_pascal_case.style = pascal_case_style
+
+dotnet_naming_symbols.constant_fields.applicable_kinds = field
+dotnet_naming_symbols.constant_fields.required_modifiers = const
+
+dotnet_naming_style.pascal_case_style.capitalization = pascal_case
+
+# PascalCase for Public Fields
+dotnet_naming_symbols.public_fields.applicable_kinds = field
+dotnet_naming_symbols.public_fields.applicable_accessibilities = public
+
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+
+dotnet_naming_rule.public_fields_must_be_pascal_case.symbols = public_fields
+dotnet_naming_rule.public_fields_must_be_pascal_case.style = pascal_case
+dotnet_naming_rule.public_fields_must_be_pascal_case.severity = warning
