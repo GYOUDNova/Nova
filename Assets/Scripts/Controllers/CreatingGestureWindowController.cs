@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Linq;
 using Mediapipe.Tasks.Vision.Core;
@@ -134,18 +133,19 @@ namespace NOVA.Scripts
                 webCamTexture.Stop();
             }
 
-            try
+            webCamTexture = new WebCamTexture(CameraWidth, CameraHeight);
+            webCamTexture.deviceName = selectedCamera;
+            webCamTexture.Play();
+
+            if (webCamTexture.isPlaying)
             {
-                webCamTexture = new WebCamTexture(CameraWidth, CameraHeight);
-                webCamTexture.deviceName = selectedCamera;
-                webCamTexture.Play();
                 edCoro = EditorCoroutineUtility.StartCoroutine(UpdateFeed(), this);
             }
-            catch(Exception)
+            else
             {
                 MessageText.text = $"There was a problem setting up and playing the camera: {selectedCamera}";
                 EditorCoroutineUtility.StartCoroutine(ClearErrorMessage(), this);
-            }               
+            }                               
         }
 
         /// <summary>
