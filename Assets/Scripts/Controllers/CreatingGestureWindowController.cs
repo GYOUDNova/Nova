@@ -28,6 +28,7 @@ namespace NOVA.Scripts
         private const string TakeImageButtonName = "TakeImageButton";
         private const string DropdownMenuName = "CameraDropdown";
         private const string MessageLabelName = "MessageLabel";
+        private const float MessageLabelTimer = 5f;
 
         private DropdownField DropdownField;
         private Label MessageText;
@@ -113,6 +114,7 @@ namespace NOVA.Scripts
                 else
                 {
                     MessageText.text = "Unable to detect gesture. Please try again";
+                    EditorCoroutineUtility.StartCoroutine(ClearErrorMessage(), this);
                 }
             };
         }
@@ -142,8 +144,8 @@ namespace NOVA.Scripts
             catch(Exception)
             {
                 MessageText.text = $"There was a problem setting up and playing the camera: {selectedCamera}";
-            }          
-           
+                EditorCoroutineUtility.StartCoroutine(ClearErrorMessage(), this);
+            }               
         }
 
         /// <summary>
@@ -189,6 +191,12 @@ namespace NOVA.Scripts
                 Repaint();
                 yield return null;
             }
+        }
+
+        private IEnumerator ClearErrorMessage()
+        {
+            yield return new EditorWaitForSeconds(MessageLabelTimer);
+            MessageText.text = string.Empty;
         }
     }
 }
