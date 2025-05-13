@@ -31,8 +31,9 @@ namespace NOVA.Scripts
 
         private DropdownField DropdownField;
         private Label MessageText;
-
+        private Button SaveImageButton;
         private VisualElement root;
+        private VisualElement savingGestureContainer;
 
         /* Camera Settings */
         private const int CameraWidth = 640;
@@ -73,6 +74,9 @@ namespace NOVA.Scripts
             root = createGestureScreenAsset.CloneTree();
             rootVisualElement.Add(root);
 
+            savingGestureContainer = root.Q<VisualElement>("SavingGestureContainer");
+            SaveImageButton = root.Q<Button>("SaveGestureButton");
+            SaveImageButton.RegisterCallback<ClickEvent>(evt => SaveImage(evt));
             DropdownField = root.Q<DropdownField>(DropdownMenuName);
             DropdownField.RegisterValueChangedCallback(evt => OnCameraSelected(evt.newValue));
             foreach (var device in WebCamTexture.devices)
@@ -100,6 +104,8 @@ namespace NOVA.Scripts
                 var result = HandLandmarkerResult.Alloc(2);
                 if (_taskApi.TryDetect(_mpImage, imageProcessingOptions, ref result))
                 {
+                    DisplayMessage("Gesture data recieved. Please name the gesture and then save", Color.green, 10f);
+                    savingGestureContainer.style.display = DisplayStyle.Flex;
                     // Placeholder: Log the results
                     // TODO: Replace with actual logic to process landmarks
                     foreach (var hands in result.handWorldLandmarks)
@@ -112,8 +118,7 @@ namespace NOVA.Scripts
                 }
                 else
                 {
-                    MessageText.text = "Unable to detect gesture. Please try again";
-                    EditorCoroutineUtility.StartCoroutine(ClearErrorMessage(), this);
+                    DisplayMessage("Unable to detect gesture. Please try again", Color.red, 5f);
                 }
             };
         }
@@ -126,7 +131,7 @@ namespace NOVA.Scripts
         {
             if (!WebCamTexture.devices.Any(device => device.name == selectedCamera))
             {
-                MessageText.text = $"Unable to find the given camera: {selectedCamera}";
+                DisplayMessage($"Unable to find the given camera: {selectedCamera}", Color.red, 5f);
             }
             if (webCamTexture != null && webCamTexture.isPlaying)
             {
@@ -143,8 +148,7 @@ namespace NOVA.Scripts
             }
             else
             {
-                MessageText.text = $"There was a problem setting up and playing the camera: {selectedCamera}";
-                EditorCoroutineUtility.StartCoroutine(ClearErrorMessage(), this);
+                DisplayMessage($"There was a problem setting up and playing the camera: {selectedCamera}", Color.red, 5f);
             }                               
         }
 
@@ -193,10 +197,23 @@ namespace NOVA.Scripts
             }
         }
 
-        private IEnumerator ClearErrorMessage()
+        private void DisplayMessage(string text, Color messageColor, float messageDisplayTime)
         {
-            yield return new EditorWaitForSeconds(MessageLabelTimer);
+            MessageText.style.color = messageColor;
+            MessageText.text = text;
+            EditorCoroutineUtility.StartCoroutine(ClearErrorMessage(messageDisplayTime), this);
+        }
+
+        private IEnumerator ClearErrorMessage(float time)
+        {
+            yield return new EditorWaitForSeconds(time);
             MessageText.text = string.Empty;
+        }
+
+        private void SaveImage(ClickEvent evt)
+        {
+            //TODO: Implement the saving to the database here...
+            Debug.Log("Not implemented yet...");
         }
     }
 }

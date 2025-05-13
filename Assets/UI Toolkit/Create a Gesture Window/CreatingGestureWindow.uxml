@@ -5,11 +5,15 @@
         <engine:VisualElement name="Header" style="flex-grow: 1;">
             <engine:Label name="TitleLabel" class="title-label" />
             <engine:VisualElement name="logo" class="logo" style="margin-top: 0;" />
+            <engine:Label name="MessageLabel" class="error-text" />
             <engine:VisualElement name="HorizontalContainer" class="horizontal-container">
-                <engine:Button text="Take Image" name="TakeImageButton" class="take-image-btn" />
-                <engine:Label name="MessageLabel" class="error-text" />
+                <engine:Button text="Take Image" name="TakeImageButton" class="take-image-btn create-gesture-buttons" />
+                <engine:VisualElement name="SavingGestureContainer" class="save-gesture-container" style="flex-direction: row; width: 404px;">
+                    <engine:Button text="Save Image" name="SaveGestureButton" class="take-image-btn create-gesture-buttons" />
+                    <engine:TextField label="Gesture Name" name="SaveGestureTextField" class="save-gesture-text-field" style="width: 75%;" />
+                </engine:VisualElement>
             </engine:VisualElement>
-            <engine:DropdownField label="Cameras" name="CameraDropdown" style="width: 50%; margin-left: 320px;" />
+            <engine:DropdownField label="Cameras" name="CameraDropdown" class="camera-dropdown" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>
