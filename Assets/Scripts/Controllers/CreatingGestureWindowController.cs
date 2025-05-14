@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 
 using System.Collections;
+using System.Linq;
 using Mediapipe.Tasks.Vision.Core;
 using Mediapipe.Tasks.Vision.HandLandmarker;
 using Mediapipe.Unity;
@@ -20,20 +21,25 @@ namespace NOVA.Scripts
         private VisualTreeAsset createGestureScreenAsset;
 
         /* Window Settings */
-
         private const float MinWindowHeight = 1280;
         private const float MinWindowLength = 720;
 
         private const string WindowName = "Create a Gesture";
         private const string CameraFeedSelector = "camera-feed";
         private const string TakeImageButtonName = "TakeImageButton";
+        private const string DropdownMenuName = "CameraDropdown";
+        private const string MessageLabelName = "MessageLabel";
+        private const float MessageLabelTimer = 5f;
 
+        private DropdownField dropdownField;
+        private Label messageText;
+        private Button saveImageButton;
         private VisualElement root;
+        private VisualElement savingGestureContainer;
 
         /* Camera Settings */
-
-        private const int CameraWidth = 600;
-        private const int CameraHeight = 600;
+        private const int CameraWidth = 640;
+        private const int CameraHeight = 480;
         private WebCamTexture webCamTexture;
         private Texture2D texture;
         private EditorCoroutine edCoro;
@@ -50,7 +56,7 @@ namespace NOVA.Scripts
         // Image processing options for the hand landmark detection
         private ImageProcessingOptions imageProcessingOptions;
 
-        // This is will contain the basic config information for the hand landmark detection (i.e., num of hands, etc.)[
+        // This will contain the basic config information for the hand landmark detection (i.e., num of hands, etc.)[
         public readonly HandLandmarkDetectionConfig Config = new HandLandmarkDetectionConfig();
 
         [MenuItem("Window/UI Toolkit/Creating Gesture Screen")]
@@ -62,7 +68,6 @@ namespace NOVA.Scripts
             createGestureController.minSize = createGestureController.maxSize;
         }
 
-
         /// <summary>
         /// Creates the GUI for the window
         /// </summary>
@@ -71,17 +76,20 @@ namespace NOVA.Scripts
             root = createGestureScreenAsset.CloneTree();
             rootVisualElement.Add(root);
 
-            webCamTexture = new WebCamTexture(CameraWidth, CameraHeight);
-            webCamTexture.Play();
-
-            texture = new Texture2D(webCamTexture.width, webCamTexture.height);
-
+            savingGestureContainer = root.Q<VisualElement>("SavingGestureContainer");
+            saveImageButton = root.Q<Button>("SaveGestureButton");
+            saveImageButton.RegisterCallback<ClickEvent>(evt => SaveImage(evt));
+            dropdownField = root.Q<DropdownField>(DropdownMenuName);
+            dropdownField.RegisterValueChangedCallback(evt => OnCameraSelected(evt.newValue));
             foreach (var device in WebCamTexture.devices)
             {
-                Debug.Log(device.name);
+                dropdownField.choices.Add(device.name);
             }
+            messageText = root.Q<Label>(MessageLabelName);
 
-            // Add the camera feed to the UI
+            webCamTexture = new WebCamTexture(CameraWidth, CameraHeight);
+            texture = new Texture2D(CameraWidth, CameraHeight);
+
             var image = new Image();
             image.image = texture;
             image.AddToClassList(CameraFeedSelector);
@@ -99,6 +107,8 @@ namespace NOVA.Scripts
                 var result = HandLandmarkerResult.Alloc(2);
                 if (taskApi.TryDetect(mpImage, imageProcessingOptions, ref result))
                 {
+                    DisplayMessage("Gesture data received. Please name the gesture and then save", Color.green, 10f);
+                    savingGestureContainer.style.display = DisplayStyle.Flex;
                     // Placeholder: Log the results
                     // TODO: Replace with actual logic to process landmarks
                     foreach (var hands in result.handWorldLandmarks)
@@ -111,11 +121,38 @@ namespace NOVA.Scripts
                 }
                 else
                 {
-                    Debug.LogError("Error processing image texture...");
+                    DisplayMessage("Unable to detect gesture. Please try again", Color.red, 5f);
                 }
             };
+        }
 
-            edCoro = EditorCoroutineUtility.StartCoroutine(UpdateFeed(), this);
+        /// <summary>
+        /// Callback for when a camera is picked in the dropdown
+        /// </summary>
+        /// <param name="selectedCamera"></param>
+        private void OnCameraSelected(string selectedCamera)
+        {
+            if (!WebCamTexture.devices.Any(device => device.name == selectedCamera))
+            {
+                DisplayMessage($"Unable to find the given camera: {selectedCamera}", Color.red, 5f);
+            }
+            if (webCamTexture != null && webCamTexture.isPlaying)
+            {
+                webCamTexture.Stop();
+            }
+
+            webCamTexture = new WebCamTexture(CameraWidth, CameraHeight);
+            webCamTexture.deviceName = selectedCamera;
+            webCamTexture.Play();
+
+            if (webCamTexture.isPlaying)
+            {
+                edCoro = EditorCoroutineUtility.StartCoroutine(UpdateFeed(), this);
+            }
+            else
+            {
+                DisplayMessage($"There was a problem setting up and playing the camera: {selectedCamera}", Color.red, 5f);
+            }
         }
 
         /// <summary>
@@ -125,7 +162,6 @@ namespace NOVA.Scripts
         {
             webCamTexture.Stop();
             webCamTexture = null;
-
             EditorCoroutineUtility.StopCoroutine(edCoro);
         }
 
@@ -163,7 +199,25 @@ namespace NOVA.Scripts
                 yield return null;
             }
         }
+
+        private void DisplayMessage(string text, Color messageColor, float messageDisplayTime)
+        {
+            messageText.style.color = messageColor;
+            messageText.text = text;
+            EditorCoroutineUtility.StartCoroutine(ClearErrorMessage(messageDisplayTime), this);
+        }
+
+        private IEnumerator ClearErrorMessage(float time)
+        {
+            yield return new EditorWaitForSeconds(time);
+            messageText.text = string.Empty;
+        }
+
+        private void SaveImage(ClickEvent evt)
+        {
+            //TODO: Implement the saving to the database here...
+            Debug.Log("Not implemented yet...");
+        }
     }
 }
-
 #endif

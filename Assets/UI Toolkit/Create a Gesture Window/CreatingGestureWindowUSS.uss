@@ -1,16 +1,30 @@
-.take-image-btn {
-    width: 100px;
-    height: 100px;
+.horizontal-container {
+    flex-direction: row;
+    width: 50%;
+    margin-left: 320px;
+}
+
+.error-text {
+    color: rgb(255, 0, 0);
+    margin-top: 3px;
+    margin-left: 320px;
+}
+
+.save-gesture-text-field {
+    width: 50%;
+}
+
+.create-gesture-buttons {
     align-items: stretch;
-    align-self: flex-end;
+    align-self: flex-start;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
+    margin-left: 0;
 }
 
-.webcam-feed {
-    width: 600px;
-    height: 600px;
-    align-self: center;
+.camera-dropdown {
+    width: 50%;
+    margin-left: 320px;
 }

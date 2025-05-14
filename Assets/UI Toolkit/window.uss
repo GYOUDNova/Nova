@@ -19,3 +19,13 @@
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
 }
+
+.webcam-feed {
+    width: 600px;
+    height: 600px;
+    align-self: center;
+}
+
+.save-gesture-container {
+    display: none;
+}
