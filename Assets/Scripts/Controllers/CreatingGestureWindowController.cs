@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using System.Collections;
 using System.Linq;
 using Mediapipe.Tasks.Vision.Core;
@@ -29,9 +31,9 @@ namespace NOVA.Scripts
         private const string MessageLabelName = "MessageLabel";
         private const float MessageLabelTimer = 5f;
 
-        private DropdownField DropdownField;
-        private Label MessageText;
-        private Button SaveImageButton;
+        private DropdownField dropdownField;
+        private Label messageText;
+        private Button saveImageButton;
         private VisualElement root;
         private VisualElement savingGestureContainer;
 
@@ -43,19 +45,19 @@ namespace NOVA.Scripts
         private EditorCoroutine edCoro;
 
         // The actual task API that will be used for hand landmark detection
-        private HandLandmarker _taskApi;
+        private HandLandmarker taskApi;
 
         // A frame object to hold the texture image
-        private TextureFrame _frame;
+        private TextureFrame textureFrame;
 
         // Reference to the MP image that will be used for processing
-        private Mediapipe.Image _mpImage;
+        private Mediapipe.Image mpImage;
 
         // Image processing options for the hand landmark detection
         private ImageProcessingOptions imageProcessingOptions;
 
-        // This is will contain the basic config information for the hand landmark detection (i.e., num of hands, etc.)
-        public readonly HandLandmarkDetectionConfig config = new HandLandmarkDetectionConfig();
+        // This will contain the basic config information for the hand landmark detection (i.e., num of hands, etc.)[
+        public readonly HandLandmarkDetectionConfig Config = new HandLandmarkDetectionConfig();
 
         [MenuItem("Window/UI Toolkit/Creating Gesture Screen")]
         public static void SetupAndShowWindow()
@@ -75,15 +77,15 @@ namespace NOVA.Scripts
             rootVisualElement.Add(root);
 
             savingGestureContainer = root.Q<VisualElement>("SavingGestureContainer");
-            SaveImageButton = root.Q<Button>("SaveGestureButton");
-            SaveImageButton.RegisterCallback<ClickEvent>(evt => SaveImage(evt));
-            DropdownField = root.Q<DropdownField>(DropdownMenuName);
-            DropdownField.RegisterValueChangedCallback(evt => OnCameraSelected(evt.newValue));
+            saveImageButton = root.Q<Button>("SaveGestureButton");
+            saveImageButton.RegisterCallback<ClickEvent>(evt => SaveImage(evt));
+            dropdownField = root.Q<DropdownField>(DropdownMenuName);
+            dropdownField.RegisterValueChangedCallback(evt => OnCameraSelected(evt.newValue));
             foreach (var device in WebCamTexture.devices)
             {
-                DropdownField.choices.Add(device.name);
+                dropdownField.choices.Add(device.name);
             }
-            MessageText = root.Q<Label>(MessageLabelName);
+            messageText = root.Q<Label>(MessageLabelName);
 
             webCamTexture = new WebCamTexture(CameraWidth, CameraHeight);
             texture = new Texture2D(CameraWidth, CameraHeight);
@@ -98,13 +100,14 @@ namespace NOVA.Scripts
             takeImage.clicked += () =>
             {
                 // Use the mediapipe task API to process the image
-                _frame.ReadTextureOnCPU(texture);
-                _mpImage = _frame.BuildCPUImage();
+
+                textureFrame.ReadTextureOnCPU(texture);
+                mpImage = textureFrame.BuildCPUImage();
 
                 var result = HandLandmarkerResult.Alloc(2);
-                if (_taskApi.TryDetect(_mpImage, imageProcessingOptions, ref result))
+                if (taskApi.TryDetect(mpImage, imageProcessingOptions, ref result))
                 {
-                    DisplayMessage("Gesture data recieved. Please name the gesture and then save", Color.green, 10f);
+                    DisplayMessage("Gesture data received. Please name the gesture and then save", Color.green, 10f);
                     savingGestureContainer.style.display = DisplayStyle.Flex;
                     // Placeholder: Log the results
                     // TODO: Replace with actual logic to process landmarks
@@ -149,7 +152,7 @@ namespace NOVA.Scripts
             else
             {
                 DisplayMessage($"There was a problem setting up and playing the camera: {selectedCamera}", Color.red, 5f);
-            }                               
+            }
         }
 
         /// <summary>
@@ -179,15 +182,15 @@ namespace NOVA.Scripts
         /// </summary>
         private IEnumerator UpdateFeed()
         {
-            config.RunningMode = Mediapipe.Tasks.Vision.Core.RunningMode.IMAGE;
+            Config.RunningMode = Mediapipe.Tasks.Vision.Core.RunningMode.IMAGE;
             AssetLoader.Provide(new StreamingAssetsResourceManager());
-            yield return AssetLoader.PrepareAssetAsync(config.ModelPath);
+            yield return AssetLoader.PrepareAssetAsync(Config.ModelPath);
 
             imageProcessingOptions = new ImageProcessingOptions(rotationDegrees: 0);
-            var options = config.GetHandLandmarkerOptions(null);
-            _taskApi = HandLandmarker.CreateFromOptions(options);
+            var options = Config.GetHandLandmarkerOptions(null);
+            taskApi = HandLandmarker.CreateFromOptions(options);
 
-            _frame = new(CameraWidth, CameraHeight, TextureFormat.RGBA32);
+            textureFrame = new(CameraWidth, CameraHeight, TextureFormat.RGBA32);
 
             // Continue updating the feed until the window is closed
             while (hasFocus)
@@ -199,15 +202,15 @@ namespace NOVA.Scripts
 
         private void DisplayMessage(string text, Color messageColor, float messageDisplayTime)
         {
-            MessageText.style.color = messageColor;
-            MessageText.text = text;
+            messageText.style.color = messageColor;
+            messageText.text = text;
             EditorCoroutineUtility.StartCoroutine(ClearErrorMessage(messageDisplayTime), this);
         }
 
         private IEnumerator ClearErrorMessage(float time)
         {
             yield return new EditorWaitForSeconds(time);
-            MessageText.text = string.Empty;
+            messageText.text = string.Empty;
         }
 
         private void SaveImage(ClickEvent evt)
@@ -217,3 +220,4 @@ namespace NOVA.Scripts
         }
     }
 }
+#endif

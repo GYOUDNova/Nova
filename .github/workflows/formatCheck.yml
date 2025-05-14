@@ -1,0 +1,57 @@
+name: Format Check
+
+on: [push, pull_request]
+
+jobs:
+  format-check:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        dotnet-version: ['9.0.x']
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      
+      # Cache
+      - uses: actions/cache@v3
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+
+      # Build
+      - name: Build project
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: StandaloneWindows
+          customImage: ${{ vars.GAMECI_CUSTOM_BUILD_IMAGE }}
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      - name: Check Code Formatting
+        run: |
+          for csproj in $(find . -maxdepth 1 -name '*.csproj'); do
+            # Verify code formatting for each project
+            echo -e "Verifying format for project: $csproj"
+            dotnet restore "$csproj"
+            dotnet format "$csproj" --verify-no-changes --exclude "**/Mediapipe/**"
+
+            rc=$?
+
+            if [[ $rc != 0 ]]; then
+              echo "Error: Code formatting check failed for project $csproj"
+              exit $rc
+            fi
+          done

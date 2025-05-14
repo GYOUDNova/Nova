@@ -1,11 +1,11 @@
 {
   "dependencies": {
-    "com.github-glitchenzo.nugetforunity": {
-      "version": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
+    "com.gilzoide.sqlite-net": {
+      "version": "https://github.com/gilzoide/unity-sqlite-net.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "fe31ad0904abee296b5ea72c6073157accba59e8"
+      "hash": "2851fb50b5a4e13ae09733ac6dabc53654cb536a"
     },
     "com.github.homuler.mediapipe": {
       "version": "file:com.github.homuler.mediapipe-0.16.1.tgz",

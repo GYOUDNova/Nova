@@ -3,7 +3,8 @@
     "rootNamespace": "NOVA.Scripts",
     "references": [
         "Unity.EditorCoroutines.Editor",
-        "Mediapipe.Runtime"
+        "Mediapipe.Runtime",
+        "Gilzoide.SqliteNet"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
