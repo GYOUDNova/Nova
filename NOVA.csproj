@@ -62,25 +62,37 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\WaitForResult.cs" />
+    <Compile Include="Assets\Scripts\Database\LandmarkDistance.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\StaticImageSource.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\GraphRunner.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\InferenceMode.cs" />
+    <Compile Include="Assets\Scripts\Database\Configuration.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSourceProvider.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\RunningMode.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkDetectionConfigWindow.cs" />
+    <Compile Include="Assets\Scripts\Database\GestureImageExtension.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkDetectionConfig.cs" />
+    <Compile Include="Assets\Scripts\Database\Exceptions\DatabaseException.cs" />
     <Compile Include="Assets\Scripts\Controllers\AddingCombinationWindowController.cs" />
+    <Compile Include="Assets\Scripts\Database\GestureData.cs" />
     <Compile Include="Assets\Scripts\Controllers\CreatingGestureWindowController.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkerRunner.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\Modal.cs" />
+    <Compile Include="Assets\Scripts\Database\GestureSqliteHandler.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\WebCamSource.cs" />
     <Compile Include="Assets\Scripts\Controllers\GestureInputController.cs" />
+    <Compile Include="Assets\Scripts\Database\RecognitionLog.cs" />
+    <Compile Include="Assets\Scripts\Database\Exceptions\ConfigurationException.cs" />
+    <Compile Include="Assets\Scripts\Database\GestureImage.cs" />
     <Compile Include="Assets\Scripts\Controllers\MainEditorWindowController.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\ModalContents.cs" />
     <Compile Include="Assets\Scripts\Helpers\TestUtils.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\Bootstrap.cs" />
     <Compile Include="Assets\Scripts\Helpers\InstallPreCommitHook.cs" />
     <Compile Include="Assets\Scripts\Controllers\GestureListWindowController.cs" />
+    <Compile Include="Assets\Scripts\Database\Landmark.cs" />
+    <Compile Include="Assets\Scripts\Database\GestureCategory.cs" />
+    <Compile Include="Assets\Scripts\Database\CustomGesture.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\Screen.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\ImageSource.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageReadMode.cs" />
@@ -91,6 +103,7 @@
     <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\ModalButton.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\ImageSourceType.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\ImageSourceConfig.cs" />
+    <Compile Include="Assets\Scripts\Database\PredefinedGesture.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\TaskApiRunner.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\LegacySolutionRunner.cs" />
     <Compile Include="Assets\Scripts\Database\Entity.cs" />
@@ -571,10 +584,6 @@
     </Reference>
     <Reference Include="UnityEditor.Graphs">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEditor.WebGL.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\PlaybackEngines\WebGLSupport\UnityEditor.WebGL.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">

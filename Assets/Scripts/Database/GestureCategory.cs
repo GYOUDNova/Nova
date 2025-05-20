@@ -6,7 +6,7 @@ namespace Nova.Scripts
     public class GestureCategory
     {
         [AutoIncrement, PrimaryKey]
-        public int CategoryId  { get; set; }
+        public int CategoryId { get; set; }
 
         [NotNull, MaxLength(64), Unique]
         public string CategoryName { get; set; }
