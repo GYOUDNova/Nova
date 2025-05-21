@@ -6,7 +6,7 @@ namespace NOVA.Scripts
     [Table("RecognitionLog")]
     public class RecognitionLog
     {
-        [NotNull, AutoIncrement, PrimaryKey]
+        [AutoIncrement, PrimaryKey]
         public int LogId { get; set; }
 
         [NotNull]

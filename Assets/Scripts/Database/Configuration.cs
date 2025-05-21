@@ -5,7 +5,8 @@ namespace NOVA.Scripts
     [Table("Configuration")]
     public class Configuration
     {
-        [NotNull, AutoIncrement, PrimaryKey]
+        [Column("ConfigurationId")]
+        [AutoIncrement, PrimaryKey]
         public int ConfigurationId { get; set; }
 
         [NotNull, Unique, MaxLength(20)]

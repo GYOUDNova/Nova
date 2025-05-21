@@ -1,6 +1,6 @@
 using System;
 
-namespace Nova.Scripts
+namespace NOVA.Scripts
 {
     public class ConfigurationException : DatabaseException
     {

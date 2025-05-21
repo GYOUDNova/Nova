@@ -5,7 +5,7 @@ namespace NOVA.Scripts
     [Table("GestureData")]
     public class GestureData
     {
-        [NotNull, PrimaryKey, AutoIncrement]
+        [PrimaryKey, AutoIncrement]
         public int GestureDataId { get; set; }
 
         [NotNull, MaxLength(256), Unique]

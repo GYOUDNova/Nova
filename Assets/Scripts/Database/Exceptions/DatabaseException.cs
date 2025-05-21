@@ -1,6 +1,6 @@
 using System;
 
-namespace Nova.Scripts
+namespace NOVA.Scripts
 {
     public class DatabaseException : Exception
     {
@@ -20,5 +20,18 @@ namespace Nova.Scripts
     {
         public TableNotFoundException(string message) : base(message) { }
         public TableNotFoundException(string message, Exception innerException) : base(message, innerException) { }
+    }
+
+    public class ItemNotFoundException : DatabaseException
+    {
+        public ItemNotFoundException(string message) : base(message) { }
+        public ItemNotFoundException(string message, Exception innerException) : base(message, innerException) { }
+    }
+
+
+    public class HandlerExistsException : DatabaseException
+    {
+        public HandlerExistsException(string message) : base(message) { }
+        public HandlerExistsException(string message, Exception innerException) : base(message, innerException) { }
     }
 }

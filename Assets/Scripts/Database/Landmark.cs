@@ -5,7 +5,7 @@ namespace NOVA.Scripts
     [Table("Landmark")]
     public class Landmark
     {
-        [NotNull, AutoIncrement, Unique]
+        [AutoIncrement, PrimaryKey]
         public int LandmarkId { get; set; }
 
         [NotNull]

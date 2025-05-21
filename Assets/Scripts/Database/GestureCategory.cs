@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace Nova.Scripts
+namespace NOVA.Scripts
 {
     [Table("GestureCategory")]
     public class GestureCategory

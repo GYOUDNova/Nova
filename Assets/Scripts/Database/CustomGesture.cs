@@ -5,7 +5,7 @@ namespace NOVA.Scripts
     [Table("CustomGesture")]
     public class CustomGesture
     {
-        [NotNull, AutoIncrement, Unique]
+        [AutoIncrement, PrimaryKey]
         public int CustomGestureId { get; set; }
 
         // FK

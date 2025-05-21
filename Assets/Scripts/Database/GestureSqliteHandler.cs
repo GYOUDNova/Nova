@@ -1,45 +1,44 @@
-using NOVA.Scripts;
-using SQLite;
-using UnityEditor;
+using System.IO;
 using UnityEngine;
 
-namespace Nova.Scripts
+namespace NOVA.Scripts
 {
-    [InitializeOnLoad]
-    public class GestureSqliteHandler
+    public class GestureSqliteHandler : SqliteHandler
     {
-        private const string DatabaseName = "Gestures.db";
-        private const string GestureAssetsName = "GestureAssets";
+        private const string GesturesDatabaseName = "Gestures.db";
+        private const string GestureAssetsDirName = "GestureAssets";
 
-        static GestureSqliteHandler()
+        private static GestureSqliteHandler instance;
+
+        private GestureSqliteHandler(string databaseName)
+            : base(databaseName)
         {
-            // Make sure a directory exists for the database (StreamingAssets/GestureAssets/Gestures.db)
-            string gestureAssetsDir = System.IO.Path.Combine(Application.streamingAssetsPath, GestureAssetsName);
+            string gestureAssetsDir = Path.Combine(Application.streamingAssetsPath, GestureAssetsDirName);
+            Initialize(gestureAssetsDir);
+        }
 
-            if (!System.IO.Directory.Exists(gestureAssetsDir))
+        protected override void Initialize(string directory)
+        {
+            // Base class handles pre-processing
+            base.Initialize(directory);
+
+            dbPath = Path.Combine(directory, databaseName);
+
+            if (!File.Exists(dbPath))
             {
-                Debug.Log("GestureAssets directory does not exist under StreamingAssets...attempting to create");
-
-                System.IO.Directory.CreateDirectory(gestureAssetsDir);
-            }
-
-            string dbPath = System.IO.Path.Combine(gestureAssetsDir, DatabaseName);
-
-            if (!System.IO.File.Exists(dbPath))
-            {
-                Debug.Log("Database 'Gestures.db' does not exist under GestureAssets...attempting to create");
-
                 // Create the database file if it doesn't exist
-                using var connection = new SQLiteConnection(dbPath);
+                Debug.Log($"Database {dbPath} does not exist...applying database migrations");
 
-                connection.CreateTable<Configuration>();
-                connection.CreateTable<GestureCategory>();
-                connection.CreateTable<GestureData>();
-                connection.CreateTable<PredefinedGesture>();
-                connection.CreateTable<CustomGesture>();
-                connection.CreateTable<Landmark>();
-                connection.CreateTable<LandmarkDistance>();
-                connection.CreateTable<GestureImage>();
+                conn = GetSqliteConnection();
+
+                conn.CreateTable<Configuration>();
+                conn.CreateTable<GestureCategory>();
+                conn.CreateTable<GestureData>();
+                conn.CreateTable<PredefinedGesture>();
+                conn.CreateTable<CustomGesture>();
+                conn.CreateTable<Landmark>();
+                conn.CreateTable<LandmarkDistance>();
+                conn.CreateTable<GestureImage>();
 
                 // Tables need to be populated in a specific order in order to
                 // avoid missing foreign key references:
@@ -52,35 +51,54 @@ namespace Nova.Scripts
                 // 7. Landmark
                 // 8. LandmarkDistance
                 // 9. GestureImage
+
+                CloseConnection();
             }
+        }
+
+        public static GestureSqliteHandler Instance(string databaseName = GesturesDatabaseName)
+        {
+            if (instance == null)
+            {
+                instance = new GestureSqliteHandler(databaseName);
+            }
+            else if (instance.databaseName != databaseName)
+            {
+                throw new HandlerExistsException("Cannot change the database name after the instance has been created.");
+            }
+
+            return instance;
         }
 
         public void CreateConfiguration(Configuration newConfig)
         {
-            using var connection = GetSqliteConnection();
+            conn = GetSqliteConnection();
 
-            var tableInfo = connection.GetTableInfo(nameof(Configuration));
+            var tableInfo = conn.GetTableInfo(nameof(Configuration));
             if (tableInfo == null)
             {
                 throw new TableNotFoundException($"Table '{nameof(Configuration)}' not found in the database.");
             }
 
             // Check if the configuration already exists
-            var existingConfig = connection.Table<Configuration>().FirstOrDefault(c => c.ConfigurationName == newConfig.ConfigurationName);
+            var existingConfig = conn.Table<Configuration>().FirstOrDefault(c => c.ConfigurationName == newConfig.ConfigurationName);
             if (existingConfig != null)
             {
                 throw new ConfigurationAlreadyExists($"Configuration with name '{newConfig.ConfigurationName}' already exists.");
             }
 
             // Insert the new configuration into the database
-            connection.Insert(newConfig);
+            conn.Insert(newConfig);
+            CloseConnection();
         }
 
-        private static SQLiteConnection GetSqliteConnection()
+        public void ReleaseInstance()
         {
-            string gestureAssetsDir = System.IO.Path.Combine(Application.streamingAssetsPath, GestureAssetsName);
-            string dbPath = System.IO.Path.Combine(gestureAssetsDir, DatabaseName);
-            return new SQLiteConnection(dbPath);
+            if (instance != null)
+            {
+                instance.CloseConnection();
+                instance = null;
+            }
         }
     }
 }

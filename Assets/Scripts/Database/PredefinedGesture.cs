@@ -6,7 +6,7 @@ namespace NOVA.Scripts
     [Table("PredefinedGesture")]
     public class PredefinedGesture
     {
-        [NotNull, AutoIncrement, Unique]
+        [AutoIncrement, PrimaryKey]
         public int PredefinedGestureId { get; set; }
 
         // FK

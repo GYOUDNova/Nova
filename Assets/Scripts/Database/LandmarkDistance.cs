@@ -5,7 +5,7 @@ namespace NOVA.Scripts
     [Table("LandmarkDistance")]
     public class LandmarkDistance
     {
-        [NotNull, AutoIncrement, PrimaryKey]
+        [AutoIncrement, PrimaryKey]
         public int LandmarkDistanceId { get; set; }
 
         // FK: Gesture

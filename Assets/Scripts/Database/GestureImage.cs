@@ -5,7 +5,7 @@ namespace NOVA.Scripts
     [Table("GestureImage")]
     public class GestureImage
     {
-        [NotNull, PrimaryKey, MaxLength(30)]
+        [PrimaryKey, MaxLength(30)]
         public string Name { get; set; }
 
         // FK --> GestureID (each gesture has an image)
