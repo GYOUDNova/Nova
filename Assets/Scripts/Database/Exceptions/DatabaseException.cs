@@ -28,10 +28,21 @@ namespace NOVA.Scripts
         public ItemNotFoundException(string message, Exception innerException) : base(message, innerException) { }
     }
 
-
     public class HandlerExistsException : DatabaseException
     {
         public HandlerExistsException(string message) : base(message) { }
         public HandlerExistsException(string message, Exception innerException) : base(message, innerException) { }
+    }
+
+    public class ItemAlreadyExistsException : DatabaseException
+    {
+        public ItemAlreadyExistsException(string message) : base(message) { }
+        public ItemAlreadyExistsException(string message, Exception innerException) : base(message, innerException) { }
+    }
+
+    public class PropertyNotFoundException : DatabaseException
+    {
+        public PropertyNotFoundException(string message) : base(message) { }
+        public PropertyNotFoundException(string message, Exception innerException) : base(message, innerException) { }
     }
 }

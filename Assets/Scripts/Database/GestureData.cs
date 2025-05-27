@@ -9,7 +9,7 @@ namespace NOVA.Scripts
         public int GestureDataId { get; set; }
 
         [NotNull, MaxLength(256), Unique]
-        public string GestureName { get; set; }
+        public string Name { get; set; }
 
         // FK
         [NotNull, MaxLength(30), Unique]

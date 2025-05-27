@@ -83,7 +83,6 @@
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\WebCamSource.cs" />
     <Compile Include="Assets\Scripts\Controllers\GestureInputController.cs" />
     <Compile Include="Assets\Scripts\Database\RecognitionLog.cs" />
-    <Compile Include="Assets\Scripts\Database\Exceptions\ConfigurationException.cs" />
     <Compile Include="Assets\Scripts\Database\GestureImage.cs" />
     <Compile Include="Assets\Scripts\Controllers\MainEditorWindowController.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\ModalContents.cs" />

@@ -9,6 +9,6 @@ namespace NOVA.Scripts
         public int CategoryId { get; set; }
 
         [NotNull, MaxLength(64), Unique]
-        public string CategoryName { get; set; }
+        public string Name { get; set; }
     }
 }

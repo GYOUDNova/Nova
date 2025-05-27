@@ -1,6 +1,7 @@
 
 using NOVA.Scripts;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -72,6 +73,8 @@ public class GestureSqliteHandlerTests
         Assert.IsTrue(handler.HasTable("Landmark"), "Landmark table does not exist.");
         Assert.IsTrue(handler.HasTable("LandmarkDistance"), "LandmarkDistance table does not exist.");
         Assert.IsTrue(handler.HasTable("GestureImage"), "GestureImage table does not exist.");
+        Assert.IsTrue(handler.HasTable("RecognitionLog"), "RecognitionLog table does not exist");
+        Assert.IsFalse(handler.HasTable("NonExistentTable"), "NonExistentTable should not exist in the database.");
     }
 
     // generate a test to ensure that only one instance of the class is created
@@ -102,12 +105,12 @@ public class GestureSqliteHandlerTests
     // generate a test that creates a configuration object and saves it to the database
 
     [Test]
-    public void CreateConfiguration_ValidConfig_SavesToDatabase()
+    public void AddItemByName_ValidConfig_SavesToDatabase()
     {
         // Arrange
         var newConfig = new Configuration
         {
-            ConfigurationName = "Test Config",
+            Name = "Test Config",
             Gamma = 1,
             ChainTimer = 0.5f,
             LandmarkTolerance = 0.1f,
@@ -115,12 +118,12 @@ public class GestureSqliteHandlerTests
         };
 
         // Act
-        handler.CreateConfiguration(newConfig);
-        var retrievedConfig = handler.GetObjectById<Configuration>(1);
+        handler.AddItemByName(newConfig, newConfig.Name);
+        var retrievedConfig = handler.GetObjectByName<Configuration>(newConfig.Name);
 
         // Assert
         Assert.IsNotNull(retrievedConfig, "Configuration was not saved to the database.");
-        Assert.AreEqual(newConfig.ConfigurationName, retrievedConfig.ConfigurationName, "Configuration name does not match.");
+        Assert.AreEqual(newConfig.Name, retrievedConfig.Name, "Configuration name does not match.");
         Assert.AreEqual(newConfig.Gamma, retrievedConfig.Gamma, "Gamma does not match.");
         Assert.AreEqual(newConfig.ChainTimer, retrievedConfig.ChainTimer, "ChainTimer does not match.");
         Assert.AreEqual(newConfig.LandmarkTolerance, retrievedConfig.LandmarkTolerance, "LandmarkTolerance does not match.");
@@ -130,23 +133,23 @@ public class GestureSqliteHandlerTests
     // generate a test that attempts to create a configuration object with the same name as an existing one
     [Test]
 
-    public void CreateConfiguration_ExistingConfig_ThrowsException()
+    public void AddItemByName_ExistingConfig_ThrowsException()
     {
         // Arrange
         var newConfig = new Configuration
         {
-            ConfigurationName = "Another Config",
+            Name = "Another Config",
             Gamma = 1,
             ChainTimer = 0.5f,
             LandmarkTolerance = 0.1f,
             ImageExtension = GestureImageExtension.Png
         };
 
-        handler.CreateConfiguration(newConfig);
+        handler.AddItemByName(newConfig, newConfig.Name);
 
         // Act & Assert
-        Assert.Throws<ConfigurationAlreadyExists>(() => handler.CreateConfiguration(newConfig),
-                  "ConfigurationAlreadyExists exception not thrown for existing configuration.");
+        Assert.Throws<ItemAlreadyExistsException>(() => handler.AddItemByName(newConfig, newConfig.Name),
+                  "ItemAlreadyExistsException exception not thrown for existing configuration.");
     }
 
     // generate a test that attempts to find a configuration object that does not exist in the database (id 2)
@@ -162,6 +165,243 @@ public class GestureSqliteHandlerTests
                   "ItemNotFoundException not thrown for non-existent ID.");
     }
 
+    // generate a test that attemps to get a configuration object by its name
+
+    [Test]
+    public void GetObjectByName_ValidName_ReturnsConfiguration()
+    {
+        // Arrange
+        var newConfig = new Configuration
+        {
+            Name = "Config By Name",
+            Gamma = 1,
+            ChainTimer = 0.5f,
+            LandmarkTolerance = 0.1f,
+            ImageExtension = GestureImageExtension.Png
+        };
+
+        handler.AddItemByName(newConfig, newConfig.Name);
+
+        // Act
+        var retrievedConfig = handler.GetObjectByName<Configuration>(newConfig.Name);
+
+        // Assert
+        Assert.IsNotNull(retrievedConfig, "Configuration was not retrieved by name.");
+        Assert.AreEqual(newConfig.Name, retrievedConfig.Name, "Configuration name does not match.");
+    }
+
+    // generate a test that attempts to get a configuration object by its name that does not exist in the database (throws itemnotfoundexception)
+    [Test]
+    public void GetObjectByName_NonExistentName_ThrowsException()
+    {
+        // Arrange
+        var nonExistentName = "NonExistent Config";
+        // Act & Assert
+        Assert.Throws<ItemNotFoundException>(() => handler.GetObjectByName<Configuration>(nonExistentName),
+                  "ItemNotFoundException not thrown for non-existent name.");
+    }
+
+    // genreate a test that attempts to get an object from a table that does not have a property with the name "Name" (e.g. Landmark)
+    [Test]
+    public void GetObjectByName_NonExistentProperty_ThrowsException()
+    {
+        // Arrange
+        var nonExistentName = "NonExistent";
+
+        // Act & Assert
+        Assert.Throws<PropertyNotFoundException>(() => handler.GetObjectByName<Landmark>(nonExistentName),
+                  "PropertyNotFoundException not thrown for non-existent property.");
+    }
+
+    // generate a test that attempts to add a generic predefined gesture using the predefined gesture category that already exists in the database, and
+    // creates a gesture data beforehand
+    [Test]
+
+    public void AddItem_ValidGesture_SavesToDatabase()
+    {
+        // Arrange (generic Predefined category exists)
+        var gestureData = new GestureData
+        {
+            Name = "Test Gesture",
+            GestureImageName = "test_image.png",
+            GestureCategoryId = 1, // Assuming the category ID is 1
+            IsPredefined = true
+        };
+
+        handler.AddItemByName(gestureData, gestureData.Name);
+
+        // Act
+        var predefinedGesture = new PredefinedGesture
+        {
+            GestureDataId = gestureData.GestureDataId,
+        };
+
+        handler.AddItem(predefinedGesture);
+
+        var retrievedGesture = handler.GetObjectById<PredefinedGesture>(1);
+        var retrievedGestureData = handler.GetObjectByName<GestureData>(gestureData.Name);
+
+        // Assert
+        Assert.IsTrue(handler.GestureExists(gestureData.Name));
+        Assert.IsNotNull(retrievedGesture, "PredefinedGesture was not saved to the database.");
+        Assert.IsNotNull(retrievedGestureData, "GestureData was not saved to the database.");
+        Assert.AreEqual(gestureData.Name, retrievedGestureData.Name, "GestureData name does not match.");
+    }
+
+    // generate a test that gets the gesture info, this is only to check that the relationship between the gesture data, category and gesture works correctly...
+
+    [Test]
+
+    public void GetGestureInfo_ValidGesture_ReturnsGestureInfo()
+    {
+        // Arrange
+        var gestureData = new GestureData
+        {
+            Name = "Test Gesture",
+            GestureImageName = "test_image.png",
+            GestureCategoryId = 1, // Assuming the category ID is 1
+            IsPredefined = true
+        };
+        handler.AddItemByName(gestureData, gestureData.Name);
+
+        var predefinedGesture = new PredefinedGesture
+        {
+            GestureDataId = gestureData.GestureDataId,
+        };
+        handler.AddItem(predefinedGesture);
+
+        // Create a sample image for the gesture
+        var gestureImage = new GestureImage
+        {
+            Name = gestureData.GestureImageName,
+            FileExtension = GestureImageExtension.Png,
+            GestureId = predefinedGesture.PredefinedGestureId,
+            IsPredefined = gestureData.IsPredefined
+        };
+
+        handler.AddItemByName(gestureImage, gestureImage.Name);
+
+        // Create two sample landmarks
+        var landmark1 = new Landmark
+        {
+            LandmarkIndex = 1,
+            X = 0.1f,
+            Y = 0.2f,
+            Z = 0.3f,
+            GestureId = predefinedGesture.PredefinedGestureId,
+            IsPredefined = gestureData.IsPredefined
+        };
+
+        var landmark2 = new Landmark
+        {
+            LandmarkIndex = 2,
+            X = 0.4f,
+            Y = 0.5f,
+            Z = 0.6f,
+            GestureId = predefinedGesture.PredefinedGestureId,
+            IsPredefined = gestureData.IsPredefined
+        };
+
+        handler.AddItem(landmark1);
+        handler.AddItem(landmark2);
+
+        // Create a sample distance between landmarks
+        var distance = new LandmarkDistance
+        {
+            GestureId = predefinedGesture.PredefinedGestureId,
+            IsPredefined = gestureData.IsPredefined,
+            Distance = 0.5f,
+            LandmarkId = landmark1.LandmarkId,
+            OtherLandmarkId = landmark2.LandmarkId
+        };
+
+        handler.AddItem(distance);
+
+        // Act
+        var gestureInfo = handler.GetGestureInfo(gestureData.Name);
+
+        // Assert
+        Assert.IsNotNull(gestureInfo, "Gesture info was not retrieved.");
+        Assert.AreEqual(gestureData.Name, gestureInfo.Data.Name, "GestureData name does not match.");
+        Assert.AreEqual(predefinedGesture.PredefinedGestureId, gestureInfo.GestureId, "PredefinedGesture ID does not match.");
+        Assert.AreEqual(gestureInfo.Category.CategoryId, gestureData.GestureCategoryId);
+        Assert.AreEqual(gestureData.IsPredefined, gestureInfo.IsPredefined, "IsPredefined flag does not match.");
+        Assert.AreEqual(predefinedGesture.PredefinedGestureId, gestureInfo.Image.GestureId, "GestureImage ID does not match.");
+        Assert.IsTrue(gestureInfo.Landmarks.Count == 2, "No landmarks were retrieved for the gesture.");
+        Assert.IsTrue(gestureInfo.Distances.Count == 1, "No distances were retrieved for the gesture.");
+    }
+
+    // generate a test that attempts to get a gesture info for a gesture that does not exist in the database
+    [Test]
+    public void GetGestureInfo_NonExistentGesture_ThrowsException()
+    {
+        // Arrange
+        var nonExistentGestureName = "NonExistent Gesture";
+
+        // Act & Assert
+        Assert.Throws<ItemNotFoundException>(() => handler.GetGestureInfo(nonExistentGestureName),
+                  "ItemNotFoundException not thrown for non-existent gesture.");
+    }
+
+    // generate a test that creates a gesture based on a queryableinfo object, this is to ensure that the queryable info object works correctly with the handler
+    [Test]
+    public void AddGesture_ValidInfo_SavesToDatabase()
+    {
+        // Arrange
+        var queryableInfo = new QueryableGestureInfo
+        {
+            GestureName = "Queryable Gesture",
+            CategoryName = "Predefined",
+            ImageName = "queryable_image.png",
+            IsPredefined = true,
+            Landmarks = new List<Landmark>
+            {
+                new Landmark { LandmarkIndex = 1, X = 0.1f, Y = 0.2f, Z = 0.3f },
+                new Landmark { LandmarkIndex = 2, X = 0.4f, Y = 0.5f, Z = 0.6f }
+            },
+            Distances = new List<LandmarkDistance>
+            {
+                new LandmarkDistance { Distance = 0.5f, LandmarkId = 1, OtherLandmarkId = 2 }
+            }
+        };
+
+        // Act
+        handler.AddGesture(queryableInfo);
+        var gestureInfo = handler.GetGestureInfo(queryableInfo.GestureName);
+
+        //Assert
+        Assert.IsNotNull(gestureInfo, "Gesture info was not retrieved.");
+        Assert.AreEqual(queryableInfo.GestureName, gestureInfo.Data.Name, "GestureData name does not match.");
+        Assert.AreEqual(queryableInfo.CategoryName, gestureInfo.Category.Name, "GestureCategory name does not match.");
+        Assert.AreEqual(queryableInfo.ImageName, gestureInfo.Image.Name, "GestureImage name does not match.");
+        Assert.IsTrue(gestureInfo.Landmarks.Count == 2, "No landmarks were retrieved for the gesture.");
+        Assert.IsTrue(gestureInfo.Distances.Count == 1, "No distances were retrieved for the gesture.");
+    }
+
+    // generate a test that creates a few dummy landmarks and retrieves all the landmarks from the database to ensure they are saved correctly
+
+    [Test]
+    public void GetObjects_Landmarks_ReturnsAllLandmarks()
+    {
+        // Arrange
+        var landmarks = new List<Landmark>
+        {
+            new Landmark { LandmarkIndex = 1, X = 0.1f, Y = 0.2f, Z = 0.3f, GestureId = 1, IsPredefined = true },
+            new Landmark { LandmarkIndex = 2, X = 0.4f, Y = 0.5f, Z = 0.6f, GestureId = 1, IsPredefined = true }
+        };
+
+        // Act
+        foreach (var landmark in landmarks)
+        {
+            handler.AddItem(landmark);
+        }
+
+        var retrievedLandmarks = handler.GetObjects<Landmark>();
+
+        // Assert
+        Assert.IsNotNull(retrievedLandmarks, "No landmarks were retrieved from the database.");
+        Assert.AreEqual(2, retrievedLandmarks.Count, "Incorrect number of landmarks retrieved from the database.");
+    }
 
     // Utility methods
     private void Cleanup()

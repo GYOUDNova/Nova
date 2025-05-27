@@ -10,7 +10,7 @@ namespace NOVA.Scripts
         public int ConfigurationId { get; set; }
 
         [NotNull, Unique, MaxLength(20)]
-        public string ConfigurationName { get; set; }
+        public string Name { get; set; }
 
         [NotNull]
         public int Gamma { get; set; }
@@ -23,5 +23,8 @@ namespace NOVA.Scripts
 
         [NotNull]
         public GestureImageExtension ImageExtension { get; set; }
+
+        [NotNull]
+        public bool Active { get; set; }
     }
 }
