@@ -6,10 +6,11 @@ namespace NOVA.Scripts
 {
     public class GestureSqliteHandler : SqliteHandler
     {
+        // Utility constants
         private const string GesturesDatabaseName = "Gestures.db";
         private const string GestureAssetsDirName = "GestureAssets";
 
-        private static GestureSqliteHandler instance;
+        private static GestureSqliteHandler instance; // Singleton instance
 
         private GestureSqliteHandler(string databaseName)
             : base(databaseName)
@@ -18,6 +19,7 @@ namespace NOVA.Scripts
             Initialize(gestureAssetsDir);
         }
 
+        // Overriden Initialize method to set up the database
         protected override void Initialize(string directory)
         {
             // Base class handles pre-processing
@@ -77,12 +79,12 @@ namespace NOVA.Scripts
 
                 AddItemByName(predefinedCategory, predefinedCategory.Name);
 
-
                 Debug.Log($"Database {dbPath} created successfully with initial tables.");
                 CloseConnection();
             }
         }
 
+        // Easy-access method to check if a gesture exists by name
         public bool GestureExists(string gestureName)
         {
             conn = GetSqliteConnection();
@@ -95,6 +97,7 @@ namespace NOVA.Scripts
             return exists;
         }
 
+        // Method to retrieve all the information about a gesture by its name
         public GestureInfo GetGestureInfo(string gestureName)
         {
             var gestureData = GetObjectByName<GestureData>(gestureName);
@@ -139,7 +142,8 @@ namespace NOVA.Scripts
             };
         }
 
-
+        // Method to create a gesture based on sample data that is then mapped
+        // and linked on the database
         public void AddGesture(QueryableGestureInfo qgi)
         {
             // The idea is that when we create a gesture, it will provide the ID that we can use to link the other tables.
@@ -214,6 +218,7 @@ namespace NOVA.Scripts
             CloseConnection();
         }
 
+        // Handle singleton instance creation and management
         public static GestureSqliteHandler Instance(string databaseName = GesturesDatabaseName)
         {
             if (instance == null)
@@ -228,6 +233,7 @@ namespace NOVA.Scripts
             return instance;
         }
 
+        // This is only to be called when the instance is no longer needed
         public void ReleaseInstance()
         {
             if (instance != null)
@@ -238,6 +244,7 @@ namespace NOVA.Scripts
         }
     }
 
+    // This is to simplify the retrieval of gesture information
     public struct GestureInfo
     {
         public int GestureId;
@@ -250,6 +257,7 @@ namespace NOVA.Scripts
         public readonly bool IsPredefined => Data.IsPredefined;
     }
 
+    // This is to simplify the creation of gestures from the UI or other sources
     public struct QueryableGestureInfo
     {
         public string GestureName;

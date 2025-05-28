@@ -77,8 +77,6 @@ public class GestureSqliteHandlerTests
         Assert.IsFalse(handler.HasTable("NonExistentTable"), "NonExistentTable should not exist in the database.");
     }
 
-    // generate a test to ensure that only one instance of the class is created
-
     [Test]
     public void Instance_SingletonInstance_CreatesOnlyOneInstance()
     {
@@ -88,8 +86,6 @@ public class GestureSqliteHandlerTests
         // Assert
         Assert.AreSame(handler, secondInstance, "Multiple instances of GestureSqliteHandler were created.");
     }
-
-    // generate a test that attempts to create a new instance of the class with a different database name
 
     [Test]
     public void Instance_DifferentDatabaseName_ThrowsException()
@@ -101,8 +97,6 @@ public class GestureSqliteHandlerTests
         Assert.Throws<HandlerExistsException>(() => GestureSqliteHandler.Instance(newDatabaseName),
                   "HandlerExistsException not thrown");
     }
-
-    // generate a test that creates a configuration object and saves it to the database
 
     [Test]
     public void AddItemByName_ValidConfig_SavesToDatabase()
@@ -130,9 +124,7 @@ public class GestureSqliteHandlerTests
         Assert.AreEqual(newConfig.ImageExtension, retrievedConfig.ImageExtension, "ImageExtension does not match.");
     }
 
-    // generate a test that attempts to create a configuration object with the same name as an existing one
     [Test]
-
     public void AddItemByName_ExistingConfig_ThrowsException()
     {
         // Arrange
@@ -152,8 +144,6 @@ public class GestureSqliteHandlerTests
                   "ItemAlreadyExistsException exception not thrown for existing configuration.");
     }
 
-    // generate a test that attempts to find a configuration object that does not exist in the database (id 2)
-
     [Test]
     public void GetObjectById_NonExistentId_ThrowsException()
     {
@@ -164,8 +154,6 @@ public class GestureSqliteHandlerTests
         Assert.Throws<ItemNotFoundException>(() => handler.GetObjectById<Configuration>(nonExistentId),
                   "ItemNotFoundException not thrown for non-existent ID.");
     }
-
-    // generate a test that attemps to get a configuration object by its name
 
     [Test]
     public void GetObjectByName_ValidName_ReturnsConfiguration()
@@ -190,7 +178,6 @@ public class GestureSqliteHandlerTests
         Assert.AreEqual(newConfig.Name, retrievedConfig.Name, "Configuration name does not match.");
     }
 
-    // generate a test that attempts to get a configuration object by its name that does not exist in the database (throws itemnotfoundexception)
     [Test]
     public void GetObjectByName_NonExistentName_ThrowsException()
     {
@@ -201,7 +188,6 @@ public class GestureSqliteHandlerTests
                   "ItemNotFoundException not thrown for non-existent name.");
     }
 
-    // genreate a test that attempts to get an object from a table that does not have a property with the name "Name" (e.g. Landmark)
     [Test]
     public void GetObjectByName_NonExistentProperty_ThrowsException()
     {
@@ -213,10 +199,7 @@ public class GestureSqliteHandlerTests
                   "PropertyNotFoundException not thrown for non-existent property.");
     }
 
-    // generate a test that attempts to add a generic predefined gesture using the predefined gesture category that already exists in the database, and
-    // creates a gesture data beforehand
     [Test]
-
     public void AddItem_ValidGesture_SavesToDatabase()
     {
         // Arrange (generic Predefined category exists)
@@ -248,10 +231,7 @@ public class GestureSqliteHandlerTests
         Assert.AreEqual(gestureData.Name, retrievedGestureData.Name, "GestureData name does not match.");
     }
 
-    // generate a test that gets the gesture info, this is only to check that the relationship between the gesture data, category and gesture works correctly...
-
     [Test]
-
     public void GetGestureInfo_ValidGesture_ReturnsGestureInfo()
     {
         // Arrange
@@ -331,7 +311,6 @@ public class GestureSqliteHandlerTests
         Assert.IsTrue(gestureInfo.Distances.Count == 1, "No distances were retrieved for the gesture.");
     }
 
-    // generate a test that attempts to get a gesture info for a gesture that does not exist in the database
     [Test]
     public void GetGestureInfo_NonExistentGesture_ThrowsException()
     {
@@ -343,7 +322,6 @@ public class GestureSqliteHandlerTests
                   "ItemNotFoundException not thrown for non-existent gesture.");
     }
 
-    // generate a test that creates a gesture based on a queryableinfo object, this is to ensure that the queryable info object works correctly with the handler
     [Test]
     public void AddGesture_ValidInfo_SavesToDatabase()
     {
@@ -378,8 +356,6 @@ public class GestureSqliteHandlerTests
         Assert.IsTrue(gestureInfo.Distances.Count == 1, "No distances were retrieved for the gesture.");
     }
 
-    // generate a test that creates a few dummy landmarks and retrieves all the landmarks from the database to ensure they are saved correctly
-
     [Test]
     public void GetObjects_Landmarks_ReturnsAllLandmarks()
     {
@@ -404,6 +380,7 @@ public class GestureSqliteHandlerTests
     }
 
     // Utility methods
+
     private void Cleanup()
     {
         if (File.Exists(databasePath))

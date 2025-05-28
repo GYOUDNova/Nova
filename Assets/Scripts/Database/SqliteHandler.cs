@@ -18,6 +18,7 @@ namespace NOVA.Scripts
             this.databaseName = databaseName;
         }
 
+        // Generic initialize method to be overriden by derived classes
         protected virtual void Initialize(string directory)
         {
             // Make sure a directory exists for the database
@@ -28,6 +29,8 @@ namespace NOVA.Scripts
                 Directory.CreateDirectory(directory);
             }
         }
+
+        // Method to check if a table exists in the database
         public bool HasTable(string tableName)
         {
             conn = GetSqliteConnection();
@@ -39,6 +42,7 @@ namespace NOVA.Scripts
             return tableInfo != null && tableInfo.Count > 0;
         }
 
+        // Generic method to get all objects of type T from the database
         public List<T> GetObjects<T>() where T : class, new()
         {
             conn = GetSqliteConnection();
@@ -149,6 +153,7 @@ namespace NOVA.Scripts
             CloseConnection();
         }
 
+        // Method to safely close the database connection
         public void CloseConnection()
         {
             if (conn != null)
@@ -159,6 +164,8 @@ namespace NOVA.Scripts
             }
         }
 
+        // Method to get a SQLite connection.
+        // Not public to ensure database operations are managed internally
         protected SQLiteConnection GetSqliteConnection()
         {
             SQLiteConnection connection;
