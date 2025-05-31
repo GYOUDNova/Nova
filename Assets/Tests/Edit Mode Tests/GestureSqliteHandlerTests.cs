@@ -3,6 +3,7 @@ using NOVA.Scripts;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using UnityEngine;
 
 [TestFixture]
@@ -329,7 +330,7 @@ public class GestureSqliteHandlerTests
         var queryableInfo = new QueryableGestureInfo
         {
             GestureName = "Queryable Gesture",
-            CategoryName = "Predefined",
+            CategoryName = "New Sample",
             ImageName = "queryable_image.png",
             IsPredefined = true,
             Landmarks = new List<Landmark>
@@ -379,18 +380,84 @@ public class GestureSqliteHandlerTests
         Assert.AreEqual(2, retrievedLandmarks.Count, "Incorrect number of landmarks retrieved from the database.");
     }
 
+
+    [Test]
+    public void MultiThreadedDatabaseOperations_NoIssues()
+    {
+        // Arrange
+        var threadCount = 10;
+        var threads = new List<Thread>();
+        var successCount = 0;
+        var failedThreads = new List<int>(); // To track which threads failed
+
+        for (int i = 0; i < threadCount; i++)
+        {
+            int threadId = Thread.CurrentThread.ManagedThreadId + i; // Generate unique ID for gesture name
+            threads.Add(new Thread(() =>
+            {
+                try
+                {
+                    QueryableGestureInfo qgi = new QueryableGestureInfo()
+                    {
+                        GestureName = $"Multi{threadId}", // Use unique ID to prevent ItemAlreadyExists
+                        CategoryName = "Predefined",
+                        ImageName = $"multi_{threadId}",
+                        IsPredefined = true,
+                        Landmarks = new List<Landmark>
+                        {
+                            new Landmark { LandmarkIndex = 1, X = 0.1f, Y = 0.2f, Z = 0.3f },
+                            new Landmark { LandmarkIndex = 2, X = 0.4f, Y = 0.5f, Z = 0.6f }
+                        },
+                        Distances = new List<LandmarkDistance>
+                        {
+                            new LandmarkDistance { Distance = 0.5f, LandmarkId = 1, OtherLandmarkId = 2 }
+                        }
+                    };
+
+                    handler.AddGesture(qgi);
+                    Interlocked.Increment(ref successCount); // Thread-safe increment
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogError($"{ex.Message}");
+                    lock (failedThreads) // Protect access to shared list
+                    {
+                        failedThreads.Add(threadId);
+                    }
+                }
+            }));
+        }
+
+        // Act
+        foreach (var thread in threads)
+        {
+            thread.Start();
+        }
+        foreach (var thread in threads)
+        {
+            thread.Join(); // Wait for all threads to complete
+        }
+
+        Debug.Log($"Successfully added {successCount} gestures out of {threadCount} expected to the database.");
+
+        // Assert that all operations succeeded
+        Assert.AreEqual(threadCount, successCount, $"Expected all {threadCount} gestures to be added, but {threadCount - successCount} failed. Failed threads: {string.Join(", ", failedThreads)}");
+    }
+
     // Utility methods
 
     private void Cleanup()
     {
-        if (File.Exists(databasePath))
+        if (Directory.Exists(gestureAssetsPath))
         {
-            File.Delete(databasePath);
-        }
-
-        if (File.Exists(metaPath))
-        {
-            File.Delete(metaPath);
+            if (File.Exists(databasePath))
+            {
+                File.Delete(databasePath);
+            }
+            if (File.Exists(metaPath))
+            {
+                File.Delete(metaPath);
+            }
         }
     }
 }

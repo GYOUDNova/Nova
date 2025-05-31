@@ -11,7 +11,7 @@ namespace NOVA.Scripts
         [NotNull]
         public int GestureId { get; set; }
 
-        [NotNull, Unique]
+        [NotNull]
         public int LandmarkIndex { get; set; }
 
         [NotNull]

@@ -16,7 +16,7 @@ namespace NOVA.Scripts
         public string GestureImageName { get; set; }
 
         // FK
-        [NotNull, Unique]
+        [NotNull]
         public int GestureCategoryId { get; set; }
 
         [NotNull]
