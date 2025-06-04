@@ -56,6 +56,17 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
 
             // NOTE: The screen will be resized later, keeping the aspect ratio.
             screen.Initialize(imageSource);
+
+            var rawImage = screen.GetComponent<UnityEngine.UI.RawImage>();
+            if (rawImage != null)
+            {
+                rawImage.enabled = false; // Disables the webcam texture but keeps the GameObject active
+            }
+            else
+            {
+                Debug.LogWarning("No RawImage found on the screen object.");
+            }
+
             SetupAnnotationController(_handLandmarkerResultAnnotationController, imageSource);
 
             var transformationOptions = imageSource.GetTransformationOptions();
