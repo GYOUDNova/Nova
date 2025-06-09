@@ -29,3 +29,7 @@
 .save-gesture-container {
     display: none;
 }
+
+.settings-container {
+    margin-top: 5px;
+}

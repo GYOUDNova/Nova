@@ -1,1 +1,5 @@
-/* Empty as of right now */
+.settings-container {
+    margin-top: 5px;
+    width: 50%;
+    margin-left: 15%;
+}
