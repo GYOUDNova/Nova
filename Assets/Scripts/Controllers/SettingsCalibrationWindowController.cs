@@ -13,6 +13,8 @@ namespace NOVA.Scripts
 
         private VisualElement root;
 
+        private DropdownField dropdownField;
+
         /*Window Settings*/
         private const float MinWindowHeight = 600;
         private const float MinWindowLength = 850;
@@ -34,6 +36,9 @@ namespace NOVA.Scripts
 
             Label label = root.Q<Label>("TitleLabel");
             label.text = Title;
+
+            dropdownField = root.Q<DropdownField>("ImageType");
+            foreach (ImageEx)
         }
     }
 }
