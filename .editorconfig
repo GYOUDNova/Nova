@@ -52,3 +52,6 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case
 dotnet_naming_rule.public_fields_must_be_pascal_case.symbols = public_fields
 dotnet_naming_rule.public_fields_must_be_pascal_case.style = pascal_case
 dotnet_naming_rule.public_fields_must_be_pascal_case.severity = warning
+
+# Remove unused imports
+dotnet_diagnostic.IDE0005.severity = error
