@@ -28,29 +28,6 @@ public class EditModeControllerTests
     }
 
     /// <summary>
-    /// Test ensures that when the Add a Combination button is clicked in the editor, that the menu opens
-    /// </summary>
-    [UnityTest]
-    public IEnumerator EditorWindow_OpenAddCombinationWindow_SubWindowOpens()
-    {
-        //Arrange
-        Button button = new();
-        bool buttonClicked = false;
-        var mainWindow = EditorWindow.GetWindow<MainEditorWindowController>();
-        var subMenu = EditorWindow.GetWindow<AddingCombinationWindowController>();
-
-        //Act   
-        button = mainWindow.rootVisualElement.Q<Button>("AddACombinationButton");
-
-        TestUtils.ClickOnButton(button);
-        buttonClicked = EditorWindow.HasOpenInstances<AddingCombinationWindowController>();
-        yield return null;
-
-        //Assert
-        Assert.IsTrue(buttonClicked);
-    }
-
-    /// <summary>
     /// Test ensures that when the Create Gesture button is clicked in the editor, that the menu opens
     /// </summary>
     [UnityTest]

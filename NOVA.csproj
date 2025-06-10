@@ -69,7 +69,6 @@
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\RunningMode.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkDetectionConfigWindow.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkDetectionConfig.cs" />
-    <Compile Include="Assets\Scripts\Controllers\AddingCombinationWindowController.cs" />
     <Compile Include="Assets\Scripts\Controllers\CreatingGestureWindowController.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkerRunner.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\Modal.cs" />
