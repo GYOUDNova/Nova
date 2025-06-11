@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -12,7 +13,14 @@ namespace NOVA.Scripts
         private VisualTreeAsset settingsScreenAsset;
 
         private VisualElement root;
+        private Button saveConfigurationButton;
+        private Label errorText;
 
+        /*Configuration fields*/
+        private TextField configuratrionName;
+        private SliderInt gamma;
+        private FloatField chainTimer;
+        private FloatField landmarkTolerance;
         private DropdownField dropdownField;
 
         /*Window Settings*/
@@ -37,10 +45,34 @@ namespace NOVA.Scripts
             Label label = root.Q<Label>("TitleLabel");
             label.text = Title;
 
+            errorText = root.Q<Label>("ErrorLabel");
+            configuratrionName = root.Q<TextField>("ConfigurationName");
+            gamma = root.Q<SliderInt>("Gamma");
+            chainTimer = root.Q<FloatField>("ChainTimer");
+            landmarkTolerance = root.Q<FloatField>("LandmarkTolerance");
+
             dropdownField = root.Q<DropdownField>("ImageType");
-            foreach (ImageEx)
+            dropdownField.value = GestureImageExtension.Jpeg.ToString();
+            foreach (var extension in Enum.GetValues(typeof(GestureImageExtension)))
+            {
+                dropdownField.choices.Add(extension.ToString());
+            }
+
+            saveConfigurationButton = root.Q<Button>("SaveConfigurationButton");
+            saveConfigurationButton.RegisterCallback<ClickEvent>(evt => OnSaveConfiguration(evt));
+        }
+
+        private void OnSaveConfiguration(ClickEvent evt)
+        {
+            if (String.IsNullOrEmpty(configuratrionName.text))
+            {
+                TextHandler.DisplayMessage("Configuration must include a name", Color.red, errorText);
+            }
+            else
+            {
+                //TODO::Add item to database
+            }
         }
     }
 }
-
 #endif

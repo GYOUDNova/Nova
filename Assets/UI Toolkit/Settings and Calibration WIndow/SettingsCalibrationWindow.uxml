@@ -7,11 +7,13 @@
             <engine:VisualElement name="logo" class="logo" />
         </engine:VisualElement>
         <engine:VisualElement name="SettingsContainer" class="settings-container" style="flex-grow: 1;">
-            <engine:TextField label="Configuration Name:" name="ConfigurationName" />
-            <engine:SliderInt label="Gamma:" value="0" high-value="100" name="Gamma" fill="false" />
-            <engine:FloatField label="Chain Timer:" value="1" name="ChainTimer" max-length="10" />
-            <engine:FloatField label="Landmark Tolerance:" value="1" max-length="10" name="LandmarkTolerance" />
-            <engine:EnumField label="Save Image As:" name="ImageType" />
+            <engine:TextField label="Configuration Name:" name="ConfigurationName" class="configuration-name-field" />
+            <engine:SliderInt label="Gamma:" value="0" high-value="100" name="Gamma" fill="false" class="gamma-field" />
+            <engine:FloatField label="Chain Timer:" value="1" name="ChainTimer" max-length="10" class="chain-timer-field" />
+            <engine:FloatField label="Landmark Tolerance:" value="1" max-length="10" name="LandmarkTolerance" class="landmark-tolerance-field" />
+            <engine:DropdownField label="Save Image As:" name="ImageType" />
+            <engine:Button text="Save Configuration" name="SaveConfigurationButton" class="save-configuration-button" />
+            <engine:Label name="ErrorLabel" class="error-label" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

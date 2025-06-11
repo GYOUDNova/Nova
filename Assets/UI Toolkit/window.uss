@@ -30,6 +30,6 @@
     display: none;
 }
 
-.settings-container {
-    margin-top: 5px;
+.error-label {
+    color: rgb(255, 0, 0);
 }

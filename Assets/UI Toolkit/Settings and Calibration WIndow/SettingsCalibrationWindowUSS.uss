@@ -1,5 +1,35 @@
 .settings-container {
-    margin-top: 5px;
     width: 50%;
-    margin-left: 15%;
+}
+
+.save-configuration-button {
+    margin-top: 15px;
+}
+
+.gamma-field {
+    margin-bottom: 15px;
+}
+
+.save-configuration-button {
+    margin-top: 15px;
+}
+
+.settings-container {
+    margin-top: 5px;
+    align-self: center;
+}
+
+.configuration-name-field {
+    margin-bottom: 15px;
+}
+
+.chain-timer-field {
+    margin-bottom: 15px;
+}
+
+.landmark-tolerance-field {
+    margin-bottom: 15px;
+}
+
+.image-type-field {
 }
