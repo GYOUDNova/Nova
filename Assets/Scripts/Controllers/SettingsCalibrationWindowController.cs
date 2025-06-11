@@ -70,7 +70,14 @@ namespace NOVA.Scripts
             }
             else
             {
-                //TODO::Add item to database
+                Enum.TryParse(dropdownField.value.ToString(), out GestureImageExtension extension);
+
+                Configuration configuration = new();
+                configuration.Name = configuratrionName.text;
+                configuration.Gamma = gamma.value;
+                configuration.ChainTimer = chainTimer.value;
+                configuration.LandmarkTolerance = landmarkTolerance.value;
+                configuration.ImageExtension = extension;
             }
         }
     }
