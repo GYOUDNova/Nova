@@ -238,6 +238,24 @@ namespace NOVA.Scripts
             }
         }
 
+        public Configuration GetActiveConfiguration()
+        {
+            lock (lockObject)
+            {
+                using var conn = GetSqliteConnection();
+
+                // Retrieve the active configuration
+                var config = conn.Table<Configuration>().FirstOrDefault(c => c.Active);
+
+                if (config == null)
+                {
+                    throw new ItemNotFoundException("No active configuration found in the database.");
+                }
+
+                return config;
+            }
+        }
+
         // Handle singleton instance creation and management
         public static GestureSqliteHandler Instance(string databaseName = GesturesDatabaseName)
         {
@@ -245,6 +263,7 @@ namespace NOVA.Scripts
             {
                 lock (lockObject)
                 {
+                    // This performs a second null-check
                     instance ??= new GestureSqliteHandler(databaseName);
                 }
             }
@@ -280,6 +299,16 @@ namespace NOVA.Scripts
         public List<Landmark> Landmarks;
         public List<LandmarkDistance> Distances;
         public readonly bool IsPredefined => Data.IsPredefined;
+
+        public readonly bool Equals(QueryableGestureInfo qgi)
+        {
+            return GestureName == qgi.GestureName &&
+                   Category.Name == qgi.CategoryName &&
+                   Image.Name == qgi.ImageName &&
+                   IsPredefined == qgi.IsPredefined &&
+                   Landmarks.Count == qgi.Landmarks.Count &&
+                   Distances.Count == qgi.Distances.Count;
+        }
     }
 
     // This is to simplify the creation of gestures from the UI or other sources
