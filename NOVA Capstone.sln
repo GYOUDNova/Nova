@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NOVA", "NOVA.csproj", "{7C0238D5-A89B-F39D-DF9A-17E02EC866F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayModeTests", "PlayModeTests.csproj", "{FD630994-7584-0520-E5D4-17CADF180CBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditModeTests", "EditModeTests.csproj", "{69DB4DC3-4542-2689-3671-1A135A05C6D2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C0238D5-A89B-F39D-DF9A-17E02EC866F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C0238D5-A89B-F39D-DF9A-17E02EC866F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C0238D5-A89B-F39D-DF9A-17E02EC866F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C0238D5-A89B-F39D-DF9A-17E02EC866F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD630994-7584-0520-E5D4-17CADF180CBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD630994-7584-0520-E5D4-17CADF180CBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD630994-7584-0520-E5D4-17CADF180CBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD630994-7584-0520-E5D4-17CADF180CBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69DB4DC3-4542-2689-3671-1A135A05C6D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69DB4DC3-4542-2689-3671-1A135A05C6D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69DB4DC3-4542-2689-3671-1A135A05C6D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69DB4DC3-4542-2689-3671-1A135A05C6D2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

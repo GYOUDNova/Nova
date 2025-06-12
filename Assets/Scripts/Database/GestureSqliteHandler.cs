@@ -203,6 +203,7 @@ namespace NOVA.Scripts
                         GestureDataId = gestureDataId
                     };
                     conn.Insert(customGesture);
+
                     gestureId = customGesture.CustomGestureId;
                 }
 
@@ -235,6 +236,24 @@ namespace NOVA.Scripts
                     distance.IsPredefined = qgi.IsPredefined;
                     conn.Insert(distance);
                 }
+            }
+        }
+
+        public Configuration GetActiveConfiguration()
+        {
+            lock (lockObject)
+            {
+                using var conn = GetSqliteConnection();
+
+                // Retrieve the active configuration
+                var config = conn.Table<Configuration>().FirstOrDefault(c => c.Active);
+
+                if (config == null)
+                {
+                    throw new ItemNotFoundException("No active configuration found in the database.");
+                }
+
+                return config;
             }
         }
 

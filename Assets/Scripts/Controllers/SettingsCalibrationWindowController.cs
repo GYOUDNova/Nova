@@ -78,6 +78,21 @@ namespace NOVA.Scripts
                 configuration.ChainTimer = chainTimer.value;
                 configuration.LandmarkTolerance = landmarkTolerance.value;
                 configuration.ImageExtension = extension;
+
+
+                try
+                {
+                    var handler = GestureSqliteHandler.Instance();
+                    var currAvtive = handler.GetActiveConfiguration();
+
+                    //TODO: Function that swaps actives
+
+                    handler.AddItemByName(configuration, configuration.Name);
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
         }
     }
