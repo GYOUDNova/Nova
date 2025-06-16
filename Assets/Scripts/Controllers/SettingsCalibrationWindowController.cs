@@ -14,7 +14,7 @@ namespace NOVA.Scripts
 
         private VisualElement root;
         private Button saveConfigurationButton;
-        private Label errorText;
+        private Label statusText;
 
         /*Configuration fields*/
         private TextField configuratrionName;
@@ -22,10 +22,13 @@ namespace NOVA.Scripts
         private FloatField chainTimer;
         private FloatField landmarkTolerance;
         private DropdownField dropdownField;
+        private RadioButtonGroup radioButtonGroup;
 
         /*Window Settings*/
         private const float MinWindowHeight = 600;
         private const float MinWindowLength = 850;
+        private const int RadioButtonYes = 0;
+        private const int RadioButtonNo = 0;
         private const string Title = "Settings & Calibration";
 
         [MenuItem("Window/UI Toolkit/Settings Calibration")]
@@ -45,7 +48,7 @@ namespace NOVA.Scripts
             Label label = root.Q<Label>("TitleLabel");
             label.text = Title;
 
-            errorText = root.Q<Label>("ErrorLabel");
+            statusText = root.Q<Label>("StatusLabel");
             configuratrionName = root.Q<TextField>("ConfigurationName");
             gamma = root.Q<SliderInt>("Gamma");
             chainTimer = root.Q<FloatField>("ChainTimer");
@@ -58,6 +61,8 @@ namespace NOVA.Scripts
                 dropdownField.choices.Add(extension.ToString());
             }
 
+            radioButtonGroup = root.Q<RadioButtonGroup>("SetActiveConfigurationButtons");
+
             saveConfigurationButton = root.Q<Button>("SaveConfigurationButton");
             saveConfigurationButton.RegisterCallback<ClickEvent>(evt => OnSaveConfiguration(evt));
         }
@@ -66,33 +71,42 @@ namespace NOVA.Scripts
         {
             if (String.IsNullOrEmpty(configuratrionName.text))
             {
-                TextHandler.DisplayMessage("Configuration must include a name", Color.red, errorText);
+                TextHandler.DisplayMessage("Configuration must include a name", Color.red, statusText);
+                return;
             }
-            else
+            if (radioButtonGroup.value == -1)
             {
-                Enum.TryParse(dropdownField.value.ToString(), out GestureImageExtension extension);
+                TextHandler.DisplayMessage("Please choose whether or not to set this confiuration as active", Color.red, statusText);
+                return;
+            }
 
-                Configuration configuration = new();
-                configuration.Name = configuratrionName.text;
-                configuration.Gamma = gamma.value;
-                configuration.ChainTimer = chainTimer.value;
-                configuration.LandmarkTolerance = landmarkTolerance.value;
-                configuration.ImageExtension = extension;
+            Enum.TryParse(dropdownField.value.ToString(), out GestureImageExtension extension);
+            Configuration configuration = new();
+            configuration.Name = configuratrionName.text;
+            configuration.Gamma = gamma.value;
+            configuration.ChainTimer = chainTimer.value;
+            configuration.LandmarkTolerance = landmarkTolerance.value;
+            configuration.ImageExtension = extension;
 
-
-                try
+            try
+            {
+                var handler = GestureSqliteHandler.Instance();
+                if (radioButtonGroup.value == RadioButtonYes)
                 {
-                    var handler = GestureSqliteHandler.Instance();
-                    var currAvtive = handler.GetActiveConfiguration();
-
-                    //TODO: Function that swaps actives
-
-                    handler.AddItemByName(configuration, configuration.Name);
+                    var activeConfiguration = handler.GetActiveConfiguration();
+                    handler.SetCurrentActiveConfigToFalse(activeConfiguration);
+                    configuration.Active = true;
                 }
-                catch (Exception ex)
+                else if (radioButtonGroup.value == RadioButtonNo)
                 {
-
+                    configuration.Active = false;
                 }
+                handler.AddItemByName(configuration, configuration.Name);
+                TextHandler.DisplayMessage($"Configuration: {configuration.Name} was sucsesfully added!", Color.green, statusText);
+            }
+            catch (Exception exception) when (exception is ItemAlreadyExistsException || exception is ItemNotFoundException || exception is TableNotFoundException)
+            {
+                TextHandler.DisplayMessage(exception.Message, Color.red, statusText);
             }
         }
     }

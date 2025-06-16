@@ -257,6 +257,16 @@ namespace NOVA.Scripts
             }
         }
 
+        public void SetCurrentActiveConfigToFalse(Configuration currActiveConfig)
+        {
+            lock (lockObject)
+            {
+                using var conn = GetSqliteConnection();
+                currActiveConfig.Active = false;
+                conn.Update(currActiveConfig);
+            }
+        }
+
         // Handle singleton instance creation and management
         public static GestureSqliteHandler Instance(string databaseName = GesturesDatabaseName)
         {

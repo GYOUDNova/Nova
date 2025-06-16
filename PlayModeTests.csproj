@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{FD630994-7584-0520-E5D4-17CADF180CBD}</ProjectGuid>
+    <ProjectGuid>{CFF53D19-4E3D-DC97-E091-989405C98981}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>PlayModeTests</AssemblyName>
@@ -1043,7 +1043,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="NOVA.csproj">
-      <Project>{7C0238D5-A89B-F39D-DF9A-17E02EC866F4}</Project>
+      <Project>{5A4396C6-CBF1-DC6E-5754-83A36342E04F}</Project>
       <Name>NOVA</Name>
     </ProjectReference>
   </ItemGroup>
