@@ -1,7 +1,3 @@
-.settings-container {
-    width: 50%;
-}
-
 .save-configuration-button {
     margin-top: 15px;
 }
@@ -33,4 +29,29 @@
 
 .image-type-field {
     margin-bottom: 15px;
+}
+
+.settings-container {
+    width: 50%;
+}
+
+.bottom-half-container {
+    margin-top: 5px;
+    align-self: center;
+}
+
+.button-container {
+    flex-direction: row;
+}
+
+.save-gesture-container {
+    display: none;
+}
+
+.make-active-button {
+    width: 50%;
+}
+
+.delete-configuration-button {
+    width: 50%;
 }

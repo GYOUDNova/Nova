@@ -239,6 +239,21 @@ namespace NOVA.Scripts
             }
         }
 
+        public void DeleteConfiguration(string itemName)
+        {
+            lock (lockObject)
+            {
+                using var conn = GetSqliteConnection();
+                var config = conn.Table<Configuration>().FirstOrDefault(c => c.Name == itemName);
+
+                if (config is null)
+                {
+                    throw new ItemNotFoundException($"No configuration with name: {itemName} exists");
+                }
+                conn.Delete(config);
+            }
+        }
+
         public Configuration GetActiveConfiguration()
         {
             lock (lockObject)

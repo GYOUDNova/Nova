@@ -25,11 +25,3 @@
     height: 600px;
     align-self: center;
 }
-
-.save-gesture-container {
-    display: none;
-}
-
-.error-label {
-    color: rgb(255, 0, 0);
-}
