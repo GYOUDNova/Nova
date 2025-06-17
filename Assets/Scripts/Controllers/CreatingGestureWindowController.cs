@@ -160,8 +160,11 @@ namespace NOVA.Scripts
         /// </summary>
         public void OnDestroy()
         {
+            if (webCamTexture == null) return;
+
             webCamTexture.Stop();
             webCamTexture = null;
+
             EditorCoroutineUtility.StopCoroutine(edCoro);
         }
 
