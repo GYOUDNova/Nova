@@ -14,29 +14,36 @@ namespace NOVA.Scripts
         [SerializeField]
         private VisualTreeAsset settingsScreenAsset;
 
+        /*All fields from UI*/
         private VisualElement root;
-        private Button saveConfigurationButton;
+
         private Label creatingConfigStatusText;
         private Label editingConfigStatusText;
-
-        /*Configuration fields*/
         private Label titleLabel;
-        private TextField configuratrionName;
-        private SliderInt gamma;
-        private FloatField chainTimer;
-        private FloatField landmarkTolerance;
-        private DropdownField imageExtensionsDropdown;
-        private DropdownField configurationsDropdown;
-        private RadioButtonGroup radioButtonGroup;
+
+        private Button saveConfigurationButton;
         private Button setActiveConfigurationButton;
         private Button deleteConfigurationButton;
+
+        private TextField configuratrionName;
+
+        private SliderInt gamma;
+
+        private FloatField chainTimer;
+        private FloatField landmarkTolerance;
+
+        private DropdownField imageExtensionsDropdown;
+        private DropdownField configurationsDropdown;
+
+        private RadioButtonGroup radioButtonGroup;
+        private const int RadioButtonYes = 0;
+        private const int RadioButtonNo = 0;
+
         private Label gammaValueDisplay;
 
         /*Window Settings*/
         private const float MinWindowHeight = 600;
         private const float MinWindowLength = 850;
-        private const int RadioButtonYes = 0;
-        private const int RadioButtonNo = 0;
         private const string Title = "Settings & Calibration";
 
         [MenuItem("Window/UI Toolkit/Settings Calibration")]
@@ -50,10 +57,12 @@ namespace NOVA.Scripts
 
         public void CreateGUI()
         {
-            SetupUI();
+            SetupUIReferences();
+            SetupUIEvents();
+            RefreshConfigurationDropdown();
         }
 
-        private void SetupUI()
+        private void SetupUIReferences()
         {
             //Setup root
             root = settingsScreenAsset.CloneTree();
@@ -74,20 +83,24 @@ namespace NOVA.Scripts
             setActiveConfigurationButton = root.Q<Button>("MakeActiveButton");
             deleteConfigurationButton = root.Q<Button>("DeleteConfigurationButton");
             gammaValueDisplay = root.Q<Label>("GammaValueDisplay");
+        }
 
-
+        private void SetupUIEvents()
+        {
             //Setup events + UI data
             gamma.RegisterValueChangedCallback(evt => { gammaValueDisplay.text = $"{evt.newValue}%"; });
+
             saveConfigurationButton.RegisterCallback<ClickEvent>(evt => OnSaveConfiguration(evt));
             setActiveConfigurationButton.RegisterCallback<ClickEvent>(evt => OnChangeActiveConfiguration(evt));
             deleteConfigurationButton.RegisterCallback<ClickEvent>(evt => OnDeleteConfiguration(evt));
+
             titleLabel.text = Title;
+
             imageExtensionsDropdown.value = GestureImageExtension.Jpeg.ToString();
             foreach (var extension in Enum.GetValues(typeof(GestureImageExtension)))
             {
                 imageExtensionsDropdown.choices.Add(extension.ToString());
             }
-            RefreshConfigurationDropdown();
         }
 
         private void RefreshConfigurationDropdown()
@@ -180,24 +193,27 @@ namespace NOVA.Scripts
 
         private bool CheckValidInput()
         {
+            string errorMessage = String.Empty;
             if (String.IsNullOrEmpty(configuratrionName.text) || configuratrionName.text.Length > 25)
             {
-                TextHandler.DisplayMessage("Configuration must include a name and must be between 1-25 characters long", Color.red, creatingConfigStatusText);
-                return false;
+                errorMessage = "Configuration must include a name and must be between 1-25 characters long";
             }
-            if (chainTimer.value < 1 || chainTimer.value > 10)
+            else if (chainTimer.value < 1 || chainTimer.value > 10)
             {
-                TextHandler.DisplayMessage("Chain timer must be a value between 1-10 (in seconds)", Color.red, creatingConfigStatusText);
-                return false;
+                errorMessage = "Chain timer must be a value between 1-10 (in seconds)";
             }
-            if (landmarkTolerance.value < 1 || landmarkTolerance.value > 10)
+            else if (landmarkTolerance.value < 1 || landmarkTolerance.value > 10)
             {
-                TextHandler.DisplayMessage("Landmark tolerance must be a value between 1-10", Color.red, creatingConfigStatusText);
-                return false;
+                errorMessage = "Landmark tolerance must be a value between 1-10";
             }
-            if (radioButtonGroup.value == -1)
+            else if (radioButtonGroup.value == -1)
             {
-                TextHandler.DisplayMessage("Please choose whether or not to set this confiuration as active", Color.red, creatingConfigStatusText);
+                errorMessage = "Please choose whether or not to set this confiuration as active";
+            }
+
+            if (errorMessage != String.Empty)
+            {
+                TextHandler.DisplayMessage(errorMessage, Color.red, creatingConfigStatusText);
                 return false;
             }
             return true;
