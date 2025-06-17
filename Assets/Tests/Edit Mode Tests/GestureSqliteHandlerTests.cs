@@ -456,11 +456,7 @@ public class GestureSqliteHandlerTests
             }
         }
 
-        // Release handler instance
-        if (handler != null)
-        {
-            handler.ReleaseInstance();
-            handler = null;
-        }
+        // Release handler instance (if it exists)
+        GestureSqliteHandler.ReleaseInstance();
     }
 }

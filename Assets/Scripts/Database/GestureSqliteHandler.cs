@@ -311,7 +311,7 @@ namespace NOVA.Scripts
         }
 
         // This is only to be called when the instance is no longer needed
-        public void ReleaseInstance()
+        public static void ReleaseInstance()
         {
             lock (lockObject)
             {
