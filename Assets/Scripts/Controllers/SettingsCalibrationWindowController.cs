@@ -171,6 +171,7 @@ namespace NOVA.Scripts
             if (configurationToBeActive.Active)
             {
                 TextHandler.DisplayMessage($"Cofiguration {configurationToBeActive.Name} is already active", Color.red, editingConfigStatusText);
+                return;
             }
             handler.SetActivePropertyToFalse(activeConfiguration);
             handler.SetActivePropertyToTrue(configurationToBeActive);
