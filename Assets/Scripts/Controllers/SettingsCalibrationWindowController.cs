@@ -129,7 +129,7 @@ namespace NOVA.Scripts
                 if (radioButtonGroup.value == RadioButtonYes)
                 {
                     var activeConfiguration = handler.GetActiveConfiguration();
-                    handler.SetCurrentActiveConfigToFalse(activeConfiguration);
+                    handler.SetActivePropertyToFalse(activeConfiguration);
                     configuration.Active = true;
                 }
                 else if (radioButtonGroup.value == RadioButtonNo)
@@ -138,6 +138,7 @@ namespace NOVA.Scripts
                 }
                 handler.AddItemByName(configuration, configuration.Name);
                 TextHandler.DisplayMessage($"Configuration: {configuration.Name} was sucsesfully added!", Color.green, creatingConfigStatusText);
+                RefreshConfigurationDropdown();
             }
             catch (Exception exception) when (exception is ItemAlreadyExistsException || exception is ItemNotFoundException || exception is TableNotFoundException)
             {
@@ -169,7 +170,17 @@ namespace NOVA.Scripts
 
         private void OnChangeActiveConfiguration(ClickEvent evt)
         {
+            string configurationName = configurationsDropdown.value;
+            var handler = GestureSqliteHandler.Instance();
+            var activeConfiguration = handler.GetActiveConfiguration();
+            var configurationToBeActive = handler.GetObjectByName<Configuration>(configurationName);
 
+            if (configurationToBeActive.Active)
+            {
+                TextHandler.DisplayMessage($"Cofiguration {configurationToBeActive.Name} is already active", Color.red, editingConfigStatusText);
+            }
+            handler.SetActivePropertyToFalse(activeConfiguration);
+            handler.SetActivePropertyToTrue(configurationToBeActive);
         }
     }
 }

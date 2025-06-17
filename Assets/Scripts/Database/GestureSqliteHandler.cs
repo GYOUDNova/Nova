@@ -272,13 +272,23 @@ namespace NOVA.Scripts
             }
         }
 
-        public void SetCurrentActiveConfigToFalse(Configuration currActiveConfig)
+        public void SetActivePropertyToFalse(Configuration currActiveConfig)
         {
             lock (lockObject)
             {
                 using var conn = GetSqliteConnection();
                 currActiveConfig.Active = false;
                 conn.Update(currActiveConfig);
+            }
+        }
+
+        public void SetActivePropertyToTrue(Configuration toBeActiveConfig)
+        {
+            lock (lockObject)
+            {
+                using var conn = GetSqliteConnection();
+                toBeActiveConfig.Active = true;
+                conn.Update(toBeActiveConfig);
             }
         }
 
