@@ -30,6 +30,7 @@ namespace NOVA.Scripts
         private RadioButtonGroup radioButtonGroup;
         private Button setActiveConfigurationButton;
         private Button deleteConfigurationButton;
+        private Label gammaValueDisplay;
 
         /*Window Settings*/
         private const float MinWindowHeight = 600;
@@ -72,9 +73,11 @@ namespace NOVA.Scripts
             configurationsDropdown = root.Q<DropdownField>("ListOfConfigs");
             setActiveConfigurationButton = root.Q<Button>("MakeActiveButton");
             deleteConfigurationButton = root.Q<Button>("DeleteConfigurationButton");
+            gammaValueDisplay = root.Q<Label>("GammaValueDisplay");
 
 
             //Setup events + UI data
+            gamma.RegisterValueChangedCallback(evt => { gammaValueDisplay.text = $"{evt.newValue}%"; });
             saveConfigurationButton.RegisterCallback<ClickEvent>(evt => OnSaveConfiguration(evt));
             setActiveConfigurationButton.RegisterCallback<ClickEvent>(evt => OnChangeActiveConfiguration(evt));
             deleteConfigurationButton.RegisterCallback<ClickEvent>(evt => OnDeleteConfiguration(evt));
@@ -104,18 +107,8 @@ namespace NOVA.Scripts
 
         private void OnSaveConfiguration(ClickEvent evt)
         {
-            if (String.IsNullOrEmpty(configuratrionName.text))
-            {
-                TextHandler.DisplayMessage("Configuration must include a name", Color.red, creatingConfigStatusText);
-                return;
-            }
-            if (radioButtonGroup.value == -1)
-            {
-                TextHandler.DisplayMessage("Please choose whether or not to set this confiuration as active", Color.red, creatingConfigStatusText);
-                return;
-            }
+            if (!CheckValidInput() || !Enum.TryParse(imageExtensionsDropdown.value.ToString(), out GestureImageExtension extension)) { return; }
 
-            Enum.TryParse(imageExtensionsDropdown.value.ToString(), out GestureImageExtension extension);
             Configuration configuration = new();
             configuration.Name = configuratrionName.text;
             configuration.Gamma = gamma.value;
@@ -181,6 +174,32 @@ namespace NOVA.Scripts
             }
             handler.SetActivePropertyToFalse(activeConfiguration);
             handler.SetActivePropertyToTrue(configurationToBeActive);
+            TextHandler.DisplayMessage($"Active configuration was sucsessfully changed to {configurationToBeActive.Name}", Color.green, editingConfigStatusText);
+        }
+
+        private bool CheckValidInput()
+        {
+            if (String.IsNullOrEmpty(configuratrionName.text) || configuratrionName.text.Length > 25)
+            {
+                TextHandler.DisplayMessage("Configuration must include a name and must be between 1-25 characters long", Color.red, creatingConfigStatusText);
+                return false;
+            }
+            if (chainTimer.value < 1 || chainTimer.value > 10)
+            {
+                TextHandler.DisplayMessage("Chain timer must be a value between 1-10 (in seconds)", Color.red, creatingConfigStatusText);
+                return false;
+            }
+            if (landmarkTolerance.value < 1 || landmarkTolerance.value > 10)
+            {
+                TextHandler.DisplayMessage("Landmark tolerance must be a value between 1-10", Color.red, creatingConfigStatusText);
+                return false;
+            }
+            if (radioButtonGroup.value == -1)
+            {
+                TextHandler.DisplayMessage("Please choose whether or not to set this confiuration as active", Color.red, creatingConfigStatusText);
+                return false;
+            }
+            return true;
         }
     }
 }

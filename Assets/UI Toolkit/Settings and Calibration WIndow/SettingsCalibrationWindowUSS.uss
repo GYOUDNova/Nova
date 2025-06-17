@@ -4,6 +4,7 @@
 
 .gamma-field {
     margin-bottom: 15px;
+    width: 90%;
 }
 
 .save-configuration-button {
@@ -50,6 +51,14 @@
 
 .make-active-button {
     width: 50%;
+}
+
+.gamma-container {
+    flex-direction: row;
+}
+
+.gamma-value-display-field {
+    width: 10%;
 }
 
 .delete-configuration-button {
