@@ -250,6 +250,7 @@ namespace NOVA.Scripts
                 {
                     throw new ItemNotFoundException($"No configuration with name: {itemName} exists");
                 }
+
                 conn.Delete(config);
             }
         }
