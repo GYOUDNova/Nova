@@ -107,7 +107,7 @@ namespace NOVA.Scripts
                 var result = HandLandmarkerResult.Alloc(2);
                 if (taskApi.TryDetect(mpImage, imageProcessingOptions, ref result))
                 {
-                    TextHandler.DisplayMessage("Gesture data received. Please name the gesture and then save", Color.green, messageText);
+                    EditorTextHandler.DisplayMessage("Gesture data received. Please name the gesture and then save", Color.green, messageText);
                     savingGestureContainer.style.display = DisplayStyle.Flex;
                     // Placeholder: Log the results
                     // TODO: Replace with actual logic to process landmarks
@@ -121,7 +121,7 @@ namespace NOVA.Scripts
                 }
                 else
                 {
-                    TextHandler.DisplayMessage("Unable to detect gesture. Please try again", Color.red, messageText);
+                    EditorTextHandler.DisplayMessage("Unable to detect gesture. Please try again", Color.red, messageText);
                 }
             };
         }
@@ -134,7 +134,7 @@ namespace NOVA.Scripts
         {
             if (!WebCamTexture.devices.Any(device => device.name == selectedCamera))
             {
-                TextHandler.DisplayMessage($"Unable to find the given camera: {selectedCamera}", Color.red, messageText);
+                EditorTextHandler.DisplayMessage($"Unable to find the given camera: {selectedCamera}", Color.red, messageText);
             }
             if (webCamTexture != null && webCamTexture.isPlaying)
             {
@@ -151,7 +151,7 @@ namespace NOVA.Scripts
             }
             else
             {
-                TextHandler.DisplayMessage($"There was a problem setting up and playing the camera: {selectedCamera}", Color.red, messageText);
+                EditorTextHandler.DisplayMessage($"There was a problem setting up and playing the camera: {selectedCamera}", Color.red, messageText);
             }
         }
 

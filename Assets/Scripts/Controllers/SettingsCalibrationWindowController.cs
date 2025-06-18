@@ -143,12 +143,12 @@ namespace NOVA.Scripts
                     configuration.Active = false;
                 }
                 handler.AddItemByName(configuration, configuration.Name);
-                TextHandler.DisplayMessage($"Configuration: {configuration.Name} was sucsesfully added!", Color.green, creatingConfigStatusText);
+                EditorTextHandler.DisplayMessage($"Configuration: {configuration.Name} was sucsesfully added!", Color.green, creatingConfigStatusText);
                 RefreshConfigurationDropdown();
             }
             catch (Exception exception) when (exception is ItemAlreadyExistsException || exception is ItemNotFoundException || exception is TableNotFoundException)
             {
-                TextHandler.DisplayMessage(exception.Message, Color.red, creatingConfigStatusText);
+                EditorTextHandler.DisplayMessage(exception.Message, Color.red, creatingConfigStatusText);
             }
         }
 
@@ -160,17 +160,17 @@ namespace NOVA.Scripts
 
             if (configuration is null)
             {
-                TextHandler.DisplayMessage($"No configuration named: {configurationName} exists", Color.red, editingConfigStatusText);
+                EditorTextHandler.DisplayMessage($"No configuration named: {configurationName} exists", Color.red, editingConfigStatusText);
                 return;
             }
 
             if (configuration.Active)
             {
-                TextHandler.DisplayMessage($"Cannot delete configuration while it is active. Please make another one active", Color.red, editingConfigStatusText);
+                EditorTextHandler.DisplayMessage($"Cannot delete configuration while it is active. Please make another one active", Color.red, editingConfigStatusText);
                 return;
             }
             handler.DeleteConfiguration(configurationName);
-            TextHandler.DisplayMessage($"Configuration: {configurationName} was sucsesfully deleted!", Color.green, editingConfigStatusText);
+            EditorTextHandler.DisplayMessage($"Configuration: {configurationName} was sucsesfully deleted!", Color.green, editingConfigStatusText);
             RefreshConfigurationDropdown();
         }
 
@@ -183,12 +183,12 @@ namespace NOVA.Scripts
 
             if (configurationToBeActive.Active)
             {
-                TextHandler.DisplayMessage($"Cofiguration {configurationToBeActive.Name} is already active", Color.red, editingConfigStatusText);
+                EditorTextHandler.DisplayMessage($"Cofiguration {configurationToBeActive.Name} is already active", Color.red, editingConfigStatusText);
                 return;
             }
             handler.SetActivePropertyToFalse(activeConfiguration);
             handler.SetActivePropertyToTrue(configurationToBeActive);
-            TextHandler.DisplayMessage($"Active configuration was sucsessfully changed to {configurationToBeActive.Name}", Color.green, editingConfigStatusText);
+            EditorTextHandler.DisplayMessage($"Active configuration was sucsessfully changed to {configurationToBeActive.Name}", Color.green, editingConfigStatusText);
         }
 
         private bool CheckValidInput()
@@ -213,7 +213,7 @@ namespace NOVA.Scripts
 
             if (errorMessage != String.Empty)
             {
-                TextHandler.DisplayMessage(errorMessage, Color.red, creatingConfigStatusText);
+                EditorTextHandler.DisplayMessage(errorMessage, Color.red, creatingConfigStatusText);
                 return false;
             }
             return true;
