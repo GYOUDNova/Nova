@@ -84,8 +84,10 @@ namespace NOVA.Scripts
 
             savingGestureContainer = root.Q<VisualElement>("SavingGestureContainer");
             savingGestureTextField = root.Q<TextField>("SaveGestureTextField");
+            savingGestureContainer.style.display = DisplayStyle.None; // Ensure the container is hidden until an image is taken
             saveGestureButton = root.Q<Button>("SaveGestureButton");
             saveGestureButton.RegisterCallback<ClickEvent>(evt => SaveGesture(evt));
+            saveGestureButton.style.display = DisplayStyle.None; // Ensure the button is hidden until an image is taken
             dropdownField = root.Q<DropdownField>(DropdownMenuName);
             dropdownField.RegisterValueChangedCallback(evt => OnCameraSelected(evt.newValue));
             foreach (var device in WebCamTexture.devices)
@@ -121,13 +123,13 @@ namespace NOVA.Scripts
                 {
                     var handWorldLandmarks = result.handWorldLandmarks.FirstOrDefault();
                     EditorCoroutineUtility.StartCoroutine(TranslateMPLandmarks(handWorldLandmarks.landmarks), this);
-
-                    DisplayMessage("Gesture data received. Please name the gesture and then save", Color.green, 10f);
+                    EditorTextHandler.DisplayMessage("Gesture data received. Please name the gesture and then save", Color.green, messageText);
                     savingGestureContainer.style.display = DisplayStyle.Flex;
+                    saveGestureButton.style.display = DisplayStyle.Flex;
                 }
                 else
                 {
-                    DisplayMessage("Unable to detect gesture. Please try again", Color.red, 5f);
+                    EditorTextHandler.DisplayMessage("Unable to detect gesture. Please try again", Color.red, messageText);
                 }
             };
         }
@@ -140,7 +142,7 @@ namespace NOVA.Scripts
         {
             if (!WebCamTexture.devices.Any(device => device.name == selectedCamera))
             {
-                DisplayMessage($"Unable to find the given camera: {selectedCamera}", Color.red, 5f);
+                EditorTextHandler.DisplayMessage($"Unable to find the given camera: {selectedCamera}", Color.red, messageText);
             }
             if (webCamTexture != null && webCamTexture.isPlaying)
             {
@@ -158,7 +160,7 @@ namespace NOVA.Scripts
             }
             else
             {
-                DisplayMessage($"There was a problem setting up and playing the camera: {selectedCamera}", Color.red, 5f);
+                EditorTextHandler.DisplayMessage($"There was a problem setting up and playing the camera: {selectedCamera}", Color.red, messageText);
             }
         }
 
@@ -167,8 +169,11 @@ namespace NOVA.Scripts
         /// </summary>
         public void OnDestroy()
         {
+            if (webCamTexture == null) return;
+
             webCamTexture.Stop();
             webCamTexture = null;
+
             EditorCoroutineUtility.StopCoroutine(edCoro);
         }
 
@@ -207,19 +212,6 @@ namespace NOVA.Scripts
             }
         }
 
-        private void DisplayMessage(string text, Color messageColor, float messageDisplayTime)
-        {
-            messageText.style.color = messageColor;
-            messageText.text = text;
-            EditorCoroutineUtility.StartCoroutine(ClearErrorMessage(messageDisplayTime), this);
-        }
-
-        private IEnumerator ClearErrorMessage(float time)
-        {
-            yield return new EditorWaitForSeconds(time);
-            messageText.text = string.Empty;
-        }
-
         private IEnumerator ClearSuccessMessage(float time)
         {
             yield return new EditorWaitForSeconds(time);
@@ -232,7 +224,7 @@ namespace NOVA.Scripts
 
             if (string.IsNullOrEmpty(gestureName))
             {
-                DisplayMessage("Please enter a name for the gesture", Color.red, 5f);
+                EditorTextHandler.DisplayMessage("Please enter a name for the gesture", Color.red, messageText);
                 return;
             }
 
@@ -240,7 +232,7 @@ namespace NOVA.Scripts
 
             if (dbHandler.GestureExists(gestureName))
             {
-                DisplayMessage($"{gestureName} already exists, please enter a different name", Color.red, 5f);
+                EditorTextHandler.DisplayMessage($"{gestureName} already exists, please enter a different name", Color.red, messageText);
                 return;
             }
 
@@ -280,12 +272,12 @@ namespace NOVA.Scripts
             var gestureInfo = dbHandler.GetGestureInfo(gestureName);
             if (gestureInfo.Equals(qgi))
             {
-                DisplayMessage($"{gestureName} was successfully created! Check Gesture List for more info", Color.green, 5f);
+                EditorTextHandler.DisplayMessage($"{gestureName} was successfully created! Check Gesture List for more info", Color.green, messageText);
                 EditorCoroutineUtility.StartCoroutine(ClearSuccessMessage(10f), this);
             }
             else
             {
-                DisplayMessage($"There was an error saving the gesture {gestureName}. Please review logs", Color.red, 5f);
+                EditorTextHandler.DisplayMessage($"There was an error saving the gesture {gestureName}. Please review logs", Color.red, messageText);
             }
         }
 

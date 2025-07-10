@@ -74,8 +74,8 @@
     <Compile Include="Assets\Scripts\Database\GestureImageExtension.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkDetectionConfig.cs" />
     <Compile Include="Assets\Scripts\Database\Exceptions\DatabaseException.cs" />
-    <Compile Include="Assets\Scripts\Controllers\AddingCombinationWindowController.cs" />
     <Compile Include="Assets\Scripts\Database\GestureData.cs" />
+    <Compile Include="Assets\Scripts\Helpers\EditorTextHandler.cs" />
     <Compile Include="Assets\Scripts\Helpers\FileHandler.cs" />
     <Compile Include="Assets\Scripts\Controllers\CreatingGestureWindowController.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkerRunner.cs" />

@@ -40,10 +40,6 @@ public class GestureSqliteHandlerTests
     [TearDown]
     public void TearDown()
     {
-        // Keep the handler instance per test 
-        handler.ReleaseInstance();
-        handler = null;
-
         // Remove existing data
         Cleanup();
     }
@@ -459,5 +455,8 @@ public class GestureSqliteHandlerTests
                 File.Delete(metaPath);
             }
         }
+
+        // Release handler instance (if it exists)
+        GestureSqliteHandler.ReleaseInstance();
     }
 }

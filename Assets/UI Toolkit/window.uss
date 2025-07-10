@@ -25,7 +25,3 @@
     height: 600px;
     align-self: center;
 }
-
-.save-gesture-container {
-    display: none;
-}
