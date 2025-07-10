@@ -19,7 +19,7 @@ namespace NOVA.Scripts
 
         /*Window Settings*/
         private const float MinWindowHeight = 600;
-        private const float MinWindowLength = 850;
+        private const float MinWindowLength = 875;
         private const string Title = "Gesture List";
 
         [MenuItem("Window/UI Toolkit/Gesture List Screen")]
@@ -62,8 +62,28 @@ namespace NOVA.Scripts
 
             VisualElement card5 = gestureCard.CloneTree();
             Label label5 = card5.Q<Label>("GestureDetails");
-            label4.text = "5";
+            label5.text = "5";
             scrollView.Add(card5);
+
+            VisualElement card6 = gestureCard.CloneTree();
+            Label label6 = card6.Q<Label>("GestureDetails");
+            label5.text = "6";
+            scrollView.Add(card6);
+
+            VisualElement card7 = gestureCard.CloneTree();
+            Label label7 = card7.Q<Label>("GestureDetails");
+            label5.text = "7";
+            scrollView.Add(card7);
+
+            VisualElement card8 = gestureCard.CloneTree();
+            Label label8 = card8.Q<Label>("GestureDetails");
+            label5.text = "8";
+            scrollView.Add(card8);
+
+            VisualElement card9 = gestureCard.CloneTree();
+            Label label9 = card9.Q<Label>("GestureDetails");
+            label5.text = "9";
+            scrollView.Add(card9);
 
         }
 
