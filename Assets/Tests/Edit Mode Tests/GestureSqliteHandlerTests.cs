@@ -444,6 +444,56 @@ public class GestureSqliteHandlerTests
         Assert.AreEqual(threadCount, successCount, $"Expected all {threadCount} gestures to be added, but {threadCount - successCount} failed. Failed threads: {string.Join(", ", failedThreads)}");
     }
 
+    // generate a test case that tests the GetAllUIGestures method, this will create a few gestures and then retrieve all of their info
+    [Test]
+    public void GetAllUIGestures_ReturnsAllGestures()
+    {
+        // Arrange
+        var gestureData1 = new GestureData
+        {
+            Name = "Gesture 1",
+            GestureImageName = "gesture1.png",
+            GestureCategoryId = 1,
+            IsPredefined = true
+        };
+        handler.AddItemByName(gestureData1, gestureData1.Name);
+        var gestureData2 = new GestureData
+        {
+            Name = "Gesture 2",
+            GestureImageName = "gesture2.png",
+            GestureCategoryId = 1,
+            IsPredefined = true
+        };
+        handler.AddItemByName(gestureData2, gestureData2.Name);
+
+        // Create the images
+        var gestureImage1 = new GestureImage
+        {
+            Name = gestureData1.GestureImageName,
+            FileExtension = GestureImageExtension.Png,
+            GestureId = 1, // Assuming the ID of the first gesture
+            IsPredefined = gestureData1.IsPredefined
+        };
+
+        var gestureImage2 = new GestureImage
+        {
+            Name = gestureData2.GestureImageName,
+            FileExtension = GestureImageExtension.Png,
+            GestureId = 2, // Assuming the ID of the second gesture
+            IsPredefined = gestureData2.IsPredefined
+        };
+
+        handler.AddItemByName(gestureImage1, gestureImage1.Name);
+        handler.AddItemByName(gestureImage2, gestureImage2.Name);
+
+        // Act
+        var allGestures = handler.GetAllUIGestures();
+
+        // Assert
+        Assert.IsNotNull(allGestures, "No gestures were retrieved from the database.");
+        Assert.IsTrue(allGestures.Count >= 2, "Expected at least two gestures to be retrieved.");
+    }
+
     // Utility methods
 
     private void Cleanup()
