@@ -6,6 +6,7 @@ MonoImporter:
   defaultReferences:
   - m_ViewDataDictionary: {instanceID: 0}
   - gestureListScreenAsset: {fileID: 9197481963319205126, guid: 85385a11fe5af0f4e96921f8a0c5887d, type: 3}
+  - gestureCard: {fileID: 9197481963319205126, guid: 715b23433237ee045b0890f3eec70d82, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
