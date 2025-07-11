@@ -321,6 +321,13 @@ namespace NOVA.Scripts
                 if (instance != null)
                 {
                     instance = null;
+
+                    // Delete db path if it exists
+                    if (File.Exists(dbPath))
+                    {
+                        File.Delete(dbPath);
+                        Debug.Log($"Database {dbPath} deleted successfully.");
+                    }
                 }
             }
         }
