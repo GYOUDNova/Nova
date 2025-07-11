@@ -39,58 +39,52 @@ namespace NOVA.Scripts
             Label label = root.Q<Label>("TitleLabel");
             label.text = Title;
 
+            var gestureSqliteHandler = GestureSqliteHandler.Instance();
+            var gestureList = gestureSqliteHandler.GetAllUIGestures();
+
+            if (gestureList.Count == 0)
+            {
+                Debug.LogWarning("No gestures found in the database.");
+                return;
+            }
+
+            // Populate the UI with gesture data
             scrollView = root.Q<ScrollView>("ListOfGestures");
-            VisualElement card1 = gestureCard.CloneTree();
-            Label label1 = card1.Q<Label>("GestureDetails");
-            label1.text = "1";
-            scrollView.Add(card1);
 
-            VisualElement card2 = gestureCard.CloneTree();
-            Label label2 = card2.Q<Label>("GestureDetails");
-            label2.text = "2";
-            scrollView.Add(card2);
+            foreach (var gesture in gestureList)
+            {
+                VisualElement card = gestureCard.CloneTree();
+                Label cardLabel = card.Q<Label>("GestureDetails");
+                Label typeLabel = card.Q<Label>("GestureType");
+                cardLabel.text = $"{gesture.GestureName} of category {gesture.Category.Name}";
 
-            VisualElement card3 = gestureCard.CloneTree();
-            Label label3 = card3.Q<Label>("GestureDetails");
-            label3.text = "3";
-            scrollView.Add(card3);
+                if (gesture.Data.IsPredefined)
+                {
+                    typeLabel.text = "Predefined";
+                    typeLabel.style.color = new StyleColor(Color.yellow);
+                }
+                else
+                {
+                    typeLabel.text = "Custom";
+                    typeLabel.style.color = new StyleColor(Color.green);
+                }
 
-            VisualElement card4 = gestureCard.CloneTree();
-            Label label4 = card4.Q<Label>("GestureDetails");
-            label4.text = "4";
-            scrollView.Add(card4);
+                // Load the image from the expected path and set it to the Image component
+                VisualElement image = card.Q<VisualElement>("GestureImage");
+                Texture2D imageTexture = FileHandler.LoadTextureFromResources(gesture.Image.Name, gesture.Image.FileExtension);
 
-            VisualElement card5 = gestureCard.CloneTree();
-            Label label5 = card5.Q<Label>("GestureDetails");
-            label5.text = "5";
-            scrollView.Add(card5);
+                // Add that texture to the image element
+                if (imageTexture != null)
+                {
+                    image.style.backgroundImage = new StyleBackground(imageTexture);
+                }
+                else
+                {
+                    Debug.LogWarning($"Image {gesture.Image.Name} not found in resources.");
+                }
 
-            VisualElement card6 = gestureCard.CloneTree();
-            Label label6 = card6.Q<Label>("GestureDetails");
-            label5.text = "6";
-            scrollView.Add(card6);
-
-            VisualElement card7 = gestureCard.CloneTree();
-            Label label7 = card7.Q<Label>("GestureDetails");
-            label5.text = "7";
-            scrollView.Add(card7);
-
-            VisualElement card8 = gestureCard.CloneTree();
-            Label label8 = card8.Q<Label>("GestureDetails");
-            label5.text = "8";
-            scrollView.Add(card8);
-
-            VisualElement card9 = gestureCard.CloneTree();
-            Label label9 = card9.Q<Label>("GestureDetails");
-            label5.text = "9";
-            scrollView.Add(card9);
-
-        }
-
-        private void OnEnable()
-        {
-            minSize = new Vector2(MinWindowLength, MinWindowHeight);
-            maxSize = new Vector2(MinWindowLength, MinWindowHeight);
+                scrollView.Add(card);
+            }
         }
     }
 }

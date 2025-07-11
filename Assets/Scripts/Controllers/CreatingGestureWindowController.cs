@@ -254,7 +254,7 @@ namespace NOVA.Scripts
             {
                 GestureName = gestureName,
                 IsPredefined = false,
-                ImageName = $"{gestureName}.{ext.GetExtension()}",
+                ImageName = gestureName,
                 CategoryName = "Placeholder",
                 Landmarks = this.Landmarks
             };
