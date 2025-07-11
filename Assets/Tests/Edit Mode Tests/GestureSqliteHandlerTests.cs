@@ -44,12 +44,6 @@ public class GestureSqliteHandlerTests
         Cleanup();
     }
 
-    [OneTimeTearDown]
-    public void OneTimeTearDown()
-    {
-        GestureSqliteHandler.Instance().ReleaseInstance();
-    }
-
     [Test]
     public void Constructor_DatabaseName_PathsExist()
     {
@@ -502,9 +496,10 @@ public class GestureSqliteHandlerTests
     {
         if (handler != null)
         {
-            handler.ReleaseInstance();
             handler = null;
         }
+
+        GestureSqliteHandler.ReleaseInstance();
 
         if (Directory.Exists(gestureAssetsPath))
         {

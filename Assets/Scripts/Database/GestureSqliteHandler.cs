@@ -314,20 +314,13 @@ namespace NOVA.Scripts
         }
 
         // This is only to be called when the instance is no longer needed
-        public void ReleaseInstance()
+        public static void ReleaseInstance()
         {
             lock (lockObject)
             {
                 if (instance != null)
                 {
                     instance = null;
-
-                    // Delete db path if it exists
-                    if (File.Exists(dbPath))
-                    {
-                        File.Delete(dbPath);
-                        Debug.Log($"Database {dbPath} deleted successfully.");
-                    }
                 }
             }
         }
