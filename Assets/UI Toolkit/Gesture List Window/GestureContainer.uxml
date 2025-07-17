@@ -1,7 +1,11 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <engine:VisualElement name="GestureContainer" style="width: 200px; height: 200px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; margin-left: 15px; margin-top: 15px;">
-        <engine:VisualElement name="GestureImage" style="background-image: url(&quot;project://database/Assets/Images/Default_Image.png?fileID=2800000&amp;guid=6b36c9f8668b35f4cb28e83383c43ae0&amp;type=3#Default_Image&quot;); height: 75%;" />
-        <engine:Label text="Label" name="GestureDetails" style="-unity-text-align: upper-center; margin-top: 15px;" />
-        <engine:Label text="Label" name="GestureType" style="border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; border-bottom-left-radius: 30px; -unity-text-align: upper-center; width: 30%; align-self: flex-end; margin-top: 40px;" />
+    <Style src="project://database/Assets/UI%20Toolkit/Gesture%20List%20Window/GestureContainerUSS.uss?fileID=7433441132597879392&amp;guid=572eeb54fa4e2fd4aa1b3691888e8d0c&amp;type=3#GestureContainerUSS" />
+    <engine:VisualElement name="GestureContainer" class="gesture-container">
+        <engine:VisualElement name="GestureImage" class="gesture-image" />
+        <engine:Label text="Label" name="GestureDetails" class="gesture-details" />
+        <engine:VisualElement name="GestureBottomHalfContainer" class="gesture-bottom-half-container">
+            <engine:Button name="DeleteGestureButton" class="delete-gesture-button" />
+            <engine:Label text="Label" name="GestureType" class="gesture-type" />
+        </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

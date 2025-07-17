@@ -1,4 +1,0 @@
-.unity-scroll-view__content-container {
-    flex-direction: row;
-    flex-wrap: wrap;
-}
