@@ -2,15 +2,16 @@
     <Style src="project://database/Assets/UI%20Toolkit/Create%20a%20Gesture%20Window/CreatingGestureWindowUSS.uss?fileID=7433441132597879392&amp;guid=4b23470200e43a14f9b20e3fd6ff3e40&amp;type=3#CreatingGestureWindowUSS" />
     <Style src="project://database/Assets/UI%20Toolkit/window.uss?fileID=7433441132597879392&amp;guid=14e1d9d7fd525284290419e722cdb958&amp;type=3#window" />
     <engine:VisualElement name="EditorWindow">
-        <engine:VisualElement name="Header" style="flex-grow: 1;">
+        <engine:VisualElement name="Header">
             <engine:Label name="TitleLabel" class="title-label" />
             <engine:VisualElement name="logo" class="logo" style="margin-top: 0;" />
             <engine:Label name="MessageLabel" class="error-text" />
-            <engine:VisualElement name="HorizontalContainer" class="horizontal-container">
-                <engine:Button text="Take Image" name="TakeImageButton" class="take-image-btn create-gesture-buttons" />
-                <engine:VisualElement name="SavingGestureContainer" class="save-gesture-container" style="flex-direction: row; width: 404px;">
-                    <engine:Button text="Save Image" name="SaveGestureButton" class="take-image-btn create-gesture-buttons" />
-                    <engine:TextField label="Gesture Name" name="SaveGestureTextField" class="save-gesture-text-field" style="width: 75%;" />
+            <engine:VisualElement name="HorizontalContainer" class="horizontal-container" style="width: 35%; margin-left: 280px;">
+                <engine:Button text="Take Image" name="TakeImageButton" class="create-gesture-buttons" />
+                <engine:VisualElement name="SavingGestureContainer" class="saving-gesture-container">
+                    <engine:Button text="Save Image" name="SaveGestureButton" class="create-gesture-buttons" />
+                    <engine:TextField label="Gesture Name" name="SaveGestureTextField" class="save-gesture-text-field" />
+                    <engine:TextField label="Category" name="GestureCategoryTextField" class="gesture-category-text-field" />
                 </engine:VisualElement>
             </engine:VisualElement>
             <engine:DropdownField label="Cameras" name="CameraDropdown" class="camera-dropdown" />

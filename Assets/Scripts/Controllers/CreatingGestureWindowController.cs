@@ -37,6 +37,7 @@ namespace NOVA.Scripts
         private VisualElement root;
         private VisualElement savingGestureContainer;
         private TextField savingGestureTextField;
+        private TextField gestureCategoryTextfield;
 
         /* Camera Settings */
         private WebCamTexture webCamTexture;
@@ -84,6 +85,7 @@ namespace NOVA.Scripts
 
             savingGestureContainer = root.Q<VisualElement>("SavingGestureContainer");
             savingGestureTextField = root.Q<TextField>("SaveGestureTextField");
+            gestureCategoryTextfield = root.Q<TextField>("GestureCategoryTextField");
             savingGestureContainer.style.display = DisplayStyle.None; // Ensure the container is hidden until an image is taken
             saveGestureButton = root.Q<Button>("SaveGestureButton");
             saveGestureButton.RegisterCallback<ClickEvent>(evt => SaveGesture(evt));
@@ -221,10 +223,17 @@ namespace NOVA.Scripts
         private void SaveGesture(ClickEvent evt)
         {
             string gestureName = savingGestureTextField.value;
+            string gestureCategory = gestureCategoryTextfield.value;
 
             if (string.IsNullOrEmpty(gestureName))
             {
                 EditorTextHandler.DisplayMessage("Please enter a name for the gesture", Color.red, messageText);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(gestureCategory))
+            {
+                EditorTextHandler.DisplayMessage("Please enter a category for the gesture", Color.red, messageText);
                 return;
             }
 
@@ -247,7 +256,7 @@ namespace NOVA.Scripts
                 GestureName = gestureName,
                 IsPredefined = false,
                 ImageName = $"{gestureName}.{ext.GetExtension()}",
-                CategoryName = "Placeholder",
+                CategoryName = gestureCategory,
                 Landmarks = this.Landmarks
             };
 
