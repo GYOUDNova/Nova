@@ -71,7 +71,7 @@ namespace NOVA.Scripts
             CreatingGestureWindowController createGestureController = GetWindow<CreatingGestureWindowController>();
             createGestureController.titleContent = new GUIContent(WindowName);
             createGestureController.maxSize = new Vector2(HelperConstants.MinWindowHeight, HelperConstants.MinWindowLength);
-            createGestureController.minSize = createGestureController.maxSize;
+            createGestureController.minSize = new Vector2(HelperConstants.MinWindowHeight + 1, HelperConstants.MinWindowLength + 1);
         }
 
         /// <summary>
@@ -126,6 +126,7 @@ namespace NOVA.Scripts
                     EditorTextHandler.DisplayMessage("Gesture data received. Please name the gesture and then save", Color.green, messageText);
                     savingGestureContainer.style.display = DisplayStyle.Flex;
                     saveGestureButton.style.display = DisplayStyle.Flex;
+                    takeImageButton.style.display = DisplayStyle.None;
                 }
                 else
                 {
@@ -212,12 +213,6 @@ namespace NOVA.Scripts
             }
         }
 
-        private IEnumerator ClearSuccessMessage(float time)
-        {
-            yield return new EditorWaitForSeconds(time);
-            ResetSaveContainer();
-        }
-
         private void SaveGesture(ClickEvent evt)
         {
             string gestureName = savingGestureTextField.value;
@@ -272,8 +267,10 @@ namespace NOVA.Scripts
             var gestureInfo = dbHandler.GetGestureInfo(gestureName);
             if (gestureInfo.Equals(qgi))
             {
+                saveGestureButton.style.display = DisplayStyle.None;
+                savingGestureContainer.style.display = DisplayStyle.None;
+                takeImageButton.style.display = DisplayStyle.Flex;
                 EditorTextHandler.DisplayMessage($"{gestureName} was successfully created! Check Gesture List for more info", Color.green, messageText);
-                EditorCoroutineUtility.StartCoroutine(ClearSuccessMessage(10f), this);
             }
             else
             {
