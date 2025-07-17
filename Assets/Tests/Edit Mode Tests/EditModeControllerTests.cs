@@ -3,7 +3,6 @@ using NOVA.Scripts;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine.TestTools;
-
 using UnityEngine.UIElements;
 
 
@@ -25,29 +24,6 @@ public class EditModeControllerTests
 
         //Assert
         Assert.IsTrue(result);
-    }
-
-    /// <summary>
-    /// Test ensures that when the Add a Combination button is clicked in the editor, that the menu opens
-    /// </summary>
-    [UnityTest]
-    public IEnumerator EditorWindow_OpenAddCombinationWindow_SubWindowOpens()
-    {
-        //Arrange
-        Button button = new();
-        bool buttonClicked = false;
-        var mainWindow = EditorWindow.GetWindow<MainEditorWindowController>();
-        var subMenu = EditorWindow.GetWindow<AddingCombinationWindowController>();
-
-        //Act   
-        button = mainWindow.rootVisualElement.Q<Button>("AddACombinationButton");
-
-        TestUtils.ClickOnButton(button);
-        buttonClicked = EditorWindow.HasOpenInstances<AddingCombinationWindowController>();
-        yield return null;
-
-        //Assert
-        Assert.IsTrue(buttonClicked);
     }
 
     /// <summary>

@@ -19,12 +19,6 @@
                 </engine:VisualElement>
                 <engine:VisualElement name="ButtonBottom" class="button-bottom" />
             </engine:Button>
-            <engine:Button name="AddACombinationButton" class="button menu-button">
-                <engine:VisualElement name="ButtonTop" class="button-top">
-                    <engine:Label text="Add a Combination" name="ButtonText" class="button-text" />
-                </engine:VisualElement>
-                <engine:VisualElement name="ButtonBottom" class="button-bottom" />
-            </engine:Button>
             <engine:Button name="SettingsCalibrationButton" class="button menu-button">
                 <engine:VisualElement name="ButtonTop" class="button-top">
                     <engine:Label text="Settings/Calibration" name="ButtonText" class="button-text" />

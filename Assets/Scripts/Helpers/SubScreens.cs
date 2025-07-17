@@ -4,7 +4,6 @@ namespace NOVA.Scripts
     {
         CreateGesture = 0,
         GestureList = 1,
-        AddingCombination = 2,
-        SettingsCalibration = 3
+        SettingsCalibration = 2
     }
 }

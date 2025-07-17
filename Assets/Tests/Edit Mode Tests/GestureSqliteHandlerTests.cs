@@ -40,7 +40,7 @@ public class GestureSqliteHandlerTests
     [TearDown]
     public void TearDown()
     {
-        // Cleanup after each test
+        // Remove existing data
         Cleanup();
     }
 
@@ -512,5 +512,8 @@ public class GestureSqliteHandlerTests
                 File.Delete(metaPath);
             }
         }
+
+        // Release handler instance (if it exists)
+        GestureSqliteHandler.ReleaseInstance();
     }
 }

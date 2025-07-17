@@ -241,6 +241,7 @@ namespace NOVA.Scripts
                         GestureDataId = gestureDataId
                     };
                     conn.Insert(customGesture);
+
                     gestureId = customGesture.CustomGestureId;
                 }
 
@@ -276,6 +277,22 @@ namespace NOVA.Scripts
             }
         }
 
+        public void DeleteConfiguration(string itemName)
+        {
+            lock (lockObject)
+            {
+                using var conn = GetSqliteConnection();
+                var config = conn.Table<Configuration>().FirstOrDefault(c => c.Name == itemName);
+
+                if (config is null)
+                {
+                    throw new ItemNotFoundException($"No configuration with name: {itemName} exists");
+                }
+
+                conn.Delete(config);
+            }
+        }
+
         public Configuration GetActiveConfiguration()
         {
             lock (lockObject)
@@ -291,6 +308,26 @@ namespace NOVA.Scripts
                 }
 
                 return config;
+            }
+        }
+
+        public void SetActivePropertyToFalse(Configuration currActiveConfig)
+        {
+            lock (lockObject)
+            {
+                using var conn = GetSqliteConnection();
+                currActiveConfig.Active = false;
+                conn.Update(currActiveConfig);
+            }
+        }
+
+        public void SetActivePropertyToTrue(Configuration toBeActiveConfig)
+        {
+            lock (lockObject)
+            {
+                using var conn = GetSqliteConnection();
+                toBeActiveConfig.Active = true;
+                conn.Update(toBeActiveConfig);
             }
         }
 

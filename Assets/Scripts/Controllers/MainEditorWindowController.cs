@@ -58,9 +58,6 @@ namespace NOVA.Scripts
             creatingGestureButton = root.Q<Button>("CreateAGestureButton");
             creatingGestureButton.RegisterCallback<ClickEvent>(evt => OpenSubScreen(evt, SubScreen.CreateGesture));
 
-            addingCombinationButton = root.Q<Button>("AddACombinationButton");
-            addingCombinationButton.RegisterCallback<ClickEvent>(evt => OpenSubScreen(evt, SubScreen.AddingCombination));
-
             gestureListButton = root.Q<Button>("GestureListButton");
             gestureListButton.RegisterCallback<ClickEvent>(evt => OpenSubScreen(evt, SubScreen.GestureList));
 
@@ -74,9 +71,6 @@ namespace NOVA.Scripts
             {
                 case SubScreen.CreateGesture:
                     CreatingGestureWindowController.SetupAndShowWindow();
-                    break;
-                case SubScreen.AddingCombination:
-                    AddingCombinationWindowController.SetupAndShowWindow();
                     break;
                 case SubScreen.GestureList:
                     GestureListWindowController.SetupAndShowWindow();
