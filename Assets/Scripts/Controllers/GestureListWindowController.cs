@@ -34,6 +34,7 @@ namespace NOVA.Scripts
         public void CreateGUI()
         {
             root = gestureListScreenAsset.CloneTree();
+            rootVisualElement.Clear(); // Ensure the root is cleared before adding new content
             rootVisualElement.Add(root);
 
             Label label = root.Q<Label>("TitleLabel");
@@ -56,6 +57,8 @@ namespace NOVA.Scripts
                 VisualElement card = gestureCard.CloneTree();
                 Label cardLabel = card.Q<Label>("GestureDetails");
                 Label typeLabel = card.Q<Label>("GestureType");
+                Button deleteGestureButton = card.Q<Button>("DeleteGestureButton");
+                deleteGestureButton.clicked += () => OnDeleteButtonClick(gesture.GestureName);
                 cardLabel.text = $"{gesture.GestureName} of category {gesture.Category.Name}";
 
                 if (gesture.Data.IsPredefined)
@@ -84,6 +87,26 @@ namespace NOVA.Scripts
                 }
 
                 scrollView.Add(card);
+            }
+        }
+
+        private void OnDeleteButtonClick(string gestureName)
+        {
+            var gestureSqliteHandler = GestureSqliteHandler.Instance();
+
+            try
+            {
+                gestureSqliteHandler.DeleteGesture(gestureName);
+                Debug.Log($"Gesture {gestureName} deleted successfully.");
+                CreateGUI();
+            }
+            catch (ItemNotFoundException ex)
+            {
+                Debug.LogError($"Failed to delete gesture {gestureName}: {ex.Message}");
+            }
+            catch (DatabaseException ex)
+            {
+                Debug.LogError($"Database error while deleting gesture {gestureName}: {ex.Message}");
             }
         }
     }

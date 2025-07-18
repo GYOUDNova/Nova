@@ -490,6 +490,84 @@ public class GestureSqliteHandlerTests
         Assert.IsTrue(allGestures.Count >= 2, "Expected at least two gestures to be retrieved.");
     }
 
+    // Test that checks if DeleteGesture works, creates a gesture and all of its data (image, landmarks, distances, etc.) and then deletes it by calling DeleteGesture(name)
+    [Test]
+    public void DeleteGesture_ValidGesture_DeletesAllRelatedData()
+    {
+        // Arrange
+        var gestureData = new GestureData
+        {
+            Name = "Delete Test Gesture",
+            GestureImageName = "delete_test_image",
+            GestureCategoryId = 1, // Assuming the category ID is 1
+            IsPredefined = true
+        };
+
+        handler.AddItemByName(gestureData, gestureData.Name);
+
+        var predefinedGesture = new PredefinedGesture
+        {
+            GestureDataId = gestureData.GestureDataId,
+        };
+
+        handler.AddItem(predefinedGesture);
+
+        var gestureImage = new GestureImage
+        {
+            Name = gestureData.GestureImageName,
+            FileExtension = GestureImageExtension.Png,
+            GestureId = predefinedGesture.PredefinedGestureId,
+            IsPredefined = gestureData.IsPredefined
+        };
+
+        handler.AddItemByName(gestureImage, gestureImage.Name);
+
+        var landmark1 = new Landmark
+        {
+            LandmarkIndex = 1,
+            X = 0.1f,
+            Y = 0.2f,
+            Z = 0.3f,
+            GestureId = predefinedGesture.PredefinedGestureId,
+            IsPredefined = gestureData.IsPredefined
+        };
+
+        handler.AddItem(landmark1);
+        var landmark2 = new Landmark
+        {
+            LandmarkIndex = 2,
+            X = 0.4f,
+            Y = 0.5f,
+            Z = 0.6f,
+            GestureId = predefinedGesture.PredefinedGestureId,
+            IsPredefined = gestureData.IsPredefined
+        };
+
+        handler.AddItem(landmark2);
+
+        var distance = new LandmarkDistance
+        {
+            GestureId = predefinedGesture.PredefinedGestureId,
+            IsPredefined = gestureData.IsPredefined,
+            Distance = 0.5f,
+            LandmarkId = landmark1.LandmarkId,
+            OtherLandmarkId = landmark2.LandmarkId
+        };
+
+        handler.AddItem(distance);
+
+        // Act
+        handler.DeleteGesture(gestureData.Name);
+
+        // Assert that all related data is deleted
+        Assert.Throws<ItemNotFoundException>(() => handler.GetObjectByName<GestureData>(gestureData.Name), "GestureData was not deleted.");
+        Assert.Throws<ItemNotFoundException>(() => handler.GetObjectById<PredefinedGesture>(predefinedGesture.PredefinedGestureId), "PredefinedGesture was not deleted.");
+        Assert.Throws<ItemNotFoundException>(() => handler.GetObjectByName<GestureImage>(gestureImage.Name), "GestureImage was not deleted.");
+        Assert.Throws<ItemNotFoundException>(() => handler.GetObjectById<Landmark>(landmark1.LandmarkId), "Landmark 1 was not deleted.");
+        Assert.Throws<ItemNotFoundException>(() => handler.GetObjectById<Landmark>(landmark2.LandmarkId), "Landmark 2 was not deleted.");
+        Assert.Throws<ItemNotFoundException>(() => handler.GetObjectById<LandmarkDistance>(distance.LandmarkDistanceId), "LandmarkDistance was not deleted.");
+    }
+
     // Utility methods
 
     private void Cleanup()
@@ -498,8 +576,6 @@ public class GestureSqliteHandlerTests
         {
             handler = null;
         }
-
-        GestureSqliteHandler.ReleaseInstance();
 
         if (Directory.Exists(gestureAssetsPath))
         {

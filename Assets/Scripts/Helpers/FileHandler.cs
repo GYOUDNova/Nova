@@ -62,5 +62,25 @@ namespace NOVA.Scripts
             texture.LoadImage(fileData);
             return texture;
         }
+
+        // Delete image from resources (deletes file.extension and file.extension.meta file)
+        public static void DeleteImageFromResources(string fileName, GestureImageExtension extension)
+        {
+            string resourcesDir = Path.Combine(Application.dataPath, HelperConstants.ResourcesDirectory);
+            string fileWithExtension = $"{fileName}.{extension.GetExtension()}";
+            string filePath = Path.Combine(resourcesDir, fileWithExtension);
+            string metaFilePath = $"{filePath}.meta";
+
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+                File.Delete(metaFilePath);
+                Debug.Log($"Deleted image {fileWithExtension} from resources.");
+            }
+            else
+            {
+                Debug.LogWarning($"File {fileWithExtension} does not exist in resources.");
+            }
+        }
     }
 }
