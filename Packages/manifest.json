@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.gilzoide.sqlite-net": "https://github.com/gilzoide/unity-sqlite-net.git",
-    "com.github.homuler.mediapipe": "https://github.com/GYOUDNova/NOVA-Mediapipe-Package.git",
+    "com.github.homuler.mediapipe": "https://github.com/GYOUDNova/NOVA-Mediapipe-Package.git#v0.16.2",
     "com.unity.ai.navigation": "2.0.6",
     "com.unity.collab-proxy": "2.6.0",
     "com.unity.editorcoroutines": "1.0.0",
