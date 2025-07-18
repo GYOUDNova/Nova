@@ -37,6 +37,7 @@ namespace NOVA.Scripts
         private VisualElement root;
         private VisualElement savingGestureContainer;
         private TextField savingGestureTextField;
+        private TextField gestureCategoryTextfield;
 
         /* Camera Settings */
         private WebCamTexture webCamTexture;
@@ -71,7 +72,7 @@ namespace NOVA.Scripts
             CreatingGestureWindowController createGestureController = GetWindow<CreatingGestureWindowController>();
             createGestureController.titleContent = new GUIContent(WindowName);
             createGestureController.maxSize = new Vector2(HelperConstants.MinWindowHeight, HelperConstants.MinWindowLength);
-            createGestureController.minSize = createGestureController.maxSize;
+            createGestureController.minSize = new Vector2(HelperConstants.MinWindowHeight + 1, HelperConstants.MinWindowLength + 1);
         }
 
         /// <summary>
@@ -84,6 +85,7 @@ namespace NOVA.Scripts
 
             savingGestureContainer = root.Q<VisualElement>("SavingGestureContainer");
             savingGestureTextField = root.Q<TextField>("SaveGestureTextField");
+            gestureCategoryTextfield = root.Q<TextField>("GestureCategoryTextField");
             savingGestureContainer.style.display = DisplayStyle.None; // Ensure the container is hidden until an image is taken
             saveGestureButton = root.Q<Button>("SaveGestureButton");
             saveGestureButton.RegisterCallback<ClickEvent>(evt => SaveGesture(evt));
@@ -126,6 +128,7 @@ namespace NOVA.Scripts
                     EditorTextHandler.DisplayMessage("Gesture data received. Please name the gesture and then save", Color.green, messageText);
                     savingGestureContainer.style.display = DisplayStyle.Flex;
                     saveGestureButton.style.display = DisplayStyle.Flex;
+                    takeImageButton.style.display = DisplayStyle.None;
                 }
                 else
                 {
@@ -212,19 +215,20 @@ namespace NOVA.Scripts
             }
         }
 
-        private IEnumerator ClearSuccessMessage(float time)
-        {
-            yield return new EditorWaitForSeconds(time);
-            ResetSaveContainer();
-        }
-
         private void SaveGesture(ClickEvent evt)
         {
             string gestureName = savingGestureTextField.value;
+            string gestureCategory = gestureCategoryTextfield.value;
 
             if (string.IsNullOrEmpty(gestureName))
             {
                 EditorTextHandler.DisplayMessage("Please enter a name for the gesture", Color.red, messageText);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(gestureCategory))
+            {
+                EditorTextHandler.DisplayMessage("Please enter a category for the gesture", Color.red, messageText);
                 return;
             }
 
@@ -247,7 +251,7 @@ namespace NOVA.Scripts
                 GestureName = gestureName,
                 IsPredefined = false,
                 ImageName = gestureName,
-                CategoryName = "Placeholder",
+                CategoryName = gestureCategory,
                 Landmarks = this.Landmarks
             };
 
@@ -272,8 +276,10 @@ namespace NOVA.Scripts
             var gestureInfo = dbHandler.GetGestureInfo(gestureName);
             if (gestureInfo.Equals(qgi))
             {
+                saveGestureButton.style.display = DisplayStyle.None;
+                savingGestureContainer.style.display = DisplayStyle.None;
+                takeImageButton.style.display = DisplayStyle.Flex;
                 EditorTextHandler.DisplayMessage($"{gestureName} was successfully created! Check Gesture List for more info", Color.green, messageText);
-                EditorCoroutineUtility.StartCoroutine(ClearSuccessMessage(10f), this);
             }
             else
             {

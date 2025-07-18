@@ -1,13 +1,13 @@
 .horizontal-container {
     flex-direction: row;
-    width: 50%;
+    width: 35%;
     margin-left: 320px;
 }
 
 .error-text {
     color: rgb(255, 0, 0);
     margin-top: 3px;
-    margin-left: 320px;
+    margin-left: 280;
 }
 
 .save-gesture-text-field {
@@ -27,4 +27,16 @@
 .camera-dropdown {
     width: 50%;
     margin-left: 320px;
+}
+
+.gesture-category-text-field{
+    width: 75%;
+}
+
+.saving-gesture-container{
+    flex-direction: row;
+}
+
+.save-gesture-text-field{
+    width: 75%;
 }

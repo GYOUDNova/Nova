@@ -25,3 +25,7 @@
     height: 600px;
     align-self: center;
 }
+
+.gesture-category-text-field {
+    width: 75%;
+}
