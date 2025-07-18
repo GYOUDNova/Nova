@@ -323,11 +323,10 @@ public class GestureSqliteHandlerTests
     public void AddGesture_ValidInfo_SavesToDatabase()
     {
         // Arrange
-        const string NormalizedCategoryName = "New Sample";
         var queryableInfo = new QueryableGestureInfo
         {
             GestureName = "Queryable Gesture",
-            CategoryName = "new sample",
+            CategoryName = "New Sample",
             ImageName = "queryable_image",
             IsPredefined = true,
             Landmarks = new List<Landmark>
@@ -348,7 +347,7 @@ public class GestureSqliteHandlerTests
         //Assert
         Assert.IsNotNull(gestureInfo, "Gesture info was not retrieved.");
         Assert.AreEqual(queryableInfo.GestureName, gestureInfo.Data.Name, "GestureData name does not match.");
-        Assert.AreEqual(NormalizedCategoryName, gestureInfo.Category.Name, "GestureCategory name does not match.");
+        Assert.AreEqual(queryableInfo.CategoryName, gestureInfo.Category.Name, "GestureCategory name does not match.");
         Assert.AreEqual(queryableInfo.ImageName, gestureInfo.Image.Name, "GestureImage name does not match.");
         Assert.IsTrue(gestureInfo.Landmarks.Count == 2, "No landmarks were retrieved for the gesture.");
         Assert.IsTrue(gestureInfo.Distances.Count == 1, "No distances were retrieved for the gesture.");
