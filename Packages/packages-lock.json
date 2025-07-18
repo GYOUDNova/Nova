@@ -8,13 +8,14 @@
       "hash": "2851fb50b5a4e13ae09733ac6dabc53654cb536a"
     },
     "com.github.homuler.mediapipe": {
-      "version": "file:com.github.homuler.mediapipe-0.16.1.tgz",
+      "version": "https://github.com/GYOUDNova/NOVA-Mediapipe-Package.git",
       "depth": 0,
-      "source": "local-tarball",
+      "source": "git",
       "dependencies": {
         "com.unity.ugui": "1.0.0",
         "com.unity.test-framework": "1.0.0"
-      }
+      },
+      "hash": "6faac567872942605098a944af1555c49be87568"
     },
     "com.unity.ai.navigation": {
       "version": "2.0.6",
