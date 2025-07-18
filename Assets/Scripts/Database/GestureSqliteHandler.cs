@@ -8,14 +8,13 @@ namespace NOVA.Scripts
     {
         // Utility constants
         private const string GesturesDatabaseName = "Gestures.db";
-        private const string GestureAssetsDirName = "GestureAssets";
 
         private static GestureSqliteHandler instance; // Singleton instance
 
         private GestureSqliteHandler(string databaseName)
             : base(databaseName)
         {
-            string gestureAssetsDir = Path.Combine(Application.streamingAssetsPath, GestureAssetsDirName);
+            string gestureAssetsDir = Path.Combine(Application.streamingAssetsPath, HelperConstants.GestureAssetsDirName);
             Initialize(gestureAssetsDir);
         }
 
