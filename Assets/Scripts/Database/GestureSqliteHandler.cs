@@ -101,6 +101,44 @@ namespace NOVA.Scripts
             }
         }
 
+        // Method to retrieve all gestures from the database, limited to only UI information
+        public List<GestureInfo> GetAllUIGestures()
+        {
+            lock (lockObject)
+            {
+                using var conn = GetSqliteConnection();
+
+                // Retrieve all GestureData objects
+                var gestureDataList = conn.Table<GestureData>().ToList();
+                var gestureInfos = new List<GestureInfo>();
+
+                foreach (var gestureData in gestureDataList)
+                {
+                    var category = conn.Get<GestureCategory>(gestureData.GestureCategoryId);
+                    var image = conn.Get<GestureImage>(gestureData.GestureImageName);
+
+                    /*
+                     * The only information we need for the UI is:
+                     * - Gesture Name
+                     * - Category
+                     * - Image (location to fetch the image from the assets)
+                     * - GestureData to retrieve other properties (like IsPredefined)
+                     *
+                    */
+
+                    gestureInfos.Add(new GestureInfo
+                    {
+                        GestureName = gestureData.Name,
+                        Category = category,
+                        Image = image,
+                        Data = gestureData
+                    });
+                }
+
+                return gestureInfos;
+            }
+        }
+
         // Method to retrieve all the information about a gesture by its name
         public GestureInfo GetGestureInfo(string gestureName)
         {
@@ -252,6 +290,63 @@ namespace NOVA.Scripts
                 }
 
                 conn.Delete(config);
+            }
+        }
+
+        // Public method to delete a gesture by its name
+        public void DeleteGesture(string gestureName)
+        {
+            lock (lockObject)
+            {
+                using var conn = GetSqliteConnection();
+
+                // Retrieve the GestureData object by name
+                var gestureData = conn.Table<GestureData>().FirstOrDefault(g => g.Name == gestureName);
+
+                if (gestureData == null)
+                {
+                    throw new ItemNotFoundException($"No gesture with name: {gestureName} exists");
+                }
+
+                int gestureID;
+
+                // Retrieve the entire gesture object (Predefined or Custom) based on the IsPredefined flag, keep the ID for linking
+
+                if (gestureData.IsPredefined)
+                {
+                    var predefinedGesture = conn.Table<PredefinedGesture>().FirstOrDefault(pg => pg.GestureDataId == gestureData.GestureDataId);
+
+                    if (predefinedGesture == null)
+                    {
+                        throw new ItemNotFoundException($"No predefined gesture with name: {gestureName} exists");
+                    }
+
+                    gestureID = predefinedGesture.PredefinedGestureId;
+                    conn.Delete(predefinedGesture);
+                }
+                else
+                {
+                    var customGesture = conn.Table<CustomGesture>().FirstOrDefault(cg => cg.GestureDataId == gestureData.GestureDataId);
+
+                    if (customGesture == null)
+                    {
+                        throw new ItemNotFoundException($"No custom gesture with name: {gestureName} exists");
+                    }
+
+                    gestureID = customGesture.CustomGestureId;
+                    conn.Delete(customGesture);
+                }
+
+                // Delete the image file before deleting the record
+                var gestureImage = conn.Table<GestureImage>().FirstOrDefault(gi => gi.GestureId == gestureID);
+                FileHandler.DeleteImageFromResources(gestureImage.Name, gestureImage.FileExtension);
+
+                // Delete everything associated with the gesture
+                conn.Delete<GestureData>(gestureData.GestureDataId);
+                conn.Delete<GestureImage>(gestureData.GestureImageName);
+                conn.Table<Landmark>().Delete(l => l.GestureId == gestureID && l.IsPredefined == gestureData.IsPredefined);
+                conn.Table<LandmarkDistance>().Delete(ld => ld.GestureId == gestureID && ld.IsPredefined == gestureData.IsPredefined);
+
             }
         }
 
