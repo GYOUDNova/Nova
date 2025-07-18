@@ -197,9 +197,7 @@ namespace NOVA.Scripts
             {
                 using var conn = GetSqliteConnection();
 
-                // Create the GestureData obj
-
-                // First, create the category if it doesn't exist
+                // Create the category if it doesn't exist
                 var category = conn.Table<GestureCategory>().FirstOrDefault(c => c.Name == qgi.CategoryName);
                 if (category == null)
                 {

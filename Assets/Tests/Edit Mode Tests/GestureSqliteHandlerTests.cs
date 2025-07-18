@@ -323,11 +323,12 @@ public class GestureSqliteHandlerTests
     public void AddGesture_ValidInfo_SavesToDatabase()
     {
         // Arrange
+        const string NormalizedCategoryName = "New Sample";
         var queryableInfo = new QueryableGestureInfo
         {
             GestureName = "Queryable Gesture",
-            CategoryName = "New Sample",
-            ImageName = "queryable_image.png",
+            CategoryName = "new sample",
+            ImageName = "queryable_image",
             IsPredefined = true,
             Landmarks = new List<Landmark>
             {
@@ -347,7 +348,7 @@ public class GestureSqliteHandlerTests
         //Assert
         Assert.IsNotNull(gestureInfo, "Gesture info was not retrieved.");
         Assert.AreEqual(queryableInfo.GestureName, gestureInfo.Data.Name, "GestureData name does not match.");
-        Assert.AreEqual(queryableInfo.CategoryName, gestureInfo.Category.Name, "GestureCategory name does not match.");
+        Assert.AreEqual(NormalizedCategoryName, gestureInfo.Category.Name, "GestureCategory name does not match.");
         Assert.AreEqual(queryableInfo.ImageName, gestureInfo.Image.Name, "GestureImage name does not match.");
         Assert.IsTrue(gestureInfo.Landmarks.Count == 2, "No landmarks were retrieved for the gesture.");
         Assert.IsTrue(gestureInfo.Distances.Count == 1, "No distances were retrieved for the gesture.");
@@ -440,7 +441,6 @@ public class GestureSqliteHandlerTests
         Assert.AreEqual(threadCount, successCount, $"Expected all {threadCount} gestures to be added, but {threadCount - successCount} failed. Failed threads: {string.Join(", ", failedThreads)}");
     }
 
-    // generate a test case that tests the GetAllUIGestures method, this will create a few gestures and then retrieve all of their info
     [Test]
     public void GetAllUIGestures_ReturnsAllGestures()
     {
@@ -490,7 +490,6 @@ public class GestureSqliteHandlerTests
         Assert.IsTrue(allGestures.Count >= 2, "Expected at least two gestures to be retrieved.");
     }
 
-    // Test that checks if DeleteGesture works, creates a gesture and all of its data (image, landmarks, distances, etc.) and then deletes it by calling DeleteGesture(name)
     [Test]
     public void DeleteGesture_ValidGesture_DeletesAllRelatedData()
     {
