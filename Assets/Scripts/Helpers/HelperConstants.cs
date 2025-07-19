@@ -8,5 +8,6 @@ namespace NOVA.Scripts
         public const float MinWindowLength = 720f;
 
         public const string ResourcesDirectory = "Resources";
+        public const string GestureAssetsDirName = "GestureAssets";
     }
 }

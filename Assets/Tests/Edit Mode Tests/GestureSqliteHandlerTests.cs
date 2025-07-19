@@ -327,7 +327,7 @@ public class GestureSqliteHandlerTests
         {
             GestureName = "Queryable Gesture",
             CategoryName = "New Sample",
-            ImageName = "queryable_image.png",
+            ImageName = "queryable_image",
             IsPredefined = true,
             Landmarks = new List<Landmark>
             {
@@ -440,7 +440,6 @@ public class GestureSqliteHandlerTests
         Assert.AreEqual(threadCount, successCount, $"Expected all {threadCount} gestures to be added, but {threadCount - successCount} failed. Failed threads: {string.Join(", ", failedThreads)}");
     }
 
-    // generate a test case that tests the GetAllUIGestures method, this will create a few gestures and then retrieve all of their info
     [Test]
     public void GetAllUIGestures_ReturnsAllGestures()
     {
@@ -490,7 +489,6 @@ public class GestureSqliteHandlerTests
         Assert.IsTrue(allGestures.Count >= 2, "Expected at least two gestures to be retrieved.");
     }
 
-    // Test that checks if DeleteGesture works, creates a gesture and all of its data (image, landmarks, distances, etc.) and then deletes it by calling DeleteGesture(name)
     [Test]
     public void DeleteGesture_ValidGesture_DeletesAllRelatedData()
     {

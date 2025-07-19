@@ -92,10 +92,12 @@ namespace NOVA.Scripts
             saveGestureButton.style.display = DisplayStyle.None; // Ensure the button is hidden until an image is taken
             dropdownField = root.Q<DropdownField>(DropdownMenuName);
             dropdownField.RegisterValueChangedCallback(evt => OnCameraSelected(evt.newValue));
+
             foreach (var device in WebCamTexture.devices)
             {
                 dropdownField.choices.Add(device.name);
             }
+
             messageText = root.Q<Label>(MessageLabelName);
 
             webCamTexture = new WebCamTexture(HelperConstants.CameraWidth, HelperConstants.CameraHeight);
@@ -231,6 +233,10 @@ namespace NOVA.Scripts
                 EditorTextHandler.DisplayMessage("Please enter a category for the gesture", Color.red, messageText);
                 return;
             }
+
+            // Normalize the gesture name and category to Title Case (e.g., "My Gesture")
+            gestureName = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(gestureName.ToLowerInvariant());
+            gestureCategory = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(gestureCategory.ToLowerInvariant());
 
             var dbHandler = GestureSqliteHandler.Instance();
 
