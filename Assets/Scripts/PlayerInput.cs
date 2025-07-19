@@ -31,7 +31,7 @@ namespace NOVA.Scripts
             }
         }
 
-        private void Jump()
+        public void Jump()
         {
             rb.AddForce(Vector3.up * 200);
             Debug.Log("Keyboard Input: Jumping!");

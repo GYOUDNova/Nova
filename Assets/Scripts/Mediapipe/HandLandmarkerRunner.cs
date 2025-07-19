@@ -17,6 +17,7 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
     public class HandLandmarkerRunner : VisionTaskApiRunner<HandLandmarker>
     {
         [SerializeField] private HandLandmarkerResultAnnotationController _handLandmarkerResultAnnotationController;
+        [SerializeField] private GestureInputController gestureInputController;
 
         private Experimental.TextureFramePool _textureFramePool;
 
@@ -196,7 +197,8 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
                 if (gesture != GestureRecognizer.NO_GESTURE)
                 {
                     Debug.Log($"Detected gesture: {gesture}");
-                    GestureEvent.TriggerGesture(gesture); // Trigger the gesture recognition event
+                    gestureInputController.ActivateGestureInput(gesture);
+                    //GestureEvent.TriggerGesture(gesture); // Trigger the gesture recognition event
                 }
                 else
                 {
