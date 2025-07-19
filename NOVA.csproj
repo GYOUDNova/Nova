@@ -68,9 +68,11 @@
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSourceProvider.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\RunningMode.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkDetectionConfigWindow.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\GestureInputMapping.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkDetectionConfig.cs" />
     <Compile Include="Assets\Scripts\Controllers\AddingCombinationWindowController.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\GestureRecognizer.cs" />
+    <Compile Include="Assets\Scripts\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Controllers\CreatingGestureWindowController.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkerRunner.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\Modal.cs" />
@@ -80,11 +82,11 @@
     <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\ModalContents.cs" />
     <Compile Include="Assets\Scripts\Helpers\TestUtils.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\Bootstrap.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\GestureManager.cs" />
     <Compile Include="Assets\Scripts\Helpers\InstallPreCommitHook.cs" />
     <Compile Include="Assets\Scripts\Controllers\GestureListWindowController.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\Screen.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\ImageSource.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\GestureEvent.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageReadMode.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\EnumExtension.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\VideoSource.cs" />

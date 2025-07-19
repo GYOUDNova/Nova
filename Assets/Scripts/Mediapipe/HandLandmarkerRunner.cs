@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Mediapipe.Tasks.Vision.Core;
 using Mediapipe.Tasks.Vision.HandLandmarker;
+using NOVA.Scripts;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -195,6 +196,7 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
                 if (gesture != GestureRecognizer.NO_GESTURE)
                 {
                     Debug.Log($"Detected gesture: {gesture}");
+                    GestureEvent.TriggerGesture(gesture); // Trigger the gesture recognition event
                 }
                 else
                 {
