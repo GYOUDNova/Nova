@@ -197,7 +197,11 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
                 if (gesture != GestureRecognizer.NO_GESTURE)
                 {
                     Debug.Log($"Detected gesture: {gesture}");
-                    gestureInputController.ActivateGestureInput(gesture);
+                    UnityMainThreadDispatcher.Enqueue(() =>
+                    {
+                        gestureInputController.AddGestureToChain(gesture);
+                    });
+                    //gestureInputController.ActivateGestureInput(gesture);
                     //GestureEvent.TriggerGesture(gesture); // Trigger the gesture recognition event
                 }
                 else

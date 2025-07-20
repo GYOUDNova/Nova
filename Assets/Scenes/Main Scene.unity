@@ -412,6 +412,7 @@ MonoBehaviour:
   screen: {fileID: 1124272301}
   runningMode: 0
   _handLandmarkerResultAnnotationController: {fileID: 1124272302}
+  _gestureInputController: {fileID: 819250327}
 --- !u!4 &819250325
 Transform:
   m_ObjectHideFlags: 0
@@ -453,7 +454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GestureDictionary:
     GestureInputs:
-    - GestureName: Open_Palm
+    - GestureName: Open Palm
       GestureEvent:
         m_PersistentCalls:
           m_Calls:
