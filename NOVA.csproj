@@ -71,11 +71,14 @@
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\RunningMode.cs" />
     <Compile Include="Assets\Scripts\Helpers\HelperConstants.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkDetectionConfigWindow.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\GestureInputMapping.cs" />
     <Compile Include="Assets\Scripts\Database\GestureImageExtension.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkDetectionConfig.cs" />
     <Compile Include="Assets\Scripts\Database\Exceptions\DatabaseException.cs" />
     <Compile Include="Assets\Scripts\Database\GestureData.cs" />
     <Compile Include="Assets\Scripts\Helpers\EditorTextHandler.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\GestureRecognizer.cs" />
+    <Compile Include="Assets\Scripts\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Helpers\FileHandler.cs" />
     <Compile Include="Assets\Scripts\Controllers\CreatingGestureWindowController.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkerRunner.cs" />
@@ -89,14 +92,17 @@
     <Compile Include="Assets\Scripts\Controllers\MainEditorWindowController.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\ModalContents.cs" />
     <Compile Include="Assets\Scripts\Helpers\TestUtils.cs" />
+    <Compile Include="Assets\Scripts\Helpers\ResetLocalState.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\Bootstrap.cs" />
     <Compile Include="Assets\Scripts\Helpers\InstallPreCommitHook.cs" />
     <Compile Include="Assets\Scripts\Controllers\GestureListWindowController.cs" />
     <Compile Include="Assets\Scripts\Database\Landmark.cs" />
     <Compile Include="Assets\Scripts\Database\GestureCategory.cs" />
+    <Compile Include="Assets\Scripts\Helpers\UnityMainThreadDispatcher.cs" />
     <Compile Include="Assets\Scripts\Database\CustomGesture.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\Screen.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\ImageSource.cs" />
+    <Compile Include="Assets\Scripts\Mediapipe\GestureEvent.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageReadMode.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\EnumExtension.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\VideoSource.cs" />
@@ -588,10 +594,6 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEditor.WebGL.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\PlaybackEngines\WebGLSupport\UnityEditor.WebGL.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
       <Private>False</Private>
@@ -621,7 +623,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>Library\PackageCache\com.github.homuler.mediapipe@7f48457ae94b\Runtime\Plugins\Protobuf\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>Library\PackageCache\com.github.homuler.mediapipe@b1121d7566e2\Runtime\Plugins\Protobuf\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
@@ -629,7 +631,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Google.Protobuf">
-      <HintPath>Library\PackageCache\com.github.homuler.mediapipe@7f48457ae94b\Runtime\Plugins\Protobuf\Google.Protobuf.dll</HintPath>
+      <HintPath>Library\PackageCache\com.github.homuler.mediapipe@b1121d7566e2\Runtime\Plugins\Protobuf\Google.Protobuf.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="log4netPlastic">
