@@ -26,6 +26,6 @@
     align-self: center;
 }
 
-.save-gesture-container {
-    display: none;
+.gesture-category-text-field {
+    width: 75%;
 }

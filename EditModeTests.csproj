@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Tests\Edit Mode Tests\EditModeControllerTests.cs" />
+    <Compile Include="Assets\Tests\Edit Mode Tests\GestureSqliteHandlerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Tests\Edit Mode Tests\Edit Mode Tests.asmdef" />

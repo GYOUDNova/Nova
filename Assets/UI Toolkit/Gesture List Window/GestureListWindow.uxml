@@ -6,5 +6,8 @@
             <engine:Label name="TitleLabel" class="title-label" />
             <engine:VisualElement name="logo" class="logo" />
         </engine:VisualElement>
+        <engine:VisualElement name="Body" style="flex-grow: 1;">
+            <engine:ScrollView name="ListOfGestures" style="align-items: flex-start;" />
+        </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

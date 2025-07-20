@@ -62,29 +62,44 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\WaitForResult.cs" />
+    <Compile Include="Assets\Scripts\Database\LandmarkDistance.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\StaticImageSource.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\GraphRunner.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\InferenceMode.cs" />
+    <Compile Include="Assets\Scripts\Database\Configuration.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSourceProvider.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\RunningMode.cs" />
+    <Compile Include="Assets\Scripts\Helpers\HelperConstants.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkDetectionConfigWindow.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\GestureInputMapping.cs" />
+    <Compile Include="Assets\Scripts\Database\GestureImageExtension.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkDetectionConfig.cs" />
-    <Compile Include="Assets\Scripts\Controllers\AddingCombinationWindowController.cs" />
+    <Compile Include="Assets\Scripts\Database\Exceptions\DatabaseException.cs" />
+    <Compile Include="Assets\Scripts\Database\GestureData.cs" />
+    <Compile Include="Assets\Scripts\Helpers\EditorTextHandler.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\GestureRecognizer.cs" />
     <Compile Include="Assets\Scripts\PlayerInput.cs" />
+    <Compile Include="Assets\Scripts\Helpers\FileHandler.cs" />
     <Compile Include="Assets\Scripts\Controllers\CreatingGestureWindowController.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkerRunner.cs" />
+    <Compile Include="Assets\Scripts\Database\SqliteHandler.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\Modal.cs" />
+    <Compile Include="Assets\Scripts\Database\GestureSqliteHandler.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\WebCamSource.cs" />
     <Compile Include="Assets\Scripts\Controllers\GestureInputController.cs" />
+    <Compile Include="Assets\Scripts\Database\RecognitionLog.cs" />
+    <Compile Include="Assets\Scripts\Database\GestureImage.cs" />
     <Compile Include="Assets\Scripts\Controllers\MainEditorWindowController.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\ModalContents.cs" />
     <Compile Include="Assets\Scripts\Helpers\TestUtils.cs" />
+    <Compile Include="Assets\Scripts\Helpers\ResetLocalState.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\Bootstrap.cs" />
     <Compile Include="Assets\Scripts\Helpers\InstallPreCommitHook.cs" />
     <Compile Include="Assets\Scripts\Controllers\GestureListWindowController.cs" />
+    <Compile Include="Assets\Scripts\Database\Landmark.cs" />
+    <Compile Include="Assets\Scripts\Database\GestureCategory.cs" />
     <Compile Include="Assets\Scripts\Helpers\UnityMainThreadDispatcher.cs" />
+    <Compile Include="Assets\Scripts\Database\CustomGesture.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\Screen.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\ImageSource.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\GestureEvent.cs" />
@@ -96,6 +111,7 @@
     <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\ModalButton.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\ImageSourceType.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\ImageSourceConfig.cs" />
+    <Compile Include="Assets\Scripts\Database\PredefinedGesture.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\TaskApiRunner.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\LegacySolutionRunner.cs" />
     <Compile Include="Assets\Scripts\Database\Entity.cs" />
@@ -607,7 +623,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>Library\PackageCache\com.github.homuler.mediapipe@7f48457ae94b\Runtime\Plugins\Protobuf\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>Library\PackageCache\com.github.homuler.mediapipe@b1121d7566e2\Runtime\Plugins\Protobuf\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
@@ -615,7 +631,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Google.Protobuf">
-      <HintPath>Library\PackageCache\com.github.homuler.mediapipe@7f48457ae94b\Runtime\Plugins\Protobuf\Google.Protobuf.dll</HintPath>
+      <HintPath>Library\PackageCache\com.github.homuler.mediapipe@b1121d7566e2\Runtime\Plugins\Protobuf\Google.Protobuf.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="log4netPlastic">
