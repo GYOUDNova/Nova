@@ -5,7 +5,10 @@
 // https://opensource.org/licenses/MIT.
 
 using System.Collections;
+using System.Collections.Generic;
+using Mediapipe.Tasks.Vision.Core;
 using Mediapipe.Tasks.Vision.HandLandmarker;
+using NOVA.Scripts;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -14,6 +17,7 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
     public class HandLandmarkerRunner : VisionTaskApiRunner<HandLandmarker>
     {
         [SerializeField] private HandLandmarkerResultAnnotationController _handLandmarkerResultAnnotationController;
+        [SerializeField] private GestureInputController gestureInputController;
 
         private Experimental.TextureFramePool _textureFramePool;
 
@@ -39,6 +43,7 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
             yield return AssetLoader.PrepareAssetAsync(config.ModelPath);
 
             var options = config.GetHandLandmarkerOptions(config.RunningMode == Tasks.Vision.Core.RunningMode.LIVE_STREAM ? OnHandLandmarkDetectionOutput : null);
+            Debug.Log(config.RunningMode);
             taskApi = HandLandmarker.CreateFromOptions(options, GpuManager.GpuResources);
             var imageSource = ImageSourceProvider.ImageSource;
 
@@ -56,6 +61,17 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
 
             // NOTE: The screen will be resized later, keeping the aspect ratio.
             screen.Initialize(imageSource);
+
+            var rawImage = screen.GetComponent<UnityEngine.UI.RawImage>();
+            if (rawImage != null)
+            {
+                rawImage.enabled = false; // Disables the webcam texture but keeps the GameObject active
+            }
+            else
+            {
+                Debug.LogWarning("No RawImage found on the screen object.");
+            }
+
             SetupAnnotationController(_handLandmarkerResultAnnotationController, imageSource);
 
             var transformationOptions = imageSource.GetTransformationOptions();
@@ -112,6 +128,8 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
                         req = textureFrame.ReadTextureAsync(imageSource.GetCurrentTexture(), flipHorizontally, flipVertically);
                         yield return waitUntilReqDone;
 
+                        // Print the landmark positions to the console log
+
                         if (req.hasError)
                         {
                             Debug.LogWarning($"Failed to read texture from the image source");
@@ -128,6 +146,7 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
                         if (taskApi.TryDetect(image, imageProcessingOptions, ref result))
                         {
                             _handLandmarkerResultAnnotationController.DrawNow(result);
+                            LogHandLandmarkPositions(result);
                         }
                         else
                         {
@@ -138,6 +157,7 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
                         if (taskApi.TryDetectForVideo(image, GetCurrentTimestampMillisec(), imageProcessingOptions, ref result))
                         {
                             _handLandmarkerResultAnnotationController.DrawNow(result);
+                            LogHandLandmarkPositions(result);
                         }
                         else
                         {
@@ -154,6 +174,64 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
         private void OnHandLandmarkDetectionOutput(HandLandmarkerResult result, Image image, long timestamp)
         {
             _handLandmarkerResultAnnotationController.DrawLater(result);
+            LogHandLandmarkPositions(result);
+        }
+
+        private void LogHandLandmarkPositions(HandLandmarkerResult result)
+        {
+            if (result.handLandmarks == null)
+            {
+                Debug.Log("No hand landmarks detected");
+                return;
+            }
+
+            for (int i = 0; i < result.handLandmarks.Count; i++)
+            {
+                var landmarks = result.handLandmarks[i];
+
+                // Convert from MediaPipe.Tasks.Containers.NormalizedLandmarks to MediaPipe.NormalizedLandmarkList
+                var landmarkList = ConvertToNormalizedLandmarkList(landmarks);
+
+                string gesture = GestureRecognizer.DetectGesture(landmarkList);
+
+                if (gesture != GestureRecognizer.NO_GESTURE)
+                {
+                    Debug.Log($"Detected gesture: {gesture}");
+                    UnityMainThreadDispatcher.Enqueue(() =>
+                    {
+                        gestureInputController.AddGestureToChain(gesture);
+                    });
+                    //gestureInputController.ActivateGestureInput(gesture);
+                    //GestureEvent.TriggerGesture(gesture); // Trigger the gesture recognition event
+                }
+                else
+                {
+                    Debug.Log("No recognized gesture detected");
+                }
+            }
+
+            //for (int i = 0; i < result.handLandmarks.Count; i++)
+            //{
+            //    var landmarks = result.handLandmarks[i];
+            //    Debug.Log(landmarks);
+            //}
+        }
+
+        private NormalizedLandmarkList ConvertToNormalizedLandmarkList(Mediapipe.Tasks.Components.Containers.NormalizedLandmarks source)
+        {
+            var landmarkList = new NormalizedLandmarkList();
+
+            foreach (var landmark in source.landmarks)
+            {
+                landmarkList.Landmark.Add(new NormalizedLandmark
+                {
+                    X = landmark.x,
+                    Y = landmark.y,
+                    Z = landmark.z
+                });
+            }
+
+            return landmarkList;
         }
     }
 }

@@ -27,6 +27,11 @@ namespace NOVA.Scripts
 
         bool chainCoroutineRunning = false;
 
+        void Awake()
+        {
+            UnityMainThreadDispatcher.Initialize();
+        }
+
         public void Start()
         {
             SingleGestureInputMapping = GestureDictionary.ToDictionary();
