@@ -470,7 +470,7 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-    - GestureName: One Finger
+    - GestureName: Peace Sign
       GestureEvent:
         m_PersistentCalls:
           m_Calls:
@@ -486,7 +486,7 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-    - GestureName: Peace Sign
+    - GestureName: Call Me
       GestureEvent:
         m_PersistentCalls:
           m_Calls:
@@ -502,7 +502,7 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-    - GestureName: Open Palm
+    - GestureName: Thumbs Up
       GestureEvent:
         m_PersistentCalls:
           m_Calls:
