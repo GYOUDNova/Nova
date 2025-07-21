@@ -40,6 +40,8 @@ public static class GestureRecognizer
     private const float OpenPalmThreshold = 1.2f;
     private const float ThumbsUpThreshold = 0.8f;
 
+    private static List<float> currentClosestDistance = new List<float>();
+
     /// <summary>
     /// Detects the gesture based on the given hand landmarks.
     /// </summary>
@@ -54,13 +56,16 @@ public static class GestureRecognizer
 
         var tolerance = (sqlGestureHandler.GetActiveConfiguration().LandmarkTolerance) * 7;
 
+        List<float> unknownGestureDistances = GetNormalizedLandmarkDistances(landmarks);
+
         foreach (var gesture in gestureList)
         {
-            if (CheckGestureMatch(landmarks, gesture.Data.Name, closestGesture, sqlGestureHandler, tolerance))
+            if (CheckGestureMatch(unknownGestureDistances, gesture.Data.Name, closestGesture, sqlGestureHandler, tolerance))
             {
                 closestGesture = gesture.Data.Name; // Return the name of the matched gesture
             }
         }
+        currentClosestDistance.Clear();
         if (closestGesture != null)
         {
             return closestGesture; // Return the name of the matched gesture
@@ -96,14 +101,9 @@ public static class GestureRecognizer
     }
 
     // takes in the landmarks we're checking and the landmarks from another gesture if it matches and is a closer match then the current closest return true
-    private static bool CheckGestureMatch(NormalizedLandmarkList landmarks, string newGesture, string currentClosestGesture, GestureSqliteHandler gestureSqliteHandler, float tolerance)
+    private static bool CheckGestureMatch(List<float> unkownGestureDistances, string newGesture, string currentClosestGesture, GestureSqliteHandler gestureSqliteHandler, float tolerance)
     {
         var newGestureData = gestureSqliteHandler.GetGestureInfo(newGesture);
-
-
-
-        List<float> unknownGestureDistances = GetNormalizedLandmarkDistances(landmarks);
-
         List<float> knownGestureDistances = GetLandmarkDistances(newGestureData.Landmarks);
 
 
@@ -115,7 +115,7 @@ public static class GestureRecognizer
         // compare each of the distances in the list of floats to see if the are within +-tolerance range
         for (int i = 0; i < knownGestureDistances.Count; i++)
         {
-            float unknownDistance = unknownGestureDistances[i];
+            float unknownDistance = unkownGestureDistances[i];
             float knownDistance = knownGestureDistances[i];
 
             // if the unknown distance - known distance is within +- range of tolerance continue
@@ -132,16 +132,15 @@ public static class GestureRecognizer
         // if we get here the known gesture is a match, now we need to check if the current closest gesture is closer than the new gesture
         if (currentClosestGesture == null)
         {
+            currentClosestDistance = knownGestureDistances;
             return true; // If no current closest gesture, accept the new gesture
         }
         else
         {
-            var currentClosestGestureData = gestureSqliteHandler.GetGestureInfo(currentClosestGesture);
-            List<float> currentClosestGestureDistances = GetLandmarkDistances(currentClosestGestureData.Landmarks);
             // comare all the disances of the new gesture to the current closest gesture
-            for (int i = 0; i < currentClosestGestureDistances.Count; i++)
+            for (int i = 0; i < currentClosestDistance.Count; i++)
             {
-                float currentDistance = currentClosestGestureDistances[i];
+                float currentDistance = currentClosestDistance[i];
                 float newDistance = distances[i];
 
                 // if currentDistance is less than newDistance, then the current closest gesture is closer and increment closerCounter
