@@ -138,6 +138,12 @@ namespace NOVA.Scripts
             }
         }
 
+        // Method to retrieve all distances for a gesture by its name
+        public List<float> GetDistancesByName(string gestureName)
+        {
+            return GetGestureInfo(gestureName).Distances.ConvertAll(ld => ld.Distance);
+        }
+
         // Method to retrieve all the information about a gesture by its name
         public GestureInfo GetGestureInfo(string gestureName)
         {

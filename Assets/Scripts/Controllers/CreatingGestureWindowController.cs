@@ -261,21 +261,21 @@ namespace NOVA.Scripts
                 Landmarks = this.Landmarks
             };
 
-            // TODO: add processing to generate distances
-
-            // PLACEHOLDER: generate a random distance just so the list isnt empty
-            var d1 = new LandmarkDistance
-            {
-                Distance = 0.5f,
-                IsPredefined = false,
-                LandmarkId = 1,
-                OtherLandmarkId = 2,
-            };
-
+            // Fetch distances and add to QGI
+            var distances = GestureRecognizer.GetLandmarkDistances(qgi.Landmarks);
             Distances.Clear();
-            Distances.Add(d1);
-            qgi.Distances = Distances;
 
+            foreach (var distance in distances)
+            {
+                Distances.Add(new LandmarkDistance
+                {
+                    Distance = distance,
+                    LandmarkId = 1,
+                    OtherLandmarkId = 2
+                });
+            }
+
+            qgi.Distances = Distances;
             dbHandler.AddGesture(qgi);
 
             //  Internal check
