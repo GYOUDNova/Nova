@@ -50,5 +50,16 @@ namespace NOVA.Scripts
 
             isBlue = !isBlue;
         }
+
+        public void MoveLeft()
+        {
+            // move the player left
+            rb.AddForce(Vector3.left * 5f, ForceMode.VelocityChange);
+        }
+        public void MoveRight()
+        {
+            // move the player right
+            rb.AddForce(Vector3.right * 5f, ForceMode.VelocityChange);
+        }
     }
 }

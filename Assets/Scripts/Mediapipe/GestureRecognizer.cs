@@ -166,7 +166,7 @@ public static class GestureRecognizer
     private static List<float> GetNormalizedLandmarkDistances(NormalizedLandmarkList landmarks)
     {
         // calculate distance from pinky to thumb
-        float thumbToPinkyDistance = GetDistance(landmarks, THUMB_MCP, PINKY_MCP);
+        float palmToThumbKnuckleDistance = GetDistance(landmarks, WRIST, THUMB_MCP);
 
 
         List<float> distances = new List<float>();
@@ -175,7 +175,7 @@ public static class GestureRecognizer
         {
             for (int j = i + 1; j < landmarks.Landmark.Count; j++)
             {
-                float distance = GetDistance(landmarks, i, j) / thumbToPinkyDistance;
+                float distance = GetDistance(landmarks, i, j) / palmToThumbKnuckleDistance;
                 distances.Add(distance);
             }
         }
@@ -186,7 +186,7 @@ public static class GestureRecognizer
     private static List<float> GetLandmarkDistances(List<NOVA.Scripts.Landmark> landmarks)
     {
         // calculate distance from pinky to thumb
-        float thumbToPinkyDistance = GetDatabaseDistance(landmarks, THUMB_MCP, PINKY_MCP);
+        float palmToThumbKnuckleDistance = GetDatabaseDistance(landmarks, WRIST, THUMB_MCP);
 
 
         List<float> distances = new List<float>();
@@ -195,7 +195,7 @@ public static class GestureRecognizer
         {
             for (int j = i + 1; j < landmarks.Count; j++)
             {
-                float distance = GetDatabaseDistance(landmarks, i, j) / thumbToPinkyDistance;
+                float distance = GetDatabaseDistance(landmarks, i, j) / palmToThumbKnuckleDistance;
                 distances.Add(distance);
             }
         }
