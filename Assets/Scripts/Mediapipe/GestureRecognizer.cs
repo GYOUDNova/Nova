@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mediapipe;
+using NOVA.Scripts;
 
 public static class GestureRecognizer
 {
@@ -46,29 +47,160 @@ public static class GestureRecognizer
     /// <returns>The name of the detected gesture.</returns>
     public static string DetectGesture(NormalizedLandmarkList landmarks)
     {
-        if (landmarks == null || landmarks.Landmark == null || landmarks.Landmark.Count < 21)
+        string closestGesture = null;
+        var sqlGestureHandler = GestureSqliteHandler.Instance();
+
+        var gestureList = sqlGestureHandler.GetAllUIGestures();
+
+        var tolerance = (sqlGestureHandler.GetActiveConfiguration().LandmarkTolerance) * 7;
+
+        foreach (var gesture in gestureList)
         {
-            return NO_GESTURE;
+            if (CheckGestureMatch(landmarks, gesture.Data.Name, closestGesture, sqlGestureHandler, tolerance))
+            {
+                closestGesture = gesture.Data.Name; // Return the name of the matched gesture
+            }
+        }
+        if (closestGesture != null)
+        {
+            return closestGesture; // Return the name of the matched gesture
+        }
+        else
+        {
+            return NO_GESTURE; // If no gesture matched, return "None"
         }
 
-        if (CheckClosedFistGesture(landmarks))
-        {
-            return CLOSED_FIST;
-        }
-        else if (CheckOpenPalmGesture(landmarks))
-        {
-            return OPEN_PALM;
-        }
-        else if (CheckThumbsUpGesture(landmarks))
-        {
-            return THUMBS_UP;
-        }
-        else if (CheckPointingGesture(landmarks))
-        {
-            return POINTING;
-        }
+        //if (landmarks == null || landmarks.Landmark == null || landmarks.Landmark.Count < 21)
+        //{
+        //    return NO_GESTURE;
+        //}
+
+        //if (CheckClosedFistGesture(landmarks))
+        //{
+        //    return CLOSED_FIST;
+        //}
+        //else if (CheckOpenPalmGesture(landmarks))
+        //{
+        //    return OPEN_PALM;
+        //}
+        //else if (CheckThumbsUpGesture(landmarks))
+        //{
+        //    return THUMBS_UP;
+        //}
+        //else if (CheckPointingGesture(landmarks))
+        //{
+        //    return POINTING;
+        //}
 
         return NO_GESTURE;
+    }
+
+    // takes in the landmarks we're checking and the landmarks from another gesture if it matches and is a closer match then the current closest return true
+    private static bool CheckGestureMatch(NormalizedLandmarkList landmarks, string newGesture, string currentClosestGesture, GestureSqliteHandler gestureSqliteHandler, float tolerance)
+    {
+        var newGestureData = gestureSqliteHandler.GetGestureInfo(newGesture);
+
+
+
+        List<float> unknownGestureDistances = GetNormalizedLandmarkDistances(landmarks);
+
+        List<float> knownGestureDistances = GetLandmarkDistances(newGestureData.Landmarks);
+
+
+        float distance = 0f;
+        List<float> distances = new List<float>();
+
+        int closerCounter = 0;
+
+        // compare each of the distances in the list of floats to see if the are within +-tolerance range
+        for (int i = 0; i < knownGestureDistances.Count; i++)
+        {
+            float unknownDistance = unknownGestureDistances[i];
+            float knownDistance = knownGestureDistances[i];
+
+            // if the unknown distance - known distance is within +- range of tolerance continue
+            if ((distance = (Mathf.Abs(unknownDistance - knownDistance))) > tolerance)
+            {
+                return false; // If any distance is out of tolerance, return false
+            }
+            // else store the distance
+            else
+            {
+                distances.Add(distance);
+            }
+        }
+        // if we get here the known gesture is a match, now we need to check if the current closest gesture is closer than the new gesture
+        if (currentClosestGesture == null)
+        {
+            return true; // If no current closest gesture, accept the new gesture
+        }
+        else
+        {
+            var currentClosestGestureData = gestureSqliteHandler.GetGestureInfo(currentClosestGesture);
+            List<float> currentClosestGestureDistances = GetLandmarkDistances(currentClosestGestureData.Landmarks);
+            // comare all the disances of the new gesture to the current closest gesture
+            for (int i = 0; i < currentClosestGestureDistances.Count; i++)
+            {
+                float currentDistance = currentClosestGestureDistances[i];
+                float newDistance = distances[i];
+
+                // if currentDistance is less than newDistance, then the current closest gesture is closer and increment closerCounter
+                if (currentDistance < newDistance)
+                {
+                    closerCounter++;
+                }
+            }
+            // if closer counter is greater than half the number of distances, then the current closest gesture is closer
+            if (closerCounter > distances.Count / 2)
+            {
+                return false; // If the current closest gesture is closer, return false
+            }
+            else
+            {
+                return true; // Otherwise, accept the new gesture
+            }
+        }
+    }
+
+    // get a vector of distances
+    private static List<float> GetNormalizedLandmarkDistances(NormalizedLandmarkList landmarks)
+    {
+        // calculate distance from pinky to thumb
+        float thumbToPinkyDistance = GetDistance(landmarks, THUMB_MCP, PINKY_MCP);
+
+
+        List<float> distances = new List<float>();
+
+        for (int i = 0; i < landmarks.Landmark.Count; i++)
+        {
+            for (int j = i + 1; j < landmarks.Landmark.Count; j++)
+            {
+                float distance = GetDistance(landmarks, i, j) / thumbToPinkyDistance;
+                distances.Add(distance);
+            }
+        }
+
+        return distances;
+    }
+    // get a vector of distances
+    private static List<float> GetLandmarkDistances(List<NOVA.Scripts.Landmark> landmarks)
+    {
+        // calculate distance from pinky to thumb
+        float thumbToPinkyDistance = GetDatabaseDistance(landmarks, THUMB_MCP, PINKY_MCP);
+
+
+        List<float> distances = new List<float>();
+
+        for (int i = 0; i < landmarks.Count; i++)
+        {
+            for (int j = i + 1; j < landmarks.Count; j++)
+            {
+                float distance = GetDatabaseDistance(landmarks, i, j) / thumbToPinkyDistance;
+                distances.Add(distance);
+            }
+        }
+
+        return distances;
     }
 
     private static bool CheckClosedFistGesture(NormalizedLandmarkList landmarks)
@@ -143,6 +275,18 @@ public static class GestureRecognizer
     {
         var landmark1 = landmarks.Landmark[index1];
         var landmark2 = landmarks.Landmark[index2];
+
+        float dx = landmark1.X - landmark2.X;
+        float dy = landmark1.Y - landmark2.Y;
+        float dz = landmark1.Z - landmark2.Z;
+
+        return Mathf.Sqrt(dx * dx + dy * dy + dz * dz);
+    }
+
+    private static float GetDatabaseDistance(List<NOVA.Scripts.Landmark> landmarks, int index1, int index2)
+    {
+        var landmark1 = landmarks[index1];
+        var landmark2 = landmarks[index2];
 
         float dx = landmark1.X - landmark2.X;
         float dy = landmark1.Y - landmark2.Y;

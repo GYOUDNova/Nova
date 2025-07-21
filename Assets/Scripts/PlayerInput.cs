@@ -37,7 +37,7 @@ namespace NOVA.Scripts
             Debug.Log("Keyboard Input: Jumping!");
         }
 
-        private void ToggleColor()
+        public void ToggleColor()
         {
             if (isBlue)
             {
