@@ -9,7 +9,9 @@
         <engine:VisualElement name="Body" style="flex-grow: 1;">
             <engine:VisualElement name="BodyControlContainer" class="body-control-container" style="flex-grow: 1;">
                 <engine:DropdownField label="Categories" name="CategoryOptions" />
+                <engine:DropdownField label="Sort By" name="SortOptions" />
                 <engine:Button text="Filter" name="FilterButton" />
+                <engine:Button text="Reset" name="ResetButton" />
             </engine:VisualElement>
             <engine:ScrollView name="ListOfGestures" style="align-items: flex-start;" />
         </engine:VisualElement>

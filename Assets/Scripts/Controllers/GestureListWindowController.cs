@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -16,8 +17,11 @@ namespace NOVA.Scripts
 
         private VisualElement root;
         private ScrollView scrollView;
+        private DropdownField categoryOptions;
+        private DropdownField sortOptions;
+        private Button filterButton;
+        private Button resetButton;
 
-        /*Window Settings*/
         private const float MinWindowHeight = 600;
         private const float MinWindowLength = 875;
         private const string Title = "Gesture List";
@@ -34,25 +38,65 @@ namespace NOVA.Scripts
         public void CreateGUI()
         {
             root = gestureListScreenAsset.CloneTree();
-            rootVisualElement.Clear(); // Ensure the root is cleared before adding new content
+            rootVisualElement.Clear();
             rootVisualElement.Add(root);
 
             Label label = root.Q<Label>("TitleLabel");
             label.text = Title;
 
-            var gestureSqliteHandler = GestureSqliteHandler.Instance();
-            var gestureList = gestureSqliteHandler.GetAllUIGestures();
+            filterButton = root.Q<Button>("FilterButton");
+            filterButton.RegisterCallback<ClickEvent>(evt => OnFilterButtonClick(evt));
 
-            if (gestureList.Count == 0)
+            resetButton = root.Q<Button>("ResetButton");
+            resetButton.RegisterCallback<ClickEvent>(evt => OnResetButtonClick(evt));
+
+            categoryOptions = root.Q<DropdownField>("CategoryOptions");
+            categoryOptions.choices.Clear();
+
+            sortOptions = root.Q<DropdownField>("SortOptions");
+            sortOptions.choices.Clear();
+
+            scrollView = root.Q<ScrollView>("ListOfGestures");
+            scrollView.Clear();
+
+            PopulateUI(HelperConstants.GestureListNoFilters, HelperConstants.NoSorting);
+        }
+
+        private void PopulateUI(string categoryFilter, string sortOption)
+        {
+            var gestureSqliteHandler = GestureSqliteHandler.Instance();
+            var allCategories = gestureSqliteHandler.GetObjects<GestureCategory>();
+
+            categoryOptions.choices.Add(HelperConstants.GestureListNoFilters);
+            categoryOptions.value = categoryFilter == HelperConstants.GestureListNoFilters ? HelperConstants.GestureListNoFilters : categoryFilter;
+            foreach (var category in allCategories)
             {
-                Debug.LogWarning("No gestures found in the database.");
-                return;
+                categoryOptions.choices.Add(category.Name);
             }
 
-            // Populate the UI with gesture data
-            scrollView = root.Q<ScrollView>("ListOfGestures");
+            foreach (var option in HelperConstants.SortingOptions)
+            {
+                sortOptions.choices.Add(option);
+            }
+            sortOptions.value = sortOption == HelperConstants.NoSorting ? HelperConstants.NoSorting : sortOption;
 
-            foreach (var gesture in gestureList)
+            var gestures = categoryFilter == HelperConstants.GestureListNoFilters
+                ? gestureSqliteHandler.GetAllUIGestures() : gestureSqliteHandler.GetUIGesturesByCategory(categoryFilter);
+
+            string selectedSortOption = sortOptions.value;
+            switch (selectedSortOption)
+            {
+                case HelperConstants.SortAlphabetically:
+                    gestures = gestures.OrderBy(g => g.GestureName).ToList();
+                    break;
+                case HelperConstants.SortInReverse:
+                    gestures = gestures.OrderByDescending(g => g.GestureName).ToList();
+                    break;
+                default:
+                    break;
+            }
+
+            foreach (var gesture in gestures)
             {
                 VisualElement card = gestureCard.CloneTree();
                 Label cardLabel = card.Q<Label>("GestureDetails");
@@ -85,9 +129,21 @@ namespace NOVA.Scripts
                 {
                     Debug.LogWarning($"Image {gesture.Image.Name} not found in resources.");
                 }
-
                 scrollView.Add(card);
             }
+        }
+
+        #region Button Events
+        private void OnFilterButtonClick(ClickEvent evt)
+        {
+            string filterOption = categoryOptions.value;
+            string sortOption = sortOptions.value;
+            PopulateUI(filterOption, sortOption);
+        }
+
+        private void OnResetButtonClick(ClickEvent evt)
+        {
+            PopulateUI(HelperConstants.GestureListNoFilters, HelperConstants.NoSorting);
         }
 
         private void OnDeleteButtonClick(string gestureName)
@@ -109,7 +165,7 @@ namespace NOVA.Scripts
                 Debug.LogError($"Database error while deleting gesture {gestureName}: {ex.Message}");
             }
         }
+        #endregion
     }
 }
-
 #endif

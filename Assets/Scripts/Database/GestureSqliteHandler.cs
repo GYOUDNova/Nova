@@ -138,6 +138,48 @@ namespace NOVA.Scripts
             }
         }
 
+
+        // Method to retrieve all gestures from the database, limited to only UI information
+        public List<GestureInfo> GetUIGesturesByCategory(string categoryName)
+        {
+            lock (lockObject)
+            {
+                using var conn = GetSqliteConnection();
+
+                // Retrieve all GestureData objects
+                var gestureDataList = conn.Table<GestureData>().ToList();
+                var gestureInfos = new List<GestureInfo>();
+
+                foreach (var gestureData in gestureDataList)
+                {
+                    var category = conn.Get<GestureCategory>(gestureData.GestureCategoryId);
+
+                    if (category.Name == categoryName)
+                    {
+                        var image = conn.Get<GestureImage>(gestureData.GestureImageName);
+
+                        /*
+                         * The only information we need for the UI is:
+                         * - Gesture Name
+                         * - Category
+                         * - Image (location to fetch the image from the assets)
+                         * - GestureData to retrieve other properties (like IsPredefined)
+                         *
+                        */
+
+                        gestureInfos.Add(new GestureInfo
+                        {
+                            GestureName = gestureData.Name,
+                            Category = category,
+                            Image = image,
+                            Data = gestureData
+                        });
+                    }
+                }
+                return gestureInfos;
+            }
+        }
+
         // Method to retrieve all the information about a gesture by its name
         public GestureInfo GetGestureInfo(string gestureName)
         {
