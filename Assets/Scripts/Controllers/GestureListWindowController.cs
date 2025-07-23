@@ -57,18 +57,15 @@ namespace NOVA.Scripts
             sortOptions.choices.Clear();
 
             scrollView = root.Q<ScrollView>("ListOfGestures");
-            scrollView.Clear();
 
-            PopulateUI(HelperConstants.GestureListNoFilters, HelperConstants.NoSorting);
+            PopulateDropdowns();
+            PopulateUI();
         }
 
-        private void PopulateUI(string categoryFilter, string sortOption)
+        private void PopulateDropdowns()
         {
             var gestureSqliteHandler = GestureSqliteHandler.Instance();
             var allCategories = gestureSqliteHandler.GetObjects<GestureCategory>();
-
-            categoryOptions.choices.Add(HelperConstants.GestureListNoFilters);
-            categoryOptions.value = categoryFilter == HelperConstants.GestureListNoFilters ? HelperConstants.GestureListNoFilters : categoryFilter;
             foreach (var category in allCategories)
             {
                 categoryOptions.choices.Add(category.Name);
@@ -78,6 +75,17 @@ namespace NOVA.Scripts
             {
                 sortOptions.choices.Add(option);
             }
+        }
+
+        private void PopulateUI(string categoryFilter = HelperConstants.GestureListNoFilters,
+                                string sortOption = HelperConstants.NoSorting)
+        {
+            ResetGUI();
+
+            var gestureSqliteHandler = GestureSqliteHandler.Instance();
+
+            categoryOptions.choices.Add(HelperConstants.GestureListNoFilters);
+            categoryOptions.value = categoryFilter == HelperConstants.GestureListNoFilters ? HelperConstants.GestureListNoFilters : categoryFilter;
             sortOptions.value = sortOption == HelperConstants.NoSorting ? HelperConstants.NoSorting : sortOption;
 
             var gestures = categoryFilter == HelperConstants.GestureListNoFilters
@@ -129,8 +137,17 @@ namespace NOVA.Scripts
                 {
                     Debug.LogWarning($"Image {gesture.Image.Name} not found in resources.");
                 }
+
                 scrollView.Add(card);
             }
+        }
+
+        private void ResetGUI()
+        {
+            // Clear the scroll view and reset dropdowns
+            scrollView.Clear();
+            categoryOptions.value = HelperConstants.GestureListNoFilters;
+            sortOptions.value = HelperConstants.NoSorting;
         }
 
         #region Button Events
@@ -143,7 +160,7 @@ namespace NOVA.Scripts
 
         private void OnResetButtonClick(ClickEvent evt)
         {
-            PopulateUI(HelperConstants.GestureListNoFilters, HelperConstants.NoSorting);
+            PopulateUI();
         }
 
         private void OnDeleteButtonClick(string gestureName)
@@ -154,7 +171,8 @@ namespace NOVA.Scripts
             {
                 gestureSqliteHandler.DeleteGesture(gestureName);
                 Debug.Log($"Gesture {gestureName} deleted successfully.");
-                CreateGUI();
+                ResetGUI(); // Reset the UI after deletion
+                PopulateUI();
             }
             catch (ItemNotFoundException ex)
             {
