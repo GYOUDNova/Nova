@@ -106,6 +106,7 @@
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageReadMode.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\EnumExtension.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\VideoSource.cs" />
+    <Compile Include="Assets\Scripts\Controllers\GestureUsingImageController.cs" />
     <Compile Include="Assets\Scripts\Database\SampleSqliteHandler.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\AssetLoader.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\ModalButton.cs" />

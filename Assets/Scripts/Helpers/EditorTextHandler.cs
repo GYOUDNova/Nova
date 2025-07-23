@@ -11,11 +11,18 @@ namespace NOVA.Scripts
     {
         private static float messageLabelTimer = 5f;
 
+        private static EditorCoroutine currentCoroutine;
+
         public static void DisplayMessage(string text, Color messageColor, Label label)
         {
+            if (currentCoroutine != null)
+            {
+                EditorCoroutineUtility.StopCoroutine(currentCoroutine);
+            }
+
             label.style.color = messageColor;
             label.text = text;
-            EditorCoroutineUtility.StartCoroutineOwnerless(ClearErrorMessage(label));
+            currentCoroutine = EditorCoroutineUtility.StartCoroutineOwnerless(ClearErrorMessage(label));
         }
 
         private static IEnumerator ClearErrorMessage(Label labelToClear)

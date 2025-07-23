@@ -17,8 +17,16 @@ using UnityEngine.UIElements;
 using MPLandmark = Mediapipe.Tasks.Components.Containers.Landmark;
 using NOVALandmark = NOVA.Scripts.Landmark;
 
+
 namespace NOVA.Scripts
 {
+    internal enum GestureInputMode
+    {
+        None,
+        ImageMode,
+        CameraMode
+    }
+
     public class CreatingGestureWindowController : EditorWindow
     {
         [SerializeField]
@@ -39,11 +47,18 @@ namespace NOVA.Scripts
         private TextField savingGestureTextField;
         private TextField gestureCategoryTextfield;
 
-        /* Camera Settings */
+        /* Camera/Image Settings and Textures */
         private WebCamTexture webCamTexture;
         private Texture2D texture;
         private Texture2D savingTexture;
         private EditorCoroutine edCoro;
+
+        private Button uploadImageButton;
+        private Texture2D uploadedTexture;
+        private bool suppressCameraSelection = false;
+
+        // Flags to track the current mode
+        private GestureInputMode currentMode = GestureInputMode.None;
 
         // The actual task API that will be used for hand landmark detection
         private HandLandmarker taskApi;
@@ -85,13 +100,19 @@ namespace NOVA.Scripts
 
             savingGestureContainer = root.Q<VisualElement>("SavingGestureContainer");
             savingGestureTextField = root.Q<TextField>("SaveGestureTextField");
+
             gestureCategoryTextfield = root.Q<TextField>("GestureCategoryTextField");
+
             savingGestureContainer.style.display = DisplayStyle.None; // Ensure the container is hidden until an image is taken
             saveGestureButton = root.Q<Button>("SaveGestureButton");
             saveGestureButton.RegisterCallback<ClickEvent>(evt => SaveGesture(evt));
             saveGestureButton.style.display = DisplayStyle.None; // Ensure the button is hidden until an image is taken
+
             dropdownField = root.Q<DropdownField>(DropdownMenuName);
             dropdownField.RegisterValueChangedCallback(evt => OnCameraSelected(evt.newValue));
+
+            uploadImageButton = root.Q<Button>("UploadImageButton");
+            uploadImageButton.RegisterCallback<ClickEvent>(evt => UploadImage());
 
             foreach (var device in WebCamTexture.devices)
             {
@@ -105,7 +126,6 @@ namespace NOVA.Scripts
             savingTexture = new Texture2D(HelperConstants.CameraWidth, HelperConstants.CameraHeight);
 
             var image = new Image();
-            image.image = texture;
             image.AddToClassList(CameraFeedSelector);
             root.Add(image);
 
@@ -114,29 +134,165 @@ namespace NOVA.Scripts
             takeImageButton.style.display = DisplayStyle.None; // Ensure the button is hidden
             takeImageButton.clicked += () =>
             {
-                ResetSaveContainer();
+                // Use the shared processing method
+                EditorCoroutineUtility.StartCoroutine(ProcessGestureFromTexture(texture), this);
+            };
+        }
 
-                // Use the mediapipe task API to process the image
+        private void UploadImage()
+        {
+            string imagePath = EditorUtility.OpenFilePanel("Select Image", "", "png,jpg,jpeg");
 
-                savingTexture.LoadRawTextureData(texture.GetRawTextureData()); // Save the current for image saving
-                textureFrame.ReadTextureOnCPU(texture);
-                mpImage = textureFrame.BuildCPUImage();
+            if (string.IsNullOrEmpty(imagePath))
+                return;
 
-                var result = HandLandmarkerResult.Alloc(2);
-                if (taskApi.TryDetect(mpImage, imageProcessingOptions, ref result))
+            try
+            {
+                // Load the image
+                byte[] imageData = System.IO.File.ReadAllBytes(imagePath);
+                uploadedTexture = new Texture2D(HelperConstants.CameraWidth, HelperConstants.CameraHeight);
+
+                if (uploadedTexture.LoadImage(imageData))
                 {
-                    var handWorldLandmarks = result.handWorldLandmarks.FirstOrDefault();
-                    EditorCoroutineUtility.StartCoroutine(TranslateMPLandmarks(handWorldLandmarks.landmarks), this);
-                    EditorTextHandler.DisplayMessage("Gesture data received. Please name the gesture and then save", Color.green, messageText);
-                    savingGestureContainer.style.display = DisplayStyle.Flex;
-                    saveGestureButton.style.display = DisplayStyle.Flex;
-                    takeImageButton.style.display = DisplayStyle.None;
+                    // Resize to match camera dimensions if needed
+                    uploadedTexture = ResizeTexture(uploadedTexture, HelperConstants.CameraWidth, HelperConstants.CameraHeight);
+
+                    // Update the display
+                    var image = root.Q<Image>();
+                    image.image = uploadedTexture;
+
+                    // Switch to image mode
+                    EnterImageMode();
+
+                    // Process the uploaded image immediately
+                    EditorCoroutineUtility.StartCoroutine(ProcessUploadedImage(), this);
                 }
                 else
                 {
-                    EditorTextHandler.DisplayMessage("Unable to detect gesture. Please try again", Color.red, messageText);
+                    EditorTextHandler.DisplayMessage("Failed to load the selected image", Color.red, messageText);
                 }
-            };
+            }
+            catch (System.Exception e)
+            {
+                throw new System.Exception($"Error loading image: {e.Message}", e);
+            }
+        }
+
+        private IEnumerator ProcessUploadedImage()
+        {
+            const string uploadSuccessMessage = "Gesture data received from uploaded image. Please name the gesture and then save";
+            yield return ProcessGestureFromTexture(uploadedTexture, uploadSuccessMessage);
+        }
+
+        private IEnumerator ProcessGestureFromTexture(Texture2D sourceTexture, string successMessage = "Gesture data received. Please name the gesture and then save")
+        {
+            // Initialize MediaPipe if not already done
+            if (taskApi == null)
+            {
+                yield return InitializeMediaPipe();
+            }
+
+            ResetSaveContainer();
+
+            // Copy source texture to saving texture for later use
+            if (savingTexture == null || savingTexture.width != sourceTexture.width || savingTexture.height != sourceTexture.height)
+            {
+                if (savingTexture != null)
+                {
+                    DestroyImmediate(savingTexture);
+                }
+
+                savingTexture = new Texture2D(sourceTexture.width, sourceTexture.height, sourceTexture.format, false);
+            }
+
+            Graphics.CopyTexture(sourceTexture, savingTexture);
+
+            // Ensure texture frame matches the source texture dimensions
+            if (textureFrame == null || textureFrame.width != sourceTexture.width || textureFrame.height != sourceTexture.height)
+            {
+                textureFrame?.Dispose();
+                textureFrame = new TextureFrame(sourceTexture.width, sourceTexture.height, TextureFormat.RGBA32);
+            }
+
+            // Process with MediaPipe
+            textureFrame.ReadTextureOnCPU(sourceTexture);
+            mpImage = textureFrame.BuildCPUImage();
+
+            var result = HandLandmarkerResult.Alloc(2);
+            if (taskApi.TryDetect(mpImage, imageProcessingOptions, ref result))
+            {
+                // Get the first detected hand
+                var handWorldLandmarks = result.handWorldLandmarks.FirstOrDefault();
+
+                // Process the landmarks
+                yield return TranslateMPLandmarks(handWorldLandmarks.landmarks);
+
+                // Show success message and enable saving
+                EditorTextHandler.DisplayMessage(successMessage, Color.green, messageText);
+                savingGestureContainer.style.display = DisplayStyle.Flex;
+                saveGestureButton.style.display = DisplayStyle.Flex;
+
+                // Hide the trigger buttons based on current mode
+                if (currentMode.Equals(GestureInputMode.CameraMode))
+                {
+                    takeImageButton.style.display = DisplayStyle.None;
+                }
+                else if (currentMode.Equals(GestureInputMode.ImageMode))
+                {
+                    uploadImageButton.style.display = DisplayStyle.None;
+                }
+            }
+            else
+            {
+                string errorMessage = currentMode.Equals(GestureInputMode.ImageMode) ?
+                    "Unable to detect gesture in uploaded image. Please try a different image with a clear hand gesture!" :
+                    "Unable to detect gesture. Please try again with a clear hand gesture";
+                EditorTextHandler.DisplayMessage(errorMessage, Color.red, messageText);
+            }
+
+            // Clean up MediaPipe resources
+            mpImage?.Dispose();
+        }
+
+        private void EnterImageMode()
+        {
+            currentMode = GestureInputMode.ImageMode;
+
+            // Hide camera controls
+            dropdownField.style.display = DisplayStyle.None;
+            takeImageButton.style.display = DisplayStyle.None;
+
+            // Stop camera if running
+            if (webCamTexture != null && webCamTexture.isPlaying)
+            {
+                webCamTexture.Stop();
+                if (edCoro != null)
+                {
+                    EditorCoroutineUtility.StopCoroutine(edCoro);
+                }
+            }
+
+            // Show upload button (keep it visible for switching images)
+            uploadImageButton.style.display = DisplayStyle.Flex;
+        }
+
+        private void EnterCameraMode()
+        {
+            currentMode = GestureInputMode.CameraMode;
+
+            // Show camera controls
+            dropdownField.style.display = DisplayStyle.Flex;
+            uploadImageButton.style.display = DisplayStyle.None;
+
+            // Clear uploaded texture
+            if (uploadedTexture != null)
+            {
+                DestroyImmediate(uploadedTexture);
+                uploadedTexture = null;
+            }
+
+            var image = root.Q<Image>();
+            image.image = texture;
         }
 
         /// <summary>
@@ -145,10 +301,21 @@ namespace NOVA.Scripts
         /// <param name="selectedCamera"></param>
         private void OnCameraSelected(string selectedCamera)
         {
+            // Prevent camera selection in image mode
+            if (currentMode.Equals(GestureInputMode.ImageMode)) { return; }
+
+            // Prevent clearing the dropdown from triggering this method
+            if (suppressCameraSelection)
+            {
+                suppressCameraSelection = false;
+                return;
+            }
+
             if (!WebCamTexture.devices.Any(device => device.name == selectedCamera))
             {
                 EditorTextHandler.DisplayMessage($"Unable to find the given camera: {selectedCamera}", Color.red, messageText);
             }
+
             if (webCamTexture != null && webCamTexture.isPlaying)
             {
                 webCamTexture.Stop();
@@ -162,6 +329,7 @@ namespace NOVA.Scripts
             {
                 edCoro = EditorCoroutineUtility.StartCoroutine(UpdateFeed(), this);
                 takeImageButton.style.display = DisplayStyle.Flex;
+                EnterCameraMode(); // Switch to camera mode
             }
             else
             {
@@ -174,7 +342,7 @@ namespace NOVA.Scripts
         /// </summary>
         public void OnDestroy()
         {
-            if (webCamTexture == null) return;
+            if (webCamTexture == null && !webCamTexture.isPlaying) return;
 
             webCamTexture.Stop();
             webCamTexture = null;
@@ -194,27 +362,57 @@ namespace NOVA.Scripts
             }
         }
 
+        private Texture2D ResizeTexture(Texture2D source, int targetWidth, int targetHeight)
+        {
+            if (source.width == targetWidth && source.height == targetHeight)
+            {
+                return source; // No resizing needed
+            }
+
+            RenderTexture rt = RenderTexture.GetTemporary(targetWidth, targetHeight);
+            Graphics.Blit(source, rt);
+
+            RenderTexture previous = RenderTexture.active;
+            RenderTexture.active = rt;
+
+            Texture2D result = new Texture2D(targetWidth, targetHeight);
+            result.ReadPixels(new Rect(0, 0, targetWidth, targetHeight), 0, 0);
+            result.Apply();
+
+            RenderTexture.active = previous;
+            RenderTexture.ReleaseTemporary(rt);
+
+            return result;
+        }
+
         /// <summary>
         /// Coroutine to update the camera feed and process the image
         /// </summary>
         private IEnumerator UpdateFeed()
         {
-            Config.RunningMode = Mediapipe.Tasks.Vision.Core.RunningMode.IMAGE;
-            AssetLoader.Provide(new StreamingAssetsResourceManager());
-            yield return AssetLoader.PrepareAssetAsync(Config.ModelPath);
-
-            imageProcessingOptions = new ImageProcessingOptions(rotationDegrees: 0);
-            var options = Config.GetHandLandmarkerOptions(null);
-            taskApi = HandLandmarker.CreateFromOptions(options);
-
-            textureFrame = new(HelperConstants.CameraWidth, HelperConstants.CameraHeight, TextureFormat.RGBA32);
+            // Initialize MediaPipe if not already done
+            if (taskApi == null)
+            {
+                yield return InitializeMediaPipe();
+            }
 
             // Continue updating the feed until the window is closed
-            while (hasFocus)
+            while (hasFocus && currentMode.Equals(GestureInputMode.CameraMode))
             {
                 Repaint();
                 yield return null;
             }
+        }
+
+        private IEnumerator InitializeMediaPipe()
+        {
+            Config.RunningMode = Mediapipe.Tasks.Vision.Core.RunningMode.IMAGE;
+            AssetLoader.Provide(new StreamingAssetsResourceManager());
+            yield return AssetLoader.PrepareAssetAsync(Config.ModelPath);
+            imageProcessingOptions = new ImageProcessingOptions(rotationDegrees: 0);
+            var options = Config.GetHandLandmarkerOptions(null);
+            taskApi = HandLandmarker.CreateFromOptions(options);
+            textureFrame = new(HelperConstants.CameraWidth, HelperConstants.CameraHeight, TextureFormat.RGBA32);
         }
 
         private void SaveGesture(ClickEvent evt)
@@ -285,12 +483,59 @@ namespace NOVA.Scripts
                 saveGestureButton.style.display = DisplayStyle.None;
                 savingGestureContainer.style.display = DisplayStyle.None;
                 takeImageButton.style.display = DisplayStyle.Flex;
+                ResetToNormalMode();
                 EditorTextHandler.DisplayMessage($"{gestureName} was successfully created! Check Gesture List for more info", Color.green, messageText);
             }
             else
             {
                 EditorTextHandler.DisplayMessage($"There was an error saving the gesture {gestureName}. Please review logs", Color.red, messageText);
             }
+        }
+
+        private void ResetToNormalMode()
+        {
+            // Stop camera if running
+            if (webCamTexture != null && webCamTexture.isPlaying)
+            {
+                webCamTexture.Stop();
+            }
+
+            if (edCoro != null)
+            {
+                EditorCoroutineUtility.StopCoroutine(edCoro);
+                edCoro = null;
+            }
+
+            // Clear the image display
+            var image = root.Q<Image>();
+            image.image = null;
+
+            // Clear uploaded texture
+            if (uploadedTexture != null)
+            {
+                DestroyImmediate(uploadedTexture);
+                uploadedTexture = null;
+            }
+
+            // Reset UI elements
+            saveGestureButton.style.display = DisplayStyle.None;
+            savingGestureContainer.style.display = DisplayStyle.None;
+            takeImageButton.style.display = DisplayStyle.None;
+            uploadImageButton.style.display = DisplayStyle.Flex;
+            dropdownField.style.display = DisplayStyle.Flex;
+
+            // Clear text fields
+            savingGestureTextField.value = string.Empty;
+            gestureCategoryTextfield.value = string.Empty;
+
+            // Reset dropdown selection only in camera mode
+            if (currentMode.Equals(GestureInputMode.CameraMode))
+            {
+                suppressCameraSelection = true; // Prevents triggering OnCameraSelected
+                dropdownField.value = string.Empty;
+            }
+
+            currentMode = GestureInputMode.None;
         }
 
         private void ResetSaveContainer()

@@ -15,7 +15,7 @@
             </engine:Button>
             <engine:Button name="CreateAGestureButton" class="button menu-button">
                 <engine:VisualElement name="ButtonTop" class="button-top">
-                    <engine:Label text="Create a Gesture (Camera)" name="ButtonText" class="button-text" />
+                    <engine:Label text="Create a Gesture" name="ButtonText" class="button-text" />
                 </engine:VisualElement>
                 <engine:VisualElement name="ButtonBottom" class="button-bottom" />
             </engine:Button>
@@ -25,7 +25,7 @@
                 </engine:VisualElement>
                 <engine:VisualElement name="ButtonBottom" class="button-bottom" />
             </engine:Button>
-            <engine:Button name="CreateGestureUsingImageButton" class="button menu-button">
+            <engine:Button name="CreateGestureUsingImageButton" class="button menu-button" style="display: none;">
                 <engine:VisualElement name="ButtonTop" class="button-top">
                     <engine:Label text="Create a Gesture (Image)" name="ButtonText" class="button-text" />
                 </engine:VisualElement>

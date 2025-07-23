@@ -64,8 +64,9 @@ namespace NOVA.Scripts
             settingsCalibrationButton = root.Q<Button>("SettingsCalibrationButton");
             settingsCalibrationButton.RegisterCallback<ClickEvent>(evt => OpenSubScreen(evt, SubScreen.SettingsCalibration));
 
-            creatingGestureWithImageButton = root.Q<Button>("CreateGestureUsingImageButton");
-            creatingGestureWithImageButton.RegisterCallback<ClickEvent>(evt => OpenSubScreen(evt, SubScreen.CreateGestureUsingImage));
+            // TO BE REMOVED:
+            //creatingGestureWithImageButton = root.Q<Button>("CreateGestureUsingImageButton");
+            //creatingGestureWithImageButton.RegisterCallback<ClickEvent>(evt => OpenSubScreen(evt, SubScreen.CreateGestureUsingImage));
         }
 
         private void OpenSubScreen(ClickEvent evt, SubScreen subScreenToOpen)
@@ -81,9 +82,9 @@ namespace NOVA.Scripts
                 case SubScreen.SettingsCalibration:
                     SettingsCalibrationWindowController.SetupAndShowWindow();
                     break;
-                case SubScreen.CreateGestureUsingImage:
-                    GestureUsingImageController.SetupAndShowWindow();
-                    break;
+                //case SubScreen.CreateGestureUsingImage:
+                //GestureUsingImageController.SetupAndShowWindow();
+                //break;
                 default:
                     break;
             }
