@@ -1,4 +1,13 @@
+.body-control-container {
+    flex-direction: row;
+    width: 50%;
+}
+
 .unity-scroll-view__content-container {
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+.unity-base-field__label{
+    width: 100px;
 }
