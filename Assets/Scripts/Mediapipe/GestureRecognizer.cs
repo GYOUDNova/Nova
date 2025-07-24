@@ -1,6 +1,8 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Mediapipe;
+using NOVA.Scripts;
+using Landmark = NOVA.Scripts.Landmark;
 
 public static class GestureRecognizer
 {
@@ -34,10 +36,31 @@ public static class GestureRecognizer
     public const string THUMBS_UP = "Thumbs Up";
     public const string POINTING = "Pointing";
 
-    // Thresholds for gesture recognition (tune these as needed)
-    private static readonly float[] FingerClosedThresholds = new float[5] { 0.5f, 0.5f, 0.5f, 0.5f, 0.5f };
-    private const float OpenPalmThreshold = 1.2f;
-    private const float ThumbsUpThreshold = 0.8f;
+    private static List<float> currentClosestDistance = new List<float>();
+    private static List<string> gestureList = new List<string>();
+    private static GestureSqliteHandler gestureSqliteHandler = GestureSqliteHandler.Instance();
+    private static float tolerance = 0.1f; // Default tolerance for gesture matching
+    private static int toleranceMultipler = 8; // Multiplier for tolerance based on configuration
+    private static Dictionary<string, List<float>> knownGestureDistances = new Dictionary<string, List<float>>();
+
+    // on awake
+    static GestureRecognizer()
+    {
+        // Initialize the gesture list from the database or predefined gestures
+        var gesturesData = gestureSqliteHandler.GetAllUIGestures();
+
+        foreach (var gesture in gesturesData)
+        {
+            gestureList.Add(gesture.Data.Name);
+        }
+
+        tolerance = (gestureSqliteHandler.GetActiveConfiguration().LandmarkTolerance) * toleranceMultipler;
+
+        foreach (var gesture in gestureList)
+        {
+            knownGestureDistances.Add(gesture, gestureSqliteHandler.GetDistancesByName(gesture));
+        }
+    }
 
     /// <summary>
     /// Detects the gesture based on the given hand landmarks.
@@ -46,103 +69,147 @@ public static class GestureRecognizer
     /// <returns>The name of the detected gesture.</returns>
     public static string DetectGesture(NormalizedLandmarkList landmarks)
     {
-        if (landmarks == null || landmarks.Landmark == null || landmarks.Landmark.Count < 21)
+        string closestGesture = null;
+        var unknownGestureDistances = GetNormalizedLandmarkDistances(landmarks);
+
+        foreach (var gesture in gestureList)
         {
-            return NO_GESTURE;
+            if (CheckGestureMatch(unknownGestureDistances, gesture, closestGesture, gestureSqliteHandler, tolerance))
+            {
+                closestGesture = gesture;
+            }
         }
 
-        if (CheckClosedFistGesture(landmarks))
-        {
-            return CLOSED_FIST;
-        }
-        else if (CheckOpenPalmGesture(landmarks))
-        {
-            return OPEN_PALM;
-        }
-        else if (CheckThumbsUpGesture(landmarks))
-        {
-            return THUMBS_UP;
-        }
-        else if (CheckPointingGesture(landmarks))
-        {
-            return POINTING;
-        }
-
-        return NO_GESTURE;
+        currentClosestDistance.Clear();
+        return closestGesture ?? NO_GESTURE;
     }
 
-    private static bool CheckClosedFistGesture(NormalizedLandmarkList landmarks)
+    /// <summary>
+    /// Centers, rotates to a palm-aligned plane, and scales landmarks so palm width is 1.
+    /// </summary>
+    private static List<Vector3> NormalizeLandmarks(NormalizedLandmarkList lm)
     {
-        float thumbToPinkyDistance = GetDistance(landmarks, THUMB_MCP, PINKY_MCP);
+        var pts = new List<Vector3>();
+        foreach (var l in lm.Landmark)
+            pts.Add(new Vector3(l.X, l.Y, l.Z));
 
-        float thumbCurl = GetDistance(landmarks, THUMB_TIP, PINKY_DIP) / thumbToPinkyDistance;
-        float indexCurl = GetDistance(landmarks, INDEX_FINGER_TIP, INDEX_FINGER_MCP) / thumbToPinkyDistance;
-        float middleCurl = GetDistance(landmarks, MIDDLE_FINGER_TIP, MIDDLE_FINGER_MCP) / thumbToPinkyDistance;
-        float ringCurl = GetDistance(landmarks, RING_FINGER_TIP, RING_FINGER_MCP) / thumbToPinkyDistance;
-        float pinkyCurl = GetDistance(landmarks, PINKY_TIP, PINKY_MCP) / thumbToPinkyDistance;
+        // center at wrist
+        var wrist = pts[WRIST];
+        for (int i = 0; i < pts.Count; i++)
+            pts[i] -= wrist;
 
-        return thumbCurl < FingerClosedThresholds[0] &&
-               indexCurl < FingerClosedThresholds[1] &&
-               middleCurl < FingerClosedThresholds[2] &&
-               ringCurl < FingerClosedThresholds[3] &&
-               pinkyCurl < FingerClosedThresholds[4];
+        // build palm axes: X = wrist->middle_MCP, temp = wrist->index_MCP
+        var xAxis = pts[MIDDLE_FINGER_MCP].normalized;
+        var temp = pts[INDEX_FINGER_MCP].normalized;
+        var yAxis = (temp - Vector3.Project(temp, xAxis)).normalized;
+        var zAxis = Vector3.Cross(xAxis, yAxis);
+
+        // rotation matrix
+        var m = new Matrix4x4();
+        m.SetColumn(0, new Vector4(xAxis.x, xAxis.y, xAxis.z, 0));
+        m.SetColumn(1, new Vector4(yAxis.x, yAxis.y, yAxis.z, 0));
+        m.SetColumn(2, new Vector4(zAxis.x, zAxis.y, zAxis.z, 0));
+        m.SetColumn(3, new Vector4(0, 0, 0, 1));
+
+        // apply rotation
+        for (int i = 0; i < pts.Count; i++)
+            pts[i] = m.MultiplyPoint3x4(pts[i]);
+
+        // scale by average palm width
+        float d1 = Vector3.Distance(pts[WRIST], pts[MIDDLE_FINGER_MCP]);
+        float d2 = Vector3.Distance(pts[INDEX_FINGER_MCP], pts[PINKY_MCP]);
+        float scale = (d1 + d2) * 0.5f;
+        for (int i = 0; i < pts.Count; i++)
+            pts[i] /= scale;
+
+        return pts;
     }
 
-    private static bool CheckOpenPalmGesture(NormalizedLandmarkList landmarks)
+    /// <summary>
+    /// Computes normalized pairwise distances on a centered, aligned, unit-scaled hand.
+    /// </summary>
+    public static List<float> GetNormalizedLandmarkDistances(NormalizedLandmarkList landmarks)
     {
-        float thumbToPinkyDistance = GetDistance(landmarks, THUMB_MCP, PINKY_MCP);
+        var pts = NormalizeLandmarks(landmarks);
+        var distances = new List<float>();
 
-        float thumbExtension = GetDistance(landmarks, THUMB_TIP, WRIST) / thumbToPinkyDistance;
-        float indexExtension = GetDistance(landmarks, INDEX_FINGER_TIP, WRIST) / thumbToPinkyDistance;
-        float middleExtension = GetDistance(landmarks, MIDDLE_FINGER_TIP, WRIST) / thumbToPinkyDistance;
-        float ringExtension = GetDistance(landmarks, RING_FINGER_TIP, WRIST) / thumbToPinkyDistance;
-        float pinkyExtension = GetDistance(landmarks, PINKY_TIP, WRIST) / thumbToPinkyDistance;
+        for (int i = 0; i < pts.Count; i++)
+        {
+            for (int j = i + 1; j < pts.Count; j++)
+            {
+                distances.Add(Vector3.Distance(pts[i], pts[j]));
+            }
+        }
 
-        return thumbExtension > OpenPalmThreshold &&
-               indexExtension > OpenPalmThreshold &&
-               middleExtension > OpenPalmThreshold &&
-               ringExtension > OpenPalmThreshold &&
-               pinkyExtension > OpenPalmThreshold;
+        return distances;
     }
 
-    private static bool CheckThumbsUpGesture(NormalizedLandmarkList landmarks)
+    /// <summary>
+    /// Adapter method to compute distances from a list of Landmark objects.
+    /// </summary>
+    public static List<float> GetLandmarkDistances(List<Landmark> landmarks)
     {
-        float thumbToPinkyDistance = GetDistance(landmarks, THUMB_MCP, PINKY_MCP);
+        // Convert landmarks to normalized landmarks
+        var normalizedLandmarks = new NormalizedLandmarkList();
 
-        float thumbExtension = GetDistance(landmarks, THUMB_TIP, INDEX_FINGER_MCP) / thumbToPinkyDistance;
-        float indexCurl = GetDistance(landmarks, INDEX_FINGER_TIP, INDEX_FINGER_MCP) / thumbToPinkyDistance;
-        float middleCurl = GetDistance(landmarks, MIDDLE_FINGER_TIP, MIDDLE_FINGER_MCP) / thumbToPinkyDistance;
-        float ringCurl = GetDistance(landmarks, RING_FINGER_TIP, RING_FINGER_MCP) / thumbToPinkyDistance;
-        float pinkyCurl = GetDistance(landmarks, PINKY_TIP, PINKY_MCP) / thumbToPinkyDistance;
+        foreach (var lm in landmarks)
+        {
+            normalizedLandmarks.Landmark.Add(new NormalizedLandmark
+            {
+                X = lm.X,
+                Y = lm.Y,
+                Z = lm.Z
+            });
+        }
 
-        return thumbExtension > ThumbsUpThreshold &&
-               indexCurl < FingerClosedThresholds[1] &&
-               middleCurl < FingerClosedThresholds[2] &&
-               ringCurl < FingerClosedThresholds[3] &&
-               pinkyCurl < FingerClosedThresholds[4];
+        return GetNormalizedLandmarkDistances(normalizedLandmarks);
     }
 
-    private static bool CheckPointingGesture(NormalizedLandmarkList landmarks)
+    private static bool CheckGestureMatch(List<float> unknownDistances, string newGesture, string currentClosestGesture, GestureSqliteHandler handler, float tol)
     {
-        float thumbToPinkyDistance = GetDistance(landmarks, THUMB_MCP, PINKY_MCP);
+        var distances = new List<float>();
+        var known = knownGestureDistances[newGesture];
 
-        float indexExtension = GetDistance(landmarks, INDEX_FINGER_TIP, WRIST) / thumbToPinkyDistance;
-        float thumbCurl = GetDistance(landmarks, THUMB_TIP, INDEX_FINGER_MCP) / thumbToPinkyDistance;
-        float middleCurl = GetDistance(landmarks, MIDDLE_FINGER_TIP, MIDDLE_FINGER_MCP) / thumbToPinkyDistance;
-        float ringCurl = GetDistance(landmarks, RING_FINGER_TIP, RING_FINGER_MCP) / thumbToPinkyDistance;
-        float pinkyCurl = GetDistance(landmarks, PINKY_TIP, PINKY_MCP) / thumbToPinkyDistance;
+        for (int i = 0; i < known.Count; i++)
+        {
+            float distance = Mathf.Abs(unknownDistances[i] - known[i]);
+            if (distance > tol) return false;
+            distances.Add(distance);
+        }
 
-        return indexExtension > OpenPalmThreshold &&
-               thumbCurl < FingerClosedThresholds[0] &&
-               middleCurl < FingerClosedThresholds[2] &&
-               ringCurl < FingerClosedThresholds[3] &&
-               pinkyCurl < FingerClosedThresholds[4];
+        if (currentClosestGesture == null)
+        {
+            currentClosestDistance = new List<float>(distances);
+            return true;
+        }
+
+        // already have a closest gesture, check if this one is closer
+        int closer = 0;
+        for (int i = 0; i < currentClosestDistance.Count; i++)
+            if (currentClosestDistance[i] < distances[i]) closer++;
+
+        // this verifies 
+        return closer <= distances.Count / 2;
     }
+
+    // Unused (kept for reference)
 
     private static float GetDistance(NormalizedLandmarkList landmarks, int index1, int index2)
     {
         var landmark1 = landmarks.Landmark[index1];
         var landmark2 = landmarks.Landmark[index2];
+
+        float dx = landmark1.X - landmark2.X;
+        float dy = landmark1.Y - landmark2.Y;
+        float dz = landmark1.Z - landmark2.Z;
+
+        return Mathf.Sqrt(dx * dx + dy * dy + dz * dz);
+    }
+
+    private static float GetDatabaseDistance(List<NOVA.Scripts.Landmark> landmarks, int index1, int index2)
+    {
+        var landmark1 = landmarks[index1];
+        var landmark2 = landmarks[index2];
 
         float dx = landmark1.X - landmark2.X;
         float dy = landmark1.Y - landmark2.Y;

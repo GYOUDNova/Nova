@@ -85,10 +85,11 @@ public class GestureInputControllerTests
 
         // Act
         gestureInputController.AddGestureToChain(gesture1Name);
+        yield return new WaitForSeconds(2.2f); // Wait for 2.2 second to simulate time between gestures
         gestureInputController.AddGestureToChain(gesture2Name);
 
         // Wait for 2 seconds
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3.5f);
 
         // Assert
         Assert.AreEqual("TestGestureChain Activated", outputText, "The gesture input was not activated correctly.");
@@ -103,11 +104,13 @@ public class GestureInputControllerTests
 
         // Act
         gestureInputController.AddGestureToChain(gesture1Name);
+        yield return new WaitForSeconds(2.2f); // Wait for 2.2 second to simulate time between gestures
         gestureInputController.AddGestureToChain(gesture2Name);
+        yield return new WaitForSeconds(2.2f); // Wait for 2.2 second to simulate time between gestures
         gestureInputController.AddGestureToChain(gesture1Name);
 
         // Wait for 2 seconds
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3.5f);
 
         // Assert
         Assert.AreEqual("TestGesture Activated", outputText, "The gesture input was not activated correctly.");
