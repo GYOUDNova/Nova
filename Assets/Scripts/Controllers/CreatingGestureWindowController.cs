@@ -13,7 +13,8 @@ using Unity.EditorCoroutines.Editor;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-
+using Color = UnityEngine.Color;
+using Image = UnityEngine.UIElements.Image;
 using MPLandmark = Mediapipe.Tasks.Components.Containers.Landmark;
 using NOVALandmark = NOVA.Scripts.Landmark;
 
@@ -235,8 +236,8 @@ namespace NOVA.Scripts
             }
 
             // Normalize the gesture name and category to Title Case (e.g., "My Gesture")
-            gestureName = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(gestureName.ToLowerInvariant());
-            gestureCategory = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(gestureCategory.ToLowerInvariant());
+            gestureName = StringHandler.GetNormalizedString(gestureName);
+            gestureCategory = StringHandler.GetNormalizedString(gestureCategory);
 
             var dbHandler = GestureSqliteHandler.Instance();
 
@@ -261,7 +262,6 @@ namespace NOVA.Scripts
                 Landmarks = this.Landmarks
             };
 
-            // Fetch distances and add to QGI
             var distances = GestureRecognizer.GetLandmarkDistances(qgi.Landmarks);
             Distances.Clear();
 
@@ -270,8 +270,8 @@ namespace NOVA.Scripts
                 Distances.Add(new LandmarkDistance
                 {
                     Distance = distance,
-                    LandmarkId = 1,
-                    OtherLandmarkId = 2
+                    LandmarkId = 1, // TODO: REMOVE
+                    OtherLandmarkId = 2 // TODO: REMOVE
                 });
             }
 
