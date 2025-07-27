@@ -33,7 +33,7 @@ namespace NOVA.Scripts
         private VisualTreeAsset createGestureScreenAsset;
 
         private const string WindowName = "Create a Gesture";
-        private const string CameraFeedSelector = "camera-feed";
+        private const string CameraFeedSelector = "webcam-feed";
         private const string TakeImageButtonName = "TakeImageButton";
         private const string DropdownMenuName = "CameraDropdown";
         private const string MessageLabelName = "MessageLabel";
@@ -53,7 +53,7 @@ namespace NOVA.Scripts
         private Texture2D savingTexture;
         private EditorCoroutine edCoro;
 
-        private Button uploadImageButton;
+        private VisualElement uploadContainer;
         private Texture2D uploadedTexture;
         private bool suppressCameraSelection = false;
 
@@ -111,7 +111,12 @@ namespace NOVA.Scripts
             dropdownField = root.Q<DropdownField>(DropdownMenuName);
             dropdownField.RegisterValueChangedCallback(evt => OnCameraSelected(evt.newValue));
 
-            uploadImageButton = root.Q<Button>("UploadImageButton");
+            uploadContainer = root.Q<VisualElement>("UploadContainer");
+
+            var imageSizeHint = uploadContainer.Q<Label>("ImageSizeHint");
+            imageSizeHint.text = $"Min {HelperConstants.CameraWidth}x{HelperConstants.CameraHeight}";
+
+            var uploadImageButton = root.Q<Button>("UploadImageButton");
             uploadImageButton.RegisterCallback<ClickEvent>(evt => UploadImage());
 
             foreach (var device in WebCamTexture.devices)
@@ -148,12 +153,27 @@ namespace NOVA.Scripts
 
             try
             {
+                if (uploadedTexture != null)
+                {
+                    DestroyImmediate(uploadedTexture);
+                    uploadedTexture = null;
+                }
+
                 // Load the image
                 byte[] imageData = System.IO.File.ReadAllBytes(imagePath);
                 uploadedTexture = new Texture2D(HelperConstants.CameraWidth, HelperConstants.CameraHeight);
 
                 if (uploadedTexture.LoadImage(imageData))
                 {
+                    // Check minimum image dimensions
+                    if (uploadedTexture.width < HelperConstants.CameraWidth || uploadedTexture.height < HelperConstants.CameraHeight)
+                    {
+                        EditorTextHandler.DisplayMessage($"Image too small ({uploadedTexture.width}x{uploadedTexture.height}). " +
+                                                        $"Minimum size is {HelperConstants.CameraWidth}x{HelperConstants.CameraHeight}.",
+                                                        Color.red, messageText);
+                        return;
+                    }
+
                     // Resize to match camera dimensions if needed
                     uploadedTexture = ResizeTexture(uploadedTexture, HelperConstants.CameraWidth, HelperConstants.CameraHeight);
 
@@ -239,7 +259,7 @@ namespace NOVA.Scripts
                 }
                 else if (currentMode.Equals(GestureInputMode.ImageMode))
                 {
-                    uploadImageButton.style.display = DisplayStyle.None;
+                    uploadContainer.style.display = DisplayStyle.None;
                 }
             }
             else
@@ -273,7 +293,7 @@ namespace NOVA.Scripts
             }
 
             // Show upload button (keep it visible for switching images)
-            uploadImageButton.style.display = DisplayStyle.Flex;
+            uploadContainer.style.display = DisplayStyle.Flex;
         }
 
         private void EnterCameraMode()
@@ -282,7 +302,7 @@ namespace NOVA.Scripts
 
             // Show camera controls
             dropdownField.style.display = DisplayStyle.Flex;
-            uploadImageButton.style.display = DisplayStyle.None;
+            uploadContainer.style.display = DisplayStyle.None;
 
             // Clear uploaded texture
             if (uploadedTexture != null)
@@ -521,7 +541,7 @@ namespace NOVA.Scripts
             saveGestureButton.style.display = DisplayStyle.None;
             savingGestureContainer.style.display = DisplayStyle.None;
             takeImageButton.style.display = DisplayStyle.None;
-            uploadImageButton.style.display = DisplayStyle.Flex;
+            uploadContainer.style.display = DisplayStyle.Flex;
             dropdownField.style.display = DisplayStyle.Flex;
 
             // Clear text fields

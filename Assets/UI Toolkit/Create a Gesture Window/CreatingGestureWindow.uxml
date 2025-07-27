@@ -7,7 +7,10 @@
             <engine:VisualElement name="logo" class="logo" style="margin-top: 0;" />
             <engine:Label name="MessageLabel" class="error-text" />
             <engine:VisualElement name="HorizontalContainer" class="horizontal-container" style="width: 35%; margin-left: 280px;">
-                <engine:Button text="Upload Image" name="UploadImageButton" class="create-gesture-buttons" />
+                <engine:VisualElement name="UploadContainer" class="upload-container">
+                    <engine:Button text="Upload Image" name="UploadImageButton" class="create-gesture-buttons" />
+                    <engine:Label text="" name="ImageSizeHint" class="size-hint-text" />
+                </engine:VisualElement>
                 <engine:Button text="Take Image" name="TakeImageButton" class="create-gesture-buttons" />
                 <engine:VisualElement name="SavingGestureContainer" class="saving-gesture-container">
                     <engine:Button text="Save Image" name="SaveGestureButton" class="create-gesture-buttons" />
