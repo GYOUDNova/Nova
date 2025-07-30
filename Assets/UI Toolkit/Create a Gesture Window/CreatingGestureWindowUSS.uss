@@ -1,18 +1,22 @@
 .horizontal-container {
-    flex-direction: row;
-    width: 35%;
-    margin-left: 320px;
+   flex-direction: row;
+   width: 35%;
+   margin-left: 320px;
+   margin-bottom: 10px;
 }
 
 .error-text {
-    color: rgb(255, 0, 0);
-    margin-top: 3px;
-    margin-left: 280;
+   color: rgb(255, 0, 0);
+   margin-bottom: 5px;
+   margin-left: 280px;
+   margin-top: 10px;
 }
 
 .save-gesture-text-field {
-    width: 50%;
+   width: 50%;
+   margin-left: 10px;
 }
+
 
 .create-gesture-buttons {
     align-items: stretch;
@@ -22,21 +26,50 @@
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
     margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    padding-left: 5px; /* Make sure button has consistent internal padding */
+    padding-right: 5px;
 }
 
 .camera-dropdown {
-    width: 50%;
-    margin-left: 320px;
+   width: 50%;
+   margin-left: 320px;
+   margin-bottom: 8px;
+   margin-top: 3px;
 }
 
-.gesture-category-text-field{
-    width: 75%;
+.gesture-category-text-field {
+   width: 75%;
+   margin-left: 10px;
 }
 
-.saving-gesture-container{
-    flex-direction: row;
+.saving-gesture-container {
+   flex-direction: row;
+   align-items: flex-end;
+   margin-left: 15px;
 }
 
-.save-gesture-text-field{
-    width: 75%;
+.save-gesture-text-field {
+   width: 75%;
+   margin-right: 10px;
+}
+
+.upload-container {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 10px;
+    margin-left: 5px;
+    width: auto;
+}
+
+.size-hint-text {
+    font-size: 10px;
+    color: rgb(128, 128, 128);
+    margin-left: 5px
+    margin-top: 2px;
+    margin-bottom: 0;
+    -unity-text-align: middle-left;
+    white-space: nowrap;
+    align-self: flex-start;
 }
