@@ -82,6 +82,12 @@ namespace NOVA.Scripts
         // Distances list
         public List<LandmarkDistance> Distances { get; private set; } = new();
 
+        // Angles list
+        public List<LandmarkAngle> Angles { get; private set; } = new();
+
+        // Direction List
+        public List<LandmarkDirection> Directions { get; private set; } = new();
+
         [MenuItem("Window/UI Toolkit/Creating Gesture Screen")]
         public static void SetupAndShowWindow()
         {
@@ -493,7 +499,21 @@ namespace NOVA.Scripts
                 });
             }
 
+            var directions = GestureRecognizer.GetGestureDirections(qgi.Landmarks);
+            Directions.Clear();
+
+            foreach (var direction in directions)
+            {
+                Directions.Add(new LandmarkDirection
+                {
+                    Direction = direction,
+                    LandmarkId = 1, // TODO: REMOVE
+                    OtherLandmarkId = 2 // TODO: REMOVE
+                });
+            }
+
             qgi.Distances = Distances;
+            qgi.Direction = Directions;
             dbHandler.AddGesture(qgi);
 
             //  Internal check

@@ -498,6 +498,8 @@ namespace NOVA.Scripts
         public string ImageName;
         public List<Landmark> Landmarks;
         public List<LandmarkDistance> Distances;
+        //public List<LandmarkAngle> Angles;
+        public List<LandmarkDirection> Direction;
         public bool IsPredefined;
     }
 }
