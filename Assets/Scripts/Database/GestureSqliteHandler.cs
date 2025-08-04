@@ -43,6 +43,7 @@ namespace NOVA.Scripts
                     conn.CreateTable<RecognitionLog>();
                     conn.CreateTable<Landmark>();
                     conn.CreateTable<LandmarkDistance>();
+                    conn.CreateTable<LandmarkDirection>(); //Adding directions
                     conn.CreateTable<GestureImage>();
 
                     // Tables need to be populated in a specific order in order to
@@ -320,6 +321,14 @@ namespace NOVA.Scripts
                     distance.GestureId = gestureId;
                     distance.IsPredefined = qgi.IsPredefined;
                     conn.Insert(distance);
+                }
+
+                // Insert directions
+                foreach (var direction in qgi.Direction)
+                {
+                    direction.GestureId = gestureId;
+                    direction.IsPredefined = qgi.IsPredefined;
+                    conn.Insert(direction);
                 }
             }
         }
