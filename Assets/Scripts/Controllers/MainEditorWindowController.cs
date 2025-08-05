@@ -9,7 +9,6 @@ namespace NOVA.Scripts
     /// <summary>
     /// This class is the controller for the main screen of the settings window
     /// </summary>
-    [InitializeOnLoad]
     public class MainEditorWindowController : EditorWindow
     {
         [SerializeField]
@@ -20,7 +19,6 @@ namespace NOVA.Scripts
         private Button creatingGestureButton;
         private Button gestureListButton;
         private Button settingsCalibrationButton;
-        private Button creatingGestureWithImageButton;
 
         /*Window Settings*/
         private const float MinWindowHeight = 600;
@@ -63,10 +61,6 @@ namespace NOVA.Scripts
 
             settingsCalibrationButton = root.Q<Button>("SettingsCalibrationButton");
             settingsCalibrationButton.RegisterCallback<ClickEvent>(evt => OpenSubScreen(evt, SubScreen.SettingsCalibration));
-
-            // TO BE REMOVED:
-            //creatingGestureWithImageButton = root.Q<Button>("CreateGestureUsingImageButton");
-            //creatingGestureWithImageButton.RegisterCallback<ClickEvent>(evt => OpenSubScreen(evt, SubScreen.CreateGestureUsingImage));
         }
 
         private void OpenSubScreen(ClickEvent evt, SubScreen subScreenToOpen)
@@ -82,9 +76,6 @@ namespace NOVA.Scripts
                 case SubScreen.SettingsCalibration:
                     SettingsCalibrationWindowController.SetupAndShowWindow();
                     break;
-                //case SubScreen.CreateGestureUsingImage:
-                //GestureUsingImageController.SetupAndShowWindow();
-                //break;
                 default:
                     break;
             }
