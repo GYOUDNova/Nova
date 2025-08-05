@@ -413,7 +413,7 @@ namespace NOVA.Scripts
                 conn.Delete<GestureImage>(gestureData.GestureImageName);
                 conn.Table<Landmark>().Delete(l => l.GestureId == gestureID && l.IsPredefined == gestureData.IsPredefined);
                 conn.Table<LandmarkDistance>().Delete(ld => ld.GestureId == gestureID && ld.IsPredefined == gestureData.IsPredefined);
-
+                conn.Table<LandmarkDirection>().Delete(id => id.GestureId == gestureID && id.IsPredefined == gestureData.IsPredefined);
             }
         }
 
