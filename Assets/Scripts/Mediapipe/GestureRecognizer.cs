@@ -3,6 +3,7 @@ using UnityEngine;
 using Mediapipe;
 using NOVA.Scripts;
 using Landmark = NOVA.Scripts.Landmark;
+using System.Linq;
 
 public static class GestureRecognizer
 {
@@ -42,6 +43,7 @@ public static class GestureRecognizer
     private static float tolerance = 0.1f; // Default tolerance for gesture matching
     private static int toleranceMultipler = 8; // Multiplier for tolerance based on configuration
     private static Dictionary<string, List<float>> knownGestureDistances = new Dictionary<string, List<float>>();
+    private static Dictionary<string, List<string>> knownGestureDirection = new Dictionary<string, List<string>>();
 
     // on awake
     static GestureRecognizer()
@@ -59,6 +61,7 @@ public static class GestureRecognizer
         foreach (var gesture in gestureList)
         {
             knownGestureDistances.Add(gesture, gestureSqliteHandler.GetDistancesByName(gesture));
+            knownGestureDirection.Add(gesture, gestureSqliteHandler.GetDirectionsByName(gesture));
         }
     }
 
@@ -71,12 +74,22 @@ public static class GestureRecognizer
     {
         string closestGesture = null;
         var unknownGestureDistances = GetNormalizedLandmarkDistances(landmarks);
+        var unknownGestureDirection = GetDetectedGestureDirection(landmarks);
 
         foreach (var gesture in gestureList)
         {
-            if (CheckGestureMatch(unknownGestureDistances, gesture, closestGesture, gestureSqliteHandler, tolerance))
+            var storedDirections = knownGestureDirection[gesture];
+
+            bool directionsMatch = storedDirections.SequenceEqual(unknownGestureDirection);
+
+            Debug.Log($"Comparing against Gesture {gesture} with directions [{string.Join(", ", storedDirections)}] against detected gesture with [{string.Join(", ", unknownGestureDirection)}]");
+
+            if (directionsMatch)
             {
-                closestGesture = gesture;
+                if (CheckGestureMatch(unknownGestureDistances, gesture, closestGesture, gestureSqliteHandler, tolerance))
+                {
+                    closestGesture = gesture;
+                }
             }
         }
 
@@ -123,6 +136,30 @@ public static class GestureRecognizer
             pts[i] /= scale;
 
         return pts;
+    }
+
+    public static List<string> GetDetectedGestureDirection(NormalizedLandmarkList landmarks)
+    {
+        List<string> directions = new List<string>();
+
+        if (landmarks.Landmark.Count >= 21) // Ensure we have all hand landmarks
+        {
+            // Wrist (0) to Index Finger Tip (8) - Inverted (short-term fix)
+            string directionWristToIndex = GetGestureDirection(
+                new Vector3(landmarks.Landmark[8].X, landmarks.Landmark[8].Y, landmarks.Landmark[8].Z),
+                new Vector3(landmarks.Landmark[0].X, landmarks.Landmark[0].Y, landmarks.Landmark[0].Z)                
+            );
+            directions.Add(directionWristToIndex);
+
+            // Index Finger Tip (8) to Middle Finger Tip (12) - Inverted (short-term fix)
+            //string directionIndexToMiddle = GetGestureDirection(
+            //    new Vector3(landmarks.Landmark[12].X, landmarks.Landmark[12].Y, landmarks.Landmark[12].Z),
+            //    new Vector3(landmarks.Landmark[8].X, landmarks.Landmark[8].Y, landmarks.Landmark[8].Z)
+            //);
+            //directions.Add(directionIndexToMiddle);
+        }
+
+        return directions;
     }
 
     /// <summary>
@@ -224,12 +261,12 @@ public static class GestureRecognizer
             directions.Add(directionWristToIndex);
 
             // Example: Index Finger Tip (Landmark 8) to Middle Finger Tip (Landmark 12)
-            string directionIndexToMiddle = GetGestureDirection(
-                new Vector3(landmarks[8].X, landmarks[8].Y, landmarks[8].Z), // Index Tip
-                new Vector3(landmarks[12].X, landmarks[12].Y, landmarks[12].Z) // Middle Tip
-            );
+            //string directionIndexToMiddle = GetGestureDirection(
+            //    new Vector3(landmarks[8].X, landmarks[8].Y, landmarks[8].Z), // Index Tip
+            //    new Vector3(landmarks[12].X, landmarks[12].Y, landmarks[12].Z) // Middle Tip
+            //);
 
-            directions.Add(directionIndexToMiddle);
+            //directions.Add(directionIndexToMiddle);
         }
 
         return directions;

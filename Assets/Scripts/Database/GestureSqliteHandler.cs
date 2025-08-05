@@ -148,6 +148,15 @@ namespace NOVA.Scripts
             }
         }
 
+        // Mehtod to retrieve all directions for a gesture by its name
+        public List<string> GetDirectionsByName(string gestureName)
+        {
+            lock (lockObject)
+            {
+                return GetGestureInfo(gestureName).Directions.ConvertAll(id => id.Direction);
+            }
+        }
+
         // Method to retrieve all gestures from the database, limited to only UI information
         public List<GestureInfo> GetUIGesturesByCategory(string categoryName)
         {
@@ -221,6 +230,7 @@ namespace NOVA.Scripts
                 // since they are stored in separate tables for predefined and custom gestures
                 var landmarks = conn.Table<Landmark>().Where(l => l.GestureId == gestureId && l.IsPredefined == gestureData.IsPredefined).ToList();
                 var distances = conn.Table<LandmarkDistance>().Where(ld => ld.GestureId == gestureId && ld.IsPredefined == gestureData.IsPredefined).ToList();
+                var directions = conn.Table<LandmarkDirection>().Where(id => id.GestureId == gestureId && id.IsPredefined == gestureData.IsPredefined).ToList();
 
                 return new GestureInfo
                 {
@@ -230,7 +240,8 @@ namespace NOVA.Scripts
                     Image = image,
                     Data = gestureData,
                     Landmarks = landmarks,
-                    Distances = distances
+                    Distances = distances,
+                    Directions = directions
                 };
             }
         }
@@ -486,6 +497,7 @@ namespace NOVA.Scripts
         public GestureData Data;
         public List<Landmark> Landmarks;
         public List<LandmarkDistance> Distances;
+        public List<LandmarkDirection> Directions;
         public readonly bool IsPredefined => Data.IsPredefined;
 
         public readonly bool Equals(QueryableGestureInfo qgi)
@@ -495,7 +507,8 @@ namespace NOVA.Scripts
                    Image.Name == qgi.ImageName &&
                    IsPredefined == qgi.IsPredefined &&
                    Landmarks.Count == qgi.Landmarks.Count &&
-                   Distances.Count == qgi.Distances.Count;
+                   Distances.Count == qgi.Distances.Count &&
+                   Directions.Count == qgi.Direction.Count;
         }
     }
 

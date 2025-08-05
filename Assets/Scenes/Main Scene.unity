@@ -454,13 +454,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GestureDictionary:
     GestureInputs:
-    - GestureName: Right Point
+    - GestureName: Open Palm Left
       GestureEvent:
         m_PersistentCalls:
           m_Calls:
           - m_Target: {fileID: 1739914560}
             m_TargetAssemblyTypeName: NOVA.Scripts.PlayerInput, NOVA
-            m_MethodName: ToggleColor
+            m_MethodName: ToggleColor_GreenBlue
             m_Mode: 1
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
@@ -470,7 +470,7 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-    - GestureName: Left Point
+    - GestureName: Open Palm Up
       GestureEvent:
         m_PersistentCalls:
           m_Calls:
@@ -486,13 +486,13 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-    - GestureName: Call Me
+    - GestureName: Open Palm Right
       GestureEvent:
         m_PersistentCalls:
           m_Calls:
           - m_Target: {fileID: 1739914560}
             m_TargetAssemblyTypeName: NOVA.Scripts.PlayerInput, NOVA
-            m_MethodName: MoveLeft
+            m_MethodName: ToggleColor_YellowRed
             m_Mode: 1
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
@@ -502,13 +502,13 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-    - GestureName: Thumbs Up
+    - GestureName: Closed Fist
       GestureEvent:
         m_PersistentCalls:
           m_Calls:
           - m_Target: {fileID: 1739914560}
             m_TargetAssemblyTypeName: NOVA.Scripts.PlayerInput, NOVA
-            m_MethodName: MoveRight
+            m_MethodName: ToggleColor_WhiteBlack
             m_Mode: 1
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
