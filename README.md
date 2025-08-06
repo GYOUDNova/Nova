@@ -1,3 +1,0 @@
-# Nova
-
-## Placeholder
