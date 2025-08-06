@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI CountText;
 
     // UI Text element to display win message (if needed).
-    public GameObject winTextObject;
+    public GameObject WinTextObject;
 
     // Start is called before the first frame update.
     void Start()
@@ -43,7 +43,14 @@ public class PlayerController : MonoBehaviour
         SetCountText();
 
         // Ensure the win text is hidden at the start
-        winTextObject.SetActive(false);
+        WinTextObject.SetActive(false);
+    }
+
+    // This function is called to set movement from a gesture input.
+    public void SetMovementFromGesture(Vector2 movement)
+    {
+        movementX = movement.x;
+        movementY = movement.y;
     }
 
     // This function is called when a move input is detected.
@@ -84,7 +91,7 @@ public class PlayerController : MonoBehaviour
             // If all items are collected, display the win message
             if (count == totalCount)
             {
-                winTextObject.SetActive(true);
+                WinTextObject.SetActive(true);
             }
         }
     }
