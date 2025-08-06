@@ -70,6 +70,8 @@
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSourceProvider.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\RunningMode.cs" />
     <Compile Include="Assets\Scripts\Helpers\HelperConstants.cs" />
+    <Compile Include="Assets\Scripts\Database\LandmarkDirection.cs" />
+    <Compile Include="Assets\Scripts\Database\LandmarkAngle.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkDetectionConfigWindow.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\GestureInputMapping.cs" />
     <Compile Include="Assets\Scripts\Database\GestureImageExtension.cs" />

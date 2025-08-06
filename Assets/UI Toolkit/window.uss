@@ -22,7 +22,7 @@
 
 .webcam-feed {
     width: 600px;
-    height: 600px;
+    height: 480px;
     align-self: center;
 }
 

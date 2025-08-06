@@ -25,6 +25,12 @@
                 </engine:VisualElement>
                 <engine:VisualElement name="ButtonBottom" class="button-bottom" />
             </engine:Button>
+            <engine:Button name="CreateGestureUsingImageButton" class="button menu-button" style="display: none;">
+                <engine:VisualElement name="ButtonTop" class="button-top">
+                    <engine:Label text="Create a Gesture (Image)" name="ButtonText" class="button-text" />
+                </engine:VisualElement>
+                <engine:VisualElement name="ButtonBottom" class="button-bottom" />
+            </engine:Button>
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

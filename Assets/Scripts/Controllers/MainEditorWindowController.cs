@@ -9,7 +9,6 @@ namespace NOVA.Scripts
     /// <summary>
     /// This class is the controller for the main screen of the settings window
     /// </summary>
-    [InitializeOnLoad]
     public class MainEditorWindowController : EditorWindow
     {
         [SerializeField]
@@ -18,7 +17,6 @@ namespace NOVA.Scripts
         private VisualElement root;
 
         private Button creatingGestureButton;
-        private Button addingCombinationButton;
         private Button gestureListButton;
         private Button settingsCalibrationButton;
 
