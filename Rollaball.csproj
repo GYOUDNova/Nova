@@ -61,13 +61,13 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Rollaball\Scripts\Rotator.cs" />
-    <Compile Include="Assets\Rollaball\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Rollaball\Scripts\CameraController.cs" />
-    <Compile Include="Assets\Rollaball\Scripts\RollaballGestureController.cs" />
+    <Compile Include="Assets\Samples\Rollaball\Scripts\RollaballGestureController.cs" />
+    <Compile Include="Assets\Samples\Rollaball\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Samples\Rollaball\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Samples\Rollaball\Scripts\Rotator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Rollaball\Scripts\Rollaball.asmdef" />
+    <None Include="Assets\Samples\Rollaball\Scripts\Rollaball.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
