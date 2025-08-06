@@ -252,7 +252,7 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
             //}
         }
 
-        private NormalizedLandmarkList ConvertToNormalizedLandmarkList(Mediapipe.Tasks.Components.Containers.NormalizedLandmarks source)
+        public static NormalizedLandmarkList ConvertToNormalizedLandmarkList(Mediapipe.Tasks.Components.Containers.NormalizedLandmarks source)
         {
             var landmarkList = new NormalizedLandmarkList();
 

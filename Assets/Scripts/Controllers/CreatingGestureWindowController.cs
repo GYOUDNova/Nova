@@ -15,7 +15,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Color = UnityEngine.Color;
 using Image = UnityEngine.UIElements.Image;
-using MPLandmark = Mediapipe.Tasks.Components.Containers.Landmark;
+using MPLandmark = Mediapipe.Tasks.Components.Containers.NormalizedLandmark;
 using NOVALandmark = NOVA.Scripts.Landmark;
 
 
@@ -78,6 +78,9 @@ namespace NOVA.Scripts
 
         // Landmarks list
         public List<NOVALandmark> Landmarks { get; private set; } = new();
+
+        // Normalized landmarks list
+        public Mediapipe.NormalizedLandmarkList NormalizedLandmarks { get; private set; } = new();
 
         // Distances list
         public List<LandmarkDistance> Distances { get; private set; } = new();
@@ -249,7 +252,10 @@ namespace NOVA.Scripts
             if (taskApi.TryDetect(mpImage, imageProcessingOptions, ref result))
             {
                 // Get the first detected hand
-                var handWorldLandmarks = result.handWorldLandmarks.FirstOrDefault();
+                var handWorldLandmarks = result.handLandmarks.FirstOrDefault();
+
+                // Get the normalized landmarks
+                NormalizedLandmarks = HandLandmarkerRunner.ConvertToNormalizedLandmarkList(handWorldLandmarks);
 
                 // Process the landmarks
                 yield return TranslateMPLandmarks(handWorldLandmarks.landmarks);
@@ -486,7 +492,7 @@ namespace NOVA.Scripts
                 Landmarks = this.Landmarks
             };
 
-            var distances = GestureRecognizer.GetLandmarkDistances(qgi.Landmarks);
+            var distances = GestureRecognizer.GetNormalizedLandmarkDistances(NormalizedLandmarks);
             Distances.Clear();
 
             foreach (var distance in distances)
@@ -499,7 +505,7 @@ namespace NOVA.Scripts
                 });
             }
 
-            var directions = GestureRecognizer.GetGestureDirections(qgi.Landmarks);
+            var directions = GestureRecognizer.GetGestureDirections(NormalizedLandmarks);
             Directions.Clear();
 
             foreach (var direction in directions)

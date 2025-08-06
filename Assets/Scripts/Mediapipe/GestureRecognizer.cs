@@ -152,11 +152,11 @@ public static class GestureRecognizer
             directions.Add(directionWristToIndex);
 
             // Index Finger Tip (8) to Middle Finger Tip (12) - Inverted (short-term fix)
-            //string directionIndexToMiddle = GetGestureDirection(
-            //    new Vector3(landmarks.Landmark[12].X, landmarks.Landmark[12].Y, landmarks.Landmark[12].Z),
-            //    new Vector3(landmarks.Landmark[8].X, landmarks.Landmark[8].Y, landmarks.Landmark[8].Z)
-            //);
-            //directions.Add(directionIndexToMiddle);
+            string directionIndexToMiddle = GetGestureDirection(
+                new Vector3(landmarks.Landmark[12].X, landmarks.Landmark[12].Y, landmarks.Landmark[12].Z),
+                new Vector3(landmarks.Landmark[8].X, landmarks.Landmark[8].Y, landmarks.Landmark[8].Z)
+            );
+            directions.Add(directionIndexToMiddle);
         }
 
         return directions;
@@ -246,28 +246,25 @@ public static class GestureRecognizer
         }
     }
 
-    public static List<string> GetGestureDirections(List<Landmark> landmarks)
+    public static List<string> GetGestureDirections(NormalizedLandmarkList landmarks)
     {
         List<string> directions = new List<string>();
 
-        if (landmarks.Count >= 5)
-        {
-            // Example: Wrist (Landmark 0) to Index Finger Tip (Landmark 8)
-            string directionWristToIndex = GetGestureDirection(
-                new Vector3(landmarks[0].X, landmarks[0].Y, landmarks[0].Z), // Wrist
-                new Vector3(landmarks[8].X, landmarks[8].Y, landmarks[8].Z)  // Index Tip
-            );
+        // Example: Wrist (Landmark 0) to Index Finger Tip (Landmark 8)
+        string directionWristToIndex = GetGestureDirection(
+            new Vector3(landmarks.Landmark[0].X, landmarks.Landmark[0].Y, landmarks.Landmark[0].Z), // Wrist
+            new Vector3(landmarks.Landmark[8].X, landmarks.Landmark[8].Y, landmarks.Landmark[8].Z)  // Index Tip
+        );
 
-            directions.Add(directionWristToIndex);
+        directions.Add(directionWristToIndex);
 
-            // Example: Index Finger Tip (Landmark 8) to Middle Finger Tip (Landmark 12)
-            //string directionIndexToMiddle = GetGestureDirection(
-            //    new Vector3(landmarks[8].X, landmarks[8].Y, landmarks[8].Z), // Index Tip
-            //    new Vector3(landmarks[12].X, landmarks[12].Y, landmarks[12].Z) // Middle Tip
-            //);
+        // Example: Index Finger Tip (Landmark 8) to Middle Finger Tip (Landmark 12)
+        string directionIndexToMiddle = GetGestureDirection(
+            new Vector3(landmarks.Landmark[8].X, landmarks.Landmark[8].Y, landmarks.Landmark[8].Z), // Index Tip
+            new Vector3(landmarks.Landmark[12].X, landmarks.Landmark[12].Y, landmarks.Landmark[12].Z) // Middle Tip
+        );
 
-            //directions.Add(directionIndexToMiddle);
-        }
+        directions.Add(directionIndexToMiddle);
 
         return directions;
     }
