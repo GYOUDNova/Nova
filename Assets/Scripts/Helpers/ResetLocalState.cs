@@ -14,8 +14,6 @@ namespace NOVA.Scripts
         [MenuItem("Window/Reset Local State")]
         public static void Reset()
         {
-            var gestureSqliteHandler = GestureSqliteHandler.Instance();
-
             // Remove any files in the GestureAssets directory
             string gestureAssetsDir = Path.Combine(Application.streamingAssetsPath, HelperConstants.GestureAssetsDirName);
 

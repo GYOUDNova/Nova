@@ -6,11 +6,15 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Mediapipe.Tasks.Vision.Core;
 using Mediapipe.Tasks.Vision.HandLandmarker;
 using NOVA.Scripts;
 using UnityEngine;
 using UnityEngine.Rendering;
+using System.Text.RegularExpressions;
+using UnityEngine.UI;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Mediapipe.Unity.Sample.HandLandmarkDetection
 {
@@ -18,8 +22,13 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
     {
         [SerializeField] private HandLandmarkerResultAnnotationController _handLandmarkerResultAnnotationController;
         [SerializeField] private GestureInputController gestureInputController;
+        [SerializeField] private Text gestureName;
 
         private Experimental.TextureFramePool _textureFramePool;
+
+        [Header("Customization Options")]
+        [Tooltip("The camera name to use for hand landmark detection. Empty means default")]
+        public string CameraName = string.Empty;
 
         public readonly HandLandmarkDetectionConfig config = new HandLandmarkDetectionConfig();
 
@@ -46,6 +55,35 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
             Debug.Log(config.RunningMode);
             taskApi = HandLandmarker.CreateFromOptions(options, GpuManager.GpuResources);
             var imageSource = ImageSourceProvider.ImageSource;
+
+            // we cannot be 100% sure that the camera name matches one available, so we need to find a camera with a name
+            // *like (regex)* the one specified, or the default camera if none is found/specified.
+            var sources = imageSource.sourceCandidateNames.ToList();
+
+            if (!string.IsNullOrEmpty(CameraName))
+            {
+                var cameraNameRegex = new Regex(CameraName, RegexOptions.IgnoreCase);
+                int match = -1;
+
+                // find the first match available
+                foreach (var source in sources)
+                {
+                    if (cameraNameRegex.IsMatch(source))
+                    {
+                        Debug.Log($"Using camera source: {source}");
+
+                        // get the ID of the match
+                        match = sources.FindIndex(s => s == source);
+                        imageSource.SelectSource(match);
+                        break;
+                    }
+                }
+
+                if (match == -1)
+                {
+                    Debug.LogWarning($"No camera found matching '{CameraName}', using default camera.");
+                }
+            }
 
             yield return imageSource.Play();
 
@@ -182,6 +220,11 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
             if (result.handLandmarks == null)
             {
                 Debug.Log("No hand landmarks detected");
+                UnityMainThreadDispatcher.Enqueue(() =>
+                {
+                    gestureName.text = "No Gesture";
+                });
+
                 return;
             }
 
@@ -199,25 +242,22 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
                     Debug.Log($"Detected gesture: {gesture}");
                     UnityMainThreadDispatcher.Enqueue(() =>
                     {
+                        gestureName.text = $"{gesture}";
                         gestureInputController.AddGestureToChain(gesture);
                     });
-                    //gestureInputController.ActivateGestureInput(gesture);
-                    //GestureEvent.TriggerGesture(gesture); // Trigger the gesture recognition event
                 }
                 else
                 {
                     Debug.Log("No recognized gesture detected");
+                    UnityMainThreadDispatcher.Enqueue(() =>
+                    {
+                        gestureName.text = "No Gesture";
+                    });
                 }
             }
-
-            //for (int i = 0; i < result.handLandmarks.Count; i++)
-            //{
-            //    var landmarks = result.handLandmarks[i];
-            //    Debug.Log(landmarks);
-            //}
         }
 
-        private NormalizedLandmarkList ConvertToNormalizedLandmarkList(Mediapipe.Tasks.Components.Containers.NormalizedLandmarks source)
+        public static NormalizedLandmarkList ConvertToNormalizedLandmarkList(Mediapipe.Tasks.Components.Containers.NormalizedLandmarks source)
         {
             var landmarkList = new NormalizedLandmarkList();
 
