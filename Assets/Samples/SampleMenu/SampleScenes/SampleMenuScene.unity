@@ -183,71 +183,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!224 &410465438 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8571076844135231236, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-  m_PrefabInstance: {fileID: 955560776}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &590769753
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 797542013}
-    m_Modifications:
-    - target: {fileID: 7434967355688441420, guid: 87a9be2a7620991a78342ef9a56fa62c, type: 3}
-      propertyPath: m_Name
-      value: Multi HandLandmarkList Annotation
-      objectReference: {fileID: 0}
-    - target: {fileID: 7434967355688441423, guid: 87a9be2a7620991a78342ef9a56fa62c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7434967355688441423, guid: 87a9be2a7620991a78342ef9a56fa62c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7434967355688441423, guid: 87a9be2a7620991a78342ef9a56fa62c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7434967355688441423, guid: 87a9be2a7620991a78342ef9a56fa62c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7434967355688441423, guid: 87a9be2a7620991a78342ef9a56fa62c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7434967355688441423, guid: 87a9be2a7620991a78342ef9a56fa62c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7434967355688441423, guid: 87a9be2a7620991a78342ef9a56fa62c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7434967355688441423, guid: 87a9be2a7620991a78342ef9a56fa62c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7434967355688441423, guid: 87a9be2a7620991a78342ef9a56fa62c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7434967355688441423, guid: 87a9be2a7620991a78342ef9a56fa62c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7434967355688441420, guid: 87a9be2a7620991a78342ef9a56fa62c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 855252378}
-  m_SourcePrefab: {fileID: 100100000, guid: 87a9be2a7620991a78342ef9a56fa62c, type: 3}
 --- !u!1 &619177159
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,68 +304,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!224 &784654858 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-  m_PrefabInstance: {fileID: 2103097275}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &797542012 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8798066379235852099, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-  m_PrefabInstance: {fileID: 2103097275}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &797542013 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7074087083388479136, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-  m_PrefabInstance: {fileID: 2103097275}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &797542014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 797542012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b085c374a6772aba491e20d7d9d980db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  annotation: {fileID: 855252379}
-  _visualizeZ: 1
---- !u!1 &855252376 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7434967355688441420, guid: 87a9be2a7620991a78342ef9a56fa62c, type: 3}
-  m_PrefabInstance: {fileID: 590769753}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &855252377 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7434967355688441423, guid: 87a9be2a7620991a78342ef9a56fa62c, type: 3}
-  m_PrefabInstance: {fileID: 590769753}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &855252378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 855252376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 723447a9c1e13584888a95a1ac00f3c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &855252379 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -8837774153085666347, guid: 87a9be2a7620991a78342ef9a56fa62c, type: 3}
-  m_PrefabInstance: {fileID: 590769753}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 855252376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ba3c50c2cb46dc9e916dd3a33c8a488, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &940469631
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,7 +441,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!1001 &955560776
+--- !u!1001 &1794169751
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -576,403 +449,372 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8571076842338426121, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
+    - target: {fileID: 492684640050430795, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: m_Name
-      value: Main Canvas
+      value: Gesture Recognizer
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426122, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_Camera
+    - target: {fileID: 4723969441337478589, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.33948722
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723969441337478589, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 17.002787
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723969441337478589, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.994298
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723969441337478589, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723969441337478589, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723969441337478589, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723969441337478589, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723969441337478589, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723969441337478589, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723969441337478589, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[0].GestureName
+      value: Closed Fist L
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[1].GestureName
+      value: Open Palm L
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[2].GestureName
+      value: Peace Sign L
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[3].GestureName
+      value: One Finger L
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[4].GestureName
+      value: One Finger R
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[5].GestureName
+      value: Peace Sign R
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureName
+      value: Open Palm R
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[7].GestureName
+      value: Closed Fist R
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[0].GestureEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[1].GestureEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[2].GestureEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[3].GestureEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[4].GestureEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[5].GestureEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[7].GestureEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[0].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[1].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[2].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[3].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[4].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[5].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[7].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[0].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 388874805}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[1].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 388874805}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[2].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 388874805}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[3].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 388874805}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[4].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 388874805}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[5].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 388874805}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 388874805}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 388874805}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[7].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 388874805}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[0].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426122, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[1].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[2].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[3].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[4].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[5].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[7].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[0].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HideInformationView
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[1].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowInformationView
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[2].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetInformationText
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[3].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetInformationText
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_LocalRotation.w
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[4].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetInformationText
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[5].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetInformationText
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowInformationView
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetInformationText
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[7].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HideInformationView
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[0].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NOVA.Scripts.InfoWindowPresenter, NOVA
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[1].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NOVA.Scripts.InfoWindowPresenter, NOVA
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[2].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NOVA.Scripts.InfoWindowPresenter, NOVA
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[3].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NOVA.Scripts.InfoWindowPresenter, NOVA
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[4].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NOVA.Scripts.InfoWindowPresenter, NOVA
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[5].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NOVA.Scripts.InfoWindowPresenter, NOVA
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NOVA.Scripts.InfoWindowPresenter, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: NOVA.Scripts.InfoWindowPresenter, NOVA
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[7].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NOVA.Scripts.InfoWindowPresenter, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[2].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[3].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8571076842583978917, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_AnchorMin.x
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[4].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842583978917, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[5].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842583978917, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 600
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842583978917, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 600
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842583978917, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -400
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[7].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8571076842583978917, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -400
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[0].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 8571076842341243440, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-    - {fileID: 8571076843876106078, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 8571076844135231236, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 784654858}
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
---- !u!1 &1938498382
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1938498386}
-  - component: {fileID: 1938498385}
-  - component: {fileID: 1938498384}
-  - component: {fileID: 1938498383}
-  m_Layer: 0
-  m_Name: Solution
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1938498383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938498382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aebc1dd426bb0cc46926fb295e83bc16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GestureDictionary:
-    GestureInputs:
-    - GestureName: Closed Fist
-      GestureEvent:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 388874805}
-            m_TargetAssemblyTypeName: NOVA.Scripts.InfoWindowPresenter, NOVA
-            m_MethodName: HideInformationView
-            m_Mode: 1
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
-    - GestureName: Open Palm
-      GestureEvent:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 388874805}
-            m_TargetAssemblyTypeName: NOVA.Scripts.InfoWindowPresenter, NOVA
-            m_MethodName: ShowInformationView
-            m_Mode: 1
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
-    - GestureName: Peace Sign
-      GestureEvent:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 388874805}
-            m_TargetAssemblyTypeName: NOVA.Scripts.InfoWindowPresenter, NOVA
-            m_MethodName: SetInformationText
-            m_Mode: 3
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 2
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
-    - GestureName: One Finger
-      GestureEvent:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 388874805}
-            m_TargetAssemblyTypeName: NOVA.Scripts.InfoWindowPresenter, NOVA
-            m_MethodName: SetInformationText
-            m_Mode: 3
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 1
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
-  GestureChainDictionary:
-    GestureChainInputs: []
---- !u!114 &1938498384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938498382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d4b793d25d7814aaffb37367c6e62e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1938498385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938498382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4695534c593051343bd98034ab946818, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bootstrapPrefab: {fileID: 968918444066301895, guid: d99373df24f37ff468e600fe39004d76, type: 3}
-  screen: {fileID: 2034664135}
-  runningMode: 0
-  _handLandmarkerResultAnnotationController: {fileID: 797542014}
-  gestureInputController: {fileID: 1938498383}
---- !u!4 &1938498386
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938498382}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 405.5, y: 265.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2034664135 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2020366215714292840, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-  m_PrefabInstance: {fileID: 2103097275}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 827c4431af677e057aa6f14170d0785c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1001 &2103097275
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 410465438}
-    m_Modifications:
-    - target: {fileID: 2020366215714292840, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_Enabled
-      value: 1
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[1].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[2].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[3].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[4].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[5].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014650, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014651, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: m_Name
-      value: Annotatable Screen
-      objectReference: {fileID: 0}
-    - target: {fileID: 3259285889726014655, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      propertyPath: _fitMode
-      value: 1
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[7].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7074087083388479136, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 855252377}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8798066379235852099, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 797542014}
-  m_SourcePrefab: {fileID: 100100000, guid: 5713b959e3c77a58fb258133fc8e4aef, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 940469634}
   - {fileID: 619177161}
-  - {fileID: 1938498386}
   - {fileID: 388874807}
-  - {fileID: 955560776}
+  - {fileID: 1794169751}
