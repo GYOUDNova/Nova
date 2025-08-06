@@ -1,0 +1,34 @@
+{
+    "name": "com.gyoudnova.handrecognition",
+    "version": "1.0.0",
+    "displayName": "Hand Recognition",
+    "description": "This is the package for hand recognition project created by Gyoud Nova",
+    "unity": "6000.0",
+    "unityRelease" : "39f1",
+  "dependencies": {
+    "com.gilzoide.sqlite-net": "1.2.3", 
+    "com.github.homuler.mediapipe": "0.16.1",
+    "com.unity.ugui": "2.0.0",
+    "com.unity.editorcoroutines": "1.0.0"   
+  },
+   "keywords": [
+      "Webcam",
+      "Hand Gesture",
+      "Sign language"
+    ],
+    "author": {
+      "name": "Gyoud Nova"
+    },
+    "samples":[
+      {
+        "displayName":"Sample Menu UI",
+        "description": "Contains a sample scene and scripts for a menu UI",
+        "path": "Samples~/SampleMenu"
+      },
+      {
+        "displayName":"Sample RollABall",
+        "description": "Contains a sample RollABall scene and related scripts",
+        "path": "Samples~/Rollaball"
+      }
+    ]
+  }

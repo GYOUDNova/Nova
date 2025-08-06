@@ -55,20 +55,20 @@
     <UnityVersion>6000.0.39f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Samples\SampleMenu\SampleMenuScript\InfoWindowPresenter.cs" />
+    <Compile Include="Assets\com.gyoudnova.handrecognition\Samples\SampleMenu\SampleMenuScript\InfoWindowPresenter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Samples\SampleMenu\SampleMenuUI\SampleMenuWelcome.uxml" />
-    <None Include="Assets\Samples\SampleMenu\SampleMenuUI\SampleMenuWindow.uxml" />
-    <None Include="Assets\Samples\SampleMenu\SampleMenuUI\SampleMenuInformation.uxml" />
-    <None Include="Assets\Samples\SampleMenu\SampleMenu.asmdef" />
-    <None Include="Assets\Samples\SampleMenu\SampleMenuUI\SampleMenuUSS.uss" />
+    <None Include="Assets\com.gyoudnova.handrecognition\Samples\SampleMenu\SampleMenuUI\SampleMenuWelcome.uxml" />
+    <None Include="Assets\com.gyoudnova.handrecognition\Samples\SampleMenu\SampleMenuUI\SampleMenuWindow.uxml" />
+    <None Include="Assets\com.gyoudnova.handrecognition\Samples\SampleMenu\SampleMenuUI\SampleMenuInformation.uxml" />
+    <None Include="Assets\com.gyoudnova.handrecognition\Samples\SampleMenu\SampleMenu.asmdef" />
+    <None Include="Assets\com.gyoudnova.handrecognition\Samples\SampleMenu\SampleMenuUI\SampleMenuUSS.uss" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
