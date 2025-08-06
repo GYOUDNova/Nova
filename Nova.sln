@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayModeTests", "PlayModeTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EditModeTests", "EditModeTests.csproj", "{382FE90D-6ADA-6C67-37CF-9EAB6FF1D053}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{EC1A7C68-1220-0DE7-3394-15018F0FABCD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleMenu", "SampleMenu.csproj", "{C3A24692-FACD-96AD-ED94-B8566D2B72C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +33,10 @@ Global
 		{382FE90D-6ADA-6C67-37CF-9EAB6FF1D053}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{382FE90D-6ADA-6C67-37CF-9EAB6FF1D053}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{382FE90D-6ADA-6C67-37CF-9EAB6FF1D053}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EC1A7C68-1220-0DE7-3394-15018F0FABCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC1A7C68-1220-0DE7-3394-15018F0FABCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC1A7C68-1220-0DE7-3394-15018F0FABCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC1A7C68-1220-0DE7-3394-15018F0FABCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3A24692-FACD-96AD-ED94-B8566D2B72C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3A24692-FACD-96AD-ED94-B8566D2B72C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3A24692-FACD-96AD-ED94-B8566D2B72C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3A24692-FACD-96AD-ED94-B8566D2B72C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
