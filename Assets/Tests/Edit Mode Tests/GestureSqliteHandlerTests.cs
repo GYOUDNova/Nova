@@ -337,6 +337,10 @@ public class GestureSqliteHandlerTests
             Distances = new List<LandmarkDistance>
             {
                 new LandmarkDistance { Distance = 0.5f, LandmarkId = 1, OtherLandmarkId = 2 }
+            },
+            Direction = new List<LandmarkDirection>
+            {
+                new LandmarkDirection { Direction = "Left", LandmarkId = 1, OtherLandmarkId = 2 }
             }
         };
 
@@ -407,6 +411,10 @@ public class GestureSqliteHandlerTests
                         Distances = new List<LandmarkDistance>
                         {
                             new LandmarkDistance { Distance = 0.5f, LandmarkId = 1, OtherLandmarkId = 2 }
+                        },
+                        Direction = new List<LandmarkDirection>
+                        {
+                            new LandmarkDirection { Direction = "Left", LandmarkId = 1, OtherLandmarkId = 2 }
                         }
                     };
 

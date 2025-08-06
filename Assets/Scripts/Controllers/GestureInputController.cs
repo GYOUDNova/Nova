@@ -187,9 +187,12 @@ namespace NOVA.Scripts
 
             foreach (var gestureInput in GestureInputs)
             {
-                if (!gestureInputMapping.ContainsKey(gestureInput.GestureName))
+                // normalize the gesture names
+                string normalizedGestureName = StringHandler.GetNormalizedString(gestureInput.GestureName);
+
+                if (!gestureInputMapping.ContainsKey(normalizedGestureName))
                 {
-                    gestureInputMapping.Add(gestureInput.GestureName, gestureInput.GestureEvent);
+                    gestureInputMapping.Add(normalizedGestureName, gestureInput.GestureEvent);
                 }
             }
 
@@ -209,8 +212,11 @@ namespace NOVA.Scripts
 
             foreach (var gestureInput in GestureChainInputs)
             {
+                // normalize the gesture chain names
+                var normalizedGestureChainNames = gestureInput.GestureChainNames.ConvertAll(StringHandler.GetNormalizedString);
+
                 // create a string from the list of gesture chain names
-                string gestureChainKey = string.Join("", gestureInput.GestureChainNames);
+                string gestureChainKey = string.Join("", normalizedGestureChainNames);
 
                 if (!gestureInputMapping.ContainsKey(gestureChainKey))
                 {

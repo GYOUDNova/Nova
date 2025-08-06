@@ -11,6 +11,8 @@ namespace NOVA.Scripts
         Renderer renderer;
 
         private bool isBlue = true;
+        private bool isRed = true;
+        private bool isWhite = true;
 
         private void Start()
         {
@@ -27,7 +29,7 @@ namespace NOVA.Scripts
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                ToggleColor();
+                ToggleColor_GreenBlue();
             }
         }
 
@@ -37,7 +39,7 @@ namespace NOVA.Scripts
             Debug.Log("Keyboard Input: Jumping!");
         }
 
-        public void ToggleColor()
+        public void ToggleColor_GreenBlue()
         {
             if (isBlue)
             {
@@ -49,6 +51,22 @@ namespace NOVA.Scripts
             }
 
             isBlue = !isBlue;
+        }
+
+        public void ToggleColor_YellowRed()
+        {
+            if (isRed) { renderer.material.color = Color.yellow; }
+            else { renderer.material.color = Color.red; }
+
+            isRed = !isRed;
+        }
+
+        public void ToggleColor_WhiteBlack()
+        {
+            if (isWhite) { renderer.material.color = Color.black; }
+            else { renderer.material.color = Color.white; }
+
+            isWhite = !isWhite;
         }
 
         public void MoveLeft()

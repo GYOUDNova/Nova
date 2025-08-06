@@ -3,6 +3,7 @@ using UnityEngine;
 using Mediapipe;
 using NOVA.Scripts;
 using Landmark = NOVA.Scripts.Landmark;
+using System.Linq;
 
 public static class GestureRecognizer
 {
@@ -42,6 +43,7 @@ public static class GestureRecognizer
     private static float tolerance = 0.1f; // Default tolerance for gesture matching
     private static int toleranceMultipler = 8; // Multiplier for tolerance based on configuration
     private static Dictionary<string, List<float>> knownGestureDistances = new Dictionary<string, List<float>>();
+    private static Dictionary<string, List<string>> knownGestureDirection = new Dictionary<string, List<string>>();
 
     // on awake
     static GestureRecognizer()
@@ -59,6 +61,7 @@ public static class GestureRecognizer
         foreach (var gesture in gestureList)
         {
             knownGestureDistances.Add(gesture, gestureSqliteHandler.GetDistancesByName(gesture));
+            knownGestureDirection.Add(gesture, gestureSqliteHandler.GetDirectionsByName(gesture));
         }
     }
 
@@ -71,12 +74,22 @@ public static class GestureRecognizer
     {
         string closestGesture = null;
         var unknownGestureDistances = GetNormalizedLandmarkDistances(landmarks);
+        var unknownGestureDirection = GetDetectedGestureDirection(landmarks);
 
         foreach (var gesture in gestureList)
         {
-            if (CheckGestureMatch(unknownGestureDistances, gesture, closestGesture, gestureSqliteHandler, tolerance))
+            var storedDirections = knownGestureDirection[gesture];
+
+            bool directionsMatch = storedDirections.SequenceEqual(unknownGestureDirection);
+
+            Debug.Log($"Comparing against Gesture {gesture} with directions [{string.Join(", ", storedDirections)}] against detected gesture with [{string.Join(", ", unknownGestureDirection)}]");
+
+            if (directionsMatch)
             {
-                closestGesture = gesture;
+                if (CheckGestureMatch(unknownGestureDistances, gesture, closestGesture, gestureSqliteHandler, tolerance))
+                {
+                    closestGesture = gesture;
+                }
             }
         }
 
@@ -123,6 +136,30 @@ public static class GestureRecognizer
             pts[i] /= scale;
 
         return pts;
+    }
+
+    public static List<string> GetDetectedGestureDirection(NormalizedLandmarkList landmarks)
+    {
+        List<string> directions = new List<string>();
+
+        if (landmarks.Landmark.Count >= 21) // Ensure we have all hand landmarks
+        {
+            // Wrist (0) to Index Finger Tip (8) - Inverted (short-term fix)
+            string directionWristToIndex = GetGestureDirection(
+                new Vector3(landmarks.Landmark[8].X, landmarks.Landmark[8].Y, landmarks.Landmark[8].Z),
+                new Vector3(landmarks.Landmark[0].X, landmarks.Landmark[0].Y, landmarks.Landmark[0].Z)                
+            );
+            directions.Add(directionWristToIndex);
+
+            // Index Finger Tip (8) to Middle Finger Tip (12) - Inverted (short-term fix)
+            string directionIndexToMiddle = GetGestureDirection(
+                new Vector3(landmarks.Landmark[12].X, landmarks.Landmark[12].Y, landmarks.Landmark[12].Z),
+                new Vector3(landmarks.Landmark[8].X, landmarks.Landmark[8].Y, landmarks.Landmark[8].Z)
+            );
+            directions.Add(directionIndexToMiddle);
+        }
+
+        return directions;
     }
 
     /// <summary>
@@ -190,10 +227,107 @@ public static class GestureRecognizer
 
         // this verifies 
         return closer <= distances.Count / 2;
+
+    }
+
+    public static string GetGestureDirection(Vector3 start, Vector3 end)
+    {
+        // Calculate the direction vector
+        Vector3 direction = end - start;
+
+        // Determine the dominant direction (2D projection for simplicity)
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y)) // Horizontal movement
+        {
+            return direction.x > 0 ? "Right" : "Left";
+        }
+        else // Vertical movement
+        {
+            return direction.y > 0 ? "Up" : "Down";
+        }
+    }
+
+    public static List<string> GetGestureDirections(NormalizedLandmarkList landmarks)
+    {
+        List<string> directions = new List<string>();
+
+        // Example: Wrist (Landmark 0) to Index Finger Tip (Landmark 8)
+        string directionWristToIndex = GetGestureDirection(
+            new Vector3(landmarks.Landmark[0].X, landmarks.Landmark[0].Y, landmarks.Landmark[0].Z), // Wrist
+            new Vector3(landmarks.Landmark[8].X, landmarks.Landmark[8].Y, landmarks.Landmark[8].Z)  // Index Tip
+        );
+
+        directions.Add(directionWristToIndex);
+
+        // Example: Index Finger Tip (Landmark 8) to Middle Finger Tip (Landmark 12)
+        string directionIndexToMiddle = GetGestureDirection(
+            new Vector3(landmarks.Landmark[8].X, landmarks.Landmark[8].Y, landmarks.Landmark[8].Z), // Index Tip
+            new Vector3(landmarks.Landmark[12].X, landmarks.Landmark[12].Y, landmarks.Landmark[12].Z) // Middle Tip
+        );
+
+        directions.Add(directionIndexToMiddle);
+
+        return directions;
+    }
+
+    // Future Implementation using Angles if desired
+
+    public static float CalculateAngle(Vector3 pointA, Vector3 pointB, Vector3 pointC)
+    {
+        // Vectors from pointB to pointA and pointB to pointC
+        Vector3 vectorBA = pointA - pointB;
+        Vector3 vectorBC = pointC - pointB;
+
+        // Normalize vectors
+        vectorBA.Normalize();
+        vectorBC.Normalize();
+
+        // Compute the dot product
+        float dotProduct = Vector3.Dot(vectorBA, vectorBC);
+
+        // Clamp the dot product to avoid floating-point precision issues
+        dotProduct = Mathf.Clamp(dotProduct, -1.0f, 1.0f);
+
+        // Calculate the angle in degrees
+        float angle = Mathf.Acos(dotProduct) * Mathf.Rad2Deg;
+
+        return angle;
+    }
+
+    public static List<float> GetLandmarkAngles(List<Landmark> landmarks)
+    {
+        List<float> angles = new List<float>();
+
+        // Example: Calculate angles between thumb, index finger, and middle finger
+        if (landmarks.Count >= 5)
+        {
+            // Thumb (Landmark 0), Index Finger (Landmark 1), Middle Finger (Landmark 2)
+            float angleThumbIndexMiddle = CalculateAngle(
+                new Vector3(landmarks[0].X, landmarks[0].Y, landmarks[0].Z),
+                new Vector3(landmarks[1].X, landmarks[1].Y, landmarks[1].Z),
+                new Vector3(landmarks[2].X, landmarks[2].Y, landmarks[2].Z)
+            );
+
+            // Add the calculated angle
+            angles.Add(angleThumbIndexMiddle);
+        }
+
+        // Repeat for other sets of landmarks as necessary
+        // Example for left/right direction: wrist, index, and pinky
+        if (landmarks.Count >= 20)
+        {
+            float angleWristIndexPinky = CalculateAngle(
+                new Vector3(landmarks[0].X, landmarks[0].Y, landmarks[0].Z),  // Wrist
+                new Vector3(landmarks[5].X, landmarks[5].Y, landmarks[5].Z),  // Index
+                new Vector3(landmarks[17].X, landmarks[17].Y, landmarks[17].Z) // Pinky
+            );
+
+            angles.Add(angleWristIndexPinky);
+        }
+
+        return angles;
     }
 
     // Unused (kept for reference)
-
     private static float GetDistance(NormalizedLandmarkList landmarks, int index1, int index2)
     {
         var landmark1 = landmarks.Landmark[index1];
