@@ -25,7 +25,7 @@ public class GestureInputControllerTests
         {
             GestureInputs = new List<GestureInput>
             {
-                new GestureInput { GestureName = "TestGesture", GestureEvent = new UnityEvent() }
+                new GestureInput { GestureName = "Test Gesture", GestureEvent = new UnityEvent() }
             }
         };
 
@@ -33,7 +33,7 @@ public class GestureInputControllerTests
         {
             GestureChainInputs = new List<GestureChainInput>
             {
-                new GestureChainInput { GestureChainNames = new List<string> { "TestGesture" , "TestGesture2"}, GestureEvent = new UnityEvent() }
+                new GestureChainInput { GestureChainNames = new List<string> { "Test Gesture" , "Test Gesture2"}, GestureEvent = new UnityEvent() }
             }
         };
 
@@ -50,9 +50,9 @@ public class GestureInputControllerTests
         // Set up a listener for the UnityEvent to capture output for chain
         gestureInputController.GestureChainDictionary.GestureChainInputs[0].GestureEvent.AddListener(() => outputText = "TestGestureChain Activated");
 
-        gestureInputController.GestureChainMapping["TestGestureTestGesture2"].AddListener(() => outputText = "TestGestureChain Activated");
+        gestureInputController.GestureChainMapping["Test GestureTest Gesture2"].AddListener(() => outputText = "TestGestureChain Activated");
 
-        gestureInputController.SingleGestureInputMapping["TestGesture"].AddListener(() => outputText = "TestGesture Activated");
+        gestureInputController.SingleGestureInputMapping["Test Gesture"].AddListener(() => outputText = "TestGesture Activated");
 
         // default value for output text
         outputText = string.Empty;
@@ -64,7 +64,7 @@ public class GestureInputControllerTests
     public IEnumerator GestureInputControllerTest_ActivateTestGesture()
     {
         // Arrange
-        string GestureName = "TestGesture";
+        string GestureName = "Test Gesture";
 
         // Act
         gestureInputController.ActivateGestureInput(GestureName);
@@ -80,8 +80,8 @@ public class GestureInputControllerTests
     public IEnumerator GestureInputControllerTest_ActivateTestGestureChain()
     {
         // Arrange
-        string gesture1Name = "TestGesture";
-        string gesture2Name = "TestGesture2";
+        string gesture1Name = "Test Gesture";
+        string gesture2Name = "Test Gesture2";
 
         // Act
         gestureInputController.AddGestureToChain(gesture1Name);
@@ -99,8 +99,8 @@ public class GestureInputControllerTests
     public IEnumerator GestureInputControllerTest_ActivateTestGestureChainToSingle()
     {
         // Arrange
-        string gesture1Name = "TestGesture";
-        string gesture2Name = "TestGesture2";
+        string gesture1Name = "Test Gesture";
+        string gesture2Name = "Test Gesture2";
 
         // Act
         gestureInputController.AddGestureToChain(gesture1Name);
