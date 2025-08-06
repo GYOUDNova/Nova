@@ -9,11 +9,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>NOVA.Scripts</RootNamespace>
-    <ProjectGuid>{5A4396C6-CBF1-DC6E-5754-83A36342E04F}</ProjectGuid>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{C3A24692-FACD-96AD-ED94-B8566D2B72C9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>NOVA</AssemblyName>
+    <AssemblyName>SampleMenu</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -61,72 +61,14 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\WaitForResult.cs" />
-    <Compile Include="Assets\Scripts\Database\LandmarkDistance.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\StaticImageSource.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\GraphRunner.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\InferenceMode.cs" />
-    <Compile Include="Assets\Scripts\Database\Configuration.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSourceProvider.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\RunningMode.cs" />
-    <Compile Include="Assets\Scripts\Helpers\HelperConstants.cs" />
-    <Compile Include="Assets\Scripts\Database\LandmarkDirection.cs" />
-    <Compile Include="Assets\Scripts\Database\LandmarkAngle.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkDetectionConfigWindow.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\GestureInputMapping.cs" />
-    <Compile Include="Assets\Scripts\Database\GestureImageExtension.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkDetectionConfig.cs" />
-    <Compile Include="Assets\Scripts\Database\Exceptions\DatabaseException.cs" />
-    <Compile Include="Assets\Scripts\Database\GestureData.cs" />
-    <Compile Include="Assets\Scripts\Helpers\EditorTextHandler.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\GestureRecognizer.cs" />
-    <Compile Include="Assets\Scripts\PlayerInput.cs" />
-    <Compile Include="Assets\Scripts\Helpers\FileHandler.cs" />
-    <Compile Include="Assets\Scripts\Controllers\CreatingGestureWindowController.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\HandLandmarkerRunner.cs" />
-    <Compile Include="Assets\Scripts\Database\SqliteHandler.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\Modal.cs" />
-    <Compile Include="Assets\Scripts\Database\GestureSqliteHandler.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\WebCamSource.cs" />
-    <Compile Include="Assets\Scripts\Controllers\GestureInputController.cs" />
-    <Compile Include="Assets\Scripts\Database\RecognitionLog.cs" />
-    <Compile Include="Assets\Scripts\Database\GestureImage.cs" />
-    <Compile Include="Assets\Scripts\Controllers\MainEditorWindowController.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\ModalContents.cs" />
-    <Compile Include="Assets\Scripts\Helpers\TestUtils.cs" />
-    <Compile Include="Assets\Scripts\Helpers\ResetLocalState.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\Bootstrap.cs" />
-    <Compile Include="Assets\Scripts\Helpers\InstallPreCommitHook.cs" />
-    <Compile Include="Assets\Scripts\Controllers\GestureListWindowController.cs" />
-    <Compile Include="Assets\Scripts\Database\Landmark.cs" />
-    <Compile Include="Assets\Scripts\Database\GestureCategory.cs" />
-    <Compile Include="Assets\Scripts\Helpers\UnityMainThreadDispatcher.cs" />
-    <Compile Include="Assets\Scripts\Database\CustomGesture.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\Screen.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\ImageSource.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\GestureEvent.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageReadMode.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\EnumExtension.cs" />
-    <Compile Include="Assets\Scripts\Helpers\StringHandler.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\VideoSource.cs" />
-    <Compile Include="Assets\Scripts\Database\SampleSqliteHandler.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\AssetLoader.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\ModalButton.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\ImageSourceType.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\ImageSourceConfig.cs" />
-    <Compile Include="Assets\Scripts\Database\PredefinedGesture.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\TaskApiRunner.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\LegacySolutionRunner.cs" />
-    <Compile Include="Assets\Scripts\Database\Entity.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\AutoFit.cs" />
-    <Compile Include="Assets\Scripts\Controllers\SettingsCalibrationWindowController.cs" />
-    <Compile Include="Assets\Scripts\Helpers\SubScreens.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\AppSettings.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\UI\Scripts\SolutionMenu.cs" />
-    <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\VisionTaskApiRunner.cs" />
+    <Compile Include="Assets\Samples\SampleMenu\SampleMenuScript\InfoWindowPresenter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Scripts\NOVA.asmdef" />
+    <None Include="Assets\Samples\SampleMenu\SampleMenuUI\SampleMenuWelcome.uxml" />
+    <None Include="Assets\Samples\SampleMenu\SampleMenuUI\SampleMenuWindow.uxml" />
+    <None Include="Assets\Samples\SampleMenu\SampleMenuUI\SampleMenuInformation.uxml" />
+    <None Include="Assets\Samples\SampleMenu\SampleMenu.asmdef" />
+    <None Include="Assets\Samples\SampleMenu\SampleMenuUI\SampleMenuUSS.uss" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -1143,18 +1085,6 @@
     </Reference>
     <Reference Include="System.Xml.Serialization">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.0.39f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.EditorCoroutines.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Mediapipe.Runtime">
-      <HintPath>Library\ScriptAssemblies\Mediapipe.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Gilzoide.SqliteNet">
-      <HintPath>Library\ScriptAssemblies\Gilzoide.SqliteNet.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEditor.UI">
