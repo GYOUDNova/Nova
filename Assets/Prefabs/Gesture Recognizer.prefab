@@ -84,6 +84,7 @@ MonoBehaviour:
   runningMode: 0
   _handLandmarkerResultAnnotationController: {fileID: 49577079515871327}
   gestureInputController: {fileID: 7741789658537998096}
+  gestureName: {fileID: 1425045751988994363}
   CameraName: 
 --- !u!114 &1965179213638750106
 MonoBehaviour:
@@ -398,6 +399,17 @@ PrefabInstance:
       addedObject: {fileID: 2216478626610549828}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
+--- !u!114 &1425045751988994363 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8947588491785359562, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}
+  m_PrefabInstance: {fileID: 8064539403567403505}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1808313061760437476 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8571076842338426133, guid: 140d1d2c406167c50819d89f86d9092e, type: 3}

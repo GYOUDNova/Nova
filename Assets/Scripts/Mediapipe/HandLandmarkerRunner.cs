@@ -13,6 +13,8 @@ using NOVA.Scripts;
 using UnityEngine;
 using UnityEngine.Rendering;
 using System.Text.RegularExpressions;
+using UnityEngine.UI;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Mediapipe.Unity.Sample.HandLandmarkDetection
 {
@@ -20,6 +22,7 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
     {
         [SerializeField] private HandLandmarkerResultAnnotationController _handLandmarkerResultAnnotationController;
         [SerializeField] private GestureInputController gestureInputController;
+        [SerializeField] private Text gestureName;
 
         private Experimental.TextureFramePool _textureFramePool;
 
@@ -217,6 +220,11 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
             if (result.handLandmarks == null)
             {
                 Debug.Log("No hand landmarks detected");
+                UnityMainThreadDispatcher.Enqueue(() =>
+                {
+                    gestureName.text = "No Gesture";
+                });
+
                 return;
             }
 
@@ -234,22 +242,19 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
                     Debug.Log($"Detected gesture: {gesture}");
                     UnityMainThreadDispatcher.Enqueue(() =>
                     {
+                        gestureName.text = $"{gesture}";
                         gestureInputController.AddGestureToChain(gesture);
                     });
-                    //gestureInputController.ActivateGestureInput(gesture);
-                    //GestureEvent.TriggerGesture(gesture); // Trigger the gesture recognition event
                 }
                 else
                 {
                     Debug.Log("No recognized gesture detected");
+                    UnityMainThreadDispatcher.Enqueue(() =>
+                    {
+                        gestureName.text = "No Gesture";
+                    });
                 }
             }
-
-            //for (int i = 0; i < result.handLandmarks.Count; i++)
-            //{
-            //    var landmarks = result.handLandmarks[i];
-            //    Debug.Log(landmarks);
-            //}
         }
 
         public static NormalizedLandmarkList ConvertToNormalizedLandmarkList(Mediapipe.Tasks.Components.Containers.NormalizedLandmarks source)
