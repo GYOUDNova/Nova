@@ -101,6 +101,17 @@ namespace NOVA.Scripts
             }
         }
 
+        public bool HasPredefinedGestures()
+        {
+            lock (lockObject)
+            {
+                using var conn = GetSqliteConnection();
+
+                // Check if there are any predefined gestures in the database
+                return conn.Table<PredefinedGesture>().Count() > 0;
+            }
+        }
+
         // Method to retrieve all gestures from the database, limited to only UI information
         public List<GestureInfo> GetAllUIGestures()
         {

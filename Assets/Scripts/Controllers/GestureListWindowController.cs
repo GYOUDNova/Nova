@@ -111,16 +111,16 @@ namespace NOVA.Scripts
                 Label typeLabel = card.Q<Label>("GestureType");
                 Button deleteGestureButton = card.Q<Button>("DeleteGestureButton");
                 deleteGestureButton.clicked += () => OnDeleteButtonClick(gesture.GestureName);
-                cardLabel.text = $"{gesture.GestureName} of category {gesture.Category.Name}";
+                cardLabel.text = gesture.GestureName;
+                typeLabel.text = gesture.Category.Name;
 
+                // Set the color of the type label based on whether the gesture is predefined or not
                 if (gesture.Data.IsPredefined)
                 {
-                    typeLabel.text = "Predefined";
                     typeLabel.style.color = new StyleColor(Color.yellow);
                 }
                 else
                 {
-                    typeLabel.text = "Custom";
                     typeLabel.style.color = new StyleColor(Color.green);
                 }
 

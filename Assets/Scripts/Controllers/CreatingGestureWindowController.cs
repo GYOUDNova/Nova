@@ -3,21 +3,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Mediapipe.Tasks.Vision.Core;
-using Mediapipe.Tasks.Vision.HandLandmarker;
-using Mediapipe.Unity;
-using Mediapipe.Unity.Experimental;
-using Mediapipe.Unity.Sample;
-using Mediapipe.Unity.Sample.HandLandmarkDetection;
 using Unity.EditorCoroutines.Editor;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Color = UnityEngine.Color;
 using Image = UnityEngine.UIElements.Image;
-using MPLandmark = Mediapipe.Tasks.Components.Containers.NormalizedLandmark;
 using NOVALandmark = NOVA.Scripts.Landmark;
-
 
 namespace NOVA.Scripts
 {
@@ -61,25 +53,13 @@ namespace NOVA.Scripts
         // Flags to track the current mode
         private GestureInputMode currentMode = GestureInputMode.None;
 
-        // The actual task API that will be used for hand landmark detection
-        private HandLandmarker taskApi;
-
-        // A frame object to hold the texture image
-        private TextureFrame textureFrame;
-
-        // Reference to the MP image that will be used for processing
-        private Mediapipe.Image mpImage;
-
-        // Image processing options for the hand landmark detection
-        private ImageProcessingOptions imageProcessingOptions;
-
-        // This will contain the basic config information for the hand landmark detection (i.e., num of hands, etc.)[
-        public readonly HandLandmarkDetectionConfig Config = new HandLandmarkDetectionConfig();
+        // Backend handler (no UI inside)
+        private NovaMediapipeHandler mp;
 
         // Landmarks list
         public List<NOVALandmark> Landmarks { get; private set; } = new();
 
-        // Normalized landmarks list
+        // Normalized landmarks list (kept as window state for saving/metrics)
         public Mediapipe.NormalizedLandmarkList NormalizedLandmarks { get; private set; } = new();
 
         // Distances list
@@ -144,12 +124,14 @@ namespace NOVA.Scripts
             image.AddToClassList(CameraFeedSelector);
             root.Add(image);
 
+            // Backend handler
+            mp = new NovaMediapipeHandler();
+
             // Add functionality to take image and save
             takeImageButton = root.Q<Button>(TakeImageButtonName);
             takeImageButton.style.display = DisplayStyle.None; // Ensure the button is hidden
             takeImageButton.clicked += () =>
             {
-                // Use the shared processing method
                 EditorCoroutineUtility.StartCoroutine(ProcessGestureFromTexture(texture), this);
             };
         }
@@ -185,7 +167,7 @@ namespace NOVA.Scripts
                     }
 
                     // Resize to match camera dimensions if needed
-                    uploadedTexture = ResizeTexture(uploadedTexture, HelperConstants.CameraWidth, HelperConstants.CameraHeight);
+                    uploadedTexture = NovaMediapipeHandler.ResizeTexture(uploadedTexture, HelperConstants.CameraWidth, HelperConstants.CameraHeight);
 
                     // Update the display
                     var image = root.Q<Image>();
@@ -216,15 +198,12 @@ namespace NOVA.Scripts
 
         private IEnumerator ProcessGestureFromTexture(Texture2D sourceTexture, string successMessage = "Gesture data received. Please name the gesture and then save")
         {
-            // Initialize MediaPipe if not already done
-            if (taskApi == null)
-            {
-                yield return InitializeMediaPipe();
-            }
+            // Ensure backend is ready for this texture size
+            yield return mp.InitializeIfNeeded(sourceTexture.width, sourceTexture.height);
 
             ResetSaveContainer();
 
-            // Copy source texture to saving texture for later use
+            // Copy source texture to saving texture for later use (UI concern)
             if (savingTexture == null || savingTexture.width != sourceTexture.width || savingTexture.height != sourceTexture.height)
             {
                 if (savingTexture != null)
@@ -237,30 +216,17 @@ namespace NOVA.Scripts
 
             Graphics.CopyTexture(sourceTexture, savingTexture);
 
-            // Ensure texture frame matches the source texture dimensions
-            if (textureFrame == null || textureFrame.width != sourceTexture.width || textureFrame.height != sourceTexture.height)
+            // Backend detection
+            NovaHandResult res = null;
+            yield return mp.TryGenerateLandmarks(sourceTexture, r => res = r);
+
+            if (res != null && res.Success)
             {
-                textureFrame?.Dispose();
-                textureFrame = new TextureFrame(sourceTexture.width, sourceTexture.height, TextureFormat.RGBA32);
-            }
+                // Update window state
+                NormalizedLandmarks = res.Normalized;
+                Landmarks = res.Landmarks;
 
-            // Process with MediaPipe
-            textureFrame.ReadTextureOnCPU(sourceTexture);
-            mpImage = textureFrame.BuildCPUImage();
-
-            var result = HandLandmarkerResult.Alloc(2);
-            if (taskApi.TryDetect(mpImage, imageProcessingOptions, ref result))
-            {
-                // Get the first detected hand
-                var handWorldLandmarks = result.handLandmarks.FirstOrDefault();
-
-                // Get the normalized landmarks
-                NormalizedLandmarks = HandLandmarkerRunner.ConvertToNormalizedLandmarkList(handWorldLandmarks);
-
-                // Process the landmarks
-                yield return TranslateMPLandmarks(handWorldLandmarks.landmarks);
-
-                // Show success message and enable saving
+                // UI success
                 EditorTextHandler.DisplayMessage(successMessage, Color.green, messageText);
                 savingGestureContainer.style.display = DisplayStyle.Flex;
                 saveGestureButton.style.display = DisplayStyle.Flex;
@@ -282,9 +248,6 @@ namespace NOVA.Scripts
                     "Unable to detect gesture. Please try again with a clear hand gesture";
                 EditorTextHandler.DisplayMessage(errorMessage, Color.red, messageText);
             }
-
-            // Clean up MediaPipe resources
-            mpImage?.Dispose();
         }
 
         private void EnterImageMode()
@@ -331,7 +294,6 @@ namespace NOVA.Scripts
         /// <summary>
         /// Callback for when a camera is picked in the dropdown
         /// </summary>
-        /// <param name="selectedCamera"></param>
         private void OnCameraSelected(string selectedCamera)
         {
             // Prevent camera selection in image mode
@@ -375,12 +337,20 @@ namespace NOVA.Scripts
         /// </summary>
         public void OnDestroy()
         {
-            if (webCamTexture == null && !webCamTexture.isPlaying) return;
-
-            webCamTexture.Stop();
+            if (webCamTexture != null && webCamTexture.isPlaying)
+            {
+                webCamTexture.Stop();
+            }
             webCamTexture = null;
 
-            EditorCoroutineUtility.StopCoroutine(edCoro);
+            if (edCoro != null)
+            {
+                EditorCoroutineUtility.StopCoroutine(edCoro);
+                edCoro = null;
+            }
+
+            mp?.Dispose();
+            mp = null;
         }
 
         /// <summary>
@@ -395,39 +365,13 @@ namespace NOVA.Scripts
             }
         }
 
-        private Texture2D ResizeTexture(Texture2D source, int targetWidth, int targetHeight)
-        {
-            if (source.width == targetWidth && source.height == targetHeight)
-            {
-                return source; // No resizing needed
-            }
-
-            RenderTexture rt = RenderTexture.GetTemporary(targetWidth, targetHeight);
-            Graphics.Blit(source, rt);
-
-            RenderTexture previous = RenderTexture.active;
-            RenderTexture.active = rt;
-
-            Texture2D result = new Texture2D(targetWidth, targetHeight);
-            result.ReadPixels(new Rect(0, 0, targetWidth, targetHeight), 0, 0);
-            result.Apply();
-
-            RenderTexture.active = previous;
-            RenderTexture.ReleaseTemporary(rt);
-
-            return result;
-        }
-
         /// <summary>
         /// Coroutine to update the camera feed and process the image
         /// </summary>
         private IEnumerator UpdateFeed()
         {
-            // Initialize MediaPipe if not already done
-            if (taskApi == null)
-            {
-                yield return InitializeMediaPipe();
-            }
+            // Initialize backend if not already done
+            yield return mp.InitializeIfNeeded(HelperConstants.CameraWidth, HelperConstants.CameraHeight);
 
             // Continue updating the feed until the window is closed
             while (hasFocus && currentMode.Equals(GestureInputMode.CameraMode))
@@ -435,17 +379,6 @@ namespace NOVA.Scripts
                 Repaint();
                 yield return null;
             }
-        }
-
-        private IEnumerator InitializeMediaPipe()
-        {
-            Config.RunningMode = Mediapipe.Tasks.Vision.Core.RunningMode.IMAGE;
-            AssetLoader.Provide(new StreamingAssetsResourceManager());
-            yield return AssetLoader.PrepareAssetAsync(Config.ModelPath);
-            imageProcessingOptions = new ImageProcessingOptions(rotationDegrees: 0);
-            var options = Config.GetHandLandmarkerOptions(null);
-            taskApi = HandLandmarker.CreateFromOptions(options);
-            textureFrame = new(HelperConstants.CameraWidth, HelperConstants.CameraHeight, TextureFormat.RGBA32);
         }
 
         private void SaveGesture(ClickEvent evt)
@@ -589,25 +522,6 @@ namespace NOVA.Scripts
             savingGestureContainer.style.display = DisplayStyle.None;
             savingGestureTextField.value = string.Empty;
             messageText.text = string.Empty;
-        }
-
-        private IEnumerator TranslateMPLandmarks(List<MPLandmark> mpLandmarks)
-        {
-            Landmarks.Clear();
-
-            for (int i = 0; i < mpLandmarks.Count; i++)
-            {
-                NOVALandmark novaLandmark = new()
-                {
-                    X = mpLandmarks[i].x,
-                    Y = mpLandmarks[i].y,
-                    Z = mpLandmarks[i].z
-                };
-
-                Landmarks.Add(novaLandmark);
-            }
-
-            yield return null;
         }
     }
 }
