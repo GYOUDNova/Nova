@@ -159,7 +159,7 @@ namespace NOVA.Scripts
             {
                 if (!chainLockoutRunning)
                 {
-                    StartCoroutine(holdChain(gestureInput, 1f));
+                    StartCoroutine(holdChain(gestureInput, 0.2f));
                 }
             }
             // check if chain coroutine is running
