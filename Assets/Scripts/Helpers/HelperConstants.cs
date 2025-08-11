@@ -9,6 +9,7 @@ namespace NOVA.Scripts
 
         public const string ResourcesDirectory = "Resources";
         public const string GestureAssetsDirName = "GestureAssets";
+        public const string ImagesDirName = "Images";
 
         public const string GestureListNoFilters = "No Filter";
         public const string NoSorting = "No Sorting";

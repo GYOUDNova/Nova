@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 
+using Unity.EditorCoroutines.Editor;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -19,6 +20,7 @@ namespace NOVA.Scripts
         private Button creatingGestureButton;
         private Button gestureListButton;
         private Button settingsCalibrationButton;
+        private Button addPredefinedGesturesButton;
 
         /*Window Settings*/
         private const float MinWindowHeight = 600;
@@ -61,6 +63,9 @@ namespace NOVA.Scripts
 
             settingsCalibrationButton = root.Q<Button>("SettingsCalibrationButton");
             settingsCalibrationButton.RegisterCallback<ClickEvent>(evt => OpenSubScreen(evt, SubScreen.SettingsCalibration));
+
+            addPredefinedGesturesButton = root.Q<Button>("AddPredefinedGesturesButton");
+            addPredefinedGesturesButton.RegisterCallback<ClickEvent>(evt => EditorCoroutineUtility.StartCoroutine(AddPredefinedGesturesHelper.AddPredefinedGestures(), this));
         }
 
         private void OpenSubScreen(ClickEvent evt, SubScreen subScreenToOpen)

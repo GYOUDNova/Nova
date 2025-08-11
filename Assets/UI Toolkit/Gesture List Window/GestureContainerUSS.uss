@@ -25,7 +25,18 @@
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     background-image: url("project://database/Assets/Images/Default_Image.png?fileID=2800000&guid=6b36c9f8668b35f4cb28e83383c43ae0&type=3#Default_Image");
-    height: 75px;
+    height: 110px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+.gesture-details {
+    margin-top: 15px;
+    margin-right: 4px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    -unity-text-align: upper-center;
+    font-size: 16px;
 }
 
 .delete-gesture-button {
@@ -49,38 +60,21 @@
     padding-right: 12px;
     padding-bottom: 10px;
     padding-left: 12px;
-}
-
-.gesture-details {
-    margin-top: 15px;
-    margin-right: 4px;
-    margin-bottom: 2px;
-    margin-left: 2px;
-    -unity-text-align: upper-center;
-}
-
-.delete-gesture-button {
-    align-self: flex-end;
-    width: 30px;
-    height: 30px;
-    margin-top: 2px;
-    margin-right: 4px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    background-image: url("project://database/Assets/Images/CloseButtonDark_Sprite.png?fileID=2800000&guid=1c487cdd7569e0a4889af0168e224b25&type=3#CloseButtonDark_Sprite");
-    border-top-width: 1px;
-    border-right-width: 1px;
-    border-bottom-width: 1px;
-    border-left-width: 1px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
     background-color: rgba(0, 0, 0, 0);
     border-left-color: rgba(255, 255, 255, 0);
     border-right-color: rgba(255, 255, 255, 0);
     border-top-color: rgba(255, 255, 255, 0);
     border-bottom-color: rgba(255, 255, 255, 0);
+    -unity-background-image-tint-color: rgba(255,255,255,1);
+    transition-property: background-color, -unity-background-image-tint-color, opacity;
+    transition-duration: 0.12s;
+    transition-timing-function: ease-in-out;
+}
+
+.delete-gesture-button:hover {
+    background-color: rgba(0,0,0,0.25);
+    -unity-background-image-tint-color: rgba(255,255,255,0.75);
+    opacity: 0.85;
 }
 
 .gesture-type {
@@ -103,7 +97,7 @@
 
 .gesture-bottom-half-container {
     flex-grow: 1;
-    margin-top: 55px;
+    margin-top: 20px;
     margin-right: 0;
     margin-bottom: 0;
     margin-left: 0;
