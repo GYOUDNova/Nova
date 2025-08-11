@@ -57,8 +57,8 @@ All samples are included under `Assets/Samples~`:
 
 * **Unity Kart** – Kart racing (Mario‑kart‑style) with gestures.
 
-  > Add image here
-
+  <img width="725" height="725" alt="image" src="https://github.com/user-attachments/assets/366fff0d-0a3b-44fd-93e9-192852734486" />
+  
 ---
 
 ## Getting started
