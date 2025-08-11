@@ -750,6 +750,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: RegularGestureDelay
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.size
       value: 4
       objectReference: {fileID: 0}
