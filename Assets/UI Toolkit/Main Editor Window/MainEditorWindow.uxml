@@ -25,9 +25,9 @@
                 </engine:VisualElement>
                 <engine:VisualElement name="ButtonBottom" class="button-bottom" />
             </engine:Button>
-            <engine:Button name="CreateGestureUsingImageButton" class="button menu-button" style="display: none;">
+            <engine:Button name="AddPredefinedGesturesButton" class="button menu-button" style="display: flex;">
                 <engine:VisualElement name="ButtonTop" class="button-top">
-                    <engine:Label text="Create a Gesture (Image)" name="ButtonText" class="button-text" />
+                    <engine:Label text="Add Predefined Gestures" name="ButtonText" class="button-text" />
                 </engine:VisualElement>
                 <engine:VisualElement name="ButtonBottom" class="button-bottom" />
             </engine:Button>

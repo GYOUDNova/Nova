@@ -8,6 +8,14 @@ namespace NOVA.Scripts
 {
     public class GestureInputController : MonoBehaviour
     {
+        [Header("Timing Settings")]
+        [SerializeField]
+        public float RegularGestureDelay = 1.0f;
+
+        [SerializeField]
+        public float GestureChainDelay = 2f;
+
+        [Header("Gesture Input Settings")]
         [SerializeField]
         public GestureDictionary GestureDictionary;
 
@@ -152,14 +160,14 @@ namespace NOVA.Scripts
                 //Debug.Log(gestureInput);
                 if (!chainLockoutRunning)
                 {
-                    StartCoroutine(holdChain(gestureInput, 0.2f));
+                    StartCoroutine(holdChain(gestureInput, GestureChainDelay));
                 }
             }
             else if (longestChainLength < 1)
             {
                 if (!chainLockoutRunning)
                 {
-                    StartCoroutine(holdChain(gestureInput, 1f));
+                    StartCoroutine(holdChain(gestureInput, RegularGestureDelay));
                 }
             }
             // check if chain coroutine is running
