@@ -25,15 +25,4 @@ public class RollaballGestureController : MonoBehaviour
 
         PlayerController.SetMovementFromGesture(movement);
     }
-
-    // For testing with keyboard
-    // TODO: Remove when integrated with actual gesture input
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I)) OnGestureDetected("up");
-        if (Input.GetKeyDown(KeyCode.K)) OnGestureDetected("down");
-        if (Input.GetKeyDown(KeyCode.J)) OnGestureDetected("left");
-        if (Input.GetKeyDown(KeyCode.L)) OnGestureDetected("right");
-        if (Input.GetKeyDown(KeyCode.Space)) OnGestureDetected("stop");
-    }
 }
