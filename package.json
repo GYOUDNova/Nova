@@ -1,6 +1,6 @@
 {
     "name": "com.gyoudnova.handrecognition",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "displayName": "Hand Recognition",
     "description": "This is the package for hand recognition project created by Gyoud Nova",
     "unity": "6000.0",
