@@ -23,7 +23,7 @@ Nova’s goal is to be **package‑level plug‑and‑play**, import it and buil
 * **All‑in‑one Unity package.** No extra glue code or native setup.
 * **Editor‑first workflow.** Create gestures and gesture chains as assets; tweak settings live.
 * **Drop‑in prefabs.** Get to a working prototype in minutes.
-* **Battle‑tested samples.** Three scenes show practical interaction patterns.
+* **Battle‑tested samples.** Two scenes show practical interaction patterns.
 
 > Looking for installation, platform support, tutorials, or troubleshooting? **All of that lives in the Wiki.**
 > 👉 **Read the Wiki:** [https://github.com/GYOUDNova/Nova/wiki](https://github.com/GYOUDNova/Nova/wiki) (or use the repo’s *Wiki* tab)
@@ -54,10 +54,6 @@ All samples are included under `Assets/Samples~`:
 * **Rollaball** – Classic Unity “roll a ball” tutorial reimagined with gesture input.
 
   <img width="725" height="725" alt="Rollaball" src="https://github.com/user-attachments/assets/7e10b350-7052-4938-8ce6-17cb1828e25a" />
-
-* **Unity Kart** – Kart racing (Mario‑kart‑style) with gestures.
-
-  <img width="725" height="725" alt="image" src="https://github.com/user-attachments/assets/366fff0d-0a3b-44fd-93e9-192852734486" />
   
 ---
 
