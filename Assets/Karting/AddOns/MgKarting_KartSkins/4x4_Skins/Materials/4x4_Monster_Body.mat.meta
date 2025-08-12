@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e22029b4327d9a840810d54f68791ed2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_KartSkins/4x4_Skins/Materials/4x4_Monster_Body.mat
+  uploadId: 613807

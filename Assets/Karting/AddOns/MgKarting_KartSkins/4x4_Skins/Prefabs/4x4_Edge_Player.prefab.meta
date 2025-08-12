@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: cfe505663f81f9c479b4e0ad5ad7c395
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_KartSkins/4x4_Skins/Prefabs/4x4_Edge_Player.prefab
+  uploadId: 613807

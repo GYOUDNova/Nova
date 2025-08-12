@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6867af4bcb42c4e8bb795333f6f1eec7
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/Tutorials/4 Add a Jump/Tutorial4Layout.wlt
+  uploadId: 613807

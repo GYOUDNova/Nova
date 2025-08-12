@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3f7d454af8557da4aa77bdb544e5809c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_Racetrack/Prefabs/RTC_TrackParts/RTC_Ramp_TurnLeft_5m.prefab
+  uploadId: 613807

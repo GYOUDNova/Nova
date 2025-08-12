@@ -152,7 +152,7 @@ namespace NOVA.Scripts
                 //Debug.Log(gestureInput);
                 if (!chainLockoutRunning)
                 {
-                    StartCoroutine(holdChain(gestureInput, 2f));
+                    StartCoroutine(holdChain(gestureInput, 0.2f));
                 }
             }
             else if (longestChainLength < 1)

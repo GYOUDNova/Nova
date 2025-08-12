@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d94de9e8da0f47c428176c2659c8dd03
+timeCreated: 1471532950
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_HoverKart/VFX/Materials/VFX_HoverKart_Embers.mat
+  uploadId: 613807

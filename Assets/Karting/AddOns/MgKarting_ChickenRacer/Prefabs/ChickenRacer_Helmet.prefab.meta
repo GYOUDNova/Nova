@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e5a33c892ac5b244582fcac249c39569
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_ChickenRacer/Prefabs/ChickenRacer_Helmet.prefab
+  uploadId: 613807

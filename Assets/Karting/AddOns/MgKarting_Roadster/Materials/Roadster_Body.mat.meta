@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 80c7c69fc5e8de349a2ecc93418fb947
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_Roadster/Materials/Roadster_Body.mat
+  uploadId: 613807

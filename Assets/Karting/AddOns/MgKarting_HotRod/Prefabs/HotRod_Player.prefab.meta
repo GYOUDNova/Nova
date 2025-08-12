@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e75a24d982436a3479e7e07a8f5e79b8
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_HotRod/Prefabs/HotRod_Player.prefab
+  uploadId: 613807

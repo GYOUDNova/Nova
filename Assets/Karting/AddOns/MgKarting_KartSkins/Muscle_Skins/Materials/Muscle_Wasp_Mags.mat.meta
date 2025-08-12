@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c33e40b0257bd4f44bf4064b738a2322
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_KartSkins/Muscle_Skins/Materials/Muscle_Wasp_Mags.mat
+  uploadId: 613807

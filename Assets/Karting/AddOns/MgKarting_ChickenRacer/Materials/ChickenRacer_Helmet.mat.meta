@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: efa767ad3c79b9948aa1b2bfd9063e1a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_ChickenRacer/Materials/ChickenRacer_Helmet.mat
+  uploadId: 613807

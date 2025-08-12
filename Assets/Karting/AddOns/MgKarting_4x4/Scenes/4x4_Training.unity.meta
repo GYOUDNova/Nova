@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 52da27bb8048826439df9f20a2fddd31
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_4x4/Scenes/4x4_Training.unity
+  uploadId: 613807

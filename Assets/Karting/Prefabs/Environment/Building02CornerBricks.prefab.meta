@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bd77db49972d95a4e9b24a8a7ed148f8
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/Prefabs/Environment/Building02CornerBricks.prefab
+  uploadId: 613807

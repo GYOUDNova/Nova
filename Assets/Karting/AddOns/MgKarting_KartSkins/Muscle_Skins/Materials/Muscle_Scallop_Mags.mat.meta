@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5a281d03ca8630f4390ae7833a3f6da2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_KartSkins/Muscle_Skins/Materials/Muscle_Scallop_Mags.mat
+  uploadId: 613807

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 05b85e11e59634a069efe1d16952f2f7
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/ModAssets/Prefabs/BounceEffectPrefabs/BouncyGlowy.prefab
+  uploadId: 613807

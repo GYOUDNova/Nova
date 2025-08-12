@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7d8be4fae5e1c5142a03db7eb23effa2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_KartSkins/Roadster_Skins/Materials/Roadster_Tiger_Exhaust.mat
+  uploadId: 613807

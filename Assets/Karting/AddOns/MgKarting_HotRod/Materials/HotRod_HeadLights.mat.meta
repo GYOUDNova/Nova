@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c2edab10d63973445aa1353573031b01
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_HotRod/Materials/HotRod_HeadLights.mat
+  uploadId: 613807

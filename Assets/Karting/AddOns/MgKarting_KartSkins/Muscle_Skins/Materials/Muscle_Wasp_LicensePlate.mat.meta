@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3da1f11743e3cfe48aa6744e7e567fff
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_KartSkins/Muscle_Skins/Materials/Muscle_Wasp_LicensePlate.mat
+  uploadId: 613807

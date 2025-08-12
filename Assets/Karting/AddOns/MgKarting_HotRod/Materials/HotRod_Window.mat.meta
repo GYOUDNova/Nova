@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e78db863670fac24db5de5759b13f42c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_HotRod/Materials/HotRod_Window.mat
+  uploadId: 613807

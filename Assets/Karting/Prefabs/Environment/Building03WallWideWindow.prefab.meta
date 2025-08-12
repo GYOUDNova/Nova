@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b242def909bdd1f4d8b54505acb6c911
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/Prefabs/Environment/Building03WallWideWindow.prefab
+  uploadId: 613807

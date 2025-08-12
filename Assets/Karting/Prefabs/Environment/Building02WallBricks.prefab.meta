@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3beaf9cd12e8c0a4d921aa0bb65380c5
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/Prefabs/Environment/Building02WallBricks.prefab
+  uploadId: 613807

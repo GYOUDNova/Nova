@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 19954de30401f73428254541a9ad156e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/Prefabs/KartClassic/KartClassic_Player.prefab
+  uploadId: 613807

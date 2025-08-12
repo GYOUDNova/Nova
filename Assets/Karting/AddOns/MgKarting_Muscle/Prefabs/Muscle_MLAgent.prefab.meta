@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f03e7104918e8fc48bbdc2ee8dad77e0
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_Muscle/Prefabs/Muscle_MLAgent.prefab
+  uploadId: 613807

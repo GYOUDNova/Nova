@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f0bbebb7a52c6a04b8b9e88a37c29452
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_KartSkins/4x4_Skins/Materials/4x4_Tiger_Tires.mat
+  uploadId: 613807

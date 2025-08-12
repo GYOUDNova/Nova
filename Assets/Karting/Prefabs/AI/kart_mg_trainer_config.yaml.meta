@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1fdeb90cbcc9fda49bbd731072ec6c2d
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/Prefabs/AI/kart_mg_trainer_config.yaml
+  uploadId: 613807

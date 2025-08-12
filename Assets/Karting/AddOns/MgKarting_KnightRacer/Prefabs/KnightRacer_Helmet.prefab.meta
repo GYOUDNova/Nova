@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 59806811b3b07c94d8d1c7359ed08730
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_KnightRacer/Prefabs/KnightRacer_Helmet.prefab
+  uploadId: 613807

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6e78c73d0c22422438a45bea2842fcfb
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/Prefabs/Environment/BuildingThin.prefab
+  uploadId: 613807

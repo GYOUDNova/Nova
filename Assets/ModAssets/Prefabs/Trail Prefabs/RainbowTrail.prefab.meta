@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d3ccf67055b3341468030d0fffd8d16f
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/ModAssets/Prefabs/Trail Prefabs/RainbowTrail.prefab
+  uploadId: 613807

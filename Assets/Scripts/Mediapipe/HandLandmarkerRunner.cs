@@ -222,7 +222,8 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
                 Debug.Log("No hand landmarks detected");
                 UnityMainThreadDispatcher.Enqueue(() =>
                 {
-                    gestureName.text = "No Gesture";
+                    gestureName.text = "No Hands Detected";
+                    gestureInputController.AddGestureToChain(GestureRecognizer.NO_GESTURE);
                 });
 
                 return;

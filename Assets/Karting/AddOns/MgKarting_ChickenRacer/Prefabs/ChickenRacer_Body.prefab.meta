@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 7f4cfe8f5461f1c45b92a8046b76a76c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_ChickenRacer/Prefabs/ChickenRacer_Body.prefab
+  uploadId: 613807

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 834e8044a93a0b24a9840f85862570ef
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_Racetrack/Scenes/RTC_TestTrack_A_Variants.unity
+  uploadId: 613807

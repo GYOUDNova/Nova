@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: dab6f510f4caec24daab5186c749283c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_TinyKart/Materials/TinyKart_Mags.mat
+  uploadId: 613807

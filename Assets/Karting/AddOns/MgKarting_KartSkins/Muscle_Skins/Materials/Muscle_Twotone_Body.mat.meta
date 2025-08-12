@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f0d3619a1732e05419c43ee093e62ee2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_KartSkins/Muscle_Skins/Materials/Muscle_Twotone_Body.mat
+  uploadId: 613807

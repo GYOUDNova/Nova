@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e9de561e2618fdb48b590b737fb52f45
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_KnightRacer/Prefabs/KnightRacer_Body.prefab
+  uploadId: 613807

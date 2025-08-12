@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 7c5daab860a9571469d94a557e65d7e4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_TinyKart/Prefabs/TinyKart_MLAgent.prefab
+  uploadId: 613807

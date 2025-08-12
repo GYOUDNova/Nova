@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 70e2ae683b21da24b8b6c3033c1dbfe4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_KartSkins/4x4_Skins/Materials/4x4_Edge_Mags.mat
+  uploadId: 613807

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0fe01a3302575f545b0bc9045284593c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_Racetrack/Prefabs/RTC_TrackParts/RTC_BankLeft_TurnShort.prefab
+  uploadId: 613807

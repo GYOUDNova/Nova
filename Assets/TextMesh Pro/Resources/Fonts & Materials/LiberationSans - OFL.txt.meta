@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 51b81726eaea67e47a3a0e02a470d657
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans - OFL.txt
+  uploadId: 613807

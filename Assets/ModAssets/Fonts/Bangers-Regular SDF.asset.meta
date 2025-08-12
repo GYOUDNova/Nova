@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0e141b3397d234c8685509c5d77ebcf1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/ModAssets/Fonts/Bangers-Regular SDF.asset
+  uploadId: 613807

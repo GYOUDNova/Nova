@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1a4a59638388ff247909634184e9d4ff
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_Racetrack/Materials/RTC_Track.mat
+  uploadId: 613807

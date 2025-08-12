@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 23448f06d6188cf4a897ad62cf4447cd
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_4x4/Prefabs/4x4_MLAgent.prefab
+  uploadId: 613807

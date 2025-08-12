@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 942c2c1bb4e544cb09d3494e89bb8041
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/ModAssets/Prefabs/Hat Prefabs/WizardHat.prefab
+  uploadId: 613807

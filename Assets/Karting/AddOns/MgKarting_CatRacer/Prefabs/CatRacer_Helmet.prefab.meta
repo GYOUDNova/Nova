@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c4b5b845a2742c949a7decd101130fa3
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_CatRacer/Prefabs/CatRacer_Helmet.prefab
+  uploadId: 613807

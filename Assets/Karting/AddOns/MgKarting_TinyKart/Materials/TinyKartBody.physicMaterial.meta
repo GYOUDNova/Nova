@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ba17376c9a9b5f14e8c4f9cff185b57b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_TinyKart/Materials/TinyKartBody.physicMaterial
+  uploadId: 613807

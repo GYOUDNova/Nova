@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f616bc0efb32e954a96572cf3559939b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_Racetrack/Prefabs/RTC_TrackParts/TrackVariant/RTC_Ramp_5m
+    Variant.prefab
+  uploadId: 613807

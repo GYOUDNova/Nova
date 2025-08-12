@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c6e20ffe6d2b946fb9896031aa048f90
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/ModAssets/Prefabs/Trail Prefabs/LaserTrail.prefab
+  uploadId: 613807

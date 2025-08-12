@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3d50c40306d539144a82cf42e6271cc9
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_Racetrack/Prefabs/RTC_TrackParts/RTC_TurnShort.prefab
+  uploadId: 613807

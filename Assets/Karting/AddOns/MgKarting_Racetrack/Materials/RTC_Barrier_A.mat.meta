@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ed5f95007294cbd4f9d3731a651e3a7e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_Racetrack/Materials/RTC_Barrier_A.mat
+  uploadId: 613807

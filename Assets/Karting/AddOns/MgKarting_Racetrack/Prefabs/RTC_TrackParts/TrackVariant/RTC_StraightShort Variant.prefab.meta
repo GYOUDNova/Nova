@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6f0f9b2e06332944598aff53573a8258
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_Racetrack/Prefabs/RTC_TrackParts/TrackVariant/RTC_StraightShort
+    Variant.prefab
+  uploadId: 613807

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: dfd0426c2a4ca174782cd114d81cbbf1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_HoverKart/VFX/Materials/VFX_HoverKart_ShockWave.mat
+  uploadId: 613807

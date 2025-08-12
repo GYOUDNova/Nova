@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a69814c8f8082a34292bcabd6b4416fb
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_KnightRacer/Materials/KnightRacer_Head.mat
+  uploadId: 613807

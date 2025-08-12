@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4091439fc102a0a44abef8fcf33734a9
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_Racetrack/Prefabs/RTC_TrackParts/RTC_Ramp_Long_10m.prefab
+  uploadId: 613807

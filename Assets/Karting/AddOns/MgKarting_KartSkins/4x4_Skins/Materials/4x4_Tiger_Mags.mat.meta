@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5a3778aa3b2f3ed40adff0c1db22234a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_KartSkins/4x4_Skins/Materials/4x4_Tiger_Mags.mat
+  uploadId: 613807

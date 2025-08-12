@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 16248afa6cf9f014c93967f94dd52a6c
+timeCreated: 1471532950
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_RocketKit/VFX_RocketKit/Materials/VFX_RocketKit_Embers.mat
+  uploadId: 613807

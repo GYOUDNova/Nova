@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4d4cb14e6ab4d9544afb7661f895509c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 13400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_4x4/Materials/4x4KartBody.physicMaterial
+  uploadId: 613807

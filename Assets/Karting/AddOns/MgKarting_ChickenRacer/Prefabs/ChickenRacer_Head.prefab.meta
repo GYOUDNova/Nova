@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d57391454a9b0464b9a1788ff1c49990
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_ChickenRacer/Prefabs/ChickenRacer_Head.prefab
+  uploadId: 613807

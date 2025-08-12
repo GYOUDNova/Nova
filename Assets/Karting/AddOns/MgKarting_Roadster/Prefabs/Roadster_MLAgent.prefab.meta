@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d8fa2cbae5f4d024fab6cfb62a3f36f3
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_Roadster/Prefabs/Roadster_MLAgent.prefab
+  uploadId: 613807

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 332a6a14085b74fdd9c8f81357a61185
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/ModAssets/Prefabs/Hat Prefabs/PartyHat.prefab
+  uploadId: 613807

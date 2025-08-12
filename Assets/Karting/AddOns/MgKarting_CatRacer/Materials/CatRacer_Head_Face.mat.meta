@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0d73df26789d9f84c9597aec11bcbd03
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_CatRacer/Materials/CatRacer_Head_Face.mat
+  uploadId: 613807

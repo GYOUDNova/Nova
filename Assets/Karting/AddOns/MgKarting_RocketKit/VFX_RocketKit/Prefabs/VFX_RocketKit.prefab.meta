@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2d2b2fd5697d8804fbd9d133ce8f4cec
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_RocketKit/VFX_RocketKit/Prefabs/VFX_RocketKit.prefab
+  uploadId: 613807

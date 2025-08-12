@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f6a553ee921f9a54c82af8208667522b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_Roadster/Materials/Roadster_Exhaust.mat
+  uploadId: 613807

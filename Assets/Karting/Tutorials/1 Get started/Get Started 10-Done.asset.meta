@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0f9959ef5c21e45e4ac3e429fab617df
+timeCreated: 1491992214
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/Tutorials/1 Get started/Get Started 10-Done.asset
+  uploadId: 613807

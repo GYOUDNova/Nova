@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0169f8aeb6515e04a91d39760be09758
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_Racetrack/Prefabs/RTC_Lanelines/RTC_Ramp_Long_10m_Lanelines.prefab
+  uploadId: 613807

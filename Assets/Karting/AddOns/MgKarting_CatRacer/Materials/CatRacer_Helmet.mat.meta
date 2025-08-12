@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b24a2ae4a40622746ac6641740a4476f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_CatRacer/Materials/CatRacer_Helmet.mat
+  uploadId: 613807

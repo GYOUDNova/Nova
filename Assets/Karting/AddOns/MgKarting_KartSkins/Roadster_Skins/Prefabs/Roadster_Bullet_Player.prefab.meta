@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ac4ac5dce31145240b93fce4edb79324
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_KartSkins/Roadster_Skins/Prefabs/Roadster_Bullet_Player.prefab
+  uploadId: 613807

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 29aea8fb45b22a742ab8299b979fc39d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_HoverKart/Prefabs/HoverKart_Player.prefab
+  uploadId: 613807

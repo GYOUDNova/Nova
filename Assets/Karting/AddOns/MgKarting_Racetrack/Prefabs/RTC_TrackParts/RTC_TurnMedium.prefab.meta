@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2579d530f84579c40a8fa4e1502a7ce0
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_Racetrack/Prefabs/RTC_TrackParts/RTC_TurnMedium.prefab
+  uploadId: 613807

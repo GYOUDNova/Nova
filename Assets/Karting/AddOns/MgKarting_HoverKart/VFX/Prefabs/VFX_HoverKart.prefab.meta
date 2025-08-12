@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8721015d9c002224c943c91b097966f1
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_HoverKart/VFX/Prefabs/VFX_HoverKart.prefab
+  uploadId: 613807

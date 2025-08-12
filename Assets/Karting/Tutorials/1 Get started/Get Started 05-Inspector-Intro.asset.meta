@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4ac627054a9104ee889eef8b990a8102
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/Tutorials/1 Get started/Get Started 05-Inspector-Intro.asset
+  uploadId: 613807

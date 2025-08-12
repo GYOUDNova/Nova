@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9481e9afd8ae89c47988f6384e94f036
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_Racetrack/Materials/RTC_Track_Stripe.mat
+  uploadId: 613807

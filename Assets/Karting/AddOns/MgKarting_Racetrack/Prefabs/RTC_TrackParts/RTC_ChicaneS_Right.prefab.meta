@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ba6c46774ab4e3f4b9bfe25d87ffb9a4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_Racetrack/Prefabs/RTC_TrackParts/RTC_ChicaneS_Right.prefab
+  uploadId: 613807

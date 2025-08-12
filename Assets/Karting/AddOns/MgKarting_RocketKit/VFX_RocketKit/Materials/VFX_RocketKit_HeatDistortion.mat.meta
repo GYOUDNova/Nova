@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 572a9c32d78ec144aab3b7c703e78448
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_RocketKit/VFX_RocketKit/Materials/VFX_RocketKit_HeatDistortion.mat
+  uploadId: 613807

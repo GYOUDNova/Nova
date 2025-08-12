@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 43b91ff9132cac94593f9550c86757d1
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_4x4/Prefabs/4x4_Player.prefab
+  uploadId: 613807

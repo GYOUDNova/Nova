@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 28d8c0fcf953ee748b55dd3ec066901f
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_Racetrack/Prefabs/RTC_TrackParts/TrackVariant/RTC_TurnLong
+    Variant.prefab
+  uploadId: 613807

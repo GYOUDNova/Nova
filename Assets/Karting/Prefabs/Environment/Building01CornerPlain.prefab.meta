@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 923761a646988454ba4628782e4e8ccf
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/Prefabs/Environment/Building01CornerPlain.prefab
+  uploadId: 613807

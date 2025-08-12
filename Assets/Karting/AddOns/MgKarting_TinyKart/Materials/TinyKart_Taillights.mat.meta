@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 46aae851adce37446bc41a109fe8c6a5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_TinyKart/Materials/TinyKart_Taillights.mat
+  uploadId: 613807

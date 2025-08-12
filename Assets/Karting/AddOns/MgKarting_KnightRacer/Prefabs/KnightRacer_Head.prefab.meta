@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f1511e24336035e4fa882908289f5ba7
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_KnightRacer/Prefabs/KnightRacer_Head.prefab
+  uploadId: 613807

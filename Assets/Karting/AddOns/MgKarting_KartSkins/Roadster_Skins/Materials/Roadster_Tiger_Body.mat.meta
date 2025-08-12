@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6a92826675e0ea64a8b96939e8492a5f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 150956
+  packageName: Karting Microgame | URP
+  packageVersion: 4.1.0
+  assetPath: Assets/Karting/AddOns/MgKarting_KartSkins/Roadster_Skins/Materials/Roadster_Tiger_Body.mat
+  uploadId: 613807
