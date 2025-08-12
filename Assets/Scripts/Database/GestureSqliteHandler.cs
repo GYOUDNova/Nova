@@ -416,7 +416,7 @@ namespace NOVA.Scripts
                 }
 
                 // Delete the image file before deleting the record
-                var gestureImage = conn.Table<GestureImage>().FirstOrDefault(gi => gi.GestureId == gestureID);
+                var gestureImage = conn.Table<GestureImage>().FirstOrDefault(gi => gi.GestureId == gestureID && gi.IsPredefined == gestureData.IsPredefined);
                 FileHandler.DeleteImageFromResources(gestureImage.Name, gestureImage.FileExtension);
 
                 // Delete everything associated with the gesture
