@@ -96,12 +96,12 @@
     <Compile Include="Assets\Scripts\Helpers\TestUtils.cs" />
     <Compile Include="Assets\Scripts\Helpers\ResetLocalState.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\Bootstrap.cs" />
-    <Compile Include="Assets\Scripts\Helpers\InstallPreCommitHook.cs" />
     <Compile Include="Assets\Scripts\Controllers\GestureListWindowController.cs" />
     <Compile Include="Assets\Scripts\Database\Landmark.cs" />
     <Compile Include="Assets\Scripts\Database\GestureCategory.cs" />
     <Compile Include="Assets\Scripts\Helpers\UnityMainThreadDispatcher.cs" />
     <Compile Include="Assets\Scripts\Helpers\AddPredefinedGesturesHelper.cs" />
+    <Compile Include="Assets\Scripts\Dev Utilities\InstallPreCommitHook.cs" />
     <Compile Include="Assets\Scripts\Database\CustomGesture.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\Screen.cs" />
     <Compile Include="Assets\Scripts\Mediapipe\Common\Scripts\ImageSource\ImageSource.cs" />
