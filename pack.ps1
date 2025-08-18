@@ -126,18 +126,6 @@ Copy-Or-Make-FolderMeta -SrcFolder $Src_UIToolkit -DstFolder $Dst_UIToolkit
 $DevUtilMeta = Join-Path $Dst_Editor "Dev Utilities.meta"
 Remove-Item -LiteralPath $DevUtilMeta -Force -ErrorAction SilentlyContinue
 
-$ReadmePath     = Join-Path $PackagePath "README.md"
-$LicensePath    = Join-Path $PackagePath "LICENSE"
-$GitIgnoreSrc   = Join-Path $ProjectRoot ".gitignore"
-$GitAttributes  = Join-Path $ProjectRoot ".gitattributes"
-
-if (Test-Path (Join-Path $ProjectRoot "README.md"))     { Copy-Item (Join-Path $ProjectRoot "README.md")     $ReadmePath     -Force }
-if (Test-Path (Join-Path $ProjectRoot "LICENSE"))    { Copy-Item (Join-Path $ProjectRoot "LICENSE")    $LicensePath    -Force }
-if (Test-Path -LiteralPath $GitIgnoreSrc)  { Copy-Item -LiteralPath $GitIgnoreSrc  -Destination (Join-Path $PackagePath ".gitignore")   -Force }
-if (Test-Path -LiteralPath $GitAttributes) { Copy-Item -LiteralPath $GitAttributes -Destination (Join-Path $PackagePath ".gitattributes") -Force }
-
-foreach ($p in @($ReadmePath,$LicensePath)) { if (Test-Path -LiteralPath $p) { Write-TextMeta $p } }
-
 $PkgJsonPath = Join-Path $PackagePath "package.json"
 if (Test-Path -LiteralPath $PkgJsonPath) {
   $pkg = Get-Content -LiteralPath $PkgJsonPath -Raw | ConvertFrom-Json
