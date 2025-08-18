@@ -4,35 +4,48 @@ on: [pull_request]
 
 jobs:
   test:
+    name: Run Tests in PlayMode and EditMode ✨
     permissions:
       checks: write
-    name: Run Tests in PlayMode and EditMode ✨
     runs-on: ubuntu-latest
-    steps:
+    timeout-minutes: 45
 
+    steps:
       # Checkout
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           lfs: true
 
-      # Cache
-      - uses: actions/cache@v3
+      # Cache the Library folder for faster runs
+      - name: Cache Library
+        uses: actions/cache@v3
         with:
           path: Library
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
             Library-
-      
-      # Test
-      - name: Run tests
-        uses: game-ci/unity-test-runner@v4
+
+      # Run Unity tests (both EditMode + PlayMode by default)
+      - name: Run tests (Ubuntu + Xvfb)
         id: tests
+        uses: game-ci/unity-test-runner@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
+          # Linux editor image for 6000.0.39f1; "base" is fine for tests
+          customImage: unityci/editor:ubuntu-6000.0.39f1-base-3.1.0
+          # Stabilize headless graphics & stream logs to STDOUT
+          customParameters: "-force-glcore -logFile -"
+          testMode: All
 
-        
+      # Always upload test artifacts (XML, logs, etc.)
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Unity Test Results
+          path: ${{ steps.tests.outputs.artifactsPath }}

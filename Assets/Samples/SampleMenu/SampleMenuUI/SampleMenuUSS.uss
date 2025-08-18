@@ -1,12 +1,89 @@
-VisualElement {
+.button {
+    background-color: #212020;
+    color: #eceff4;
+    border-radius: 8px;
+    margin: 6px 0;
+    padding: 8px 14px;
+    font-size: 32px;
+    font-weight: 500;
+    transition: background 0.2s ease;
 }
 
-.Info-button {
-    font-size: 50px;
-    width: 100%;
-    height: 15%;
-    max-width: none;
-    max-height: none;
-    min-width: 0;
-    min-height: 0;
+/* When selected */
+.button-hover {
+    background-color: #434c5e;
+    border: 2px solid #00ffff;
+    scale: 1.05;
+}
+
+/* Glow animation loop */
+.button-glow {
+    animation: glow-pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes glow-pulse {
+    0%   { box-shadow: 0 0 6px #00ffff; transform: scale(1.05); }
+    50%  { box-shadow: 0 0 16px #00ffff; transform: scale(1.08); }
+    100% { box-shadow: 0 0 6px #00ffff; transform: scale(1.05); }
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 20px;
+}
+
+.sidebar {
+    background-color: #2e3440;  /* darker slate grey */
+    border-radius: 12px;
+    padding: 12px;
+    margin-right: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* subtle depth */
+}
+
+
+.gesture-column {
+    flex: 1;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.gesture-card {
+    background-color: #222;
+    border-radius: 20px;
+    padding: 12px;
+    margin: 10px 0;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.gesture-label {
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 4px;
+    text-shadow: 1px 1px 2px black;
+}
+
+.info-column {
+    flex: 2;
+    justify-content: flex-start;
+}
+
+.info-text {
+    font-size: 32px;
+    line-height: 1.6;
+    color: black;  /* dark slate for easy reading */
+    margin: 0 auto;
+}
+
+.info-header {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: black;
 }
