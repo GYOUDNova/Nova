@@ -4,6 +4,7 @@ param(
   [string]$BranchName = "",
   [switch]$ForceBranch,
   [switch]$TagRelease,
+  [switch]$AllowDirty,
   [string]$PackageName    = "com.gyoudnova.handrecognition",
   [string]$DisplayName    = "Hand Recognition",
   [string]$Description    = "This is the package for hand recognition project created by Gyoud Nova",
@@ -26,7 +27,7 @@ $ProjectRoot = & git -C $ScriptDir rev-parse --show-toplevel 2>$null
 if (-not $ProjectRoot) { $ProjectRoot = (Resolve-Path $ScriptDir).Path }
 
 Push-Location $ProjectRoot
-if (git status --porcelain) { Pop-Location; throw "Working tree is not clean." }
+if (-not $AllowDirty -and (git status --porcelain)) { Pop-Location; throw "Working tree is not clean. Use -AllowDirty to bypass." }
 git fetch origin | Out-Null
 git checkout $BaseBranch | Out-Null
 git pull --ff-only | Out-Null
@@ -35,9 +36,6 @@ if ($remoteExists -and -not $ForceBranch) { Pop-Location; throw "Remote branch '
 if ((git branch --list $BranchName)) { git branch -D $BranchName | Out-Null }
 git checkout -B $BranchName $BaseBranch | Out-Null
 Pop-Location
-
-$PackagesRoot = Join-Path $ProjectRoot "Packages"
-$PackagePath  = Join-Path $PackagesRoot $PackageName
 
 function New-Dir([string]$Path) { if (-not (Test-Path -LiteralPath $Path)) { New-Item -ItemType Directory -Force -Path $Path | Out-Null } }
 function Clear-Dir([string]$Path) { if (Test-Path -LiteralPath $Path) { Get-ChildItem -LiteralPath $Path -Force | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue } else { New-Dir $Path } }
@@ -79,7 +77,9 @@ function Copy-TreeTo { param([Parameter(Mandatory=$true)][string]$From,[Paramete
   Get-ChildItem -LiteralPath $From -Force | ForEach-Object { $dest = Join-Path $To $_.Name; Copy-Item -LiteralPath $_.FullName -Destination $dest -Recurse -Force -ErrorAction Stop }
 }
 
-# New-Dir $PackagesRoot
+$PackagesRoot = Join-Path $ProjectRoot "Packages"
+$PackagePath  = Join-Path $PackagesRoot $PackageName
+New-Dir $PackagesRoot
 New-Dir $PackagePath
 
 $Assets               = Join-Path $ProjectRoot "Assets"
@@ -125,6 +125,35 @@ Copy-Or-Make-FolderMeta -SrcFolder $Src_UIToolkit -DstFolder $Dst_UIToolkit
 
 $DevUtilMeta = Join-Path $Dst_Editor "Dev Utilities.meta"
 Remove-Item -LiteralPath $DevUtilMeta -Force -ErrorAction SilentlyContinue
+
+$ReadmePath     = Join-Path $PackagePath "README.md"
+$LicensePath    = Join-Path $PackagePath "LICENSE"
+$GitIgnoreSrc   = Join-Path $ProjectRoot ".gitignore"
+
+if (Test-Path (Join-Path $ProjectRoot "README.md"))     { Copy-Item (Join-Path $ProjectRoot "README.md")     $ReadmePath     -Force }
+if (Test-Path (Join-Path $ProjectRoot "LICENSE"))    { Copy-Item (Join-Path $ProjectRoot "LICENSE")    $LicensePath    -Force }
+if (Test-Path -LiteralPath $GitIgnoreSrc)  { Copy-Item -LiteralPath $GitIgnoreSrc  -Destination (Join-Path $PackagePath ".gitignore") -Force }
+
+$PkgGitAttr = Join-Path $PackagePath ".gitattributes"
+@"
+* -filter -diff -merge -text
+*.png   -filter -diff -merge -text
+*.jpg   -filter -diff -merge -text
+*.jpeg  -filter -diff -merge -text
+*.psd   -filter -diff -merge -text
+*.tga   -filter -diff -merge -text
+*.bmp   -filter -diff -merge -text
+*.exr   -filter -diff -merge -text
+*.wav   -filter -diff -merge -text
+*.mp3   -filter -diff -merge -text
+*.mp4   -filter -diff -merge -text
+*.prefab -filter -diff -merge -text
+*.mat   -filter -diff -merge -text
+*.anim  -filter -diff -merge -text
+*.controller -filter -diff -merge -text
+"@ | Out-File -Encoding ASCII $PkgGitAttr
+
+foreach ($p in @($ReadmePath,$LicensePath)) { if (Test-Path -LiteralPath $p) { Write-TextMeta $p } }
 
 $PkgJsonPath = Join-Path $PackagePath "package.json"
 if (Test-Path -LiteralPath $PkgJsonPath) {
@@ -172,11 +201,12 @@ $pkg | ConvertTo-Json -Depth 20 | Out-File -FilePath $PkgJsonPath -Encoding UTF8
 Write-TextMeta $PkgJsonPath
 
 Push-Location $ProjectRoot
-git add -A
+git add -- "Packages/$PackageName"
 if (-not (git diff --cached --quiet)) { git commit -m "Release $Version" | Out-Null }
 if ($ForceBranch) { git push -u origin $BranchName --force-with-lease | Out-Null } else { git push -u origin $BranchName | Out-Null }
 if ($TagRelease) { git tag -f -a "v$Version" -m "Release $Version" | Out-Null; git push --force origin tag "v$Version" | Out-Null }
 Pop-Location
 
-Write-Host "https://github.com/GYOUDNova/Nova.git?path=/Packages/$PackageName#$BranchName"
-if ($TagRelease) { Write-Host "https://github.com/GYOUDNova/Nova.git?path=/Packages/$PackageName#v$Version" }
+Write-Host "Install via branch:"
+Write-Host "  https://github.com/GYOUDNova/Nova.git?path=/Packages/$PackageName#$BranchName"
+if ($TagRelease) { Write-Host "Install via tag:"; Write-Host "  https://github.com/GYOUDNova/Nova.git?path=/Packages/$PackageName#v$Version" }
