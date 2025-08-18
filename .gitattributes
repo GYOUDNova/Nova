@@ -1,0 +1,15 @@
+* -filter -diff -merge -text
+*.png   -filter -diff -merge -text
+*.jpg   -filter -diff -merge -text
+*.jpeg  -filter -diff -merge -text
+*.psd   -filter -diff -merge -text
+*.tga   -filter -diff -merge -text
+*.bmp   -filter -diff -merge -text
+*.exr   -filter -diff -merge -text
+*.wav   -filter -diff -merge -text
+*.mp3   -filter -diff -merge -text
+*.mp4   -filter -diff -merge -text
+*.prefab -filter -diff -merge -text
+*.mat   -filter -diff -merge -text
+*.anim  -filter -diff -merge -text
+*.controller -filter -diff -merge -text

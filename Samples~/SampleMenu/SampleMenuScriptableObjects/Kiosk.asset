@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e5796312d05d64784aac2a13a585bf, type: 3}
+  m_Name: Kiosk
+  m_EditorClassIdentifier: 
+  ButtonName: Kiosk
+  InfoText: Our Unity plugin enables intuitive hand gesture recognition, making it
+    ideal for modern kiosk technologies. It allows users to interact with digital
+    content in a completely touchless manner, which is especially valuable in public
+    environments where hygiene is a concern. This can be applied to interactive information
+    kiosks in museums, airports, or retail settings, where users can browse content,
+    navigate menus, or trigger actions using simple gestures. Additionally, the plugin
+    supports integration with projector-based or holographic displays, enabling users
+    to control immersive content in mid-air without physical contact, enhancing accessibility
+    and creating futuristic, engaging user experiences.

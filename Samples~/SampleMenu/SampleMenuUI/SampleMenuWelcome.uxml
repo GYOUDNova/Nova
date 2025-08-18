@@ -1,0 +1,9 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Samples/SampleMenu/SampleMenuUI/SampleMenuUSS.uss?fileID=7433441132597879392&amp;guid=efdf1558fc352f94e8008c44d84f91eb&amp;type=3#SampleMenuUSS" />
+    <engine:VisualElement style="flex-grow: 1; background-color: rgb(188, 194, 206); -unity-background-image-tint-color: rgb(0, 0, 0);">
+        <engine:Label text="Welcome" name="WeclomeText" enabled="true" style="position: absolute; top: 9%; left: -21%; font-size: 116%; background-color: rgb(34, 34, 34); color: rgb(255, 255, 255); max-width: initial; max-height: initial; width: 93%; -unity-text-align: upper-center;" />
+        <engine:VisualElement name="Logo" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Images/NOVA_Logo.png?fileID=2800000&amp;guid=7ae3119cad772bc4ea379281f9b755cc&amp;type=3#NOVA_Logo&quot;); align-items: stretch; align-self: flex-end; position: absolute; min-width: auto; min-height: auto; max-width: 40%; max-height: 40%; height: 40%; width: 26%;" />
+        <engine:Label text="Please show your palm to continue" name="InstructionText" style="position: absolute; bottom: 5%; left: 16%; font-size: 77%;" />
+        <engine:VisualElement class="gesture-card" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Samples/SampleMenu/SampleSceneImages/OpenPalm.png?fileID=2800000&amp;guid=293a23facfba3f445824b4439a64def5&amp;type=3#OpenPalm&quot;); width: 38%; height: 44%; max-width: none; max-height: none; min-width: auto; min-height: auto; top: 32%; left: 35%; -unity-background-image-tint-color: rgb(255, 255, 255); position: absolute;" />
+    </engine:VisualElement>
+</engine:UXML>

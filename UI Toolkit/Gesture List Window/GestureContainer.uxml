@@ -1,0 +1,11 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Gesture%20List%20Window/GestureContainerUSS.uss?fileID=7433441132597879392&amp;guid=572eeb54fa4e2fd4aa1b3691888e8d0c&amp;type=3#GestureContainerUSS" />
+    <engine:VisualElement name="GestureContainer" class="gesture-container">
+        <engine:VisualElement name="GestureImage" class="gesture-image" />
+        <engine:Label text="Label" name="GestureDetails" class="gesture-details" />
+        <engine:VisualElement name="GestureBottomHalfContainer" class="gesture-bottom-half-container">
+            <engine:Button name="DeleteGestureButton" class="delete-gesture-button" />
+            <engine:Label text="Label" name="GestureType" class="gesture-type" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

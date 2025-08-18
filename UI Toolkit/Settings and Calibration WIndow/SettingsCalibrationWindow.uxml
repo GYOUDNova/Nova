@@ -1,0 +1,31 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Settings%20and%20Calibration%20WIndow/SettingsCalibrationWindowUSS.uss?fileID=7433441132597879392&amp;guid=08505877cd7a24d45b3da8ca81203d84&amp;type=3#SettingsCalibrationWindowUSS" />
+    <Style src="project://database/Assets/UI%20Toolkit/window.uss?fileID=7433441132597879392&amp;guid=14e1d9d7fd525284290419e722cdb958&amp;type=3#window" />
+    <engine:VisualElement name="EditorWindow">
+        <engine:VisualElement name="Header" style="flex-grow: 1;">
+            <engine:Label name="TitleLabel" class="title-label" />
+            <engine:VisualElement name="logo" class="logo" />
+        </engine:VisualElement>
+        <engine:VisualElement name="ConfigContainer" class="settings-container" style="flex-grow: 1;">
+            <engine:TextField label="Configuration Name:" name="ConfigurationName" placeholder-text="Max length of 25 characters" class="configuration-name-field" />
+            <engine:VisualElement name="GammaContainer" class="gamma-container">
+                <engine:SliderInt label="Gamma:" value="0" high-value="100" name="Gamma" fill="false" class="gamma-field" />
+                <engine:Label name="GammaValueDisplay" text="0%" class="gamma-value-display-field" />
+            </engine:VisualElement>
+            <engine:FloatField label="Chain Timer:" name="ChainTimer" max-length="10" placeholder-text="Range: 1-10" class="chain-timer-field" />
+            <engine:FloatField label="Landmark Tolerance:" max-length="10" name="LandmarkTolerance" placeholder-text="Range: 1-10" class="landmark-tolerance-field" />
+            <engine:DropdownField label="Save Image As:" name="ImageType" class="image-type-field" />
+            <engine:RadioButtonGroup label="Set Active" choices="Yes,No" name="SetActiveConfigurationButtons" />
+            <engine:Button text="Save Configuration" name="SaveConfigurationButton" class="save-configuration-button" />
+            <engine:Label name="CreatingConfigStatusLabel" class="status-label" />
+        </engine:VisualElement>
+        <engine:VisualElement name="BottomHalfContainer" class="bottom-half-container" style="flex-grow: 1; margin-top: 35px; width: 50%;">
+            <engine:DropdownField label="Configurations" name="ListOfConfigs" style="width: 100%;" />
+            <engine:VisualElement name="ButtonContainer" class="button-container" style="flex-grow: 1;">
+                <engine:Button text="Set as Active Configuration" name="MakeActiveButton" class="make-active-button" />
+                <engine:Button text="Delete Configuration" name="DeleteConfigurationButton" class="delete-configuration-button" />
+            </engine:VisualElement>
+            <engine:Label name="EditingConfigStatusLabel" class="status-label" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

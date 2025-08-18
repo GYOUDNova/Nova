@@ -1,0 +1,25 @@
+﻿using SQLite;
+
+namespace NOVA.Scripts
+{
+    [Table("GestureData")]
+    public class GestureData
+    {
+        [PrimaryKey, AutoIncrement]
+        public int GestureDataId { get; set; }
+
+        [NotNull, MaxLength(256), Unique]
+        public string Name { get; set; }
+
+        // FK
+        [NotNull, MaxLength(30), Unique]
+        public string GestureImageName { get; set; }
+
+        // FK
+        [NotNull]
+        public int GestureCategoryId { get; set; }
+
+        [NotNull]
+        public bool IsPredefined { get; set; }
+    }
+}
