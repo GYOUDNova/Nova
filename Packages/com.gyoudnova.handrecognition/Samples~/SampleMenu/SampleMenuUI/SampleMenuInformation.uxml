@@ -1,0 +1,32 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Samples/SampleMenu/SampleMenuUI/SampleMenuUSS.uss?fileID=7433441132597879392&amp;guid=efdf1558fc352f94e8008c44d84f91eb&amp;type=3#SampleMenuUSS" />
+    <engine:VisualElement style="flex-grow: 1; background-color: rgb(188, 194, 206);">
+        <engine:Label text="Information Window" name="TitleText" style="font-size: 72%; flex-wrap: nowrap; left: -5%; top: 6%; position: absolute; width: 111%; height: 11%; -unity-text-align: upper-center; background-color: rgb(34, 34, 34); color: rgb(243, 243, 243); max-width: initial; max-height: initial;" />
+        <engine:VisualElement name="Logo" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Images/NOVA_Logo.png?fileID=2800000&amp;guid=7ae3119cad772bc4ea379281f9b755cc&amp;type=3#NOVA_Logo&quot;); max-width: 20%; max-height: 25%; top: auto; right: auto; left: auto; align-items: stretch; align-self: flex-end; min-width: auto; min-height: auto; position: absolute; width: 100%; height: 30%; opacity: 1;" />
+        <engine:VisualElement name="SelectionContainer" class="main-container sidebar" style="flex-grow: 1; max-width: initial; left: -1%; flex-direction: row; max-height: initial; background-color: rgba(0, 0, 0, 0.36); height: 69%; width: 46%; position: absolute; top: 28%; overflow: hidden;">
+            <engine:ScrollView name="ButtonScroll" vertical-scroller-visibility="Hidden" horizontal-scroller-visibility="Hidden" class="main-container" style="min-width: auto; max-width: initial; max-height: initial; width: 69%; overflow: visible; height: 150%; top: -25%;">
+                <engine:Button text="Kiosk" class="button" />
+                <engine:Button text="Sign Language" class="button" />
+                <engine:Button text="Back" class="button" />
+            </engine:ScrollView>
+            <engine:VisualElement name="ImageContainer" class="gesture-column" style="max-width: 32%;">
+                <engine:VisualElement name="UpCard" class="gesture-card" style="flex-grow: 1; max-width: initial; max-height: initial; width: 100%;">
+                    <engine:VisualElement class="gesture-card" style="background-image: url(&quot;project://database/Assets/Samples/SampleMenu/SampleSceneImages/OneFinger.png?fileID=2800000&amp;guid=61b2444cbb567e74a89e1573a6d80ed2&amp;type=3#OneFinger&quot;); width: 100%; min-width: auto; min-height: auto; max-width: initial; max-height: initial; height: 100%;" />
+                    <engine:Label text="Up" class="gesture-label" style="font-size: 32px;" />
+                </engine:VisualElement>
+                <engine:VisualElement name="ConfirmCard" class="gesture-card" style="flex-grow: 1; max-height: initial; max-width: initial; width: 100%;">
+                    <engine:VisualElement class="gesture-card" style="background-image: url(&quot;project://database/Assets/Samples/SampleMenu/SampleSceneImages/OpenPalm.png?fileID=2800000&amp;guid=293a23facfba3f445824b4439a64def5&amp;type=3#OpenPalm&quot;); min-width: auto; min-height: auto; max-height: initial; max-width: initial; width: 100%; height: 100%;" />
+                    <engine:Label text="Confirm" class="gesture-label" style="font-size: 32px;" />
+                </engine:VisualElement>
+                <engine:VisualElement name="DownCard" class="gesture-card" style="flex-grow: 1; width: 100%;">
+                    <engine:VisualElement class="gesture-card" style="min-width: auto; min-height: auto; background-image: url(&quot;project://database/Assets/Samples/SampleMenu/SampleSceneImages/TwoFingers.png?fileID=2800000&amp;guid=c0db5c1ec93d148459dc1643f822dfbd&amp;type=3#TwoFingers&quot;); max-width: initial; max-height: initial; width: 100%; height: 100%;" />
+                    <engine:Label text="Down" class="gesture-label" style="font-size: 32px;" />
+                </engine:VisualElement>
+            </engine:VisualElement>
+        </engine:VisualElement>
+        <engine:VisualElement name="InformationContainer" style="flex-grow: 1; max-width: 47%; left: 48%; top: 27%; max-height: 65%; min-height: 67%; position: absolute; min-width: 47%; -unity-background-scale-mode: scale-to-fit;">
+            <engine:Label name="InfoHeader" text="Header" class="info-header" />
+            <engine:Label text="To read information on possible use cases please match one of the gestures on the left" name="InformationText" class="info-text" style="font-size: 32px; white-space: normal;" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e5796312d05d64784aac2a13a585bf, type: 3}
+  m_Name: SignlLanguage
+  m_EditorClassIdentifier: 
+  ButtonName: Sign Language
+  InfoText: Our Unity plugin opens up powerful possibilities in the realm of sign
+    language recognition and learning. By accurately detecting and interpreting hand
+    gestures, it can be used to create real-time translation tools that convert sign
+    language into text or speech, improving communication accessibility for Deaf
+    and hard-of-hearing individuals. Additionally, it can support immersive educational
+    applications, allowing users to learn sign language through interactive lessons,
+    visual feedback, and guided practice in a virtual environment. This makes it
+    a valuable tool for both assistive technology and inclusive education.

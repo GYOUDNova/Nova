@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 83c7f3654e0142043a2c06f44ba60ed5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - m_ViewDataDictionary: {instanceID: 0}
+  - createGestureScreenAsset: {fileID: 9197481963319205126, guid: f5eda2e4b3b0c15409eec7ebd0e9350b, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
