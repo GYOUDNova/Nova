@@ -505,35 +505,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.size
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[0].GestureName
-      value: Finger Down L
+      value: One Finger L
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[1].GestureName
-      value: Finger Up L
-      objectReference: {fileID: 0}
-    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
-      propertyPath: GestureDictionary.GestureInputs.Array.data[2].GestureName
-      value: Open Palm L
-      objectReference: {fileID: 0}
-    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
-      propertyPath: GestureDictionary.GestureInputs.Array.data[3].GestureName
-      value: Closed Fist L
-      objectReference: {fileID: 0}
-    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
-      propertyPath: GestureDictionary.GestureInputs.Array.data[4].GestureName
       value: One Finger R
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
-      propertyPath: GestureDictionary.GestureInputs.Array.data[5].GestureName
+      propertyPath: GestureDictionary.GestureInputs.Array.data[2].GestureName
+      value: Peace Sign L
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[3].GestureName
       value: Peace Sign R
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
-      propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureName
+      propertyPath: GestureDictionary.GestureInputs.Array.data[4].GestureName
+      value: Open Palm L
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[5].GestureName
       value: Open Palm R
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureName
+      value: Closed Fist L
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[7].GestureName
@@ -581,19 +581,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[2].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[3].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[4].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[5].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -689,23 +689,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[2].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ConfirmSelection
+      value: MoveSelection
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[3].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: HideInformationView
+      value: MoveSelection
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[4].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetInformationText
+      value: ConfirmSelection
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[5].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetInformationText
+      value: ConfirmSelection
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowInformationView
+      value: HideInformationView
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -733,15 +733,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[4].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: NOVA.Scripts.InfoWindowPresenter, NOVA
+      value: NOVA.Scripts.InfoWindowPresenter, SampleMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[5].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: NOVA.Scripts.InfoWindowPresenter, NOVA
+      value: NOVA.Scripts.InfoWindowPresenter, SampleMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: NOVA.Scripts.InfoWindowPresenter, Assembly-CSharp
+      value: NOVA.Scripts.InfoWindowPresenter, SampleMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -749,11 +749,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[7].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: NOVA.Scripts.InfoWindowPresenter, Assembly-CSharp
+      value: NOVA.Scripts.InfoWindowPresenter, SampleMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[0].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[1].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
@@ -761,23 +761,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[2].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
-      propertyPath: GestureDictionary.GestureInputs.Array.data[3].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
-      propertyPath: GestureDictionary.GestureInputs.Array.data[4].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[3].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
+      propertyPath: GestureDictionary.GestureInputs.Array.data[4].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[5].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[6].GestureEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
@@ -785,7 +785,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[7].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff, type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[0].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
