@@ -7,7 +7,7 @@ jobs:
     permissions:
       checks: write
     name: Run Tests in PlayMode and EditMode ✨
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
 
       # Checkout
