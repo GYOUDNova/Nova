@@ -15,5 +15,10 @@ namespace KartGame.KartSystems
             gestureInputComponent.SetGesture(direction);
         }
 
+        public void OnDirectionGestureDetected(string direction)
+        {
+            if (!EnableGestureControl || gestureInputComponent == null) return;
+            gestureInputComponent.SetDirectionGesture(direction);
+        }
     }
 }

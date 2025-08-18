@@ -246,16 +246,6 @@ namespace KartGame.KartSystems
 
             m_CurrentGrip = baseStats.Grip;
 
-            // Find GestureInput in the inputs
-            //foreach (var inputSource in m_Inputs)
-            //{
-            //    if (inputSource is GestureInput gestureInputSource)
-            //    {
-            //        gestureInput = gestureInputSource;
-            //        break;
-            //    }
-            //}
-
             if (DriftSparkVFX != null)
             {
                 AddSparkToWheel(RearLeftWheel, -DriftSparkHorizontalOffset, -DriftSparkRotation);

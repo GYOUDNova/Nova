@@ -8168,7 +8168,6 @@ Transform:
   - {fileID: 919539589}
   - {fileID: 611497299}
   - {fileID: 1636226116}
-  - {fileID: 1009162156}
   - {fileID: 68686923}
   - {fileID: 1382268769}
   - {fileID: 1108453783}
@@ -9708,102 +9707,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1411612671}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1009162155
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 822690626}
-    m_Modifications:
-    - target: {fileID: 4478061287446689989, guid: 06604f26f581c4de08c3f45572924c7d,
-        type: 3}
-      propertyPath: bounciness
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602977218683501769, guid: 06604f26f581c4de08c3f45572924c7d,
-        type: 3}
-      propertyPath: m_Name
-      value: ModularTrackCurveLarge
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602977218683986153, guid: 06604f26f581c4de08c3f45572924c7d,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602977218683986153, guid: 06604f26f581c4de08c3f45572924c7d,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602977218683986153, guid: 06604f26f581c4de08c3f45572924c7d,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602977218683986153, guid: 06604f26f581c4de08c3f45572924c7d,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 37
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602977218683986153, guid: 06604f26f581c4de08c3f45572924c7d,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602977218683986153, guid: 06604f26f581c4de08c3f45572924c7d,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602977218683986153, guid: 06604f26f581c4de08c3f45572924c7d,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.0001478046
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602977218683986153, guid: 06604f26f581c4de08c3f45572924c7d,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602977218683986153, guid: 06604f26f581c4de08c3f45572924c7d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602977218683986153, guid: 06604f26f581c4de08c3f45572924c7d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -0.017
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602977218683986153, guid: 06604f26f581c4de08c3f45572924c7d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6602977218685588075, guid: 06604f26f581c4de08c3f45572924c7d,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: 83f0e1b2590734b80bda8c5dcda941da,
-        type: 2}
-    - target: {fileID: 6602977218685588075, guid: 06604f26f581c4de08c3f45572924c7d,
-        type: 3}
-      propertyPath: m_CookingOptions
-      value: -1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6602977218685588073, guid: 06604f26f581c4de08c3f45572924c7d, type: 3}
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 06604f26f581c4de08c3f45572924c7d, type: 3}
---- !u!4 &1009162156 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6602977218683986153, guid: 06604f26f581c4de08c3f45572924c7d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1009162155}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1011628028
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10357,22 +10260,26 @@ PrefabInstance:
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff,
         type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[0].GestureName
+<<<<<<< Updated upstream
       value: One Finger L
+=======
+      value: Open Up L
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff,
         type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[1].GestureName
-      value: Point Up R
+      value: Open Up R
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff,
         type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[2].GestureName
-      value: Point Left
+      value: Point Left R
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff,
         type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[3].GestureName
-      value: Point Right
+      value: Point Right L
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff,
         type: 3}
@@ -10642,12 +10549,12 @@ PrefabInstance:
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff,
         type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[2].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnGestureDetected
+      value: OnDirectionGestureDetected
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff,
         type: 3}
       propertyPath: GestureDictionary.GestureInputs.Array.data[3].GestureEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnGestureDetected
+      value: OnDirectionGestureDetected
       objectReference: {fileID: 0}
     - target: {fileID: 7741789658537998096, guid: 01927840367e87a4cbe74573af36a6ff,
         type: 3}

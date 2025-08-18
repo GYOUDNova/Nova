@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Web;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,7 +11,7 @@ namespace NOVA.Scripts
     {
         [Header("Timing Settings")]
         [SerializeField]
-        public float RegularGestureDelay = 1.0f;
+        public float RegularGestureDelay = 0f;
 
         [SerializeField]
         public float GestureChainDelay = 2f;
@@ -62,18 +63,18 @@ namespace NOVA.Scripts
             if (SingleGestureInputMapping.ContainsKey(gestureName))
             {
                 SingleGestureInputMapping[gestureName].Invoke();
-                Debug.Log($"Activated gesture input: {gestureName}");
+                //Debug.Log($"Activated gesture input: {gestureName}");
             }
             else
             {
-                Debug.LogWarning($"Gesture input not found: {gestureName}");
+                //Debug.LogWarning($"Gesture input not found: {gestureName}");
             }
         }
 
         public void ActivateGestureChainInput()
         {
             // print the current gesture chain
-            Debug.Log($"Current gesture chain: {string.Join("", CurrentGestureChain)}");
+            //Debug.Log($"Current gesture chain: {string.Join("", CurrentGestureChain)}");
 
             // combine the current gesture chain into a string
             string currentGestureChainKey = string.Join("", CurrentGestureChain);
@@ -82,7 +83,7 @@ namespace NOVA.Scripts
             if (GestureChainMapping.ContainsKey(currentGestureChainKey))
             {
                 GestureChainMapping[currentGestureChainKey].Invoke();
-                Debug.Log($"Activated gesture chain input: {string.Join(", ", CurrentGestureChain)}");
+                //Debug.Log($"Activated gesture chain input: {string.Join(", ", CurrentGestureChain)}");
             }
             // if the gesture chain is not in the dictionary run activateGestureInput with the last gesture in the chain
             else
@@ -92,9 +93,17 @@ namespace NOVA.Scripts
                     //Debug.LogWarning("No gestures in the chain to activate.");
                     return;
                 }
-                string lastGesture = CurrentGestureChain[CurrentGestureChain.Count - 1];
-                ActivateGestureInput(lastGesture);
-                Debug.Log($"Activated single gesture");
+                //string lastGesture = CurrentGestureChain[CurrentGestureChain.Count - 1];
+                //ActivateGestureInput(lastGesture);
+                //Debug.Log($"Activated single gesture");
+
+                // Activate individual gestures if no chain match is found
+                foreach (var gesture in CurrentGestureChain)
+                {
+                    //Debug.Log($"Activate Gesture: {gesture}");
+                    ActivateGestureInput(gesture);
+                }
+                //Debug.Log($"Activated individual gestures in chain: {string.Join(", ", CurrentGestureChain)}");
             }
         }
 
@@ -133,43 +142,49 @@ namespace NOVA.Scripts
             CurrentGestureChain.Clear();
             chainCoroutineRunning = false;
 
+            yield return null;
+
         }
 
         // function that prevents adding a gesture to the chain if the chain is already running
         // and adds the gesture to the chain if it is not running
-        public IEnumerator holdChain(string gestureInput, float delay)
+        public IEnumerator holdChain(string gestureInput, string gestureInputTwo, float delay)
         {
             chainLockoutRunning = true;
 
             // add the gesture to the chain
             CurrentGestureChain.Add(gestureInput);
+            if (gestureInputTwo != null) { CurrentGestureChain.Add(gestureInputTwo); }
             // log the gesture input
-            Debug.Log($"Added gesture to chain: {gestureInput}");
+            //Debug.Log($"Added gesture to chain: {gestureInput} & {gestureInputTwo}");
             yield return new WaitForSeconds(delay);
             chainLockoutRunning = false; // reset the lockout running state
         }
 
-        public void AddGestureToChain(string gestureInput)
+        public void AddGestureToChain(string gestureInput, string gestureInputTwo = null)
         {
             if (CurrentGestureChain == null)
             {
                 CurrentGestureChain = new List<string>();
             }
+
+            // Process the first gesture
             if (CurrentGestureChain.Count < longestChainLength)
             {
                 //Debug.Log(gestureInput);
                 if (!chainLockoutRunning)
                 {
-                    StartCoroutine(holdChain(gestureInput, GestureChainDelay));
+                    StartCoroutine(holdChain(gestureInput, gestureInputTwo, GestureChainDelay));
                 }
             }
             else if (longestChainLength < 1)
             {
                 if (!chainLockoutRunning)
                 {
-                    StartCoroutine(holdChain(gestureInput, RegularGestureDelay));
+                    StartCoroutine(holdChain(gestureInput, gestureInputTwo, RegularGestureDelay));
                 }
             }
+
             // check if chain coroutine is running
             if (chainCoroutineRunning)
             {

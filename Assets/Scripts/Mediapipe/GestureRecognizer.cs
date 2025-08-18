@@ -82,7 +82,7 @@ public static class GestureRecognizer
 
             bool directionsMatch = storedDirections.SequenceEqual(unknownGestureDirection);
 
-            Debug.Log($"Comparing against Gesture {gesture} with directions [{string.Join(", ", storedDirections)}] against detected gesture with [{string.Join(", ", unknownGestureDirection)}]");
+            //Debug.Log($"Comparing against Gesture {gesture} with directions [{string.Join(", ", storedDirections)}] against detected gesture with [{string.Join(", ", unknownGestureDirection)}]");
 
             if (directionsMatch)
             {
