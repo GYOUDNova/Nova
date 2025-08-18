@@ -351,8 +351,8 @@ Remove-Item -Recurse -Force $StageRoot -ErrorAction SilentlyContinue
 # -------------------- Print install URLs --------------------
 Write-Host ""
 Write-Host "Install via branch:"
-Write-Host "  https://github.com/<ORG>/<REPO>.git#$BranchName"
+Write-Host "  https://github.com/GYOUDNova/Nova.git#$BranchName"
 if ($TagRelease) {
   Write-Host "Install via tag:"
-  Write-Host "  https://github.com/<ORG>/<REPO>.git#v$Version"
+  Write-Host "  https://github.com/GYOUDNova/Nova.git#v$Version"
 }
