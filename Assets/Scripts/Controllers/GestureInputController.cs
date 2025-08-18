@@ -92,9 +92,17 @@ namespace NOVA.Scripts
                     //Debug.LogWarning("No gestures in the chain to activate.");
                     return;
                 }
-                string lastGesture = CurrentGestureChain[CurrentGestureChain.Count - 1];
-                ActivateGestureInput(lastGesture);
-                Debug.Log($"Activated single gesture");
+                //string lastGesture = CurrentGestureChain[CurrentGestureChain.Count - 1];
+                //ActivateGestureInput(lastGesture);
+                //Debug.Log($"Activated single gesture");
+
+                // Activate individual gestures if no chain match is found
+                foreach (var gesture in CurrentGestureChain)
+                {
+                    //Debug.Log($"Activate Gesture: {gesture}");
+                    ActivateGestureInput(gesture);
+                }
+                //Debug.Log($"Activated individual gestures in chain: {string.Join(", ", CurrentGestureChain)}");
             }
         }
 
@@ -137,19 +145,20 @@ namespace NOVA.Scripts
 
         // function that prevents adding a gesture to the chain if the chain is already running
         // and adds the gesture to the chain if it is not running
-        public IEnumerator holdChain(string gestureInput, float delay)
+        public IEnumerator holdChain(string gestureInput, string gestureInputTwo, float delay)
         {
             chainLockoutRunning = true;
 
             // add the gesture to the chain
             CurrentGestureChain.Add(gestureInput);
+            if (gestureInputTwo != null) { CurrentGestureChain.Add(gestureInputTwo); }
             // log the gesture input
-            Debug.Log($"Added gesture to chain: {gestureInput}");
+            //Debug.Log($"Added gesture to chain: {gestureInput}");
             yield return new WaitForSeconds(delay);
             chainLockoutRunning = false; // reset the lockout running state
         }
 
-        public void AddGestureToChain(string gestureInput)
+        public void AddGestureToChain(string gestureInput, string gestureInputTwo = null)
         {
             if (CurrentGestureChain == null)
             {
@@ -160,14 +169,14 @@ namespace NOVA.Scripts
                 //Debug.Log(gestureInput);
                 if (!chainLockoutRunning)
                 {
-                    StartCoroutine(holdChain(gestureInput, GestureChainDelay));
+                    StartCoroutine(holdChain(gestureInput, gestureInputTwo, GestureChainDelay));
                 }
             }
             else if (longestChainLength < 1)
             {
                 if (!chainLockoutRunning)
                 {
-                    StartCoroutine(holdChain(gestureInput, RegularGestureDelay));
+                    StartCoroutine(holdChain(gestureInput, gestureInputTwo, RegularGestureDelay));
                 }
             }
             // check if chain coroutine is running
