@@ -35,5 +35,6 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           customImage: ${{ vars.GAMECI_CUSTOM_BUILD_IMAGE }}
+          customParameters: -nographics
 
         
