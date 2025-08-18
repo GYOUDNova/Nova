@@ -9,7 +9,7 @@ namespace KartGame.KartSystems
         private bool left;
         private bool right;
         private float gestureTimeout = 1.0f; // Timeout in seconds
-        private float lastGestureTime;
+        private bool keepLooping;
         private Coroutine resetCoroutine; // Tracks the active reset coroutine
 
         private float turnValue; // Gradual turn value
@@ -34,22 +34,8 @@ namespace KartGame.KartSystems
                 right = false;
                 left = true;
             }
-            //lock (lockObj)
-            //{
-            //    if (gesture == "right")
-            //    {
-            //        right = true;
-            //        left = false;
-            //    }
-            //    else if (gesture == "left")
-            //    {
-            //        right = false;
-            //        left = true;
-            //    }
-            //}
 
-            //Instead of restarting the coroutine, update a "last input time"
-            lastGestureTime = Time.time;
+            keepLooping = true;
 
             if (resetCoroutine == null) // Start watchdog only once
             {
@@ -59,18 +45,15 @@ namespace KartGame.KartSystems
 
         private IEnumerator ResetDirectionGesturesAfterTimeout()
         {
-            while (true)
+            while (keepLooping)
             {
-                // Wait until timeout has passed with no new gesture
-                if (Time.time - lastGestureTime >= gestureTimeout)
-                {
-                    Debug.Log("Turn Reset");
-                    ResetDirectionGestures();
-                    resetCoroutine = null;
-                    yield break;
-                }
-                yield return null; // Check every frame
+                keepLooping = false;
+                yield return new WaitForSeconds(0.3f);
             }
+
+            Debug.Log("Turn Reset");
+            resetCoroutine = null;
+            ResetDirectionGestures();
         }
 
         private void ResetDirectionGestures()
@@ -78,12 +61,6 @@ namespace KartGame.KartSystems
             right = false;
             left = false;
             turnValue = 0f; // Reset the turn value
-            //lock (lockObj)
-            //{
-            //    right = false;
-            //    left = false;
-            //    turnValue = 0f; // Reset the turn value
-            //}
         }
 
         public override InputData GenerateInput()
@@ -117,8 +94,6 @@ namespace KartGame.KartSystems
 
             if (right) turn = turnValue;
             else if (left) turn = -turnValue;
-
-            //ResetDirectionGestures();
 
             return new InputData
             {
