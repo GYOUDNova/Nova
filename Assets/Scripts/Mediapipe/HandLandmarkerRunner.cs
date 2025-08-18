@@ -5,16 +5,13 @@
 // https://opensource.org/licenses/MIT.
 
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using Mediapipe.Tasks.Vision.Core;
 using Mediapipe.Tasks.Vision.HandLandmarker;
 using NOVA.Scripts;
 using UnityEngine;
 using UnityEngine.Rendering;
 using System.Text.RegularExpressions;
 using UnityEngine.UI;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Mediapipe.Unity.Sample.HandLandmarkDetection
 {
@@ -30,6 +27,8 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
         [Tooltip("The camera name to use for hand landmark detection. Empty means default")]
         public string CameraName = string.Empty;
 
+        public int NumHands = 1;
+
         public readonly HandLandmarkDetectionConfig config = new HandLandmarkDetectionConfig();
 
         public override void Stop()
@@ -41,6 +40,7 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
 
         protected override IEnumerator Run()
         {
+            config.NumHands = NumHands; //TO-DO: nicer implemnetation with configurations -- done quick and dirty
             Debug.Log($"Delegate = {config.Delegate}");
             Debug.Log($"Image Read Mode = {config.ImageReadMode}");
             Debug.Log($"Running Mode = {config.RunningMode}");
@@ -228,9 +228,31 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
                 return;
             }
 
-            for (int i = 0; i < result.handLandmarks.Count; i++)
+            if (result.handLandmarks.Count == 2) // Two hands recognized
             {
-                var landmarks = result.handLandmarks[i];
+                var landmarkHandOne = result.handLandmarks[0];
+                var landmarkHandTwo = result.handLandmarks[1];
+
+                // Convert from MediaPipe.Tasks.Containers.NormalizedLandmarks to MediaPipe.NormalizedLandmarkList
+                var landmarkListHandOne = ConvertToNormalizedLandmarkList(landmarkHandOne);
+                var landmarkListHandTwo = ConvertToNormalizedLandmarkList(landmarkHandTwo);
+
+                string gestureOne = GestureRecognizer.DetectGesture(landmarkListHandOne);
+                string gestureTwo = GestureRecognizer.DetectGesture(landmarkListHandTwo);
+
+                if (gestureOne != GestureRecognizer.NO_GESTURE && gestureTwo != GestureRecognizer.NO_GESTURE)
+                {
+                    //Debug.Log($"Detected gestures: {gestureOne} & {gestureTwo}");
+                    UnityMainThreadDispatcher.Enqueue(() =>
+                    {
+                        gestureName.text = $"{gestureOne} \n& {gestureTwo}";
+                        gestureInputController.AddGestureToChain(gestureOne, gestureTwo);
+                    });
+                }
+            }
+            else // One hand recognized
+            {
+                var landmarks = result.handLandmarks[0];
 
                 // Convert from MediaPipe.Tasks.Containers.NormalizedLandmarks to MediaPipe.NormalizedLandmarkList
                 var landmarkList = ConvertToNormalizedLandmarkList(landmarks);
@@ -239,7 +261,7 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
 
                 if (gesture != GestureRecognizer.NO_GESTURE)
                 {
-                    Debug.Log($"Detected gesture: {gesture}");
+                    //Debug.Log($"Detected gesture: {gesture}");
                     UnityMainThreadDispatcher.Enqueue(() =>
                     {
                         gestureName.text = $"{gesture}";
@@ -248,7 +270,7 @@ namespace Mediapipe.Unity.Sample.HandLandmarkDetection
                 }
                 else
                 {
-                    Debug.Log("No recognized gesture detected");
+                    //Debug.Log("No recognized gesture detected");
                     UnityMainThreadDispatcher.Enqueue(() =>
                     {
                         gestureName.text = "No Gesture";
