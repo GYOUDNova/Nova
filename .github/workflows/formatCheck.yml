@@ -1,10 +1,10 @@
 name: Format Check
 
-on: [pull_request]
+on: [pull_request, push]
 
 jobs:
   format-check:
-    runs-on: ubuntu-latest
+    runs-on: blaze/ubuntu-22.04
 
     strategy:
       matrix:
